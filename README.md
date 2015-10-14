@@ -26,3 +26,44 @@ As a student, I can use the app to share notes with other students
 As a student, I can use the app to submit questions for the instructor    
 As a student, I can view all of my available courses     
 
+
+
+**Demo Images**  
+***Instructor View1***  
+This is the first view which will appear once the instructor logs in inside the application.   
+- Instructor can navigate to different classes through the pageviewcontroller   
+- Instructor can also start the class
+- Instructor has instant view of the attendance percentage of the current class. 
+- Instructor can add class material, questions, and shared notes
+- The notes, videos, assingment , labs, surveys can be uploaded per class basis.
+
+![alt tag](https://github.com/Punch-In/PunchInIOSApp/blob/master/Wireframes/Screen%20Shot%202015-10-13%20at%207.27.11%20PM.png)
+
+After clicking the attendance, user (instructor) can also see the : 
+- Stats of attendance, per class basis. 
+- Can individually see the attendance per class basis.
+- Once tapped on the table cell  - a detail view will give more details about that particular student or we can just add the percentage of attendance of that student.  
+
+![alt tag](https://github.com/Punch-In/PunchInIOSApp/blob/master/Wireframes/Screen%20Shot%202015-10-13%20at%207.27.20%20PM.png)
+
+Instructor can also create new course and get the students on board : 
+
+![alt tag](https://github.com/Punch-In/PunchInIOSApp/blob/master/Wireframes/Screen%20Shot%202015-10-13%20at%208.10.20%20PM.png)
+
+
+
+
+This is the first view which will appear once the student logs in inside the application.   
+- Student can navigate to different classes through the pageviewcontroller   
+- Student can mark his attendance
+- Student has instant view of the attendance percentage of the current class. 
+- Student can get class material, questions, and shared notes
+- The notes, videos, assingment , labs, surveys can be uploaded/viewed per class basis.
+
+![alt tag](https://github.com/Punch-In/PunchInIOSApp/blob/master/Wireframes/Screen%20Shot%202015-10-13%20at%207.30.50%20PM.png)
+
+
+
+
+
+
