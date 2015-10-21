@@ -3,7 +3,7 @@
 1. two user profiles: student, instructor
 2. the vocabulary for the app:
    - a "course" is a series of sessions on a particular subject. for example, "iOS bootcamp" would be a course.
-   - a "class" is an individual session, delivered on a given day at a given time in a given location.  for example, "the oct 19th iOS bootcamp will be from 7-9PM in the Catalina room at Zynga HQ"
+   - a "class" is an individual session for a course, delivered on a given day at a given time in a given location.  for example, "the oct 19th iOS bootcamp will be from 7-9PM in the Catalina room at Zynga HQ"
    - a class is "in session" if the instructor has started the class and the class has not yet ended. for example, at 8pm, the above class is "in session"
    - a student is "present" if her current location is within the geofence for the class location, and she has verified her attendance via an action in the app
    - a student is "absent" if she is not present.
