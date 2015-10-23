@@ -8,20 +8,90 @@
 
 /* Begin PBXBuildFile section */
 		C43414761BCE443E00AA63DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43414751BCE443E00AA63DB /* AppDelegate.swift */; };
-		C43414781BCE443E00AA63DB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43414771BCE443E00AA63DB /* ViewController.swift */; };
 		C434147B1BCE443E00AA63DB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C43414791BCE443E00AA63DB /* Main.storyboard */; };
 		C434147D1BCE443E00AA63DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C434147C1BCE443E00AA63DB /* Assets.xcassets */; };
 		C43414801BCE443E00AA63DB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C434147E1BCE443E00AA63DB /* LaunchScreen.storyboard */; };
+		C460FCD81BD75B2700CD9DBC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C460FCD71BD75B2700CD9DBC /* LoginViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		C460FCDA1BD75B3F00CD9DBC /* CoursesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C460FCD91BD75B3F00CD9DBC /* CoursesListViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		C460FCDC1BD75B4B00CD9DBC /* CourseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C460FCDB1BD75B4B00CD9DBC /* CourseViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		C460FCDE1BD75B5800CD9DBC /* QuestionsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C460FCDD1BD75B5800CD9DBC /* QuestionsListViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		C460FCE01BD75BA800CD9DBC /* DetailAttendanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C460FCDF1BD75BA800CD9DBC /* DetailAttendanceViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		C460FCE21BD75E9500CD9DBC /* CoursesListsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C460FCE11BD75E9500CD9DBC /* CoursesListsCollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		C460FCE41BD75F9A00CD9DBC /* Courses.swift in Sources */ = {isa = PBXBuildFile; fileRef = C460FCE31BD75F9A00CD9DBC /* Courses.swift */; settings = {ASSET_TAGS = (); }; };
+		C460FCE61BD8332500CD9DBC /* AttendanceCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C460FCE51BD8332500CD9DBC /* AttendanceCollectionViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		C460FCF71BD840CE00CD9DBC /* ThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C460FCF31BD840CE00CD9DBC /* ThemeManager.m */; settings = {ASSET_TAGS = (); }; };
+		C460FCF81BD840CE00CD9DBC /* MaterialDesignTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = C460FCF51BD840CE00CD9DBC /* MaterialDesignTheme.m */; settings = {ASSET_TAGS = (); }; };
+		C460FD051BD8410D00CD9DBC /* BFPaperCheckbox.m in Sources */ = {isa = PBXBuildFile; fileRef = C460FCFA1BD8410D00CD9DBC /* BFPaperCheckbox.m */; settings = {ASSET_TAGS = (); }; };
+		C460FD061BD8410D00CD9DBC /* BFPaperTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = C460FCFC1BD8410D00CD9DBC /* BFPaperTabBarController.m */; settings = {ASSET_TAGS = (); }; };
+		C460FD071BD8410D00CD9DBC /* BFPaperButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C460FCFE1BD8410D00CD9DBC /* BFPaperButton.m */; settings = {ASSET_TAGS = (); }; };
+		C460FD081BD8410D00CD9DBC /* UIColor+BFPaperColors.m in Sources */ = {isa = PBXBuildFile; fileRef = C460FD001BD8410D00CD9DBC /* UIColor+BFPaperColors.m */; settings = {ASSET_TAGS = (); }; };
+		C460FD091BD8410D00CD9DBC /* BFPaperTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C460FD021BD8410D00CD9DBC /* BFPaperTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		C460FD0A1BD8410D00CD9DBC /* BFPaperCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C460FD041BD8410D00CD9DBC /* BFPaperCollectionViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		C460FD131BD8416200CD9DBC /* MKButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C460FD0C1BD8416200CD9DBC /* MKButton.swift */; settings = {ASSET_TAGS = (); }; };
+		C460FD141BD8416200CD9DBC /* MKColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C460FD0D1BD8416200CD9DBC /* MKColor.swift */; settings = {ASSET_TAGS = (); }; };
+		C460FD151BD8416200CD9DBC /* MKImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C460FD0E1BD8416200CD9DBC /* MKImageView.swift */; settings = {ASSET_TAGS = (); }; };
+		C460FD161BD8416200CD9DBC /* MKLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C460FD0F1BD8416200CD9DBC /* MKLabel.swift */; settings = {ASSET_TAGS = (); }; };
+		C460FD171BD8416200CD9DBC /* MKLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C460FD101BD8416200CD9DBC /* MKLayer.swift */; settings = {ASSET_TAGS = (); }; };
+		C460FD181BD8416200CD9DBC /* MKTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C460FD111BD8416200CD9DBC /* MKTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		C460FD191BD8416200CD9DBC /* MKTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C460FD121BD8416200CD9DBC /* MKTextField.swift */; settings = {ASSET_TAGS = (); }; };
+		C460FD201BD8778E00CD9DBC /* new.png in Resources */ = {isa = PBXBuildFile; fileRef = C460FD1F1BD8778E00CD9DBC /* new.png */; settings = {ASSET_TAGS = (); }; };
+		C460FD231BD8B05A00CD9DBC /* Student.swift in Sources */ = {isa = PBXBuildFile; fileRef = C460FD221BD8B05A00CD9DBC /* Student.swift */; settings = {ASSET_TAGS = (); }; };
+		C460FD2A1BD8B22C00CD9DBC /* student1.png in Resources */ = {isa = PBXBuildFile; fileRef = C460FD241BD8B22C00CD9DBC /* student1.png */; settings = {ASSET_TAGS = (); }; };
+		C460FD2B1BD8B22C00CD9DBC /* student2.png in Resources */ = {isa = PBXBuildFile; fileRef = C460FD251BD8B22C00CD9DBC /* student2.png */; settings = {ASSET_TAGS = (); }; };
+		C460FD2C1BD8B22C00CD9DBC /* student3.png in Resources */ = {isa = PBXBuildFile; fileRef = C460FD261BD8B22C00CD9DBC /* student3.png */; settings = {ASSET_TAGS = (); }; };
+		C460FD2D1BD8B22C00CD9DBC /* student4.png in Resources */ = {isa = PBXBuildFile; fileRef = C460FD271BD8B22C00CD9DBC /* student4.png */; settings = {ASSET_TAGS = (); }; };
+		C460FD2E1BD8B22C00CD9DBC /* student5.png in Resources */ = {isa = PBXBuildFile; fileRef = C460FD281BD8B22C00CD9DBC /* student5.png */; settings = {ASSET_TAGS = (); }; };
+		C460FD2F1BD8B22C00CD9DBC /* student6.png in Resources */ = {isa = PBXBuildFile; fileRef = C460FD291BD8B22C00CD9DBC /* student6.png */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		C43414721BCE443E00AA63DB /* PunchIn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PunchIn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C43414751BCE443E00AA63DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C43414771BCE443E00AA63DB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		C434147A1BCE443E00AA63DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C434147C1BCE443E00AA63DB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C434147F1BCE443E00AA63DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C43414811BCE443E00AA63DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C460FCD31BD75AFF00CD9DBC /* PunchIn-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PunchIn-Bridging-Header.h"; sourceTree = "<group>"; };
+		C460FCD71BD75B2700CD9DBC /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		C460FCD91BD75B3F00CD9DBC /* CoursesListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursesListViewController.swift; sourceTree = "<group>"; };
+		C460FCDB1BD75B4B00CD9DBC /* CourseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseViewController.swift; sourceTree = "<group>"; };
+		C460FCDD1BD75B5800CD9DBC /* QuestionsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionsListViewController.swift; sourceTree = "<group>"; };
+		C460FCDF1BD75BA800CD9DBC /* DetailAttendanceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailAttendanceViewController.swift; sourceTree = "<group>"; };
+		C460FCE11BD75E9500CD9DBC /* CoursesListsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursesListsCollectionViewCell.swift; sourceTree = "<group>"; };
+		C460FCE31BD75F9A00CD9DBC /* Courses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Courses.swift; sourceTree = "<group>"; };
+		C460FCE51BD8332500CD9DBC /* AttendanceCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AttendanceCollectionViewController.swift; path = ../AttendanceCollectionViewController.swift; sourceTree = "<group>"; };
+		C460FCF21BD840CE00CD9DBC /* ThemeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThemeManager.h; sourceTree = "<group>"; };
+		C460FCF31BD840CE00CD9DBC /* ThemeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThemeManager.m; sourceTree = "<group>"; };
+		C460FCF41BD840CE00CD9DBC /* MaterialDesignTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaterialDesignTheme.h; sourceTree = "<group>"; };
+		C460FCF51BD840CE00CD9DBC /* MaterialDesignTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MaterialDesignTheme.m; sourceTree = "<group>"; };
+		C460FCF61BD840CE00CD9DBC /* Theme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Theme.h; sourceTree = "<group>"; };
+		C460FCF91BD8410D00CD9DBC /* BFPaperCheckbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFPaperCheckbox.h; sourceTree = "<group>"; };
+		C460FCFA1BD8410D00CD9DBC /* BFPaperCheckbox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFPaperCheckbox.m; sourceTree = "<group>"; };
+		C460FCFB1BD8410D00CD9DBC /* BFPaperTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFPaperTabBarController.h; sourceTree = "<group>"; };
+		C460FCFC1BD8410D00CD9DBC /* BFPaperTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFPaperTabBarController.m; sourceTree = "<group>"; };
+		C460FCFD1BD8410D00CD9DBC /* BFPaperButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFPaperButton.h; sourceTree = "<group>"; };
+		C460FCFE1BD8410D00CD9DBC /* BFPaperButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFPaperButton.m; sourceTree = "<group>"; };
+		C460FCFF1BD8410D00CD9DBC /* UIColor+BFPaperColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+BFPaperColors.h"; sourceTree = "<group>"; };
+		C460FD001BD8410D00CD9DBC /* UIColor+BFPaperColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+BFPaperColors.m"; sourceTree = "<group>"; };
+		C460FD011BD8410D00CD9DBC /* BFPaperTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFPaperTableViewCell.h; sourceTree = "<group>"; };
+		C460FD021BD8410D00CD9DBC /* BFPaperTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFPaperTableViewCell.m; sourceTree = "<group>"; };
+		C460FD031BD8410D00CD9DBC /* BFPaperCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFPaperCollectionViewCell.h; sourceTree = "<group>"; };
+		C460FD041BD8410D00CD9DBC /* BFPaperCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFPaperCollectionViewCell.m; sourceTree = "<group>"; };
+		C460FD0C1BD8416200CD9DBC /* MKButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKButton.swift; sourceTree = "<group>"; };
+		C460FD0D1BD8416200CD9DBC /* MKColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKColor.swift; sourceTree = "<group>"; };
+		C460FD0E1BD8416200CD9DBC /* MKImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKImageView.swift; sourceTree = "<group>"; };
+		C460FD0F1BD8416200CD9DBC /* MKLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKLabel.swift; sourceTree = "<group>"; };
+		C460FD101BD8416200CD9DBC /* MKLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKLayer.swift; sourceTree = "<group>"; };
+		C460FD111BD8416200CD9DBC /* MKTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKTableViewCell.swift; sourceTree = "<group>"; };
+		C460FD121BD8416200CD9DBC /* MKTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKTextField.swift; sourceTree = "<group>"; };
+		C460FD1F1BD8778E00CD9DBC /* new.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = new.png; sourceTree = "<group>"; };
+		C460FD221BD8B05A00CD9DBC /* Student.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Student.swift; sourceTree = "<group>"; };
+		C460FD241BD8B22C00CD9DBC /* student1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = student1.png; sourceTree = "<group>"; };
+		C460FD251BD8B22C00CD9DBC /* student2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = student2.png; sourceTree = "<group>"; };
+		C460FD261BD8B22C00CD9DBC /* student3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = student3.png; sourceTree = "<group>"; };
+		C460FD271BD8B22C00CD9DBC /* student4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = student4.png; sourceTree = "<group>"; };
+		C460FD281BD8B22C00CD9DBC /* student5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = student5.png; sourceTree = "<group>"; };
+		C460FD291BD8B22C00CD9DBC /* student6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = student6.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +124,158 @@
 		C43414741BCE443E00AA63DB /* PunchIn */ = {
 			isa = PBXGroup;
 			children = (
+				C460FCF11BD840A400CD9DBC /* 3DParty */,
+				C460FCEF1BD8409800CD9DBC /* Utils */,
+				C460FCE91BD8334500CD9DBC /* Model */,
+				C460FCE71BD8333700CD9DBC /* Views */,
+				C460FCE81BD8333E00CD9DBC /* Controllers */,
+				C460FCEA1BD8336B00CD9DBC /* AppDelegate */,
+				C460FCEB1BD8337400CD9DBC /* StoryBoard */,
+				C460FCEC1BD8338400CD9DBC /* Others */,
+			);
+			path = PunchIn;
+			sourceTree = "<group>";
+		};
+		C460FCE71BD8333700CD9DBC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C460FCE11BD75E9500CD9DBC /* CoursesListsCollectionViewCell.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		C460FCE81BD8333E00CD9DBC /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				C460FCD71BD75B2700CD9DBC /* LoginViewController.swift */,
+				C460FCEE1BD833A500CD9DBC /* Student */,
+				C460FCED1BD8339D00CD9DBC /* Instructor */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		C460FCE91BD8334500CD9DBC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C460FCE31BD75F9A00CD9DBC /* Courses.swift */,
+				C460FD221BD8B05A00CD9DBC /* Student.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		C460FCEA1BD8336B00CD9DBC /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
 				C43414751BCE443E00AA63DB /* AppDelegate.swift */,
-				C43414771BCE443E00AA63DB /* ViewController.swift */,
+			);
+			name = AppDelegate;
+			sourceTree = "<group>";
+		};
+		C460FCEB1BD8337400CD9DBC /* StoryBoard */ = {
+			isa = PBXGroup;
+			children = (
+				C460FD241BD8B22C00CD9DBC /* student1.png */,
+				C460FD251BD8B22C00CD9DBC /* student2.png */,
+				C460FD261BD8B22C00CD9DBC /* student3.png */,
+				C460FD271BD8B22C00CD9DBC /* student4.png */,
+				C460FD281BD8B22C00CD9DBC /* student5.png */,
+				C460FD291BD8B22C00CD9DBC /* student6.png */,
+				C460FD1F1BD8778E00CD9DBC /* new.png */,
 				C43414791BCE443E00AA63DB /* Main.storyboard */,
 				C434147C1BCE443E00AA63DB /* Assets.xcassets */,
 				C434147E1BCE443E00AA63DB /* LaunchScreen.storyboard */,
-				C43414811BCE443E00AA63DB /* Info.plist */,
 			);
-			path = PunchIn;
+			name = StoryBoard;
+			sourceTree = "<group>";
+		};
+		C460FCEC1BD8338400CD9DBC /* Others */ = {
+			isa = PBXGroup;
+			children = (
+				C43414811BCE443E00AA63DB /* Info.plist */,
+				C460FCD31BD75AFF00CD9DBC /* PunchIn-Bridging-Header.h */,
+			);
+			name = Others;
+			sourceTree = "<group>";
+		};
+		C460FCED1BD8339D00CD9DBC /* Instructor */ = {
+			isa = PBXGroup;
+			children = (
+				C460FCD91BD75B3F00CD9DBC /* CoursesListViewController.swift */,
+				C460FCDB1BD75B4B00CD9DBC /* CourseViewController.swift */,
+				C460FCE51BD8332500CD9DBC /* AttendanceCollectionViewController.swift */,
+				C460FCDD1BD75B5800CD9DBC /* QuestionsListViewController.swift */,
+				C460FCDF1BD75BA800CD9DBC /* DetailAttendanceViewController.swift */,
+			);
+			name = Instructor;
+			sourceTree = "<group>";
+		};
+		C460FCEE1BD833A500CD9DBC /* Student */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Student;
+			sourceTree = "<group>";
+		};
+		C460FCEF1BD8409800CD9DBC /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				C460FCF01BD8409D00CD9DBC /* ThemeManager */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		C460FCF01BD8409D00CD9DBC /* ThemeManager */ = {
+			isa = PBXGroup;
+			children = (
+				C460FCF21BD840CE00CD9DBC /* ThemeManager.h */,
+				C460FCF31BD840CE00CD9DBC /* ThemeManager.m */,
+				C460FCF41BD840CE00CD9DBC /* MaterialDesignTheme.h */,
+				C460FCF51BD840CE00CD9DBC /* MaterialDesignTheme.m */,
+				C460FCF61BD840CE00CD9DBC /* Theme.h */,
+			);
+			name = ThemeManager;
+			sourceTree = "<group>";
+		};
+		C460FCF11BD840A400CD9DBC /* 3DParty */ = {
+			isa = PBXGroup;
+			children = (
+				C460FD1A1BD8416700CD9DBC /* MaterialKit */,
+				C460FD0B1BD8411400CD9DBC /* BFPaper */,
+			);
+			name = 3DParty;
+			sourceTree = "<group>";
+		};
+		C460FD0B1BD8411400CD9DBC /* BFPaper */ = {
+			isa = PBXGroup;
+			children = (
+				C460FCF91BD8410D00CD9DBC /* BFPaperCheckbox.h */,
+				C460FCFA1BD8410D00CD9DBC /* BFPaperCheckbox.m */,
+				C460FCFB1BD8410D00CD9DBC /* BFPaperTabBarController.h */,
+				C460FCFC1BD8410D00CD9DBC /* BFPaperTabBarController.m */,
+				C460FCFD1BD8410D00CD9DBC /* BFPaperButton.h */,
+				C460FCFE1BD8410D00CD9DBC /* BFPaperButton.m */,
+				C460FCFF1BD8410D00CD9DBC /* UIColor+BFPaperColors.h */,
+				C460FD001BD8410D00CD9DBC /* UIColor+BFPaperColors.m */,
+				C460FD011BD8410D00CD9DBC /* BFPaperTableViewCell.h */,
+				C460FD021BD8410D00CD9DBC /* BFPaperTableViewCell.m */,
+				C460FD031BD8410D00CD9DBC /* BFPaperCollectionViewCell.h */,
+				C460FD041BD8410D00CD9DBC /* BFPaperCollectionViewCell.m */,
+			);
+			name = BFPaper;
+			sourceTree = "<group>";
+		};
+		C460FD1A1BD8416700CD9DBC /* MaterialKit */ = {
+			isa = PBXGroup;
+			children = (
+				C460FD0C1BD8416200CD9DBC /* MKButton.swift */,
+				C460FD0D1BD8416200CD9DBC /* MKColor.swift */,
+				C460FD0E1BD8416200CD9DBC /* MKImageView.swift */,
+				C460FD0F1BD8416200CD9DBC /* MKLabel.swift */,
+				C460FD101BD8416200CD9DBC /* MKLayer.swift */,
+				C460FD111BD8416200CD9DBC /* MKTableViewCell.swift */,
+				C460FD121BD8416200CD9DBC /* MKTextField.swift */,
+			);
+			name = MaterialKit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -90,6 +304,7 @@
 		C434146A1BCE443E00AA63DB /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Nilesh Agrawal";
 				TargetAttributes = {
@@ -121,9 +336,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C460FD2B1BD8B22C00CD9DBC /* student2.png in Resources */,
+				C460FD201BD8778E00CD9DBC /* new.png in Resources */,
+				C460FD2D1BD8B22C00CD9DBC /* student4.png in Resources */,
+				C460FD2C1BD8B22C00CD9DBC /* student3.png in Resources */,
+				C460FD2F1BD8B22C00CD9DBC /* student6.png in Resources */,
 				C43414801BCE443E00AA63DB /* LaunchScreen.storyboard in Resources */,
 				C434147D1BCE443E00AA63DB /* Assets.xcassets in Resources */,
+				C460FD2E1BD8B22C00CD9DBC /* student5.png in Resources */,
 				C434147B1BCE443E00AA63DB /* Main.storyboard in Resources */,
+				C460FD2A1BD8B22C00CD9DBC /* student1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,8 +356,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C43414781BCE443E00AA63DB /* ViewController.swift in Sources */,
+				C460FCDE1BD75B5800CD9DBC /* QuestionsListViewController.swift in Sources */,
+				C460FD061BD8410D00CD9DBC /* BFPaperTabBarController.m in Sources */,
+				C460FCE21BD75E9500CD9DBC /* CoursesListsCollectionViewCell.swift in Sources */,
+				C460FD131BD8416200CD9DBC /* MKButton.swift in Sources */,
+				C460FD181BD8416200CD9DBC /* MKTableViewCell.swift in Sources */,
+				C460FCD81BD75B2700CD9DBC /* LoginViewController.swift in Sources */,
+				C460FD141BD8416200CD9DBC /* MKColor.swift in Sources */,
+				C460FD161BD8416200CD9DBC /* MKLabel.swift in Sources */,
+				C460FD151BD8416200CD9DBC /* MKImageView.swift in Sources */,
+				C460FD091BD8410D00CD9DBC /* BFPaperTableViewCell.m in Sources */,
+				C460FD051BD8410D00CD9DBC /* BFPaperCheckbox.m in Sources */,
+				C460FCDA1BD75B3F00CD9DBC /* CoursesListViewController.swift in Sources */,
+				C460FCDC1BD75B4B00CD9DBC /* CourseViewController.swift in Sources */,
+				C460FCE01BD75BA800CD9DBC /* DetailAttendanceViewController.swift in Sources */,
+				C460FD0A1BD8410D00CD9DBC /* BFPaperCollectionViewCell.m in Sources */,
+				C460FD071BD8410D00CD9DBC /* BFPaperButton.m in Sources */,
+				C460FD171BD8416200CD9DBC /* MKLayer.swift in Sources */,
+				C460FD081BD8410D00CD9DBC /* UIColor+BFPaperColors.m in Sources */,
+				C460FCF81BD840CE00CD9DBC /* MaterialDesignTheme.m in Sources */,
 				C43414761BCE443E00AA63DB /* AppDelegate.swift in Sources */,
+				C460FCF71BD840CE00CD9DBC /* ThemeManager.m in Sources */,
+				C460FD191BD8416200CD9DBC /* MKTextField.swift in Sources */,
+				C460FCE41BD75F9A00CD9DBC /* Courses.swift in Sources */,
+				C460FD231BD8B05A00CD9DBC /* Student.swift in Sources */,
+				C460FCE61BD8332500CD9DBC /* AttendanceCollectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,10 +493,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = PunchIn/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.codepath.app.PunchIn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "PunchIn/PunchIn-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -259,10 +507,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = PunchIn/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.codepath.app.PunchIn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "PunchIn/PunchIn-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -285,6 +535,7 @@
 				C43414861BCE443E00AA63DB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
