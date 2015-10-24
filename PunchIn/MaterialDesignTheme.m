@@ -11,21 +11,20 @@
 
 @implementation MaterialDesignTheme
 
+
 /*Colors*/
 //main color of the app.
+//Blue color
 - (UIColor *)primaryColor{
-    return UIColorFromRGB(0xEF6D65);
-}
-
-//Dark version of the primary colors
-- (UIColor *)primaryColorDark{
-    return UIColorFromRGB(0xBF5750);
+    return UIColorFromRGB(0x007dc6);
 }
 
 //Light version of the primary colors
 - (UIColor *)primaryColorLight{
-    return UIColorFromRGB(0xF28A83);
+    return UIColorFromRGB(0x79b9e7);
 }
+
+
 
 //Color to be used for text which is present on the main window.
 - (UIColor *)textPrimaryColor{

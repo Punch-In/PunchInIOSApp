@@ -1,17 +1,17 @@
 //
-//  Theme.h
-//  HomeMonkApplication
+//  WalmartcolorTheme.h
+//  PunchIn
 //
-//  Created by Nilesh Agrawal on 7/16/15.
-//  Copyright (c) 2015 Nilesh Agrawal. All rights reserved.
+//  Created by Nilesh Agrawal on 10/23/15.
+//  Copyright © 2015 Nilesh Agrawal. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import "BFPaperButton.h"
-#import "BFPaperTabBarController.h"
+#import "UIColor+BFPaperColors.h"
+#import "Theme.h"
 
-@protocol Theme <NSObject>
+@interface WalmartcolorTheme : NSObject<Theme>
 
 -(UIColor *)primaryColor;
 -(UIColor *)secondaryPrimaryColor;
@@ -24,8 +24,6 @@
 - (void)themeForContentView:(UIView *)view;
 - (void)themeForSecondaryContentView:(UIView *)view;
 - (void)themeForCourseCollectionView:(UICollectionView *)courseCollectionView forView:(UIView *)view;
-
-
 
 
 @end

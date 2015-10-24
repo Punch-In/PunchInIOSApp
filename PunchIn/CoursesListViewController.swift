@@ -32,13 +32,20 @@ class CoursesListViewController: UIViewController,UICollectionViewDelegate,UICol
     
     func setUpUI(){
         coursesCollectionView.backgroundColor = UIColor.whiteColor()
+        self.navigationController?.navigationBar.barTintColor = ThemeManager.theme().primaryColor()
+        self.navigationItem.title = "Courses"
+        self.navigationController?.navigationItem.title = "Courses"
+        self.navigationController?.navigationBar.titleTextAttributes = NSDictionary.init(dictionary:
+            [NSForegroundColorAttributeName:UIColor.whiteColor()]) as? [String : AnyObject]
+        
     }
     
     func setCollectionViewLayout(){
         let flowLayout : UICollectionViewFlowLayout = UICollectionViewFlowLayout.init()
-        flowLayout.itemSize = CGSizeMake(self.view.bounds.width/2, self.view.bounds.height/5)
-        flowLayout.minimumInteritemSpacing = 0
-        flowLayout.minimumLineSpacing = 0
+        flowLayout.itemSize = CGSizeMake(self.view.bounds.width/2-20, self.view.bounds.height/5)
+        flowLayout.minimumInteritemSpacing = 10
+        flowLayout.minimumLineSpacing = 10
+        flowLayout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10)
         coursesCollectionView.setCollectionViewLayout(flowLayout, animated: true)
     }
     
@@ -53,6 +60,11 @@ class CoursesListViewController: UIViewController,UICollectionViewDelegate,UICol
         cell.setCoursesListCollectionViewCell(courseArray[indexPath.row])
         cell.layer.borderWidth = 2.0;
         cell.layer.borderColor = UIColor.blackColor().CGColor
+        cell.backgroundColor = ThemeManager.theme().secondaryPrimaryColor()
+        cell.courseNameLabel?.textColor = UIColor.whiteColor()
+        cell.layer.shadowRadius = 2.0;
+        cell.layer.shadowOpacity = 0.5;
+        cell.layer.shadowOffset = CGSizeZero
         return cell;
     }
     

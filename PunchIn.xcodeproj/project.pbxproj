@@ -42,6 +42,10 @@
 		C460FD2D1BD8B22C00CD9DBC /* student4.png in Resources */ = {isa = PBXBuildFile; fileRef = C460FD271BD8B22C00CD9DBC /* student4.png */; settings = {ASSET_TAGS = (); }; };
 		C460FD2E1BD8B22C00CD9DBC /* student5.png in Resources */ = {isa = PBXBuildFile; fileRef = C460FD281BD8B22C00CD9DBC /* student5.png */; settings = {ASSET_TAGS = (); }; };
 		C460FD2F1BD8B22C00CD9DBC /* student6.png in Resources */ = {isa = PBXBuildFile; fileRef = C460FD291BD8B22C00CD9DBC /* student6.png */; settings = {ASSET_TAGS = (); }; };
+		C460FD341BDAF8E500CD9DBC /* WalmartcolorTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = C460FD331BDAF8E500CD9DBC /* WalmartcolorTheme.m */; settings = {ASSET_TAGS = (); }; };
+		C460FD381BDB1AF300CD9DBC /* AttendanceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C460FD371BDB1AF300CD9DBC /* AttendanceCollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		C460FD3A1BDB27ED00CD9DBC /* DailyAttendanceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C460FD391BDB27ED00CD9DBC /* DailyAttendanceCollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		C460FD3C1BDB287700CD9DBC /* Attendance.swift in Sources */ = {isa = PBXBuildFile; fileRef = C460FD3B1BDB287700CD9DBC /* Attendance.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -92,6 +96,11 @@
 		C460FD271BD8B22C00CD9DBC /* student4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = student4.png; sourceTree = "<group>"; };
 		C460FD281BD8B22C00CD9DBC /* student5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = student5.png; sourceTree = "<group>"; };
 		C460FD291BD8B22C00CD9DBC /* student6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = student6.png; sourceTree = "<group>"; };
+		C460FD321BDAF8E500CD9DBC /* WalmartcolorTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalmartcolorTheme.h; sourceTree = "<group>"; };
+		C460FD331BDAF8E500CD9DBC /* WalmartcolorTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalmartcolorTheme.m; sourceTree = "<group>"; };
+		C460FD371BDB1AF300CD9DBC /* AttendanceCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttendanceCollectionViewCell.swift; sourceTree = "<group>"; };
+		C460FD391BDB27ED00CD9DBC /* DailyAttendanceCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyAttendanceCollectionViewCell.swift; sourceTree = "<group>"; };
+		C460FD3B1BDB287700CD9DBC /* Attendance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attendance.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +149,8 @@
 			isa = PBXGroup;
 			children = (
 				C460FCE11BD75E9500CD9DBC /* CoursesListsCollectionViewCell.swift */,
+				C460FD371BDB1AF300CD9DBC /* AttendanceCollectionViewCell.swift */,
+				C460FD391BDB27ED00CD9DBC /* DailyAttendanceCollectionViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -159,6 +170,7 @@
 			children = (
 				C460FCE31BD75F9A00CD9DBC /* Courses.swift */,
 				C460FD221BD8B05A00CD9DBC /* Student.swift */,
+				C460FD3B1BDB287700CD9DBC /* Attendance.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -203,8 +215,8 @@
 				C460FCD91BD75B3F00CD9DBC /* CoursesListViewController.swift */,
 				C460FCDB1BD75B4B00CD9DBC /* CourseViewController.swift */,
 				C460FCE51BD8332500CD9DBC /* AttendanceCollectionViewController.swift */,
-				C460FCDD1BD75B5800CD9DBC /* QuestionsListViewController.swift */,
 				C460FCDF1BD75BA800CD9DBC /* DetailAttendanceViewController.swift */,
+				C460FCDD1BD75B5800CD9DBC /* QuestionsListViewController.swift */,
 			);
 			name = Instructor;
 			sourceTree = "<group>";
@@ -232,6 +244,8 @@
 				C460FCF41BD840CE00CD9DBC /* MaterialDesignTheme.h */,
 				C460FCF51BD840CE00CD9DBC /* MaterialDesignTheme.m */,
 				C460FCF61BD840CE00CD9DBC /* Theme.h */,
+				C460FD321BDAF8E500CD9DBC /* WalmartcolorTheme.h */,
+				C460FD331BDAF8E500CD9DBC /* WalmartcolorTheme.m */,
 			);
 			name = ThemeManager;
 			sourceTree = "<group>";
@@ -373,13 +387,17 @@
 				C460FD0A1BD8410D00CD9DBC /* BFPaperCollectionViewCell.m in Sources */,
 				C460FD071BD8410D00CD9DBC /* BFPaperButton.m in Sources */,
 				C460FD171BD8416200CD9DBC /* MKLayer.swift in Sources */,
+				C460FD3C1BDB287700CD9DBC /* Attendance.swift in Sources */,
 				C460FD081BD8410D00CD9DBC /* UIColor+BFPaperColors.m in Sources */,
+				C460FD341BDAF8E500CD9DBC /* WalmartcolorTheme.m in Sources */,
 				C460FCF81BD840CE00CD9DBC /* MaterialDesignTheme.m in Sources */,
 				C43414761BCE443E00AA63DB /* AppDelegate.swift in Sources */,
 				C460FCF71BD840CE00CD9DBC /* ThemeManager.m in Sources */,
 				C460FD191BD8416200CD9DBC /* MKTextField.swift in Sources */,
+				C460FD3A1BDB27ED00CD9DBC /* DailyAttendanceCollectionViewCell.swift in Sources */,
 				C460FCE41BD75F9A00CD9DBC /* Courses.swift in Sources */,
 				C460FD231BD8B05A00CD9DBC /* Student.swift in Sources */,
+				C460FD381BDB1AF300CD9DBC /* AttendanceCollectionViewCell.swift in Sources */,
 				C460FCE61BD8332500CD9DBC /* AttendanceCollectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

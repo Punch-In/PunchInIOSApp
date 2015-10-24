@@ -16,11 +16,18 @@ class CourseViewController: UIViewController,UINavigationBarDelegate {
     @IBOutlet weak var courseView: UIView!
     @IBOutlet weak var attendanceView: UIView!
     @IBOutlet weak var questionsView: UIView!
+    
+    @IBOutlet weak var startClassLabel: UILabel!
+    @IBOutlet weak var startClassView: UIView!
     /*Course Details*/
     @IBOutlet weak var courseName: UILabel!
     @IBOutlet weak var classNumber: UILabel!
     @IBOutlet weak var courseDate: UILabel!
     @IBOutlet weak var courseAddress: UILabel!
+
+    @IBOutlet var attendanceTapGestureRecognizer: UITapGestureRecognizer!
+    @IBOutlet var questionsTapGestureRecognizer: UITapGestureRecognizer!
+    
     /*  Attendance  */
     // @IBOutlet weak var totalAttendance: UILabel!
     /*  Questions*/
@@ -42,25 +49,49 @@ class CourseViewController: UIViewController,UINavigationBarDelegate {
         classNumber.text = course?.classNumber
         courseDate.text = course?.classTimeAndDate
         courseAddress.text = course?.courseAddress
+        
+        attendanceTapGestureRecognizer.addTarget(self, action: "attendanceViewClicked")
+        questionsTapGestureRecognizer.addTarget(self, action: "questionsViewClicked")
     }
+    
+    func attendanceViewClicked(){
+        let storyBoardName = "Main"
+        let storyBoard = UIStoryboard.init(name: storyBoardName, bundle: nil);
+        let vc = storyBoard.instantiateViewControllerWithIdentifier("AttendanceCollectionViewController") as! AttendanceCollectionViewController
+        vc.course = course
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func questionsViewClicked(){
+        let storyBoardName = "Main"
+        let storyBoard = UIStoryboard.init(name: storyBoardName, bundle: nil);
+        let vc = storyBoard.instantiateViewControllerWithIdentifier("QuestionsListViewController")
+    
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
     
     func setUpUI(){
         //Navigation Controller
-        self.navigationController?.navigationBar.barTintColor = UIColor(red:0.988, green:0.702, blue:0.078, alpha:1.0)
+        self.navigationController?.navigationBar.barTintColor = ThemeManager.theme().primaryColor()
         self.navigationItem.title = "Course"
         self.navigationController?.navigationItem.title = "Course"
         self.navigationController?.navigationBar.titleTextAttributes = NSDictionary.init(dictionary:
             [NSForegroundColorAttributeName:UIColor.whiteColor()]) as? [String : AnyObject]
-
+        
         //Content Views
         ThemeManager.theme().themeForContentView(courseView)
         ThemeManager.theme().themeForContentView(attendanceView)
         ThemeManager.theme().themeForContentView(questionsView)
-        //Title Labels
-        ThemeManager.theme().themeForLightTitleLabels(courseName)
-        ThemeManager.theme().themeForLightTitleLabels(classNumber)
-        ThemeManager.theme().themeForLightTitleLabels(courseDate)
-        ThemeManager.theme().themeForLightTitleLabels(courseAddress)
+        ThemeManager.theme().themeForSecondaryContentView(startClassView)
+        
+        //Labels
+        ThemeManager.theme().themeForTitleLabels(courseName)
+        ThemeManager.theme().themeForTitleLabels(classNumber)
+        ThemeManager.theme().themeForTitleLabels(courseDate)
+        ThemeManager.theme().themeForTitleLabels(courseAddress)
+        ThemeManager.theme().themeForTitleLabels(startClassLabel)
+    
     }
     
     override func didReceiveMemoryWarning() {
@@ -75,8 +106,11 @@ class CourseViewController: UIViewController,UINavigationBarDelegate {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     // Get the new view controller using segue.destinationViewController.
     // Pass the selected object to the new view controller.
-        if(segue.identifier == ""){
+        if(segue.identifier == "AttedanceViewControllerSegue"){
          //   var vc:
+            
+        }else if(segue.identifier == "QuestionsViewControllerSegue"){
+            
         }
     }
     

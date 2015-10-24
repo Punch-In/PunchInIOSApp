@@ -8,10 +8,11 @@
 
 #import "ThemeManager.h"
 #import "MaterialDesignTheme.h"
+#import "WalmartcolorTheme.h"
 
 @implementation ThemeManager
 
 +(id<Theme>)theme{
-    return [[MaterialDesignTheme alloc] init];
+    return [[WalmartcolorTheme alloc] init];
 }
 @end

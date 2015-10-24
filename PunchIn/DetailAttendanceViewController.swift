@@ -8,20 +8,62 @@
 
 import UIKit
 
-class DetailAttendanceViewController: UIViewController {
+class DetailAttendanceViewController: UIViewController,UICollectionViewDataSource,UICollectionViewDelegate{
 
+    var course:Courses?
+    var student:Student?
+    private var attendanceArray:[Attendance]!
+    
+    @IBOutlet weak var dailyAttendanceView: UIView!
+    @IBOutlet weak var studentName: UILabel!
+    @IBOutlet weak var className: UILabel!
+    @IBOutlet weak var totalAttendance: UILabel!
+    @IBOutlet weak var studentImage: UIImageView!
+    @IBOutlet weak var attendanceCollectionView: UICollectionView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        attendanceCollectionView.delegate = self
+        attendanceCollectionView.dataSource = self
+        attendanceArray = student?.attendances
+        studentName.text = student?.studentName
+        className.text = course?.courseName
+        studentImage.image = student?.studentImage
+        totalAttendance.text = student?.attendanceOfStudent
+        setCollectionViewLayout()
+        attendanceCollectionView.backgroundColor = ThemeManager.theme().primaryColor()
+       
+        ThemeManager.theme().themeForContentView(dailyAttendanceView)
+        ThemeManager.theme().themeForTitleLabels(studentName)
+        ThemeManager.theme().themeForTitleLabels(className)
+        ThemeManager.theme().themeForTitleLabels(totalAttendance)
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func setCollectionViewLayout(){
+        let flowLayout : UICollectionViewFlowLayout = UICollectionViewFlowLayout.init()
+        flowLayout.itemSize = CGSizeMake(self.view.bounds.width, self.view.bounds.height/10)
+        flowLayout.minimumInteritemSpacing = 10
+        attendanceCollectionView.setCollectionViewLayout(flowLayout, animated: true)
+    }
+
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
+        
+        return (attendanceArray?.count)!
     }
     
-
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell{
+        let cell = attendanceCollectionView.dequeueReusableCellWithReuseIdentifier("DailyAttendanceCollectionViewCell", forIndexPath: indexPath) as! DailyAttendanceCollectionViewCell
+        let attendance:Attendance = attendanceArray[indexPath.row]
+        cell.className.text = attendance.className
+        cell.classDate.text = attendance.classDate
+        cell.classPresentOrAbsent.text = attendance.classPresentOrAbsent
+        cell.backgroundColor = UIColor.whiteColor()
+        cell.layer.borderColor = UIColor.blackColor().CGColor
+        cell.layer.borderWidth = 2.0
+        
+        return cell
+    }
+    
     /*
     // MARK: - Navigation
 
