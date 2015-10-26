@@ -15,9 +15,9 @@ class AttendanceCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var totalAttendance: UILabel!
 
     func setAttendanceOfStudent(student:Student){
-    studentName.text = student.studentName
-    studentImage.image = student.studentImage
-    totalAttendance.text = student.attendanceOfStudent
+        studentName.text = student.studentName
+        studentImage.image = student.studentImage
+        totalAttendance.text = student.attendanceOfStudent
     }
     
     

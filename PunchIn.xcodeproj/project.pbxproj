@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		450509341BDC234C00ED17FF /* ParseDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450509331BDC234C00ED17FF /* ParseDB.swift */; settings = {ASSET_TAGS = (); }; };
+		4505093C1BDC391100ED17FF /* Instructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4505093B1BDC391100ED17FF /* Instructor.swift */; settings = {ASSET_TAGS = (); }; };
+		4505093E1BDC469B00ED17FF /* Class.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4505093D1BDC469B00ED17FF /* Class.swift */; settings = {ASSET_TAGS = (); }; };
+		450509401BDC475D00ED17FF /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4505093F1BDC475D00ED17FF /* Location.swift */; settings = {ASSET_TAGS = (); }; };
+		450509421BDC479200ED17FF /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450509411BDC479200ED17FF /* Question.swift */; settings = {ASSET_TAGS = (); }; };
+		4567BC7D1BDC7162003C247A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4567BC7C1BDC7162003C247A /* Constants.swift */; settings = {ASSET_TAGS = (); }; };
+		45F7535D1BDCBDE10011FE00 /* DataInjector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F7535C1BDCBDE10011FE00 /* DataInjector.swift */; settings = {ASSET_TAGS = (); }; };
+		45FC02DE1BDD9F2E006E37E3 /* QuestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FC02DD1BDD9F2E006E37E3 /* QuestionTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		82FEDFDFA7C3E9CBE09D154A /* Pods_PunchIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0926E69D8C5ACE24A61E9D24 /* Pods_PunchIn.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		C43414761BCE443E00AA63DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43414751BCE443E00AA63DB /* AppDelegate.swift */; };
 		C434147B1BCE443E00AA63DB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C43414791BCE443E00AA63DB /* Main.storyboard */; };
 		C434147D1BCE443E00AA63DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C434147C1BCE443E00AA63DB /* Assets.xcassets */; };
@@ -17,7 +26,7 @@
 		C460FCDE1BD75B5800CD9DBC /* QuestionsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C460FCDD1BD75B5800CD9DBC /* QuestionsListViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		C460FCE01BD75BA800CD9DBC /* DetailAttendanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C460FCDF1BD75BA800CD9DBC /* DetailAttendanceViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		C460FCE21BD75E9500CD9DBC /* CoursesListsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C460FCE11BD75E9500CD9DBC /* CoursesListsCollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
-		C460FCE41BD75F9A00CD9DBC /* Courses.swift in Sources */ = {isa = PBXBuildFile; fileRef = C460FCE31BD75F9A00CD9DBC /* Courses.swift */; settings = {ASSET_TAGS = (); }; };
+		C460FCE41BD75F9A00CD9DBC /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = C460FCE31BD75F9A00CD9DBC /* Course.swift */; settings = {ASSET_TAGS = (); }; };
 		C460FCE61BD8332500CD9DBC /* AttendanceCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C460FCE51BD8332500CD9DBC /* AttendanceCollectionViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		C460FCF71BD840CE00CD9DBC /* ThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C460FCF31BD840CE00CD9DBC /* ThemeManager.m */; settings = {ASSET_TAGS = (); }; };
 		C460FCF81BD840CE00CD9DBC /* MaterialDesignTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = C460FCF51BD840CE00CD9DBC /* MaterialDesignTheme.m */; settings = {ASSET_TAGS = (); }; };
@@ -49,6 +58,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		059088C62FB362D8909118AB /* Pods-PunchIn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PunchIn.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PunchIn/Pods-PunchIn.debug.xcconfig"; sourceTree = "<group>"; };
+		0926E69D8C5ACE24A61E9D24 /* Pods_PunchIn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PunchIn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		450509331BDC234C00ED17FF /* ParseDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseDB.swift; sourceTree = "<group>"; };
+		4505093B1BDC391100ED17FF /* Instructor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Instructor.swift; sourceTree = "<group>"; };
+		4505093D1BDC469B00ED17FF /* Class.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Class.swift; sourceTree = "<group>"; };
+		4505093F1BDC475D00ED17FF /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		450509411BDC479200ED17FF /* Question.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
+		4567BC7C1BDC7162003C247A /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		45F7535C1BDCBDE10011FE00 /* DataInjector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataInjector.swift; sourceTree = "<group>"; };
+		45FC02DD1BDD9F2E006E37E3 /* QuestionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionTableViewCell.swift; sourceTree = "<group>"; };
+		671141AE5759EFD24DC8F9D5 /* Pods-PunchIn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PunchIn.release.xcconfig"; path = "Pods/Target Support Files/Pods-PunchIn/Pods-PunchIn.release.xcconfig"; sourceTree = "<group>"; };
 		C43414721BCE443E00AA63DB /* PunchIn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PunchIn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C43414751BCE443E00AA63DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C434147A1BCE443E00AA63DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -62,7 +82,7 @@
 		C460FCDD1BD75B5800CD9DBC /* QuestionsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionsListViewController.swift; sourceTree = "<group>"; };
 		C460FCDF1BD75BA800CD9DBC /* DetailAttendanceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailAttendanceViewController.swift; sourceTree = "<group>"; };
 		C460FCE11BD75E9500CD9DBC /* CoursesListsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursesListsCollectionViewCell.swift; sourceTree = "<group>"; };
-		C460FCE31BD75F9A00CD9DBC /* Courses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Courses.swift; sourceTree = "<group>"; };
+		C460FCE31BD75F9A00CD9DBC /* Course.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
 		C460FCE51BD8332500CD9DBC /* AttendanceCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AttendanceCollectionViewController.swift; path = ../AttendanceCollectionViewController.swift; sourceTree = "<group>"; };
 		C460FCF21BD840CE00CD9DBC /* ThemeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThemeManager.h; sourceTree = "<group>"; };
 		C460FCF31BD840CE00CD9DBC /* ThemeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThemeManager.m; sourceTree = "<group>"; };
@@ -108,17 +128,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				82FEDFDFA7C3E9CBE09D154A /* Pods_PunchIn.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		450509321BDC233600ED17FF /* Parse */ = {
+			isa = PBXGroup;
+			children = (
+				450509331BDC234C00ED17FF /* ParseDB.swift */,
+			);
+			name = Parse;
+			sourceTree = "<group>";
+		};
+		6C19A54B4BA2B3835FDEB9CC /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				059088C62FB362D8909118AB /* Pods-PunchIn.debug.xcconfig */,
+				671141AE5759EFD24DC8F9D5 /* Pods-PunchIn.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		C43414691BCE443E00AA63DB = {
 			isa = PBXGroup;
 			children = (
 				C43414741BCE443E00AA63DB /* PunchIn */,
 				C43414731BCE443E00AA63DB /* Products */,
+				6C19A54B4BA2B3835FDEB9CC /* Pods */,
+				CD8FC80B0AD3E39675544999 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -133,6 +173,7 @@
 		C43414741BCE443E00AA63DB /* PunchIn */ = {
 			isa = PBXGroup;
 			children = (
+				450509321BDC233600ED17FF /* Parse */,
 				C460FCF11BD840A400CD9DBC /* 3DParty */,
 				C460FCEF1BD8409800CD9DBC /* Utils */,
 				C460FCE91BD8334500CD9DBC /* Model */,
@@ -151,6 +192,7 @@
 				C460FCE11BD75E9500CD9DBC /* CoursesListsCollectionViewCell.swift */,
 				C460FD371BDB1AF300CD9DBC /* AttendanceCollectionViewCell.swift */,
 				C460FD391BDB27ED00CD9DBC /* DailyAttendanceCollectionViewCell.swift */,
+				45FC02DD1BDD9F2E006E37E3 /* QuestionTableViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -168,9 +210,15 @@
 		C460FCE91BD8334500CD9DBC /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				C460FCE31BD75F9A00CD9DBC /* Courses.swift */,
+				C460FCE31BD75F9A00CD9DBC /* Course.swift */,
 				C460FD221BD8B05A00CD9DBC /* Student.swift */,
 				C460FD3B1BDB287700CD9DBC /* Attendance.swift */,
+				4505093B1BDC391100ED17FF /* Instructor.swift */,
+				4505093D1BDC469B00ED17FF /* Class.swift */,
+				4505093F1BDC475D00ED17FF /* Location.swift */,
+				450509411BDC479200ED17FF /* Question.swift */,
+				4567BC7C1BDC7162003C247A /* Constants.swift */,
+				45F7535C1BDCBDE10011FE00 /* DataInjector.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -292,6 +340,14 @@
 			name = MaterialKit;
 			sourceTree = "<group>";
 		};
+		CD8FC80B0AD3E39675544999 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0926E69D8C5ACE24A61E9D24 /* Pods_PunchIn.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -299,9 +355,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C43414841BCE443E00AA63DB /* Build configuration list for PBXNativeTarget "PunchIn" */;
 			buildPhases = (
+				97122DDEF1F6E2ADF8DB267F /* Check Pods Manifest.lock */,
 				C434146E1BCE443E00AA63DB /* Sources */,
 				C434146F1BCE443E00AA63DB /* Frameworks */,
 				C43414701BCE443E00AA63DB /* Resources */,
+				88E628C30023072D0999D3AE /* Embed Pods Frameworks */,
+				D9EB15A141EF619341E24B5C /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -365,16 +424,67 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		88E628C30023072D0999D3AE /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PunchIn/Pods-PunchIn-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		97122DDEF1F6E2ADF8DB267F /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		D9EB15A141EF619341E24B5C /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PunchIn/Pods-PunchIn-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		C434146E1BCE443E00AA63DB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				C460FCDE1BD75B5800CD9DBC /* QuestionsListViewController.swift in Sources */,
+				450509401BDC475D00ED17FF /* Location.swift in Sources */,
 				C460FD061BD8410D00CD9DBC /* BFPaperTabBarController.m in Sources */,
+				450509421BDC479200ED17FF /* Question.swift in Sources */,
 				C460FCE21BD75E9500CD9DBC /* CoursesListsCollectionViewCell.swift in Sources */,
 				C460FD131BD8416200CD9DBC /* MKButton.swift in Sources */,
 				C460FD181BD8416200CD9DBC /* MKTableViewCell.swift in Sources */,
+				4505093C1BDC391100ED17FF /* Instructor.swift in Sources */,
 				C460FCD81BD75B2700CD9DBC /* LoginViewController.swift in Sources */,
 				C460FD141BD8416200CD9DBC /* MKColor.swift in Sources */,
 				C460FD161BD8416200CD9DBC /* MKLabel.swift in Sources */,
@@ -383,19 +493,24 @@
 				C460FD051BD8410D00CD9DBC /* BFPaperCheckbox.m in Sources */,
 				C460FCDA1BD75B3F00CD9DBC /* CoursesListViewController.swift in Sources */,
 				C460FCDC1BD75B4B00CD9DBC /* CourseViewController.swift in Sources */,
+				45FC02DE1BDD9F2E006E37E3 /* QuestionTableViewCell.swift in Sources */,
 				C460FCE01BD75BA800CD9DBC /* DetailAttendanceViewController.swift in Sources */,
 				C460FD0A1BD8410D00CD9DBC /* BFPaperCollectionViewCell.m in Sources */,
 				C460FD071BD8410D00CD9DBC /* BFPaperButton.m in Sources */,
 				C460FD171BD8416200CD9DBC /* MKLayer.swift in Sources */,
 				C460FD3C1BDB287700CD9DBC /* Attendance.swift in Sources */,
+				45F7535D1BDCBDE10011FE00 /* DataInjector.swift in Sources */,
 				C460FD081BD8410D00CD9DBC /* UIColor+BFPaperColors.m in Sources */,
 				C460FD341BDAF8E500CD9DBC /* WalmartcolorTheme.m in Sources */,
 				C460FCF81BD840CE00CD9DBC /* MaterialDesignTheme.m in Sources */,
+				450509341BDC234C00ED17FF /* ParseDB.swift in Sources */,
 				C43414761BCE443E00AA63DB /* AppDelegate.swift in Sources */,
 				C460FCF71BD840CE00CD9DBC /* ThemeManager.m in Sources */,
 				C460FD191BD8416200CD9DBC /* MKTextField.swift in Sources */,
 				C460FD3A1BDB27ED00CD9DBC /* DailyAttendanceCollectionViewCell.swift in Sources */,
-				C460FCE41BD75F9A00CD9DBC /* Courses.swift in Sources */,
+				C460FCE41BD75F9A00CD9DBC /* Course.swift in Sources */,
+				4567BC7D1BDC7162003C247A /* Constants.swift in Sources */,
+				4505093E1BDC469B00ED17FF /* Class.swift in Sources */,
 				C460FD231BD8B05A00CD9DBC /* Student.swift in Sources */,
 				C460FD381BDB1AF300CD9DBC /* AttendanceCollectionViewCell.swift in Sources */,
 				C460FCE61BD8332500CD9DBC /* AttendanceCollectionViewController.swift in Sources */,
@@ -509,6 +624,7 @@
 		};
 		C43414851BCE443E00AA63DB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 059088C62FB362D8909118AB /* Pods-PunchIn.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -523,6 +639,7 @@
 		};
 		C43414861BCE443E00AA63DB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 671141AE5759EFD24DC8F9D5 /* Pods-PunchIn.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;

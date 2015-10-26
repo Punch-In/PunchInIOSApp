@@ -7,13 +7,23 @@
 //
 
 import UIKit
+import Parse
 
 class LoginViewController: UIViewController {
+    
+    static let loginSegueName = "loginSegue"
+    
+    static let userTypes = [ "Student", "Instructor" ]
+    
 
     @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var typeSelector: UISegmentedControl!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+     
         // Do any additional setup after loading the view.
     }
 
@@ -22,10 +32,22 @@ class LoginViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    
+    func validateInput() -> Bool {
+        return !nameTextField.text!.isEmpty && !passwordTextField.text!.isEmpty
+    }
 
     @IBAction func accountLogin(sender: AnyObject) {
+        guard validateInput() else {
+            return  // TODO: alert
+        }
         
-        
+        ParseDB.login(nameTextField!.text!, password: passwordTextField!.text!,
+            type: LoginViewController.userTypes[typeSelector.selectedSegmentIndex])
     }
 
     

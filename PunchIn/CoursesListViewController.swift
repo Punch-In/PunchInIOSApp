@@ -7,11 +7,16 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class CoursesListViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource {
     
     let CoursesListCellIdentifier  = "CoursesListCell"
-    let courseArray:[Courses] = Courses.getAllCourses()
+    var courseArray:[Course] = [] {
+        didSet {
+            coursesCollectionView.reloadData()
+        }
+    }
     
     @IBOutlet weak var coursesCollectionView: UICollectionView!
     
@@ -22,8 +27,27 @@ class CoursesListViewController: UIViewController,UICollectionViewDelegate,UICol
         setUpDelegates()
         setUpUI()
         setCollectionViewLayout()
+        fetchData()
     }
-    
+
+    func fetchData() {
+        let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        hud.labelText = "Getting courses..."
+        
+        Course.courses({
+            (courses, error) -> Void in
+            if error == nil {
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.courseArray = courses!
+                    MBProgressHUD.hideHUDForView(self.view, animated: true)
+                })
+            }else{
+                print("error getting courses! \(error)")
+                MBProgressHUD.hideHUDForView(self.view, animated: true)
+            }
+        })
+    }
+
     // MARK: Setup Methods
     func setUpDelegates(){
         coursesCollectionView.delegate = self
@@ -38,6 +62,13 @@ class CoursesListViewController: UIViewController,UICollectionViewDelegate,UICol
         self.navigationController?.navigationBar.titleTextAttributes = NSDictionary.init(dictionary:
             [NSForegroundColorAttributeName:UIColor.whiteColor()]) as? [String : AnyObject]
         
+        // logout button
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Logout", style: UIBarButtonItemStyle.Plain, target:self, action: "tappedLogout")
+        
+    }
+    
+    func tappedLogout() {
+        ParseDB.logout()
     }
     
     func setCollectionViewLayout(){
@@ -65,6 +96,7 @@ class CoursesListViewController: UIViewController,UICollectionViewDelegate,UICol
         cell.layer.shadowRadius = 2.0;
         cell.layer.shadowOpacity = 0.5;
         cell.layer.shadowOffset = CGSizeZero
+        cell.layer.cornerRadius = 10
         return cell;
     }
     
@@ -74,7 +106,7 @@ class CoursesListViewController: UIViewController,UICollectionViewDelegate,UICol
             let courseViewController:CourseViewController = segue.destinationViewController as! CourseViewController
             let cell = sender as! UICollectionViewCell
             let indexPath  = coursesCollectionView!.indexPathForCell(cell) as NSIndexPath!
-            let selectedCourse:Courses = courseArray[indexPath.row] as Courses
+            let selectedCourse:Course = courseArray[indexPath.row] as Course
             courseViewController.course = selectedCourse
         }
     }

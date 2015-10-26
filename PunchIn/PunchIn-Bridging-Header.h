@@ -3,3 +3,5 @@
 //
 
 #import "ThemeManager.h"
+#import <Parse/PFObject+Subclass.h>
+#import <MBProgressHUD/MBProgressHUD.h>

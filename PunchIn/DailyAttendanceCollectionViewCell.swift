@@ -15,7 +15,7 @@ class DailyAttendanceCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var classPresentOrAbsent: UILabel!
     
     func setAttendance(attendance:Attendance){
-        className.text = attendance.className
+        className.text = attendance.theClassName
         classDate.text = attendance.classDate
         classPresentOrAbsent.text = attendance.classPresentOrAbsent
     }

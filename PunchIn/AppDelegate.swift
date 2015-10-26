@@ -7,17 +7,50 @@
 //
 
 import UIKit
+import Parse
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    let mainStoryboard = UIStoryboard(name: "Main", bundle:nil)
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+       // Override point for customization after application launch.
+       ParseDB.initialize()
+       //DataInjector.doIt()
+        
+        
+        // add notification handler for user log in & out event
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "userLoggedIn", name: Constants.Notifications.UserLoggedIn, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "userLoggedOut", name:Constants.Notifications.UserLoggedOut, object:nil)
+
+        // skip login if user is already logged in
+        if let user = PFUser.currentUser() {
+            // check if session needs to be reauthenticated
+            do{
+                try PFUser.become(user.sessionToken!)
+                print("user \(PFUser.currentUser()!.username) logged in")
+                self.userLoggedIn()
+            }catch{
+                print("need to reauthenticate session \(error)")
+            }
+        }
+
         return true
     }
+    
+    func userLoggedIn() {
+        let vc = self.mainStoryboard.instantiateViewControllerWithIdentifier(Constants.Storyboard.CoursesListViewController) as! CoursesListViewController
+        let navigationController = UINavigationController(rootViewController: vc)
+        self.window?.rootViewController = navigationController
+    }
+    
+    func userLoggedOut() {
+        let vc = mainStoryboard.instantiateInitialViewController()
+        window?.rootViewController = vc
+    }
+
 
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

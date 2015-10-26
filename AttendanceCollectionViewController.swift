@@ -7,11 +7,17 @@
 //
 
 import UIKit
+import AFNetworking
 
 class AttendanceCollectionViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource {
     
     @IBOutlet weak var attendanceCollectionView: UICollectionView!
-    var course:Courses!
+    var theClass: Class!
+    private var studentArray: [Student]! {
+        didSet {
+            attendanceCollectionView.reloadData()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +25,9 @@ class AttendanceCollectionViewController: UIViewController,UICollectionViewDeleg
         attendanceCollectionView.delegate = self
         attendanceCollectionView.dataSource = self
         attendanceCollectionView.backgroundColor = UIColor.whiteColor()
+        
+        // data
+        studentArray = theClass.attendance!
     }
     
     // MARK: Setup UI Methods
@@ -33,17 +42,13 @@ class AttendanceCollectionViewController: UIViewController,UICollectionViewDeleg
     
     // MARK: Collection View Delegate Methods
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
-        let studentArray = course.studentArray
-        return (studentArray?.count)!;
+        return studentArray.count
     }
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell{
         let cell = attendanceCollectionView.dequeueReusableCellWithReuseIdentifier("AttendanceCollectionViewCell", forIndexPath: indexPath) as! AttendanceCollectionViewCell
-        let localcourse:Courses = course
-        let studentArray :[Student] = localcourse.studentArray!
         let student:Student = studentArray[indexPath.row]
         cell.studentName.text = student.studentName
-        cell.studentImage.image = student.studentImage
         cell.totalAttendance.text = student.attendanceOfStudent
         cell.layer.borderWidth = 2.0;
         cell.layer.borderColor = UIColor.blackColor().CGColor
@@ -53,22 +58,35 @@ class AttendanceCollectionViewController: UIViewController,UICollectionViewDeleg
         cell.layer.shadowRadius = 2.0;
         cell.layer.shadowOpacity = 0.5;
         cell.layer.shadowOffset = CGSizeZero
+        cell.layer.cornerRadius = 10
+        
+        // get student image
+        student.getStudentImage { (image, error) -> Void in
+            if error == nil {
+                dispatch_async(dispatch_get_main_queue()){
+                    cell.studentImage.image = image
+                }
+            }else{
+                print("error getting image for student \(student.studentName)")
+            }
+        }
+        
         return cell
     }
 
     // MARK: - Navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-        if(segue.identifier == "AttendanceSegue"){
-            let vc:DetailAttendanceViewController = segue.destinationViewController as! DetailAttendanceViewController
-            let cell = sender as! UICollectionViewCell
-            let indexPath  = attendanceCollectionView.indexPathForCell(cell) as NSIndexPath!
-            let localcourse:Courses = course
-            let studentArray :[Student] = localcourse.studentArray!
-            let student:Student = studentArray[indexPath.row]
-            vc.student = student
-            vc.course = localcourse
-        }
-    }
+//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+//        // Get the new view controller using segue.destinationViewController.
+//        // Pass the selected object to the new view controller.
+//        if(segue.identifier == "AttendanceSegue"){
+//            let vc:DetailAttendanceViewController = segue.destinationViewController as! DetailAttendanceViewController
+//            let cell = sender as! UICollectionViewCell
+//            let indexPath  = attendanceCollectionView.indexPathForCell(cell) as NSIndexPath!
+//            let localcourse:Course = course
+//            let studentArray :[Student] = localcourse.registeredStudents!
+//            let student:Student = studentArray[indexPath.row]
+//            vc.student = student
+//            vc.course = localcourse
+//        }
+//    }
 }

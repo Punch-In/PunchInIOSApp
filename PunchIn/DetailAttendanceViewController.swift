@@ -10,7 +10,7 @@ import UIKit
 
 class DetailAttendanceViewController: UIViewController,UICollectionViewDataSource,UICollectionViewDelegate{
 
-    var course:Courses?
+    var course:Course?
     var student:Student?
     private var attendanceArray:[Attendance]!
     
@@ -54,12 +54,13 @@ class DetailAttendanceViewController: UIViewController,UICollectionViewDataSourc
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell{
         let cell = attendanceCollectionView.dequeueReusableCellWithReuseIdentifier("DailyAttendanceCollectionViewCell", forIndexPath: indexPath) as! DailyAttendanceCollectionViewCell
         let attendance:Attendance = attendanceArray[indexPath.row]
-        cell.className.text = attendance.className
+        cell.className.text = attendance.theClassName
         cell.classDate.text = attendance.classDate
         cell.classPresentOrAbsent.text = attendance.classPresentOrAbsent
         cell.backgroundColor = UIColor.whiteColor()
         cell.layer.borderColor = UIColor.blackColor().CGColor
         cell.layer.borderWidth = 2.0
+        cell.layer.cornerRadius = 10
         
         return cell
     }

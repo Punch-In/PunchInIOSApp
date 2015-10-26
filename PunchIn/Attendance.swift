@@ -7,15 +7,34 @@
 //
 
 import UIKit
+import Parse
 
-class Attendance: NSObject {
-
-    var className:String?
+class Attendance: PFObject, PFSubclassing {
+    
+    // MARK: Parse subclassing
+    private static let className = "Attendance"
+    private static var initialized = false
+    
+    override class func initialize() {
+        if !initialized {
+            print("registered \(className) with parse!")
+            registerSubclass()
+            initialized=true
+        }
+    }
+    
+    class func parseClassName() -> String {
+        return className
+    }
+    
+    var theClassName:String?
     var classDate:String?
     var classPresentOrAbsent:String?
     
     init(class_name:String,class_date:String,classPresentORAbsent:String){
-        className = class_name
+        super.init()
+        
+        theClassName = class_name
         classDate = class_date
         classPresentOrAbsent = classPresentORAbsent
     }

@@ -10,7 +10,7 @@ import UIKit
 
 class CourseViewController: UIViewController,UINavigationBarDelegate {
     
-    var course:Courses?
+    var course:Course!
     
     /*IgnoreViews*/
     @IBOutlet weak var courseView: UIView!
@@ -19,19 +19,29 @@ class CourseViewController: UIViewController,UINavigationBarDelegate {
     
     @IBOutlet weak var startClassLabel: UILabel!
     @IBOutlet weak var startClassView: UIView!
+    
     /*Course Details*/
     @IBOutlet weak var courseName: UILabel!
-    @IBOutlet weak var classNumber: UILabel!
+    @IBOutlet weak var courseNumber: UILabel!
     @IBOutlet weak var courseDate: UILabel!
     @IBOutlet weak var courseAddress: UILabel!
-
+    
+    /* Class Details */
+    private var classIndex: Int = 0
+    private var currentClass: Class!
+    @IBOutlet weak var classDescription: UILabel!
+    @IBOutlet weak var registeredCount: UILabel!    
+    @IBOutlet weak var attendanceCount: UILabel!
+    
+    /* Question Details */
+    
+    @IBOutlet weak var questionCount: UILabel!
+    @IBOutlet weak var unansweredQuestionCount: UILabel!
+    
     @IBOutlet var attendanceTapGestureRecognizer: UITapGestureRecognizer!
     @IBOutlet var questionsTapGestureRecognizer: UITapGestureRecognizer!
     
     /*  Attendance  */
-    // @IBOutlet weak var totalAttendance: UILabel!
-    /*  Questions*/
-    //  @IBOutlet weak var unansweredQuestions: UILabel!
     /*startButton*/
     @IBOutlet weak var startButton: UIButton!
     
@@ -40,16 +50,33 @@ class CourseViewController: UIViewController,UINavigationBarDelegate {
         super.viewDidLoad()
         setUpUI()
         setUpValues()
+        setUpGestures()
     }
     
     
     func setUpValues() {
-        /*Setting the class details*/
-        courseName.text = course?.courseName
-        classNumber.text = course?.classNumber
-        courseDate.text = course?.classTimeAndDate
-        courseAddress.text = course?.courseAddress
+        /*Setting the course details*/
+        courseName.text = course.courseName
+        courseNumber.text = course.courseId
+        courseDate.text = String("\(course.courseTime); \(course.courseDay)")
+        courseAddress.text = course.courseLocation.address
+        registeredCount.text = "\(course.registeredStudents!.count)"
         
+        // store current class
+        currentClass = course.classes![classIndex]
+        classDescription.text = currentClass.classDescription
+        currentClass.fetchAllFields { (theClass, error) -> Void in
+            if error == nil {
+                dispatch_async(dispatch_get_main_queue()){
+                    self.attendanceCount.text = "\(self.currentClass.attendance!.count)"
+                    self.questionCount.text = "\(self.currentClass.questions!.count)"
+                    self.unansweredQuestionCount.text = "\(self.currentClass.questions!.filter({!$0.isAnswered}).count)"
+                }
+            }
+        }
+    }
+    
+    func setUpGestures() {
         attendanceTapGestureRecognizer.addTarget(self, action: "attendanceViewClicked")
         questionsTapGestureRecognizer.addTarget(self, action: "questionsViewClicked")
     }
@@ -58,15 +85,15 @@ class CourseViewController: UIViewController,UINavigationBarDelegate {
         let storyBoardName = "Main"
         let storyBoard = UIStoryboard.init(name: storyBoardName, bundle: nil);
         let vc = storyBoard.instantiateViewControllerWithIdentifier("AttendanceCollectionViewController") as! AttendanceCollectionViewController
-        vc.course = course
+        vc.theClass = currentClass
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func questionsViewClicked(){
         let storyBoardName = "Main"
         let storyBoard = UIStoryboard.init(name: storyBoardName, bundle: nil);
-        let vc = storyBoard.instantiateViewControllerWithIdentifier("QuestionsListViewController")
-    
+        let vc = storyBoard.instantiateViewControllerWithIdentifier("QuestionsListViewController") as! QuestionsListViewController
+        vc.theClass = currentClass
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -87,7 +114,7 @@ class CourseViewController: UIViewController,UINavigationBarDelegate {
         
         //Labels
         ThemeManager.theme().themeForTitleLabels(courseName)
-        ThemeManager.theme().themeForTitleLabels(classNumber)
+        ThemeManager.theme().themeForTitleLabels(courseNumber)
         ThemeManager.theme().themeForTitleLabels(courseDate)
         ThemeManager.theme().themeForTitleLabels(courseAddress)
         ThemeManager.theme().themeForTitleLabels(startClassLabel)

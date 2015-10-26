@@ -12,7 +12,7 @@ class CoursesListsCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var  courseNameLabel:UILabel?
 
-    func setCoursesListCollectionViewCell(courses:Courses){
+    func setCoursesListCollectionViewCell(courses:Course){
         courseNameLabel?.text = courses.courseName as String!;
     }
     

@@ -7,30 +7,96 @@
 //
 
 import UIKit
+import Parse
 
-class Student: NSObject {
+class Student: PFObject, PFSubclassing {
     
-    var studentName:String?
-    var studentImage:UIImage?
-    var attendanceOfStudent:String?
-    var attendances:[Attendance]?
+    // MARK: Parse subclassing
+    private static let className = "Student"
+    private static var initialized = false
     
-    init(studentName:String,studentImage:UIImage,attendanceOfStudent:String?,attendance:[Attendance]){
+    override class func initialize() {
+        if !initialized {
+            print("registered \(className) with parse!")
+            registerSubclass()
+            initialized=true
+        }
+    }
+    
+    class func parseClassName() -> String {
+        return className
+    }
+    
+    // MARK: Properties saved to Parse
+    @NSManaged private(set) var studentName: String!
+    @NSManaged private(set) var studentId: String!
+    @NSManaged private(set) var studentEmail: String!
+    @NSManaged private(set) var studentImageFile:PFFile?
+
+    // MARK: Properties not saved
+    private(set) var studentImage:UIImage?
+    private(set) var attendanceOfStudent:String?
+    private(set) var attendances:[Attendance]?
+    
+    override init() {
+        super.init()
+    }
+
+    init(studentName:String,studentImage:UIImage,id:String, email: String){
+        super.init()
+        
         self.studentName = studentName
         self.studentImage = studentImage
-        self.attendanceOfStudent = attendanceOfStudent
-        self.attendances = attendance
+        self.studentId = id
+        self.studentEmail = email
+        
+        let imageData = UIImagePNGRepresentation(studentImage)
+        self.studentImageFile = PFFile(name:studentName+".png", data:imageData!)
     }
     
-    /*iOS Class*/
-    class func getStudentsForiOSClass()->[Student]{
-        let student1 = Student.init(studentName: "Neha Agrawal", studentImage: UIImage(named: "student1")!, attendanceOfStudent: "80",attendance: Attendance.getAllAttedance())
-        let student2 = Student.init(studentName: "Ketty Perry", studentImage: UIImage(named: "student2")!, attendanceOfStudent: "80",attendance:Attendance.getAllAttedance())
-        let student3 = Student.init(studentName: "Vaidehi Murarka", studentImage: UIImage(named: "student3")!, attendanceOfStudent: "80",attendance:Attendance.getAllAttedance())
-        let student4 = Student.init(studentName: "Shalini Khare", studentImage: UIImage(named: "student4")!, attendanceOfStudent: "80",attendance:Attendance.getAllAttedance())
-        let student5 = Student.init(studentName: "Saurabh Gupta", studentImage: UIImage(named: "student5")!, attendanceOfStudent: "80",attendance:Attendance.getAllAttedance())
-        let student6 = Student.init(studentName: "Sumit Samant", studentImage: UIImage(named: "student6")!, attendanceOfStudent: "80",attendance:Attendance.getAllAttedance())
-        let students:[Student] = [student1,student2,student3,student4,student5,student6]
-        return students
+    func getStudentImage(completion: ((image:UIImage?, error:NSError?)-> Void)) {
+        guard !(studentImageFile?.isDataAvailable)! || studentImage == nil else {
+            return completion(image:studentImage, error:nil)
+        }
+        
+        if let imageFile = studentImageFile {
+            imageFile.getDataInBackgroundWithBlock {
+                (imageData: NSData?, error: NSError?) -> Void in
+                if error == nil {
+                    if let imageData = imageData {
+                        self.studentImage = UIImage(data:imageData)
+                        completion(image:self.studentImage, error:nil)
+                    }
+                }else{
+                    completion(image:nil, error:error)
+                }
+            }
+        }
     }
+    
+    class func student(forEmail: String, completion: ((student:Student?, error:NSError?)->Void)) {
+        if let query = Student.query() {
+            query.whereKey("studentEmail", equalTo: forEmail)
+            query.getFirstObjectInBackgroundWithBlock {
+                (object: PFObject?, error: NSError?) -> Void in
+                if error == nil {
+                    completion(student:object as? Student, error:nil)
+                }else{
+                    completion(student:nil, error:error)
+                }
+            }
+        }
+    }
+    
+    
+    class func createStudent(name: String, id:String, email:String, image:UIImage?) -> Student {
+        let student = Student()
+        student.studentName = name
+        student.studentEmail = email
+        student.studentId = id
+        student.studentImage = image
+        
+        return student
+    }
+
 }
