@@ -31,6 +31,7 @@ class Question : PFObject, PFSubclassing {
     @NSManaged private(set) var questionText: String!
     @NSManaged private(set) var isAnswered: Bool
     @NSManaged private(set) var date: NSDate!
+    @NSManaged private(set) weak var forClass: Class!
     
     override init() {
         super.init()
@@ -41,12 +42,13 @@ class Question : PFObject, PFSubclassing {
         self.saveEventually()
     }
     
-    class func createQuestion(email:String, text:String, date: NSDate) -> Question {
+    class func createQuestion(email:String, text:String, date: NSDate, inClass: Class) -> Question {
         let question = Question()
         question.askedBy = email
         question.questionText = text
         question.isAnswered = false
         question.date = date
+        question.forClass = inClass
         question.saveEventually()
         
         return question

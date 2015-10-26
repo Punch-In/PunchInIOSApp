@@ -70,7 +70,7 @@ class QuestionsListViewController: UIViewController, UITableViewDelegate, UITabl
     
     @IBAction func postButtonTapped(sender: AnyObject) {
         // create new question
-        let question = Question.createQuestion(PFUser.currentUser()!.email!, text:newQuestionText.text, date:NSDate())
+        let question = Question.createQuestion(PFUser.currentUser()!.email!, text:newQuestionText.text, date:NSDate(), inClass: theClass)
         theClass.addQuestion(question)
         questions.append(question)
         initializeNewQuestionText()

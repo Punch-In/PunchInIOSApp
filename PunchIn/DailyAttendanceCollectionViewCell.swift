@@ -13,12 +13,10 @@ class DailyAttendanceCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var className: UILabel!
     @IBOutlet weak var classDate: UILabel!
     @IBOutlet weak var classPresentOrAbsent: UILabel!
-    
-    func setAttendance(attendance:Attendance){
-        className.text = attendance.theClassName
-        classDate.text = attendance.classDate
-        classPresentOrAbsent.text = attendance.classPresentOrAbsent
+        
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
     }
-    
     
 }

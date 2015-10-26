@@ -16,12 +16,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let mainStoryboard = UIStoryboard(name: "Main", bundle:nil)
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-       // Override point for customization after application launch.
-       ParseDB.initialize()
-       //DataInjector.doIt()
+        // Override point for customization after application launch.
+        ParseDB.initialize()
+        //DataInjector.doIt()
         
         
-        // add notification handler for user log in & out event
+        // add notification handler for user log in & log out events
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "userLoggedIn", name: Constants.Notifications.UserLoggedIn, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "userLoggedOut", name:Constants.Notifications.UserLoggedOut, object:nil)
 

@@ -13,6 +13,7 @@
 		450509401BDC475D00ED17FF /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4505093F1BDC475D00ED17FF /* Location.swift */; settings = {ASSET_TAGS = (); }; };
 		450509421BDC479200ED17FF /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450509411BDC479200ED17FF /* Question.swift */; settings = {ASSET_TAGS = (); }; };
 		4567BC7D1BDC7162003C247A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4567BC7C1BDC7162003C247A /* Constants.swift */; settings = {ASSET_TAGS = (); }; };
+		45F39D4A1BDE03F800E385E8 /* AttendanceCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F39D491BDE03F800E385E8 /* AttendanceCollectionViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		45F7535D1BDCBDE10011FE00 /* DataInjector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F7535C1BDCBDE10011FE00 /* DataInjector.swift */; settings = {ASSET_TAGS = (); }; };
 		45FC02DE1BDD9F2E006E37E3 /* QuestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FC02DD1BDD9F2E006E37E3 /* QuestionTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		82FEDFDFA7C3E9CBE09D154A /* Pods_PunchIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0926E69D8C5ACE24A61E9D24 /* Pods_PunchIn.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -27,7 +28,6 @@
 		C460FCE01BD75BA800CD9DBC /* DetailAttendanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C460FCDF1BD75BA800CD9DBC /* DetailAttendanceViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		C460FCE21BD75E9500CD9DBC /* CoursesListsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C460FCE11BD75E9500CD9DBC /* CoursesListsCollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		C460FCE41BD75F9A00CD9DBC /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = C460FCE31BD75F9A00CD9DBC /* Course.swift */; settings = {ASSET_TAGS = (); }; };
-		C460FCE61BD8332500CD9DBC /* AttendanceCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C460FCE51BD8332500CD9DBC /* AttendanceCollectionViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		C460FCF71BD840CE00CD9DBC /* ThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C460FCF31BD840CE00CD9DBC /* ThemeManager.m */; settings = {ASSET_TAGS = (); }; };
 		C460FCF81BD840CE00CD9DBC /* MaterialDesignTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = C460FCF51BD840CE00CD9DBC /* MaterialDesignTheme.m */; settings = {ASSET_TAGS = (); }; };
 		C460FD051BD8410D00CD9DBC /* BFPaperCheckbox.m in Sources */ = {isa = PBXBuildFile; fileRef = C460FCFA1BD8410D00CD9DBC /* BFPaperCheckbox.m */; settings = {ASSET_TAGS = (); }; };
@@ -66,6 +66,7 @@
 		4505093F1BDC475D00ED17FF /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		450509411BDC479200ED17FF /* Question.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		4567BC7C1BDC7162003C247A /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		45F39D491BDE03F800E385E8 /* AttendanceCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttendanceCollectionViewController.swift; sourceTree = "<group>"; };
 		45F7535C1BDCBDE10011FE00 /* DataInjector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataInjector.swift; sourceTree = "<group>"; };
 		45FC02DD1BDD9F2E006E37E3 /* QuestionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionTableViewCell.swift; sourceTree = "<group>"; };
 		671141AE5759EFD24DC8F9D5 /* Pods-PunchIn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PunchIn.release.xcconfig"; path = "Pods/Target Support Files/Pods-PunchIn/Pods-PunchIn.release.xcconfig"; sourceTree = "<group>"; };
@@ -83,7 +84,6 @@
 		C460FCDF1BD75BA800CD9DBC /* DetailAttendanceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailAttendanceViewController.swift; sourceTree = "<group>"; };
 		C460FCE11BD75E9500CD9DBC /* CoursesListsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursesListsCollectionViewCell.swift; sourceTree = "<group>"; };
 		C460FCE31BD75F9A00CD9DBC /* Course.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
-		C460FCE51BD8332500CD9DBC /* AttendanceCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AttendanceCollectionViewController.swift; path = ../AttendanceCollectionViewController.swift; sourceTree = "<group>"; };
 		C460FCF21BD840CE00CD9DBC /* ThemeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThemeManager.h; sourceTree = "<group>"; };
 		C460FCF31BD840CE00CD9DBC /* ThemeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThemeManager.m; sourceTree = "<group>"; };
 		C460FCF41BD840CE00CD9DBC /* MaterialDesignTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaterialDesignTheme.h; sourceTree = "<group>"; };
@@ -260,9 +260,9 @@
 		C460FCED1BD8339D00CD9DBC /* Instructor */ = {
 			isa = PBXGroup;
 			children = (
+				45F39D491BDE03F800E385E8 /* AttendanceCollectionViewController.swift */,
 				C460FCD91BD75B3F00CD9DBC /* CoursesListViewController.swift */,
 				C460FCDB1BD75B4B00CD9DBC /* CourseViewController.swift */,
-				C460FCE51BD8332500CD9DBC /* AttendanceCollectionViewController.swift */,
 				C460FCDF1BD75BA800CD9DBC /* DetailAttendanceViewController.swift */,
 				C460FCDD1BD75B5800CD9DBC /* QuestionsListViewController.swift */,
 			);
@@ -505,6 +505,7 @@
 				C460FCF81BD840CE00CD9DBC /* MaterialDesignTheme.m in Sources */,
 				450509341BDC234C00ED17FF /* ParseDB.swift in Sources */,
 				C43414761BCE443E00AA63DB /* AppDelegate.swift in Sources */,
+				45F39D4A1BDE03F800E385E8 /* AttendanceCollectionViewController.swift in Sources */,
 				C460FCF71BD840CE00CD9DBC /* ThemeManager.m in Sources */,
 				C460FD191BD8416200CD9DBC /* MKTextField.swift in Sources */,
 				C460FD3A1BDB27ED00CD9DBC /* DailyAttendanceCollectionViewCell.swift in Sources */,
@@ -513,7 +514,6 @@
 				4505093E1BDC469B00ED17FF /* Class.swift in Sources */,
 				C460FD231BD8B05A00CD9DBC /* Student.swift in Sources */,
 				C460FD381BDB1AF300CD9DBC /* AttendanceCollectionViewCell.swift in Sources */,
-				C460FCE61BD8332500CD9DBC /* AttendanceCollectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

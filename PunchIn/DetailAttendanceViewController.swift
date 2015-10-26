@@ -10,9 +10,13 @@ import UIKit
 
 class DetailAttendanceViewController: UIViewController,UICollectionViewDataSource,UICollectionViewDelegate{
 
-    var course:Course?
-    var student:Student?
-    private var attendanceArray:[Attendance]!
+    var course:Course!
+    var student:Student!
+    private var classes:[Class]! {
+        didSet {
+            attendanceCollectionView.reloadData()
+        }
+    }
     
     @IBOutlet weak var dailyAttendanceView: UIView!
     @IBOutlet weak var studentName: UILabel!
@@ -25,11 +29,30 @@ class DetailAttendanceViewController: UIViewController,UICollectionViewDataSourc
         super.viewDidLoad()
         attendanceCollectionView.delegate = self
         attendanceCollectionView.dataSource = self
-        attendanceArray = student?.attendances
-        studentName.text = student?.studentName
-        className.text = course?.courseName
-        studentImage.image = student?.studentImage
-        totalAttendance.text = student?.attendanceOfStudent
+        
+//        course?.attendanceForCourse(student, completion: { (classes, isRegistered) -> Void in
+//            if isRegistered {
+//                self.classAttendance = classes
+//            }else{
+//                print("student \(self.student.studentName) not registered for course \(self.course.courseName)")
+//                self.classAttendance = []
+//            }
+//        })
+        
+        studentName.text = student.studentName
+        className.text = course.courseName
+    
+        // get student image
+        student.getStudentImage { (image, error) -> Void in
+            if error == nil {
+                dispatch_async(dispatch_get_main_queue()){
+                    self.studentImage.image = image
+                }
+            }else{
+                print("error getting image for student \(self.student.studentName)")
+            }
+        }
+        
         setCollectionViewLayout()
         attendanceCollectionView.backgroundColor = ThemeManager.theme().primaryColor()
        
@@ -37,6 +60,13 @@ class DetailAttendanceViewController: UIViewController,UICollectionViewDataSourc
         ThemeManager.theme().themeForTitleLabels(studentName)
         ThemeManager.theme().themeForTitleLabels(className)
         ThemeManager.theme().themeForTitleLabels(totalAttendance)
+
+        // calculate attendance percentage
+        let numClassesAttended = course.classes!.filter({$0.didStudentAttend(self.student)}).count
+        let pctAttendance = (Double(numClassesAttended) / Double(course.classes!.count))*100.0
+        totalAttendance.text = String(format:"%.2f%% Attendance", pctAttendance)
+
+        classes = course.classes!
     }
 
     func setCollectionViewLayout(){
@@ -47,16 +77,17 @@ class DetailAttendanceViewController: UIViewController,UICollectionViewDataSourc
     }
 
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
-        
-        return (attendanceArray?.count)!
+        return classes.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell{
         let cell = attendanceCollectionView.dequeueReusableCellWithReuseIdentifier("DailyAttendanceCollectionViewCell", forIndexPath: indexPath) as! DailyAttendanceCollectionViewCell
-        let attendance:Attendance = attendanceArray[indexPath.row]
-        cell.className.text = attendance.theClassName
-        cell.classDate.text = attendance.classDate
-        cell.classPresentOrAbsent.text = attendance.classPresentOrAbsent
+        
+        let theClass = classes[indexPath.row]
+        cell.className.text = theClass.classDescription
+        cell.classDate.text = DetailAttendanceViewController.classDateFormatter.stringFromDate(theClass.date)
+        cell.classPresentOrAbsent.text = theClass.didStudentAttend(student) ? "Present" : "Absent"
+        
         cell.backgroundColor = UIColor.whiteColor()
         cell.layer.borderColor = UIColor.blackColor().CGColor
         cell.layer.borderWidth = 2.0
@@ -64,6 +95,13 @@ class DetailAttendanceViewController: UIViewController,UICollectionViewDataSourc
         
         return cell
     }
+    
+    private static var classDateFormatter: NSDateFormatter = {
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "MMM dd y"
+        return formatter
+    }()
+
     
     /*
     // MARK: - Navigation

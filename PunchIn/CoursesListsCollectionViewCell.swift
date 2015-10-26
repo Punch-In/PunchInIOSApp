@@ -10,10 +10,10 @@ import UIKit
 
 class CoursesListsCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet weak var  courseNameLabel:UILabel?
+    @IBOutlet weak var courseNameLabel:UILabel?
 
-    func setCoursesListCollectionViewCell(courses:Course){
-        courseNameLabel?.text = courses.courseName as String!;
+    func setCoursesListCollectionViewCell(course:Course){
+        courseNameLabel?.text = course.courseName as String!;
     }
     
     

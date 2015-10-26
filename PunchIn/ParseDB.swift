@@ -26,18 +26,6 @@ class ParseDB {
         Question.initialize()
     }
     
-    func test() {
-        var testObj = PFObject(className: "TestObject")
-        testObj["foo"] = "bar"
-        testObj.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
-            if success {
-                print("saved object")
-            }else{
-                print("error: \(error)")
-            }
-        }
-    }
-    
     class func logout() {
         if let user = PFUser.currentUser() {
             user.removeObjectForKey("type")
@@ -63,6 +51,18 @@ class ParseDB {
                 print("bad user!")
             }
         }
-        
     }
+    
+    func test() {
+        let testObj = PFObject(className: "TestObject")
+        testObj["foo"] = "bar"
+        testObj.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+            if success {
+                print("saved object")
+            }else{
+                print("error: \(error)")
+            }
+        }
+    }
+
 }

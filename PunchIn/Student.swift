@@ -35,8 +35,6 @@ class Student: PFObject, PFSubclassing {
 
     // MARK: Properties not saved
     private(set) var studentImage:UIImage?
-    private(set) var attendanceOfStudent:String?
-    private(set) var attendances:[Attendance]?
     
     override init() {
         super.init()
@@ -96,6 +94,9 @@ class Student: PFObject, PFSubclassing {
         student.studentId = id
         student.studentImage = image
         
+        let imageData = UIImagePNGRepresentation(image!)
+        student.studentImageFile = PFFile(name:name+".png", data:imageData!)
+
         return student
     }
 
