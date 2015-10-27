@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         ParseDB.initialize()
         //DataInjector.doIt()
-        LocationProvider.startUpdatingLocation()
+//        LocationProvider.startUpdatingLocation()
         
         
         // add notification handler for user log in & log out events
@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "userLoggedOut", name: ParseDB.UserLoggedOutNotificationName, object:nil)
         
         // test ... REMOVE ME
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "printLocation", name:LocationProvider.locationAvailableNotificationName, object:nil)
+   //     NSNotificationCenter.defaultCenter().addObserver(self, selector: "printLocation", name:LocationProvider.locationAvailableNotificationName, object:nil)
 
         // skip login if user is already logged in
         if let user = PFUser.currentUser() {
@@ -89,7 +89,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-        LocationProvider.startUpdatingLocation()
+//        LocationProvider.startUpdatingLocation()
     }
 
     func applicationWillTerminate(application: UIApplication) {

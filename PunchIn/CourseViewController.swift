@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class CourseViewController: UIViewController,UINavigationBarDelegate {
     
@@ -40,11 +41,15 @@ class CourseViewController: UIViewController,UINavigationBarDelegate {
     
     @IBOutlet var attendanceTapGestureRecognizer: UITapGestureRecognizer!
     @IBOutlet var questionsTapGestureRecognizer: UITapGestureRecognizer!
+    @IBOutlet var startClassTapGestureRecognizer: UITapGestureRecognizer!
     
     /*  Attendance  */
     /*startButton*/
     @IBOutlet weak var startButton: UIButton!
     
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: LocationProvider.locationAvailableNotificationName, object: nil)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,7 +67,7 @@ class CourseViewController: UIViewController,UINavigationBarDelegate {
         courseAddress.text = course.courseLocation.address
         registeredCount.text = "\(course.registeredStudents!.count)"
         
-        // store current class
+        // show current class
         currentClass = course.classes![classIndex]
         classDescription.text = currentClass.classDescription
         currentClass.fetchAllFields { (theClass, error) -> Void in
@@ -74,14 +79,27 @@ class CourseViewController: UIViewController,UINavigationBarDelegate {
                 }
             }
         }
+        
+        // set "class start" view based on class status
+        if currentClass.isFinished {
+            self.startClassLabel.text = Class.classFinishedText
+            self.startClassView.backgroundColor = UIColor.redColor()
+        }else if currentClass.isStarted {
+            self.startClassLabel.text = Class.classStartedText
+            self.startClassView.backgroundColor = UIColor.greenColor()
+        }else {
+            self.startClassLabel.text = Class.classNotStartedText
+            ThemeManager.theme().themeForSecondaryContentView(startClassView)
+        }
     }
     
     func setUpGestures() {
-        attendanceTapGestureRecognizer.addTarget(self, action: "attendanceViewClicked")
-        questionsTapGestureRecognizer.addTarget(self, action: "questionsViewClicked")
+        attendanceTapGestureRecognizer.addTarget(self, action: "attendanceViewTapped")
+        questionsTapGestureRecognizer.addTarget(self, action: "questionsViewTapped")
+        startClassTapGestureRecognizer.addTarget(self, action: "startClassTapped")
     }
     
-    func attendanceViewClicked(){
+    func attendanceViewTapped(){
         let storyBoardName = "Main"
         let storyBoard = UIStoryboard.init(name: storyBoardName, bundle: nil);
         let vc = storyBoard.instantiateViewControllerWithIdentifier("AttendanceCollectionViewController") as! AttendanceCollectionViewController
@@ -89,7 +107,7 @@ class CourseViewController: UIViewController,UINavigationBarDelegate {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    func questionsViewClicked(){
+    func questionsViewTapped(){
         let storyBoardName = "Main"
         let storyBoard = UIStoryboard.init(name: storyBoardName, bundle: nil);
         let vc = storyBoard.instantiateViewControllerWithIdentifier("QuestionsListViewController") as! QuestionsListViewController
@@ -97,6 +115,59 @@ class CourseViewController: UIViewController,UINavigationBarDelegate {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
+    func startClassTapped() {
+        print("tapped start class!")
+
+        guard !currentClass.isFinished else {
+            // class already done... do nothing
+            return
+        }
+        
+        if currentClass.isStarted {
+            // stop class
+            doStopClass()
+        }else {
+            doStartClass()
+        }
+    }
+
+    private func doStartClass() {
+        // TODO: verify class can be started (time, etc) --> alert user if outside of class expected time
+        // TODO: verify user can start class
+        let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        hud.labelText = "Starting class..."
+        
+        LocationProvider.startUpdatingLocation()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "doStartClassLocationAvailable", name:LocationProvider.locationAvailableNotificationName, object:nil)
+    }
+    
+    func doStartClassLocationAvailable() {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: LocationProvider.locationAvailableNotificationName, object: nil)
+        // get location
+        LocationProvider.currentLocation(true) { (location, error) -> Void in
+            if error == nil {
+                self.currentClass.start(location)
+                LocationProvider.stopUpdatingLocation()
+                MBProgressHUD.hideHUDForView(self.view, animated: true)
+                UIView.animateWithDuration(0.5, animations: { () -> Void in
+                    self.startClassView.backgroundColor = UIColor.greenColor()
+                    self.startClassLabel.text = Class.classStartedText
+                })
+            }else{
+                print("error getting location for starting class \(error)")
+                NSNotificationCenter.defaultCenter().addObserver(self, selector: "doStartClassLocationAvailable", name:LocationProvider.locationAvailableNotificationName, object:nil)
+            }
+        }
+    }
+    
+    private func doStopClass() {
+        // TODO: add completion handler to finish to make sure parsedb is updated
+        currentClass.finish()
+        UIView.animateWithDuration(0.5, animations: { () -> Void in
+            self.startClassLabel.text = Class.classFinishedText
+            self.startClassView.backgroundColor = UIColor.redColor()
+        })
+    }
     
     func setUpUI(){
         //Navigation Controller
@@ -125,6 +196,7 @@ class CourseViewController: UIViewController,UINavigationBarDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     
     
     // MARK: - Navigation

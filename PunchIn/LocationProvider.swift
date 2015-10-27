@@ -61,22 +61,24 @@ class LocationProvider : NSObject, CLLocationManagerDelegate {
         }
     }
     
-    class func currentLocation(completion: ((location:Location?, error:NSError?)->Void))  {
+    class func currentLocation(withAddress: Bool=true, completion: ((location:Location?, error:NSError?)->Void))  {
         if let currentLocation = instance.manager.location {
+            if !withAddress {
+                return completion(location: Location(address:"", coordinates: currentLocation), error:nil)
+            }
+            
             instance.geocoder.reverseGeocodeLocation(currentLocation, completionHandler: {
                 (placemarks: [CLPlacemark]?, error:NSError?) -> Void in
                 if error == nil {
                     if let placemark = placemarks?.last {
                         if let addrList = placemark.addressDictionary?["FormattedAddressLines"] as? [String] {
                             let address =  addrList.joinWithSeparator(",")
-                            let locationObj = Location(address: address, coordinates: currentLocation)
-                            return completion(location: locationObj, error: nil)
+                            return completion(location: Location(address: address, coordinates: currentLocation), error: nil)
                         }
                     }
                 }else{
                     print("error obtaining address from reverseGeocodeLocation \(error)")
-                    let locationObj = Location(address: "", coordinates: currentLocation)
-                    return completion(location:locationObj, error:error)
+                    return completion(location:Location(address: "", coordinates: currentLocation), error:error)
                 }
             })
         }else{

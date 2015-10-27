@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PunchIn/Class.swift"
-            timestampString = "467503554.363544"
+            timestampString = "467668979.454555"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "57"
-            endingLineNumber = "57"
+            startingLineNumber = "61"
+            endingLineNumber = "61"
             landmarkName = "fetchAllFields(_:completion:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -144,6 +144,22 @@
             startingLineNumber = "59"
             endingLineNumber = "59"
             landmarkName = "courses(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PunchIn/LocationProvider.swift"
+            timestampString = "467667962.050904"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "startUpdatingLocation()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

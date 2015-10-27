@@ -678,6 +678,10 @@
                                 <rect key="frame" x="30" y="257" width="540" height="120"/>
                                 <animations/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="LDW-ks-Qu6" appends="YES" id="kBp-pC-rUz"/>
+                                </connections>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start Class" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hct-Ty-5zB">
                                 <rect key="frame" x="30" y="302" width="540" height="30"/>
@@ -757,6 +761,7 @@
                         <outlet property="questionsView" destination="TPI-pS-AqU" id="6nv-UA-2If"/>
                         <outlet property="registeredCount" destination="stc-89-wba" id="wR5-VQ-hBM"/>
                         <outlet property="startClassLabel" destination="hct-Ty-5zB" id="uRP-58-1nZ"/>
+                        <outlet property="startClassTapGestureRecognizer" destination="LDW-ks-Qu6" id="7Xt-Mg-Vrn"/>
                         <outlet property="startClassView" destination="7sV-MT-gWd" id="kPi-Fl-TfQ"/>
                         <outlet property="unansweredQuestionCount" destination="bdm-gr-Ea6" id="GAG-e8-jhE"/>
                     </connections>
@@ -764,6 +769,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NuZ-6W-nsb" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="jfZ-5N-fAQ"/>
                 <tapGestureRecognizer id="cfw-Aa-VVz"/>
+                <tapGestureRecognizer id="LDW-ks-Qu6"/>
             </objects>
             <point key="canvasLocation" x="145" y="2672"/>
         </scene>

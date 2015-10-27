@@ -10,6 +10,10 @@ import Parse
 
 class Class : PFObject, PFSubclassing {
     
+    static let classFinishedText = "Class has ended!"
+    static let classStartedText = "Class has started"
+    static let classNotStartedText = "Start Class"
+        
     // MARK: Parse subclassing
     private static let className = "Class"
     private static var initialized = false
@@ -94,6 +98,17 @@ class Class : PFObject, PFSubclassing {
                 completion(questions: nil, error: error)
             }
         }
+    }
+    
+    func start(location: Location?) {
+        self.isStarted = true
+        self.location = location
+        self.saveEventually()
+    }
+    
+    func finish() {
+        self.isFinished = true
+        self.saveEventually()
     }
     
     func update() {
