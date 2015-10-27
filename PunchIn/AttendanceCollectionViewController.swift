@@ -8,6 +8,7 @@
 
 import UIKit
 import AFNetworking
+import MBProgressHUD
 
 class AttendanceCollectionViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource {
     
@@ -21,6 +22,10 @@ class AttendanceCollectionViewController: UIViewController,UICollectionViewDeleg
         }
     }
     
+    // MARK: refresh hacks
+    var refreshControl : UIRefreshControl!
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setCollectionViewLayout()
@@ -28,8 +33,36 @@ class AttendanceCollectionViewController: UIViewController,UICollectionViewDeleg
         attendanceCollectionView.dataSource = self
         attendanceCollectionView.backgroundColor = UIColor.whiteColor()
         
+        // hack
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: "fetchData", forControlEvents: UIControlEvents.ValueChanged)
+        
+        attendanceCollectionView.alwaysBounceVertical = true
+        attendanceCollectionView.addSubview(refreshControl)
+        
         // data
         studentArray = theClass.attendance!
+    }
+    
+    // MARK: data fetch
+    func fetchData() {
+        let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        hud.labelText = "Updating attendance..."
+        
+        theClass.refreshAttendance { (attendance, error) -> Void in
+            if error == nil {
+                dispatch_async(dispatch_get_main_queue()){
+                    self.studentArray = attendance!
+                    self.refreshControl.endRefreshing()
+                    MBProgressHUD.hideHUDForView(self.view, animated: true)
+                }
+            }else{
+                print("error updating attendance! \(error)")
+                self.refreshControl.endRefreshing()
+                MBProgressHUD.hideHUDForView(self.view, animated: true)
+            }
+        }
+        
     }
     
     // MARK: Setup UI Methods
@@ -52,7 +85,7 @@ class AttendanceCollectionViewController: UIViewController,UICollectionViewDeleg
         cell.student = studentArray[indexPath.row]        
         return cell
     }
-
+    
     // MARK: - Navigation
     private static let detailAttendanceSegueName = "DetailAttendanceSegue"
     

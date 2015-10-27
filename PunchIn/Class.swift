@@ -100,6 +100,16 @@ class Class : PFObject, PFSubclassing {
         }
     }
     
+    func refreshAttendance(completion:((attendance:[Student]?, error:NSError?)->Void)) {
+        self.fetchAllFields(true) { (theClass, error) -> Void in
+            if error == nil {
+                completion(attendance: theClass!.attendance, error: nil)
+            }else{
+                completion(attendance: nil, error: error)
+            }
+        }
+    }
+    
     func start(location: Location?) {
         self.isStarted = true
         self.location = location
