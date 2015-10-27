@@ -12,6 +12,8 @@
 		4505093E1BDC469B00ED17FF /* Class.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4505093D1BDC469B00ED17FF /* Class.swift */; settings = {ASSET_TAGS = (); }; };
 		450509401BDC475D00ED17FF /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4505093F1BDC475D00ED17FF /* Location.swift */; settings = {ASSET_TAGS = (); }; };
 		450509421BDC479200ED17FF /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450509411BDC479200ED17FF /* Question.swift */; settings = {ASSET_TAGS = (); }; };
+		450C2D821BDF221600149934 /* LocationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450C2D811BDF221600149934 /* LocationProvider.swift */; settings = {ASSET_TAGS = (); }; };
+		450C2D841BDF2C9900149934 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 450C2D831BDF2C9900149934 /* CoreLocation.framework */; };
 		4567BC7D1BDC7162003C247A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4567BC7C1BDC7162003C247A /* Constants.swift */; settings = {ASSET_TAGS = (); }; };
 		45F39D4A1BDE03F800E385E8 /* AttendanceCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F39D491BDE03F800E385E8 /* AttendanceCollectionViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		45F7535D1BDCBDE10011FE00 /* DataInjector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F7535C1BDCBDE10011FE00 /* DataInjector.swift */; settings = {ASSET_TAGS = (); }; };
@@ -65,6 +67,8 @@
 		4505093D1BDC469B00ED17FF /* Class.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Class.swift; sourceTree = "<group>"; };
 		4505093F1BDC475D00ED17FF /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		450509411BDC479200ED17FF /* Question.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
+		450C2D811BDF221600149934 /* LocationProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationProvider.swift; sourceTree = "<group>"; };
+		450C2D831BDF2C9900149934 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		4567BC7C1BDC7162003C247A /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		45F39D491BDE03F800E385E8 /* AttendanceCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttendanceCollectionViewController.swift; sourceTree = "<group>"; };
 		45F7535C1BDCBDE10011FE00 /* DataInjector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataInjector.swift; sourceTree = "<group>"; };
@@ -128,6 +132,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				450C2D841BDF2C9900149934 /* CoreLocation.framework in Frameworks */,
 				82FEDFDFA7C3E9CBE09D154A /* Pods_PunchIn.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -141,6 +146,14 @@
 				450509331BDC234C00ED17FF /* ParseDB.swift */,
 			);
 			name = Parse;
+			sourceTree = "<group>";
+		};
+		450C2D801BDF215B00149934 /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				450C2D811BDF221600149934 /* LocationProvider.swift */,
+			);
+			name = Location;
 			sourceTree = "<group>";
 		};
 		6C19A54B4BA2B3835FDEB9CC /* Pods */ = {
@@ -173,6 +186,7 @@
 		C43414741BCE443E00AA63DB /* PunchIn */ = {
 			isa = PBXGroup;
 			children = (
+				450C2D801BDF215B00149934 /* Location */,
 				450509321BDC233600ED17FF /* Parse */,
 				C460FCF11BD840A400CD9DBC /* 3DParty */,
 				C460FCEF1BD8409800CD9DBC /* Utils */,
@@ -343,6 +357,7 @@
 		CD8FC80B0AD3E39675544999 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				450C2D831BDF2C9900149934 /* CoreLocation.framework */,
 				0926E69D8C5ACE24A61E9D24 /* Pods_PunchIn.framework */,
 			);
 			name = Frameworks;
@@ -513,6 +528,7 @@
 				4567BC7D1BDC7162003C247A /* Constants.swift in Sources */,
 				4505093E1BDC469B00ED17FF /* Class.swift in Sources */,
 				C460FD231BD8B05A00CD9DBC /* Student.swift in Sources */,
+				450C2D821BDF221600149934 /* LocationProvider.swift in Sources */,
 				C460FD381BDB1AF300CD9DBC /* AttendanceCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

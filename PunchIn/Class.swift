@@ -37,8 +37,7 @@ class Class : PFObject, PFSubclassing {
     @NSManaged private(set) var attendance: [Student]?
     @NSManaged private(set) var date: NSDate!
     @NSManaged private(set) var questions: [Question]?
-    @NSManaged private(set) var location: Location?
-    
+    @NSManaged var location: Location?
     
     override init(){
         super.init()
@@ -50,14 +49,15 @@ class Class : PFObject, PFSubclassing {
         self.attendance!.forEach{ allDataAvailable = allDataAvailable && $0.isDataAvailable() }
         self.questions!.forEach{ allDataAvailable = allDataAvailable && $0.isDataAvailable() }
         
-        return !allDataAvailable
+        return allDataAvailable
     }
     
-    func fetchAllFields(completion:((theClass:Class?, error:NSError?)->Void)) {
-        guard self.areAllFieldsAvailable() else {
+    func fetchAllFields(forceFetch: Bool=false, completion:((theClass:Class?, error:NSError?)->Void)) {
+        // perform query ONLY if forceFetch is true OR fields aren't already available
+        guard forceFetch || !self.areAllFieldsAvailable() else {
             return completion(theClass:self, error:nil)
         }
-        
+                
         let query = Class.query()
         query?.whereKey("objectId", equalTo: self.objectId!)
         query?.includeKey("attendance")
@@ -86,6 +86,21 @@ class Class : PFObject, PFSubclassing {
         self.saveEventually()
     }
     
+    func refreshQuestions(completion:((questions:[Question]?, error:NSError?)->Void)) {
+        self.fetchAllFields(true) { (theClass, error) -> Void in
+            if error == nil {
+                completion(questions: theClass!.questions, error: nil)
+            }else{
+                completion(questions: nil, error: error)
+            }
+        }
+    }
+    
+    func update() {
+        self.saveEventually()
+    }
+    
+    // utility functions
     
     class func createClass(name:String, index:Int, desc:String, date:NSDate, location:Location) -> Class {
         let theClass = Class()

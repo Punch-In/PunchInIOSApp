@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import MBProgressHUD
 
 class QuestionsListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate {
 
@@ -16,9 +17,13 @@ class QuestionsListViewController: UIViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var questionTableView: UITableView!
     @IBOutlet weak var newQuestionText: UITextView!
     
+    // MARK: refresh hacks
+    var refreshControl : UIRefreshControl!
+    
     var theClass: Class!
     private var questions: [Question] = [] {
         didSet {
+            questions.sortInPlace{ $0.date.compare($1.date) == .OrderedDescending }
             questionTableView.reloadData()
         }
     }
@@ -31,10 +36,37 @@ class QuestionsListViewController: UIViewController, UITableViewDelegate, UITabl
         questionTableView.delegate = self
         newQuestionText.delegate = self
         
+        // hack
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: "fetchData", forControlEvents: UIControlEvents.ValueChanged)
+        
+        let dummyTableVC = UITableViewController()
+        dummyTableVC.tableView = questionTableView
+        dummyTableVC.refreshControl = refreshControl
+        
         initializeNewQuestionText()
 
         // show questions (if exist)
         questions = theClass.questions!
+    }
+    
+    func fetchData() {
+        let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        hud.labelText = "Fetching new questions..."
+
+        theClass.refreshQuestions { (questions, error) -> Void in
+            if error == nil {
+                dispatch_async(dispatch_get_main_queue()){
+                    self.questions = questions!
+                    self.refreshControl.endRefreshing()
+                    MBProgressHUD.hideHUDForView(self.view, animated: true)
+                }
+            }else{
+                print("error refreshing questions! \(error)")
+                self.refreshControl.endRefreshing()
+                MBProgressHUD.hideHUDForView(self.view, animated: true)
+            }
+        }
     }
     
     func initializeNewQuestionText() {

@@ -19,11 +19,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         ParseDB.initialize()
         //DataInjector.doIt()
+        LocationProvider.startUpdatingLocation()
         
         
         // add notification handler for user log in & log out events
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "userLoggedIn", name: Constants.Notifications.UserLoggedIn, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "userLoggedOut", name:Constants.Notifications.UserLoggedOut, object:nil)
+        
+        // test ... REMOVE ME
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "printLocation", name:LocationProvider.locationAvailableNotificationStr, object:nil)
 
         // skip login if user is already logged in
         if let user = PFUser.currentUser() {
@@ -38,6 +42,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         return true
+    }
+    
+    func printLocation(){
+        LocationProvider.currentLocation { (location, error) -> Void in
+            if error == nil {
+                // have an address
+                print("address = \(location!.address)")
+            }else if error!.domain != LocationProvider.errorDomain {
+                // have coordinates, but no address
+                print("coordinates but no address \(error)")
+            }else{
+                // no location error
+                print("no location available! \(error)")
+            }
+        }
     }
     
     func userLoggedIn() {
@@ -55,11 +74,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+        LocationProvider.stopUpdatingLocation()
     }
 
     func applicationDidEnterBackground(application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        LocationProvider.stopUpdatingLocation()
     }
 
     func applicationWillEnterForeground(application: UIApplication) {
@@ -68,10 +89,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        LocationProvider.startUpdatingLocation()
     }
 
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+        LocationProvider.stopUpdatingLocation()
     }
 
 
