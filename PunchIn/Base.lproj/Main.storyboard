@@ -60,11 +60,19 @@
                                     <segment title="Instructor"/>
                                 </segments>
                             </segmentedControl>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email and/or Password is not valid" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PxA-du-pRV">
+                                <rect key="frame" x="178" y="68" width="243" height="18"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                <color key="textColor" red="0.62615804760000005" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="peS-ho-7Ll" firstAttribute="leading" secondItem="FQA-VO-jLg" secondAttribute="trailing" constant="16" id="2cS-Hu-3th"/>
+                            <constraint firstItem="PxA-du-pRV" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="6kz-2r-2BF"/>
+                            <constraint firstItem="PxA-du-pRV" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="48" id="9Bc-ph-bXY"/>
                             <constraint firstItem="2ia-8P-RYI" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="EO0-t4-GBp"/>
                             <constraint firstItem="2ia-8P-RYI" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="IV8-WS-J25"/>
                             <constraint firstItem="oIi-8s-Vtp" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="JNf-JP-NDu"/>
@@ -82,6 +90,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="ch3-Uv-sK4"/>
                     <connections>
+                        <outlet property="invalidEntryLabel" destination="PxA-du-pRV" id="YsI-gr-geK"/>
                         <outlet property="loginButton" destination="2ia-8P-RYI" id="pf8-CT-x0b"/>
                         <outlet property="nameTextField" destination="wJo-bK-Rl6" id="phO-NF-ocs"/>
                         <outlet property="passwordTextField" destination="peS-ho-7Ll" id="OYm-4b-SDA"/>

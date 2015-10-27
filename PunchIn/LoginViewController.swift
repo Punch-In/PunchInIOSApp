@@ -15,17 +15,28 @@ class LoginViewController: UIViewController {
     
     static let userTypes = [ "Student", "Instructor" ]
     
+    private static let noUserProvidedText = "Please provide an email address"
+    private static let noPasswordProvidedText = "Please provide a password"
+    private static let badUserText = "Email and/or Password is not valid"
 
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var typeSelector: UISegmentedControl!
+    @IBOutlet weak var invalidEntryLabel: UILabel!
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: ParseDB.BadLoginNotificationName, object: nil)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
      
         // Do any additional setup after loading the view.
+        invalidEntryLabel.hidden = true
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "badUser", name:ParseDB.BadLoginNotificationName, object:nil)
     }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -40,12 +51,32 @@ class LoginViewController: UIViewController {
     func validateInput() -> Bool {
         return !nameTextField.text!.isEmpty && !passwordTextField.text!.isEmpty
     }
+    
+    private func updateInvalidDataText(status: String) {
+        self.invalidEntryLabel.alpha = 0
+        self.invalidEntryLabel.hidden = false
+        self.invalidEntryLabel.text = status
+        UIView.animateWithDuration(0.5) { () -> Void in
+            self.invalidEntryLabel.alpha = 1
+        }
+    }
+        
+    func badUser() {
+        updateInvalidDataText(LoginViewController.badUserText)
+    }
 
     @IBAction func accountLogin(sender: AnyObject) {
-        guard validateInput() else {
-            return  // TODO: alert
+        guard !nameTextField.text!.isEmpty else {
+            updateInvalidDataText(LoginViewController.noUserProvidedText)
+            return
         }
         
+        guard !passwordTextField.text!.isEmpty else {
+            updateInvalidDataText(LoginViewController.noPasswordProvidedText)
+            return
+        }
+        
+        self.invalidEntryLabel.hidden = true
         ParseDB.login(nameTextField!.text!, password: passwordTextField!.text!,
             type: LoginViewController.userTypes[typeSelector.selectedSegmentIndex])
     }

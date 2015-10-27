@@ -7,12 +7,7 @@
 //
 
 class Constants {
-    
-    class Notifications {
-        static let UserLoggedIn = "UserLoggedInNotification"
-        static let UserLoggedOut = "UserLoggedOutNotification"
-    }
-    
+        
     class Storyboard {
         static let CoursesListViewController = "CoursesListViewController"
     }

@@ -14,7 +14,7 @@ class LocationProvider : NSObject, CLLocationManagerDelegate {
     static let errorDomain = "LocationProvider"
     static let errorCodeNoLocation = 1234
     
-    static let locationAvailableNotificationStr = "DidUpdateLocation"
+    static let locationAvailableNotificationName = "DidUpdateLocation"
     
     private let manager: CLLocationManager = {
         let mgr = CLLocationManager()
@@ -96,7 +96,7 @@ class LocationProvider : NSObject, CLLocationManagerDelegate {
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last {
             NSLog("new location! \(location)")
-            NSNotificationCenter.defaultCenter().postNotificationName(LocationProvider.locationAvailableNotificationStr, object: nil)
+            NSNotificationCenter.defaultCenter().postNotificationName(LocationProvider.locationAvailableNotificationName, object: nil)
         }
     }
 }

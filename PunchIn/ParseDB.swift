@@ -12,6 +12,11 @@ class ParseDB {
     private static let appId = "gaczrw01jIML4LYeOVRYVAbqo7t9hDrcszLMYf8l"
     private static let clientKey = "jo8XmhAefUTy1KmisFveehNCbuJS0MSHQTXPg76Y"
     
+    static let BadLoginNotificationName = "BadLoginNotification"
+    static let UserLoggedInNotificatioName = "UserLoggedInNotification"
+    static let UserLoggedOutNotificationName = "UserLoggedOutNotification"
+
+    
     class func initialize() {
         // Initialize Parse.
         Parse.enableLocalDatastore()
@@ -32,7 +37,7 @@ class ParseDB {
         }
         PFUser.logOut()
         dispatch_async(dispatch_get_main_queue()){
-            NSNotificationCenter.defaultCenter().postNotificationName(Constants.Notifications.UserLoggedOut, object: nil)
+            NSNotificationCenter.defaultCenter().postNotificationName(ParseDB.UserLoggedOutNotificationName, object: nil)
         }
     }
     
@@ -44,11 +49,14 @@ class ParseDB {
                 newUser["type"] =  type
                 // Do stuff after successful login.
                 dispatch_async(dispatch_get_main_queue()){
-                    NSNotificationCenter.defaultCenter().postNotificationName(Constants.Notifications.UserLoggedIn, object: nil)
+                    NSNotificationCenter.defaultCenter().postNotificationName(ParseDB.UserLoggedInNotificatioName, object: nil)
                 }
             } else {
                 // The login failed. Check error to see why.
-                print("bad user!")
+                print("bad user! \(error)")
+                dispatch_async(dispatch_get_main_queue()){
+                    NSNotificationCenter.defaultCenter().postNotificationName(ParseDB.BadLoginNotificationName, object:nil)
+                }
             }
         }
     }

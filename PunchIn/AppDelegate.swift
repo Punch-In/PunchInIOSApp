@@ -23,11 +23,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         // add notification handler for user log in & log out events
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "userLoggedIn", name: Constants.Notifications.UserLoggedIn, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "userLoggedOut", name:Constants.Notifications.UserLoggedOut, object:nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "userLoggedIn", name: ParseDB.UserLoggedInNotificatioName, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "userLoggedOut", name: ParseDB.UserLoggedOutNotificationName, object:nil)
         
         // test ... REMOVE ME
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "printLocation", name:LocationProvider.locationAvailableNotificationStr, object:nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "printLocation", name:LocationProvider.locationAvailableNotificationName, object:nil)
 
         // skip login if user is already logged in
         if let user = PFUser.currentUser() {
