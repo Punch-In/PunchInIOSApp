@@ -8,6 +8,10 @@
 
 import Parse
 
+protocol ClassStartedDelegate {
+    func classDidStart(error:NSError?)
+}
+
 class Class : PFObject, PFSubclassing {
     
     static let classFinishedText = "Class has ended!"
@@ -110,12 +114,36 @@ class Class : PFObject, PFSubclassing {
         }
     }
     
-    func start(location: Location?) {
+    var classStartedDelegate: ClassStartedDelegate!
+    
+    func start(delegate: ClassStartedDelegate) {
+        classStartedDelegate = delegate
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "startClassLocationAvailable", name:LocationProvider.locationAvailableNotificationName, object:nil)
+        LocationProvider.startUpdatingLocation()
+    }
+    
+    func startClassLocationAvailable() {
+        LocationProvider.stopUpdatingLocation()
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: LocationProvider.locationAvailableNotificationName, object: nil)
+        // get location
+        LocationProvider.currentLocation(true) { (location, error) -> Void in
+            if error == nil {
+                self.startMe(location)
+                self.classStartedDelegate.classDidStart(nil)
+            }else{
+                print("error getting location for starting class \(error)")
+                self.classStartedDelegate.classDidStart(error)
+            }
+        }
+    }
+    
+    private func startMe(location: Location?) {
         self.isStarted = true
         self.location = location
         self.saveEventually()
     }
     
+    // TODO: add completion handler to finish to make sure parsedb is updated
     func finish() {
         self.isFinished = true
         self.saveEventually()

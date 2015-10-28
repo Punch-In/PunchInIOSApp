@@ -15,6 +15,7 @@ class ParseDB {
     static let BadLoginNotificationName = "BadLoginNotification"
     static let UserLoggedInNotificatioName = "UserLoggedInNotification"
     static let UserLoggedOutNotificationName = "UserLoggedOutNotification"
+    static let BadTypeNotificationName = "BadTypeNotification"
 
     
     class func initialize() {
@@ -32,9 +33,6 @@ class ParseDB {
     }
     
     class func logout() {
-        if let user = PFUser.currentUser() {
-            user.removeObjectForKey("type")
-        }
         PFUser.logOut()
         dispatch_async(dispatch_get_main_queue()){
             NSNotificationCenter.defaultCenter().postNotificationName(ParseDB.UserLoggedOutNotificationName, object: nil)
@@ -44,18 +42,40 @@ class ParseDB {
     class func login(name: String, password: String, type: String) {
         PFUser.logInWithUsernameInBackground(name, password:password) {
             (newUser: PFUser?, error: NSError?) -> Void in
-            if let newUser = newUser {
-                print("good user!")
-                newUser["type"] =  type
-                // Do stuff after successful login.
-                dispatch_async(dispatch_get_main_queue()){
-                    NSNotificationCenter.defaultCenter().postNotificationName(ParseDB.UserLoggedInNotificatioName, object: nil)
-                }
-            } else {
+            // error during login
+            if error != nil {
                 // The login failed. Check error to see why.
                 print("bad user! \(error)")
                 dispatch_async(dispatch_get_main_queue()){
                     NSNotificationCenter.defaultCenter().postNotificationName(ParseDB.BadLoginNotificationName, object:nil)
+                }
+                return
+            }
+            
+            // verify the user
+            if let newUser = newUser {
+                if let userType = newUser.objectForKey("type") as? String {
+                    if userType == type {
+                        // registered type matches login type
+                        dispatch_async(dispatch_get_main_queue()) {
+                            NSNotificationCenter.defaultCenter().postNotificationName(ParseDB.UserLoggedInNotificatioName, object: nil)
+                        }
+                    }else{
+                        // registered type does not match login type for user
+                        print("registered type \(userType) for user does not match login type \(type)")
+                        PFUser.logOut()
+                        dispatch_async(dispatch_get_main_queue()) {
+                            NSNotificationCenter.defaultCenter().postNotificationName(ParseDB.BadTypeNotificationName, object: nil)
+                        }
+                    }
+                }else{
+                    // type information not found... so just add it based on the login type
+                    print("user \(name) did not have a registered type. Adding type as \(type)")
+                    newUser["type"] =  type
+                    newUser.saveEventually()
+                    dispatch_async(dispatch_get_main_queue()){
+                        NSNotificationCenter.defaultCenter().postNotificationName(ParseDB.UserLoggedInNotificatioName, object: nil)
+                    }
                 }
             }
         }

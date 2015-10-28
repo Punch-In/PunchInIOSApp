@@ -9,7 +9,7 @@
 import UIKit
 import MBProgressHUD
 
-class CourseViewController: UIViewController,UINavigationBarDelegate {
+class CourseViewController: UIViewController,UINavigationBarDelegate,ClassStartedDelegate {
     
     var course:Course!
     
@@ -137,31 +137,26 @@ class CourseViewController: UIViewController,UINavigationBarDelegate {
         let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         hud.labelText = "Starting class..."
         
-        LocationProvider.startUpdatingLocation()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "doStartClassLocationAvailable", name:LocationProvider.locationAvailableNotificationName, object:nil)
+        currentClass.start(self)
     }
     
-    func doStartClassLocationAvailable() {
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: LocationProvider.locationAvailableNotificationName, object: nil)
-        // get location
-        LocationProvider.currentLocation(true) { (location, error) -> Void in
-            if error == nil {
-                self.currentClass.start(location)
-                LocationProvider.stopUpdatingLocation()
+    // Class started delegate
+    func classDidStart(error:NSError?) {
+        if error == nil {
+            dispatch_async(dispatch_get_main_queue()) {
                 MBProgressHUD.hideHUDForView(self.view, animated: true)
                 UIView.animateWithDuration(0.5, animations: { () -> Void in
                     self.startClassView.backgroundColor = UIColor.greenColor()
                     self.startClassLabel.text = Class.classStartedText
                 })
-            }else{
-                print("error getting location for starting class \(error)")
-                NSNotificationCenter.defaultCenter().addObserver(self, selector: "doStartClassLocationAvailable", name:LocationProvider.locationAvailableNotificationName, object:nil)
             }
+        }else{
+            MBProgressHUD.hideHUDForView(self.view, animated: true)
+            print("error getting location for starting class \(error)")
         }
     }
     
     private func doStopClass() {
-        // TODO: add completion handler to finish to make sure parsedb is updated
         currentClass.finish()
         UIView.animateWithDuration(0.5, animations: { () -> Void in
             self.startClassLabel.text = Class.classFinishedText

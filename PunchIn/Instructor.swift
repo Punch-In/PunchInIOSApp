@@ -43,7 +43,8 @@ class Instructor: PFObject, PFSubclassing {
         instructorEmail = email
         instructorId = id
     }
-        
+    
+    // get instructor from email address
     class func instructor(forEmail: String, completion: ((instructor:Instructor?, error:NSError?)->Void)) {
         if let query = Instructor.query() {
             query.whereKey("instructorEmail", equalTo: forEmail)
@@ -57,6 +58,8 @@ class Instructor: PFObject, PFSubclassing {
             }
         }
     }
+    
+    // MARK: Data Injection functions
     
     class func createInstructor(name:String, email:String, id:String) -> Instructor {
         let instructor = Instructor()

@@ -18,6 +18,8 @@ class LoginViewController: UIViewController {
     private static let noUserProvidedText = "Please provide an email address"
     private static let noPasswordProvidedText = "Please provide a password"
     private static let badUserText = "Email and/or Password is not valid"
+    private static let notInstructorText = " is not an Instructor"
+    private static let notStudentText = " is not a Student"
 
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var nameTextField: UITextField!
@@ -27,6 +29,7 @@ class LoginViewController: UIViewController {
     
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self, name: ParseDB.BadLoginNotificationName, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: ParseDB.BadTypeNotificationName, object:nil)
     }
     
     override func viewDidLoad() {
@@ -35,6 +38,7 @@ class LoginViewController: UIViewController {
         // Do any additional setup after loading the view.
         invalidEntryLabel.hidden = true
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "badUser", name:ParseDB.BadLoginNotificationName, object:nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "badType", name:ParseDB.BadTypeNotificationName, object:nil)
     }
     
 
@@ -63,6 +67,11 @@ class LoginViewController: UIViewController {
         
     func badUser() {
         updateInvalidDataText(LoginViewController.badUserText)
+    }
+    
+    func badType() {
+        let errorText = typeSelector.selectedSegmentIndex==0 ? LoginViewController.notStudentText : LoginViewController.notInstructorText
+        updateInvalidDataText(self.nameTextField.text! + errorText)
     }
 
     @IBAction func accountLogin(sender: AnyObject) {
