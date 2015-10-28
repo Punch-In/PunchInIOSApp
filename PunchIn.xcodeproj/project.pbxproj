@@ -57,6 +57,8 @@
 		C460FD381BDB1AF300CD9DBC /* AttendanceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C460FD371BDB1AF300CD9DBC /* AttendanceCollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		C460FD3A1BDB27ED00CD9DBC /* DailyAttendanceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C460FD391BDB27ED00CD9DBC /* DailyAttendanceCollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		C460FD3C1BDB287700CD9DBC /* Attendance.swift in Sources */ = {isa = PBXBuildFile; fileRef = C460FD3B1BDB287700CD9DBC /* Attendance.swift */; settings = {ASSET_TAGS = (); }; };
+		C4A78A021BE1679A0040C270 /* InstructorCourseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A78A011BE1679A0040C270 /* InstructorCourseView.swift */; settings = {ASSET_TAGS = (); }; };
+		C4A78A041BE170FE0040C270 /* InstructorCourseDraggableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A78A031BE170FE0040C270 /* InstructorCourseDraggableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -125,6 +127,8 @@
 		C460FD371BDB1AF300CD9DBC /* AttendanceCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttendanceCollectionViewCell.swift; sourceTree = "<group>"; };
 		C460FD391BDB27ED00CD9DBC /* DailyAttendanceCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyAttendanceCollectionViewCell.swift; sourceTree = "<group>"; };
 		C460FD3B1BDB287700CD9DBC /* Attendance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attendance.swift; sourceTree = "<group>"; };
+		C4A78A011BE1679A0040C270 /* InstructorCourseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructorCourseView.swift; sourceTree = "<group>"; };
+		C4A78A031BE170FE0040C270 /* InstructorCourseDraggableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructorCourseDraggableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -207,6 +211,7 @@
 				C460FD371BDB1AF300CD9DBC /* AttendanceCollectionViewCell.swift */,
 				C460FD391BDB27ED00CD9DBC /* DailyAttendanceCollectionViewCell.swift */,
 				45FC02DD1BDD9F2E006E37E3 /* QuestionTableViewCell.swift */,
+				C4A78A011BE1679A0040C270 /* InstructorCourseView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -279,6 +284,7 @@
 				C460FCDB1BD75B4B00CD9DBC /* CourseViewController.swift */,
 				C460FCDF1BD75BA800CD9DBC /* DetailAttendanceViewController.swift */,
 				C460FCDD1BD75B5800CD9DBC /* QuestionsListViewController.swift */,
+				C4A78A031BE170FE0040C270 /* InstructorCourseDraggableViewController.swift */,
 			);
 			name = Instructor;
 			sourceTree = "<group>";
@@ -527,8 +533,10 @@
 				C460FCE41BD75F9A00CD9DBC /* Course.swift in Sources */,
 				4567BC7D1BDC7162003C247A /* Constants.swift in Sources */,
 				4505093E1BDC469B00ED17FF /* Class.swift in Sources */,
+				C4A78A021BE1679A0040C270 /* InstructorCourseView.swift in Sources */,
 				C460FD231BD8B05A00CD9DBC /* Student.swift in Sources */,
 				450C2D821BDF221600149934 /* LocationProvider.swift in Sources */,
+				C4A78A041BE170FE0040C270 /* InstructorCourseDraggableViewController.swift in Sources */,
 				C460FD381BDB1AF300CD9DBC /* AttendanceCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
