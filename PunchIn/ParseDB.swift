@@ -18,6 +18,9 @@ class ParseDB {
     static let BadTypeNotificationName = "BadTypeNotification"
 
     
+    static let errorDomain = "ParseDB"
+    static let errorCodeBadType = 1234
+    
     class func initialize() {
         // Initialize Parse.
         Parse.enableLocalDatastore()
@@ -81,6 +84,43 @@ class ParseDB {
         }
     }
     
+    static var isStudent:Bool  {
+        get{
+            return PFUser.currentUser()?.objectForKey("type") as? String == LoginViewController.userTypes[0]
+        }
+    }
+    
+    class func instructor(completion:((instructor:Instructor?,error:NSError?)->Void)) {
+        guard !isStudent else {
+            print("not an instructor")
+            return completion(instructor:nil, error:NSError(domain: ParseDB.errorDomain, code: ParseDB.errorCodeBadType, userInfo:nil))
+        }
+
+        Instructor.instructor((PFUser.currentUser()?.email!)!, completion: { (instructor, error) -> Void in
+            if error == nil {
+                completion(instructor:instructor, error:nil)
+            }else{
+                completion(instructor:nil, error:error)
+            }
+        })
+    }
+    
+    class func student(completion:((student:Student?,error:NSError?)->Void)) {
+        guard isStudent else {
+            print("not a student")
+            return completion(student:nil, error:NSError(domain: ParseDB.errorDomain, code: ParseDB.errorCodeBadType, userInfo:nil))
+        }
+        
+        Student.student((PFUser.currentUser()?.email!)!, completion: { (student, error) -> Void in
+            if error == nil {
+                completion(student: student, error: nil)
+            }else{
+                completion(student: nil, error:error)
+            }
+        })
+    }
+    
+    // MARK: test
     func test() {
         let testObj = PFObject(className: "TestObject")
         testObj["foo"] = "bar"

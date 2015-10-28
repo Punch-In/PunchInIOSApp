@@ -53,34 +53,29 @@ class Course: PFObject, PFSubclassing {
     }
     
     class func courses(handler: ((courses: [Course]?, error:NSError?)->Void)){
-        if let type = PFUser.currentUser()?.objectForKey("type") as? String {
-            switch type {
-            case LoginViewController.userTypes[0]: // student type
-                Student.student((PFUser.currentUser()?.email!)!, completion: { (student, error) -> Void in
-                    if error == nil {
-                        Course.getCourses(student!, completion: handler)
-                    }else{
-                        handler(courses: nil, error: error)
-                    }
-                })
-            case LoginViewController.userTypes[1]: // instructor type
-                Instructor.instructor((PFUser.currentUser()?.email!)!, completion: { (instructor, error) -> Void in
-                    if error == nil {
-                        Course.getCourses(instructor!, completion: handler)
-                    }else{
-                        handler(courses: nil, error: error)
-                    }
-                })
-            default:
-                print("unknown user type \(type)")
-            }
+        if ParseDB.isStudent {
+            Student.student((PFUser.currentUser()?.email!)!, completion: { (student, error) -> Void in
+                if error == nil {
+                    Course.courses(student!, completion: handler)
+                }else{
+                    handler(courses: nil, error: error)
+                }
+            })
+        }else {
+            Instructor.instructor((PFUser.currentUser()?.email!)!, completion: { (instructor, error) -> Void in
+                if error == nil {
+                    Course.courses(instructor!, completion: handler)
+                }else{
+                    handler(courses: nil, error: error)
+                }
+            })
         }
     }
     
     @objc(getCoursesForInstructor:instructor:)
-    private class func getCourses(instructor: Instructor, completion: ((courses: [Course]?, error:NSError?)->Void)) {
+    class func courses(forInstructor: Instructor, completion: ((courses: [Course]?, error:NSError?)->Void)) {
         if let query = Course.query() {
-            query.whereKey("courseInstructors", equalTo: instructor)
+            query.whereKey("courseInstructors", equalTo: forInstructor)
             query.includeKey("courseLocation")
             query.includeKey("classes")
             query.includeKey("registeredStudents")
@@ -92,9 +87,9 @@ class Course: PFObject, PFSubclassing {
     }
     
     @objc(getCoursesForStudent:student:)
-    private class func getCourses(student: Student, completion: ((courses: [Course]?, error:NSError?)->Void)) {
+    class func courses(forStudent: Student, completion: ((courses: [Course]?, error:NSError?)->Void)) {
         if let query = Course.query() {
-            query.whereKey("registeredStudents", equalTo: student)
+            query.whereKey("registeredStudents", equalTo: forStudent)
             query.includeKey("courseLocation")
             query.includeKey("classes")
             query.includeKey("registeredStudents")

@@ -117,6 +117,19 @@ class CourseViewController: UIViewController,UINavigationBarDelegate,ClassStarte
     
     func startClassTapped() {
         print("tapped start class!")
+        
+        guard !ParseDB.isStudent else {
+            print("students can't start a class")
+            let alertController = UIAlertController(
+                title: "StudentCantStartClass",
+                message: "Students can't start a class",
+                preferredStyle: .Alert)
+            
+            let dismissAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            alertController.addAction(dismissAction)
+            self.presentViewController(alertController, animated: true, completion: nil)
+            return
+        }
 
         guard !currentClass.isFinished else {
             // class already done... do nothing
