@@ -8,10 +8,6 @@
 
 import Parse
 
-protocol ClassStartedDelegate {
-    func classDidStart(error:NSError?)
-}
-
 class Class : PFObject, PFSubclassing {
     
     static let classFinishedText = "Class has ended!"
@@ -45,7 +41,19 @@ class Class : PFObject, PFSubclassing {
     @NSManaged private(set) var attendance: [Student]?
     @NSManaged private(set) var date: NSDate!
     @NSManaged private(set) var questions: [Question]?
+    @NSManaged private(set) var startTime: NSDate!
+    @NSManaged private(set) var finishTime: NSDate!
     @NSManaged var location: Location?
+    
+    var geofenceRegion: CLCircularRegion? {
+        get {
+            if let location = self.location {
+                return LocationProvider.createGeofenceRegion(self.location!, id: self.name)
+            }else {
+                return nil
+            }
+        }
+    }
     
     override init(){
         super.init()
@@ -60,10 +68,10 @@ class Class : PFObject, PFSubclassing {
         return allDataAvailable
     }
     
-    func fetchAllFields(forceFetch: Bool=false, completion:((theClass:Class?, error:NSError?)->Void)) {
+    private func fetchAllFields(forceFetch: Bool=false, completion:((myClass:Class?, error:NSError?)->Void)) {
         // perform query ONLY if forceFetch is true OR fields aren't already available
         guard forceFetch || !self.areAllFieldsAvailable() else {
-            return completion(theClass:self, error:nil)
+            return completion(myClass:self, error:nil)
         }
                 
         let query = Class.query()
@@ -74,9 +82,9 @@ class Class : PFObject, PFSubclassing {
         query?.getFirstObjectInBackgroundWithBlock({ (obj: PFObject?, error: NSError?) -> Void in
             if error==nil, let theClass = obj as? Class {
                 // do nothing...
-                completion(theClass:theClass, error:nil)
+                completion(myClass:theClass, error:nil)
             }else{
-                completion(theClass:nil, error:error)
+                completion(myClass:nil, error:error)
             }
         })
     }
@@ -93,11 +101,22 @@ class Class : PFObject, PFSubclassing {
         self.addObject(question, forKey:"questions")
         self.saveEventually()
     }
+
+    func refreshDetails(completion:((theClass:Class?, error:NSError?)->Void)) {
+        self.fetchAllFields(true) { (myClass, error) -> Void in
+            if error == nil {
+                completion(theClass: myClass, error: nil)
+            }else{
+                completion(theClass: nil, error: error)
+            }
+        }
+    }
+
     
     func refreshQuestions(completion:((questions:[Question]?, error:NSError?)->Void)) {
-        self.fetchAllFields(true) { (theClass, error) -> Void in
+        self.fetchAllFields(true) { (myClass, error) -> Void in
             if error == nil {
-                completion(questions: theClass!.questions, error: nil)
+                completion(questions: myClass!.questions, error: nil)
             }else{
                 completion(questions: nil, error: error)
             }
@@ -105,47 +124,38 @@ class Class : PFObject, PFSubclassing {
     }
     
     func refreshAttendance(completion:((attendance:[Student]?, error:NSError?)->Void)) {
-        self.fetchAllFields(true) { (theClass, error) -> Void in
+        self.fetchAllFields(true) { (myClass, error) -> Void in
             if error == nil {
-                completion(attendance: theClass!.attendance, error: nil)
+                completion(attendance: myClass!.attendance, error: nil)
             }else{
                 completion(attendance: nil, error: error)
             }
         }
     }
     
-    var classStartedDelegate: ClassStartedDelegate!
-    
-    func start(delegate: ClassStartedDelegate) {
-        classStartedDelegate = delegate
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "startClassLocationAvailable", name:LocationProvider.locationAvailableNotificationName, object:nil)
-        LocationProvider.startUpdatingLocation()
-    }
-    
-    func startClassLocationAvailable() {
-        LocationProvider.stopUpdatingLocation()
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: LocationProvider.locationAvailableNotificationName, object: nil)
-        // get location
-        LocationProvider.currentLocation(true) { (location, error) -> Void in
+    func start(completion: ((error:NSError?)->Void)) {
+        LocationProvider.location(false) { (location, error) -> Void in
             if error == nil {
                 self.startMe(location)
-                self.classStartedDelegate.classDidStart(nil)
+                completion(error:nil)
             }else{
                 print("error getting location for starting class \(error)")
-                self.classStartedDelegate.classDidStart(error)
+                completion(error:error)
             }
         }
     }
-    
+        
     private func startMe(location: Location?) {
         self.isStarted = true
         self.location = location
+        self.startTime = NSDate()
         self.saveEventually()
     }
     
     // TODO: add completion handler to finish to make sure parsedb is updated
     func finish() {
         self.isFinished = true
+        self.finishTime = NSDate()
         self.saveEventually()
     }
     

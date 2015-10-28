@@ -45,7 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func printLocation(){
-        LocationProvider.currentLocation { (location, error) -> Void in
+        LocationProvider.location { (location, error) -> Void in
             if error == nil {
                 // have an address
                 print("address = \(location!.address)")

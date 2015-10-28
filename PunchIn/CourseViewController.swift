@@ -9,7 +9,7 @@
 import UIKit
 import MBProgressHUD
 
-class CourseViewController: UIViewController,UINavigationBarDelegate,ClassStartedDelegate {
+class CourseViewController: UIViewController,UINavigationBarDelegate {
     
     var course:Course!
     
@@ -70,7 +70,7 @@ class CourseViewController: UIViewController,UINavigationBarDelegate,ClassStarte
         // show current class
         currentClass = course.classes![classIndex]
         classDescription.text = currentClass.classDescription
-        currentClass.fetchAllFields { (theClass, error) -> Void in
+        currentClass.refreshDetails { (theClass, error) -> Void in
             if error == nil {
                 dispatch_async(dispatch_get_main_queue()){
                     self.attendanceCount.text = "\(self.currentClass.attendance!.count)"
@@ -150,22 +150,19 @@ class CourseViewController: UIViewController,UINavigationBarDelegate,ClassStarte
         let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         hud.labelText = "Starting class..."
         
-        currentClass.start(self)
-    }
-    
-    // Class started delegate
-    func classDidStart(error:NSError?) {
-        if error == nil {
-            dispatch_async(dispatch_get_main_queue()) {
+        currentClass.start { (error) -> Void in
+            if error == nil {
+                dispatch_async(dispatch_get_main_queue()) {
+                    MBProgressHUD.hideHUDForView(self.view, animated: true)
+                    UIView.animateWithDuration(0.5, animations: { () -> Void in
+                        self.startClassView.backgroundColor = UIColor.greenColor()
+                        self.startClassLabel.text = Class.classStartedText
+                    })
+                }
+            }else{
                 MBProgressHUD.hideHUDForView(self.view, animated: true)
-                UIView.animateWithDuration(0.5, animations: { () -> Void in
-                    self.startClassView.backgroundColor = UIColor.greenColor()
-                    self.startClassLabel.text = Class.classStartedText
-                })
+                print("error getting location for starting class \(error)")
             }
-        }else{
-            MBProgressHUD.hideHUDForView(self.view, animated: true)
-            print("error getting location for starting class \(error)")
         }
     }
     

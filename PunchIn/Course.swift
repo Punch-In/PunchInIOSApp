@@ -100,6 +100,7 @@ class Course: PFObject, PFSubclassing {
         }
     }
 
+    // get classes for a course (needed?)
     func classes(completion: ((classes:[Class]?, error:NSError?)->Void)) {
         // TODO: fix me
         for c in self.classes! {

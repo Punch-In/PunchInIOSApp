@@ -31,7 +31,13 @@ class Location : PFObject, PFSubclassing {
     @NSManaged private(set) var latitude: String!
     @NSManaged private(set) var longitude: String!
     
-    private(set) var coordinates: CLLocation?
+    var coordinates: CLLocationCoordinate2D {
+        get {
+            let lat = (latitude as NSString).doubleValue
+            let lon = (longitude as NSString).doubleValue
+            return CLLocationCoordinate2D(latitude: lat, longitude: lon)
+        }
+    }
     
     override init() {
         super.init()
@@ -40,7 +46,7 @@ class Location : PFObject, PFSubclassing {
     init(address:String, coordinates:CLLocation){
         super.init()
         self.address = address
-        self.coordinates = coordinates
+//        self.coordinates = coordinates
         self.latitude = "\(coordinates.coordinate.latitude)"
         self.longitude = "\(coordinates.coordinate.longitude)"
     }

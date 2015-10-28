@@ -86,6 +86,7 @@ class Student: PFObject, PFSubclassing {
         }
     }
     
+    // MARK: Utility functions
     
     class func createStudent(name: String, id:String, email:String, image:UIImage?) -> Student {
         let student = Student()
