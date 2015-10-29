@@ -12,6 +12,8 @@ import MBProgressHUD
 class CoursesListViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource {
     
     let CoursesListCellIdentifier  = "CoursesListCell"
+    //var userType:String!
+    
     var courseArray:[Course] = [] {
         didSet {
             coursesCollectionView.reloadData()
@@ -107,6 +109,7 @@ class CoursesListViewController: UIViewController,UICollectionViewDelegate,UICol
             let cell = sender as! UICollectionViewCell
             let indexPath  = coursesCollectionView!.indexPathForCell(cell) as NSIndexPath!
             let selectedCourse:Course = courseArray[indexPath.row] as Course
+           // courseViewController.userType = userType
             courseViewController.course = selectedCourse
         }
     }

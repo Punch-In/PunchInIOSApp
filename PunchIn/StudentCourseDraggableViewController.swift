@@ -1,5 +1,5 @@
 //
-//  InstructorCourseDraggableViewController.swift
+//  StudentCourseDraggableViewController.swift
 //  PunchIn
 //
 //  Created by Nilesh Agrawal on 10/28/15.
@@ -9,24 +9,18 @@
 import UIKit
 import MBProgressHUD
 
-class InstructorCourseDraggableViewController: UIViewController {
-    
-    
+class StudentCourseDraggableViewController: UIViewController {
+
     var course:Course!
     var classIndex:Int!
     /*Start Class*/
-    @IBOutlet weak var startButton: UIButton!
-    @IBOutlet weak var startClassView: UIView!
-    @IBOutlet weak var startClassLabel: UILabel!
+    
     @IBOutlet var startClassTapGestureRecognizer: UITapGestureRecognizer!
     /*Class Details*/
     //private var classIndex: Int!
     private var currentClass: Class!
-    @IBOutlet weak var classDescription: UILabel!
-    @IBOutlet weak var registeredCount: UILabel!
-    @IBOutlet weak var attendanceCount: UILabel!
-    @IBOutlet weak var attendanceView: UIView!
     @IBOutlet var attendanceTapGestureRecognizer: UITapGestureRecognizer!
+    
     /* Question Details */
     @IBOutlet weak var questionCount: UILabel!
     @IBOutlet weak var unansweredQuestionCount: UILabel!
@@ -60,48 +54,44 @@ class InstructorCourseDraggableViewController: UIViewController {
         course.classes?.count
         // show current class
         if classIndex < 0 {
-        return
+            return
         }
         currentClass = course.classes![classIndex]
         
-        classDescription.text = currentClass.classDescription
+
         currentClass.refreshDetails { (theClass, error) -> Void in
             if error == nil {
                 dispatch_async(dispatch_get_main_queue()){
-                    self.attendanceCount.text = "\(self.currentClass.attendance!.count)"
+                
                     self.questionCount.text = "\(self.currentClass.questions!.count)"
                     self.unansweredQuestionCount.text = "\(self.currentClass.questions!.filter({!$0.isAnswered}).count)"
                 }
             }
         }
         
-        // set "class start" view based on class status
-        if currentClass.isFinished {
-            self.startClassLabel.text = Class.classFinishedText
-            self.startClassView.backgroundColor = UIColor.redColor()
-        }else if currentClass.isStarted {
-            self.startClassLabel.text = Class.classStartedText
-            self.startClassView.backgroundColor = UIColor.greenColor()
-        }else {
-            self.startClassLabel.text = Class.classNotStartedText
-            ThemeManager.theme().themeForSecondaryContentView(startClassView)
-        }
-        
+//        // set "class start" view based on class status
+//        if currentClass.isFinished {
+//            self.startClassLabel.text = Class.classFinishedText
+//            self.startClassView.backgroundColor = UIColor.redColor()
+//        }else if currentClass.isStarted {
+//            self.startClassLabel.text = Class.classStartedText
+//            self.startClassView.backgroundColor = UIColor.greenColor()
+//        }else {
+//            self.startClassLabel.text = Class.classNotStartedText
+//            ThemeManager.theme().themeForSecondaryContentView(startClassView)
+//        }
+//        
     }
     func setUpUI(){
-        ThemeManager.theme().themeForContentView(attendanceView)
+//        ThemeManager.theme().themeForContentView(attendanceView)
         ThemeManager.theme().themeForContentView(questionsView)
-        ThemeManager.theme().themeForSecondaryContentView(startClassView)
-        
-        //Labels
-     
-        ThemeManager.theme().themeForTitleLabels(startClassLabel)
+       
     }
     
     func setUpGestures() {
-        attendanceTapGestureRecognizer.addTarget(self, action: "attendanceViewTapped")
+//        attendanceTapGestureRecognizer.addTarget(self, action: "attendanceViewTapped")
         questionsTapGestureRecognizer.addTarget(self, action: "questionsViewTapped")
-        startClassTapGestureRecognizer.addTarget(self, action: "startClassTapped")
+       // startClassTapGestureRecognizer.addTarget(self, action: "startClassTapped")
     }
     
     func attendanceViewTapped(){
@@ -120,7 +110,7 @@ class InstructorCourseDraggableViewController: UIViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-
+    
     func startClassTapped() {
         print("tapped start class!")
         
@@ -162,8 +152,8 @@ class InstructorCourseDraggableViewController: UIViewController {
                 dispatch_async(dispatch_get_main_queue()) {
                     MBProgressHUD.hideHUDForView(self.view, animated: true)
                     UIView.animateWithDuration(0.5, animations: { () -> Void in
-                        self.startClassView.backgroundColor = UIColor.greenColor()
-                        self.startClassLabel.text = Class.classStartedText
+//                        self.startClassView.backgroundColor = UIColor.greenColor()
+//                        self.startClassLabel.text = Class.classStartedText
                     })
                 }
             }else{
@@ -176,8 +166,8 @@ class InstructorCourseDraggableViewController: UIViewController {
     private func doStopClass() {
         currentClass.finish()
         UIView.animateWithDuration(0.5, animations: { () -> Void in
-            self.startClassLabel.text = Class.classFinishedText
-            self.startClassView.backgroundColor = UIColor.redColor()
+//            self.startClassLabel.text = Class.classFinishedText
+//            self.startClassView.backgroundColor = UIColor.redColor()
         })
     }
     
@@ -186,12 +176,18 @@ class InstructorCourseDraggableViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        if(segue.identifier == "AttedanceViewControllerSegue"){
+        if(segue.identifier == "DetailAttedanceViewControllerSegue"){
             //   var vc:
             
         }else if(segue.identifier == "QuestionsViewControllerSegue"){
             
         }
     }
+    
+
+    
+    
+    
+
     
 }

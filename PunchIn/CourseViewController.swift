@@ -13,6 +13,7 @@ class CourseViewController: UIViewController,UINavigationBarDelegate,UIPageViewC
     
     var course:Course!
     var pageController:UIPageViewController!
+    var userType:String!
     
     @IBOutlet weak var courseBaseView:UIView!
     
@@ -28,7 +29,6 @@ class CourseViewController: UIViewController,UINavigationBarDelegate,UIPageViewC
     
  
     /*  Attendance  */
-    
     
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self, name: LocationProvider.locationAvailableNotificationName, object: nil)
@@ -49,9 +49,7 @@ class CourseViewController: UIViewController,UINavigationBarDelegate,UIPageViewC
         courseDate.text = String("\(course.courseTime); \(course.courseDay)")
         courseAddress.text = course.courseLocation.address
        // registeredCount.text = "\(course.registeredStudents!.count)"
-        
-                
-        
+    
     }
     
     
@@ -99,22 +97,38 @@ class CourseViewController: UIViewController,UINavigationBarDelegate,UIPageViewC
     }
 
     func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController?{
+        var index:Int!
         
-        let instructorDraggableView =  viewController as! InstructorCourseDraggableViewController
-        var index = instructorDraggableView.indexNumber
+        if !ParseDB.isStudent{
+            let instructorDraggableView =  viewController as! InstructorCourseDraggableViewController
+            index = instructorDraggableView.indexNumber
+        }else{
+            let studentDraggableView = viewController as!
+            StudentCourseDraggableViewController
+            let index = studentDraggableView.indexNumber
+        }
+
         index = index - 1
-        if(index == 0){
+        if(index == 0 && index < 0){
             return nil
         }
         return self.viewControllerAtIndex(withIndex:index)
     }
     
     func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController?{
+        var index:Int!
         
+        if !ParseDB.isStudent{
         let instructorDraggableView =  viewController as! InstructorCourseDraggableViewController
-        var index = instructorDraggableView.indexNumber
+           index = instructorDraggableView.indexNumber
+        }else{
+            let studentDraggableView = viewController as!
+            StudentCourseDraggableViewController
+            let index = studentDraggableView.indexNumber
+        }
+    
         index = index + 1
-        if(index == 3){
+        if(index  > course.classes?.count){
             return nil
         }
         return self.viewControllerAtIndex(withIndex:index)
@@ -124,9 +138,19 @@ class CourseViewController: UIViewController,UINavigationBarDelegate,UIPageViewC
     func viewControllerAtIndex(withIndex index:Int)->UIViewController{
         let storyBoardName = "Main"
         let storyBoard = UIStoryboard.init(name: storyBoardName, bundle: nil);
-      let childViewController   = storyBoard.instantiateViewControllerWithIdentifier("DraggableView") as! InstructorCourseDraggableViewController
-        childViewController.indexNumber = index
-        return childViewController
+        
+     if !ParseDB.isStudent {
+       let   childViewController   = storyBoard.instantiateViewControllerWithIdentifier("DraggableView") as! InstructorCourseDraggableViewController
+            childViewController.indexNumber = index
+            childViewController.course = course
+            childViewController.classIndex = index
+            return childViewController
+        }
+         let childViewController = storyBoard.instantiateViewControllerWithIdentifier("StudentDraggableView") as! StudentCourseDraggableViewController
+            childViewController.indexNumber = index
+            childViewController.course = course
+            childViewController.classIndex = index
+            return childViewController
     }
     
     func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int{
@@ -135,13 +159,13 @@ class CourseViewController: UIViewController,UINavigationBarDelegate,UIPageViewC
     }// The number of items reflected in the page indicator.
     
     func presentationIndexForPageViewController(pageViewController: UIPageViewController) -> Int{
-        return 0
+        var classCount : Int  = (course.classes?.count)!
+        return classCount / 2 
     }// The selected item reflected in the page indicator.
-
+    
     
     
     // MARK: - Navigation
-    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     // Get the new view controller using segue.destinationViewController.

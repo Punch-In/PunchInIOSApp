@@ -57,6 +57,7 @@
 		C460FD381BDB1AF300CD9DBC /* AttendanceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C460FD371BDB1AF300CD9DBC /* AttendanceCollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		C460FD3A1BDB27ED00CD9DBC /* DailyAttendanceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C460FD391BDB27ED00CD9DBC /* DailyAttendanceCollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		C460FD3C1BDB287700CD9DBC /* Attendance.swift in Sources */ = {isa = PBXBuildFile; fileRef = C460FD3B1BDB287700CD9DBC /* Attendance.swift */; settings = {ASSET_TAGS = (); }; };
+		C498956F1BE1B87600B5E490 /* StudentCourseDraggableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C498956E1BE1B87600B5E490 /* StudentCourseDraggableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		C4A78A021BE1679A0040C270 /* InstructorCourseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A78A011BE1679A0040C270 /* InstructorCourseView.swift */; settings = {ASSET_TAGS = (); }; };
 		C4A78A041BE170FE0040C270 /* InstructorCourseDraggableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A78A031BE170FE0040C270 /* InstructorCourseDraggableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
@@ -127,6 +128,7 @@
 		C460FD371BDB1AF300CD9DBC /* AttendanceCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttendanceCollectionViewCell.swift; sourceTree = "<group>"; };
 		C460FD391BDB27ED00CD9DBC /* DailyAttendanceCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyAttendanceCollectionViewCell.swift; sourceTree = "<group>"; };
 		C460FD3B1BDB287700CD9DBC /* Attendance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attendance.swift; sourceTree = "<group>"; };
+		C498956E1BE1B87600B5E490 /* StudentCourseDraggableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentCourseDraggableViewController.swift; sourceTree = "<group>"; };
 		C4A78A011BE1679A0040C270 /* InstructorCourseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructorCourseView.swift; sourceTree = "<group>"; };
 		C4A78A031BE170FE0040C270 /* InstructorCourseDraggableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructorCourseDraggableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -292,6 +294,7 @@
 		C460FCEE1BD833A500CD9DBC /* Student */ = {
 			isa = PBXGroup;
 			children = (
+				C498956E1BE1B87600B5E490 /* StudentCourseDraggableViewController.swift */,
 			);
 			name = Student;
 			sourceTree = "<group>";
@@ -515,6 +518,7 @@
 				C460FCDA1BD75B3F00CD9DBC /* CoursesListViewController.swift in Sources */,
 				C460FCDC1BD75B4B00CD9DBC /* CourseViewController.swift in Sources */,
 				45FC02DE1BDD9F2E006E37E3 /* QuestionTableViewCell.swift in Sources */,
+				C498956F1BE1B87600B5E490 /* StudentCourseDraggableViewController.swift in Sources */,
 				C460FCE01BD75BA800CD9DBC /* DetailAttendanceViewController.swift in Sources */,
 				C460FD0A1BD8410D00CD9DBC /* BFPaperCollectionViewCell.m in Sources */,
 				C460FD071BD8410D00CD9DBC /* BFPaperButton.m in Sources */,
