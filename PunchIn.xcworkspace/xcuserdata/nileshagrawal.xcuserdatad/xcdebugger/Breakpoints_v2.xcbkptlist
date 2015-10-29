@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PunchIn/CourseViewController.swift"
-            timestampString = "467780310.697066"
+            timestampString = "467781343.068541"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "136"
-            endingLineNumber = "136"
+            startingLineNumber = "152"
+            endingLineNumber = "152"
             landmarkName = "viewControllerAtIndex(withIndex:)"
             landmarkType = "5">
          </BreakpointContent>

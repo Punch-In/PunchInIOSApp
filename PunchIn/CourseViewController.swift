@@ -105,7 +105,7 @@ class CourseViewController: UIViewController,UINavigationBarDelegate,UIPageViewC
         }else{
             let studentDraggableView = viewController as!
             StudentCourseDraggableViewController
-            let index = studentDraggableView.indexNumber
+             index = studentDraggableView.indexNumber
         }
 
         index = index - 1
@@ -124,7 +124,7 @@ class CourseViewController: UIViewController,UINavigationBarDelegate,UIPageViewC
         }else{
             let studentDraggableView = viewController as!
             StudentCourseDraggableViewController
-            let index = studentDraggableView.indexNumber
+         index = studentDraggableView.indexNumber
         }
     
         index = index + 1
