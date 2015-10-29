@@ -13,10 +13,12 @@ protocol LocationProviderGeofenceDelegate {
     func isInsideGeofence()
     func isOutsideGeofence()
     func isUnknown()
+    func errorGettingLocation(error:NSError)
 }
 
 class LocationProvider : NSObject, CLLocationManagerDelegate {
     
+    // MARK: static constants
     static let errorDomain = "LocationProvider"
     static let errorCodeNoLocation = 1234
     static let errorCodeLocationMonitoringNotAvailable = 1235
@@ -28,6 +30,7 @@ class LocationProvider : NSObject, CLLocationManagerDelegate {
     
     static let defaultGeofenceDistance = 20.0 // 20 meters
     
+    // MARK: CLLocation Manager instance
     private let manager: CLLocationManager = {
         let mgr = CLLocationManager()
         mgr.distanceFilter = kCLDistanceFilterNone
@@ -37,18 +40,30 @@ class LocationProvider : NSObject, CLLocationManagerDelegate {
     
     private let geocoder = CLGeocoder()
     
+    // MARK: singleton instanc
     private static let instance = LocationProvider()
     
+    private var monitoredRegions: [CLCircularRegion:LocationProviderGeofenceDelegate] = [:]
+    
+    private var canMonitorForRegion = true
+    
     private override init() {
+        print("Creating LocationProvider")
         super.init()
         manager.delegate = self
+        
+        // check authorization state
+        checkAuthorizationState()
+        
+        // check if can monitor
+        canMonitorForRegion = CLLocationManager.isMonitoringAvailableForClass(CLCircularRegion)
     }
     
     private func checkAuthorizationState() {
         switch CLLocationManager.authorizationStatus() {
         case .AuthorizedAlways:
             // do nothing
-            print("always authorized!")
+            break
         case .NotDetermined:
             self.manager.requestAlwaysAuthorization()
         case .AuthorizedWhenInUse, .Restricted, .Denied:
@@ -85,27 +100,26 @@ class LocationProvider : NSObject, CLLocationManagerDelegate {
     
     class func stopUpdatingLocation() {
         print("stopped updating location")
+        instance.isContinuousLocation = false
         instance.manager.stopUpdatingLocation()
     }
     
+    private var isContinuousLocation = false
     private var locationCompletionHandler: ((location:Location?,error:NSError?)->Void)?
-    private var includeAddress: Bool = true
     
-    class func continuousLocation(withAddress: Bool=true, completion: ((location:Location?, error:NSError?)->Void)) {
+    class func continuousLocation(completion: ((location:Location?, error:NSError?)->Void)) {
         instance.locationCompletionHandler = completion
-        instance.includeAddress = withAddress
+        instance.isContinuousLocation = true
         instance.startUpdatingLocation()
     }
     
-    class func location(withAddress: Bool=true, completion: ((location:Location?, error:NSError?)->Void)) {
+    class func location(completion: ((location:Location?, error:NSError?)->Void)) {
         instance.checkAuthorizationState()
         if CLLocationManager.authorizationStatus() == .AuthorizedAlways {
-            print("requesting location")
             instance.locationCompletionHandler = completion
-            instance.includeAddress = withAddress
             instance.manager.requestLocation()
         }else{
-            print("ruh roh.... not authorized")
+            print("ruh roh.... not authorized to get location")
         }
     }
     
@@ -115,38 +129,34 @@ class LocationProvider : NSObject, CLLocationManagerDelegate {
     }
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard self.locationCompletionHandler != nil else {
-            print("location update but no completion handler")
+        guard let handler = self.locationCompletionHandler else {
             return
         }
         
-        let handler = self.locationCompletionHandler!
         // now provide the location to the completion handler
         if let location = locations.last {
-            if !self.includeAddress {
-                handler(location: Location(address:"", coordinates: location), error:nil)
-            }else{
-                // caller wants the address as well as coordinates. so provide 'em
-                self.geocoder.reverseGeocodeLocation(location, completionHandler: {
-                    (placemarks: [CLPlacemark]?, error:NSError?) -> Void in
-                    if error == nil {
-                        if let placemark = placemarks?.last {
-                            if let addrList = placemark.addressDictionary?["FormattedAddressLines"] as? [String] {
-                                let address =  addrList.joinWithSeparator(",")
-                                handler(location: Location(address: address, coordinates: location), error: nil)
-                            }
+            // caller wants the address as well as coordinates. so provide 'em
+            self.geocoder.reverseGeocodeLocation(location, completionHandler: {
+                (placemarks: [CLPlacemark]?, error:NSError?) -> Void in
+                if error == nil {
+                    if let placemark = placemarks?.last {
+                        if let addrList = placemark.addressDictionary?["FormattedAddressLines"] as? [String] {
+                            let address =  addrList.joinWithSeparator(",")
+                            handler(location: Location(address: address, coordinates: location), error: nil)
                         }
-                    }else{
-                        print("error obtaining address from reverseGeocodeLocation \(error)")
-                        handler(location:Location(address: "", coordinates: location), error:error)
                     }
-                })
-            }
+                }else{
+                    print("error obtaining address from reverseGeocodeLocation \(error)")
+                    handler(location:Location(address: "", coordinates: location), error:error)
+                }
+            })
             
-            // stop updates
-            self.manager.stopUpdatingLocation()
-            // reset completion handler
-            self.locationCompletionHandler = nil
+            if !isContinuousLocation {
+                // stop updates
+                self.manager.stopUpdatingLocation()
+                // reset completion handler
+                self.locationCompletionHandler = nil
+            }
         }
     }
     
@@ -160,29 +170,48 @@ class LocationProvider : NSObject, CLLocationManagerDelegate {
     
     func locationManager(manager: CLLocationManager, didEnterRegion region: CLRegion) {
         print("in geofence for region \(region.identifier)!")
+        if let region = region as? CLCircularRegion {
+            if let delegate = self.monitoredRegions[region] {
+                delegate.isInsideGeofence()
+            }
+        }
     }
     
     func locationManager(manager: CLLocationManager, didExitRegion region: CLRegion) {
         print("outside geofence \(region.identifier)!")
+        if let region = region as? CLCircularRegion {
+            if let delegate = self.monitoredRegions[region] {
+                delegate.isOutsideGeofence()
+            }
+        }
     }
     
     func locationManager(manager: CLLocationManager, didDetermineState state: CLRegionState, forRegion region: CLRegion) {
-        guard self.requestStateCompletionHandler != nil else {
+        guard (region as? CLCircularRegion != nil) else {
+            print("region \(region.identifier) not a circular region")
+            return
+        }
+        
+        let region = region as! CLCircularRegion
+        guard  let delegate = self.monitoredRegions[region] else {
             print("didDetermineState but no completion handler")
             return
         }
         
-        let handler = self.requestStateCompletionHandler!
         print("did determine state \(state)for region")
         switch state {
         case .Inside:
-            handler(status: true, error: nil)
+            // always notify if inside geofence
+            delegate.isInsideGeofence()
         case .Outside:
-            handler(status: false, error: nil)
+            break
         case .Unknown:
             // TODO: fix me
-            handler(status: false, error: NSError(domain: LocationProvider.errorDomain, code: LocationProvider.errorCodeUnknownState, userInfo:nil))
+            break
         }
+        
+        // remove delegate; was a onetime operation
+        self.monitoredRegions.removeValueForKey(region)
     }
     
     class func createGeofenceRegion(location: Location, distance: CLLocationDistance=LocationProvider.defaultGeofenceDistance, id:String) -> CLCircularRegion? {
@@ -194,29 +223,39 @@ class LocationProvider : NSObject, CLLocationManagerDelegate {
         return CLCircularRegion(center:location.coordinates, radius: radius, identifier: id)
     }
     
-    class func addNotifyForRegion(region:CLCircularRegion) {
-        guard CLLocationManager.isMonitoringAvailableForClass(CLCircularRegion) else {
-            print("monitoring not available for geofence. Have to manually poll")
-            return
-        }
-        
+    class func addNotifyForRegion(region:CLCircularRegion, delegate: LocationProviderGeofenceDelegate) {
         region.notifyOnEntry = true
         region.notifyOnExit = true
         
+        instance.monitoredRegions[region] = delegate
         instance.manager.startMonitoringForRegion(region)
+        print("monitoring \(instance.manager.monitoredRegions.count)")
     }
     
     class func removeNotifyForRegion(region:CLCircularRegion) {
         region.notifyOnEntry = false
         region.notifyOnExit = false
         instance.manager.stopMonitoringForRegion(region)
+        
+        instance.monitoredRegions.removeValueForKey(region)
     }
     
-    private var requestStateCompletionHandler: ((status:Bool, error:NSError?)->Void)?
-    
-    // checks if current location is inside current geofence
-    class func isInsideGeofence(region:CLCircularRegion, completion:((status:Bool, error:NSError?)->Void)) {
-        instance.requestStateCompletionHandler = completion
-        instance.manager.requestStateForRegion(region)
+    class func notifyWhenInsideGeofence(region:CLCircularRegion, delegate: LocationProviderGeofenceDelegate){
+        LocationProvider.location { (location, error) -> Void in
+            if location == nil {
+                print("error getting location!")
+                addNotifyForRegion(region, delegate: delegate) //TODO: fix me!
+                delegate.errorGettingLocation(error!)
+//                delegate.isUnknown()
+            }else{
+                if region.containsCoordinate((location?.coordinates)!) {
+                    delegate.isInsideGeofence()
+                }else{
+                    // if request for region is outside the geofence, then add notify for region
+                    addNotifyForRegion(region, delegate: delegate)
+                }
+            }
+        }
+
     }
 }

@@ -49,6 +49,7 @@ class CourseViewController: UIViewController,UINavigationBarDelegate {
     
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self, name: LocationProvider.locationAvailableNotificationName, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: Class.insideClassGeofenceNotification, object: nil)
     }
     
     override func viewDidLoad() {
@@ -56,8 +57,9 @@ class CourseViewController: UIViewController,UINavigationBarDelegate {
         setUpUI()
         setUpValues()
         setUpGestures()
+        
+        // test
     }
-    
     
     func setUpValues() {
         /*Setting the course details*/
@@ -115,6 +117,20 @@ class CourseViewController: UIViewController,UINavigationBarDelegate {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
+//    func testLogic() {
+//        ParseDB.student({ (student, error) -> Void in
+//            self.currentClass.attendClass(student!, completion: { (confirmed) -> Void in
+//                if confirmed {
+//                    print("student can attend class!")
+//                }else{
+//                    print("student cannot attend class")
+//                }
+//            })
+//        })
+//        
+//        NSNotificationCenter.defaultCenter().removeObserver(self, name: Class.insideClassGeofenceNotification, object: nil)
+//    }
+    
     func startClassTapped() {
         print("tapped start class!")
         
@@ -129,6 +145,11 @@ class CourseViewController: UIViewController,UINavigationBarDelegate {
             alertController.addAction(dismissAction)
             self.presentViewController(alertController, animated: true, completion: nil)
             return
+            
+//            // test
+//            NSNotificationCenter.defaultCenter().addObserver(self, selector: "testLogic", name: Class.insideClassGeofenceNotification, object: nil)
+//            currentClass.notifyWhenStudentCanAttendClass()
+//            return
         }
 
         guard !currentClass.isFinished else {
