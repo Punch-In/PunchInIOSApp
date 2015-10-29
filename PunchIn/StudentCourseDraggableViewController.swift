@@ -27,14 +27,19 @@ class StudentCourseDraggableViewController: UIViewController {
     @IBOutlet weak var questionsView: UIView!
     @IBOutlet var questionsTapGestureRecognizer: UITapGestureRecognizer!
     
+    @IBOutlet weak var attendClassView: UIView!
     //PageController Property.
     var indexNumber:Int!
+    
+    private var student: Student!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpUI()
         setUpValues()
         setUpGestures()
+        
+        setupAttendView()
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -54,8 +59,11 @@ class StudentCourseDraggableViewController: UIViewController {
         course.classes?.count
         // show current class
         if classIndex < 0 {
-            return
+            classIndex = 0
+        }else if classIndex >= course.classes!.count {
+            classIndex = course.classes!.count-1
         }
+        
         currentClass = course.classes![classIndex]
         
 
@@ -91,7 +99,7 @@ class StudentCourseDraggableViewController: UIViewController {
     func setUpGestures() {
 //        attendanceTapGestureRecognizer.addTarget(self, action: "attendanceViewTapped")
         questionsTapGestureRecognizer.addTarget(self, action: "questionsViewTapped")
-       // startClassTapGestureRecognizer.addTarget(self, action: "startClassTapped")
+        startClassTapGestureRecognizer.addTarget(self, action: "attendClassTapped")
     }
     
     func attendanceViewTapped(){
@@ -110,15 +118,36 @@ class StudentCourseDraggableViewController: UIViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    
-    func startClassTapped() {
-        print("tapped start class!")
+    func setupAttendView() {
+        if currentClass.isFinished {
+            attendClassView.backgroundColor = UIColor.redColor()
+            return
+        }
         
-        guard !ParseDB.isStudent else {
-            print("students can't start a class")
+        if !currentClass.isStarted {
+            attendClassView.backgroundColor = UIColor.grayColor()
+            return
+        }
+        
+       ParseDB.student { (student, error) -> Void in
+            self.student = student
+            if self.currentClass.didStudentAttend(student!) {
+                self.attendClassView.backgroundColor = UIColor.greenColor()
+            }else{
+                self.attendClassView.backgroundColor = UIColor.yellowColor()
+                
+            }
+        }
+    }
+    
+    func attendClassTapped() {
+        print("tapped attend class!")
+        
+        guard ParseDB.isStudent else {
+            print("instructor can't attend a class")
             let alertController = UIAlertController(
-                title: "StudentCantStartClass",
-                message: "Students can't start a class",
+                title: "InstructorCantAttendClass",
+                message: "Instructors can't attend a class",
                 preferredStyle: .Alert)
             
             let dismissAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
@@ -129,14 +158,26 @@ class StudentCourseDraggableViewController: UIViewController {
         
         guard !currentClass.isFinished else {
             // class already done... do nothing
+            print("class already finished; can't attend")
             return
         }
         
-        if currentClass.isStarted {
-            // stop class
-            doStopClass()
-        }else {
-            doStartClass()
+        guard currentClass.isStarted else {
+            print("class hasn't started yet")
+            return
+        }
+        
+        // class has started
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "attendanceNotification", name: Class.insideClassGeofenceNotification, object: nil)
+        currentClass.notifyWhenStudentCanAttendClass()
+    }
+    
+    func attendanceNotification() {
+        print("student can attend class!")
+        attendClassView.backgroundColor = UIColor.greenColor()
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: Class.insideClassGeofenceNotification, object: nil)
+        currentClass.attendClass(self.student) { (confirmed) -> Void in
+            print("woo")
         }
     }
     

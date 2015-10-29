@@ -223,7 +223,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "137"
             endingLineNumber = "137"
-            landmarkName = "startClassTapped()"
+            landmarkName = "viewControllerAtIndex(withIndex:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -256,6 +256,86 @@
             startingLineNumber = "190"
             endingLineNumber = "190"
             landmarkName = "locationManager(_:didDetermineState:forRegion:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PunchIn/Location.swift"
+            timestampString = "467782552.400197"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "Location"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PunchIn/StudentCourseDraggableViewController.swift"
+            timestampString = "467783213.803537"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
+            landmarkName = "setUpValues()"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PunchIn.StudentCourseDraggableViewController.setUpValues (PunchIn.StudentCourseDraggableViewController)() -&gt; ()"
+                  moduleName = "PunchIn"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sumeetshendrikar/Projects/fall2015_iosBootcamp/groupProject/PunchInIOSApp/PunchIn/StudentCourseDraggableViewController.swift"
+                  timestampString = "467782916.971404"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "63"
+                  endingLineNumber = "63"
+                  offsetFromSymbolStart = "420">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PunchIn.StudentCourseDraggableViewController.(setUpValues (PunchIn.StudentCourseDraggableViewController) -&gt; () -&gt; ()).(closure #1)"
+                  moduleName = "PunchIn"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sumeetshendrikar/Projects/fall2015_iosBootcamp/groupProject/PunchInIOSApp/PunchIn/StudentCourseDraggableViewController.swift"
+                  timestampString = "467782916.971671"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "64"
+                  endingLineNumber = "64"
+                  offsetFromSymbolStart = "37">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PunchIn/StudentCourseDraggableViewController.swift"
+            timestampString = "467783213.803537"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
+            landmarkName = "setUpValues()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
