@@ -8,12 +8,15 @@
 
 import Parse
 
-class Class : PFObject, PFSubclassing {
+class Class : PFObject, PFSubclassing, LocationProviderGeofenceDelegate {
     
     static let classFinishedText = "Class has ended!"
     static let classStartedText = "Class has started"
     static let classNotStartedText = "Start Class"
-        
+    
+    static let insideClassGeofenceNotification = "InsideClassGeofenceNotification"
+
+    
     // MARK: Parse subclassing
     private static let className = "Class"
     private static var initialized = false
@@ -48,7 +51,7 @@ class Class : PFObject, PFSubclassing {
     var geofenceRegion: CLCircularRegion? {
         get {
             if let location = self.location {
-                return LocationProvider.createGeofenceRegion(self.location!, id: self.name)
+                return LocationProvider.createGeofenceRegion(location, id: self.name)
             }else {
                 return nil
             }
@@ -67,6 +70,8 @@ class Class : PFObject, PFSubclassing {
         
         return allDataAvailable
     }
+    
+    // MARK: Refresh data
     
     private func fetchAllFields(forceFetch: Bool=false, completion:((myClass:Class?, error:NSError?)->Void)) {
         // perform query ONLY if forceFetch is true OR fields aren't already available
@@ -89,19 +94,6 @@ class Class : PFObject, PFSubclassing {
         })
     }
     
-    func didStudentAttend(student: Student) -> Bool {
-        if let attendance = self.objectForKey("attendance") as? [Student] {
-            return attendance.contains(student)
-        }
-        
-        return false
-    }
-    
-    func addQuestion(question:Question) {
-        self.addObject(question, forKey:"questions")
-        self.saveEventually()
-    }
-
     func refreshDetails(completion:((theClass:Class?, error:NSError?)->Void)) {
         self.fetchAllFields(true) { (myClass, error) -> Void in
             if error == nil {
@@ -133,8 +125,10 @@ class Class : PFObject, PFSubclassing {
         }
     }
     
+    
+    // MARK: class workflow
     func start(completion: ((error:NSError?)->Void)) {
-        LocationProvider.location(false) { (location, error) -> Void in
+        LocationProvider.location{ (location, error) -> Void in
             if error == nil {
                 self.startMe(location)
                 completion(error:nil)
@@ -144,7 +138,7 @@ class Class : PFObject, PFSubclassing {
             }
         }
     }
-        
+    
     private func startMe(location: Location?) {
         self.isStarted = true
         self.location = location
@@ -152,7 +146,7 @@ class Class : PFObject, PFSubclassing {
         self.saveEventually()
     }
     
-    // TODO: add completion handler to finish to make sure parsedb is updated
+    // TODO: add completion handler to finish when parsedb is updated
     func finish() {
         self.isFinished = true
         self.finishTime = NSDate()
@@ -163,7 +157,77 @@ class Class : PFObject, PFSubclassing {
         self.saveEventually()
     }
     
-    // utility functions
+    // MARK: attendance workflow
+    func attendClass(student:Student, completion:((confirmed:Bool)->Void)) {
+        // TODO: can we assume this can only be called if the geofence is satisfied?
+        self.addStudentToAttendance(student)
+        completion(confirmed:true)
+    }
+
+    func notifyWhenStudentCanAttendClass() {
+        guard !self.isFinished else {
+            return
+        }
+        
+        guard self.isStarted else {
+            return
+        }
+        
+        if let region = self.geofenceRegion {
+            LocationProvider.notifyWhenInsideGeofence(region, delegate: self)
+        }
+    }
+    
+    // MARK: LocationProviderGeofenceDelegate
+    func isInsideGeofence() {
+        print("inside geofence...")
+        LocationProvider.removeNotifyForRegion(self.geofenceRegion!)
+        NSNotificationCenter.defaultCenter().postNotificationName(Class.insideClassGeofenceNotification, object: nil)
+    }
+    
+    func isOutsideGeofence() {
+        print("outside geofence...")
+    }
+    
+    func isUnknown() {
+        print("still outside geofence...")
+    }
+    
+    func errorGettingLocation(error: NSError) {
+        print("error getting location! \(error)")
+    }
+    
+    private func stopCheckingForGeofence() {
+        // triggered by NSTimer
+        LocationProvider.removeNotifyForRegion(self.geofenceRegion!)
+    }
+
+    
+    // MARK: additional function
+    func didStudentAttend(student: Student) -> Bool {
+        if let attendance = self.objectForKey("attendance") as? [Student] {
+            return attendance.contains(student)
+        }
+        
+        return false
+    }
+    
+    func addQuestion(question:Question) {
+        self.addObject(question, forKey:"questions")
+        self.saveEventually()
+    }
+    
+    private func addStudentToAttendance(student:Student) {
+        if let attendance = self.attendance {
+            if !attendance.contains(student) {
+                self.attendance!.append(student)
+                self.saveEventually()
+            }
+        }
+    }
+
+    
+    // MARK: utility functions
     
     class func createClass(name:String, index:Int, desc:String, date:NSDate, location:Location) -> Class {
         let theClass = Class()

@@ -32,13 +32,13 @@ class CourseViewController: UIViewController,UINavigationBarDelegate,UIPageViewC
     
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self, name: LocationProvider.locationAvailableNotificationName, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: Class.insideClassGeofenceNotification, object: nil)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpUI()
         setUpValues()
-        
         setUpPageViewController()
     }
     
@@ -52,8 +52,6 @@ class CourseViewController: UIViewController,UINavigationBarDelegate,UIPageViewC
     
     }
     
-    
-
     func setUpUI(){
         //Navigation Controller
         self.navigationController?.navigationBar.barTintColor = ThemeManager.theme().primaryColor()
