@@ -12,6 +12,7 @@ class AttendanceCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet private weak var studentImage: UIImageView!
     @IBOutlet private weak var studentName: UILabel!
+    @IBOutlet weak var segmentControl: UISegmentedControl!
     
     var student: Student! {
         didSet {
@@ -40,6 +41,8 @@ class AttendanceCollectionViewCell: UICollectionViewCell {
     }
   
     func formatCell() {
+        let attr = NSDictionary(object: UIFont(name: "HelveticaNeue-Bold", size: 8.0)!, forKey: NSFontAttributeName)
+        self.segmentControl.setTitleTextAttributes(attr as [NSObject : AnyObject], forState: .Normal)
         self.layer.borderWidth = 2.0;
         self.layer.borderColor = UIColor.blackColor().CGColor
         self.backgroundColor = ThemeManager.theme().secondaryPrimaryColor()
