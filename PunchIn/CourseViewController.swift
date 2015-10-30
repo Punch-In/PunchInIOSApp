@@ -13,7 +13,6 @@ class CourseViewController: UIViewController,UINavigationBarDelegate,UIPageViewC
     
     var course:Course!
     var pageController:UIPageViewController!
-    var userType:String!
     
     @IBOutlet weak var courseBaseView:UIView!
     
