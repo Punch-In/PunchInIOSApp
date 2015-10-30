@@ -107,7 +107,7 @@ class CourseViewController: UIViewController,UINavigationBarDelegate,UIPageViewC
         }
 
         index = index - 1
-        if(index == 0 && index < 0){
+        if(index < 0){
             return nil
         }
         return self.viewControllerAtIndex(withIndex:index)
@@ -126,7 +126,7 @@ class CourseViewController: UIViewController,UINavigationBarDelegate,UIPageViewC
         }
     
         index = index + 1
-        if(index  > course.classes?.count){
+        if(index  >= course.classes?.count){
             return nil
         }
         return self.viewControllerAtIndex(withIndex:index)
@@ -152,12 +152,11 @@ class CourseViewController: UIViewController,UINavigationBarDelegate,UIPageViewC
     }
     
     func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int{
-        
         return 3
     }// The number of items reflected in the page indicator.
     
     func presentationIndexForPageViewController(pageViewController: UIPageViewController) -> Int{
-        var classCount : Int  = (course.classes?.count)!
+        let classCount : Int  = (course.classes?.count)!
         return classCount / 2 
     }// The selected item reflected in the page indicator.
     

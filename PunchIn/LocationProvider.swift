@@ -251,6 +251,7 @@ class LocationProvider : NSObject, CLLocationManagerDelegate {
                 if region.containsCoordinate((location?.coordinates)!) {
                     delegate.isInsideGeofence()
                 }else{
+                    delegate.isOutsideGeofence()
                     // if request for region is outside the geofence, then add notify for region
                     addNotifyForRegion(region, delegate: delegate)
                 }

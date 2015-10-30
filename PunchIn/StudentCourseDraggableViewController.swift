@@ -33,6 +33,11 @@ class StudentCourseDraggableViewController: UIViewController {
     
     private var student: Student!
     
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: Class.outsideClassGeofenceNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: Class.insideClassGeofenceNotification, object: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpUI()
@@ -77,18 +82,6 @@ class StudentCourseDraggableViewController: UIViewController {
             }
         }
         
-//        // set "class start" view based on class status
-//        if currentClass.isFinished {
-//            self.startClassLabel.text = Class.classFinishedText
-//            self.startClassView.backgroundColor = UIColor.redColor()
-//        }else if currentClass.isStarted {
-//            self.startClassLabel.text = Class.classStartedText
-//            self.startClassView.backgroundColor = UIColor.greenColor()
-//        }else {
-//            self.startClassLabel.text = Class.classNotStartedText
-//            ThemeManager.theme().themeForSecondaryContentView(startClassView)
-//        }
-//        
     }
     func setUpUI(){
 //        ThemeManager.theme().themeForContentView(attendanceView)
@@ -167,52 +160,30 @@ class StudentCourseDraggableViewController: UIViewController {
             return
         }
         
-        // class has started
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "attendanceNotification", name: Class.insideClassGeofenceNotification, object: nil)
+        guard !currentClass.didStudentAttend(student!) else {
+            print("student already attended class")
+            return
+        }
+        
+        // class has started, check if student is inside geofence
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "canAttendClass", name: Class.insideClassGeofenceNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "canNotAttendClass", name: Class.outsideClassGeofenceNotification, object: nil)
         currentClass.notifyWhenStudentCanAttendClass()
     }
     
-    func attendanceNotification() {
+    func canAttendClass() {
         print("student can attend class!")
         attendClassView.backgroundColor = UIColor.greenColor()
         NSNotificationCenter.defaultCenter().removeObserver(self, name: Class.insideClassGeofenceNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: Class.outsideClassGeofenceNotification, object: nil)
         currentClass.attendClass(self.student) { (confirmed) -> Void in
             print("woo")
         }
     }
     
-    
-    private func doStartClass() {
-        // TODO: verify class can be started (time, etc) --> alert user if outside of class expected time
-        // TODO: verify user can start class
-        let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-        hud.labelText = "Starting class..."
-        
-        currentClass.start { (error) -> Void in
-            if error == nil {
-                dispatch_async(dispatch_get_main_queue()) {
-                    MBProgressHUD.hideHUDForView(self.view, animated: true)
-                    UIView.animateWithDuration(0.5, animations: { () -> Void in
-//                        self.startClassView.backgroundColor = UIColor.greenColor()
-//                        self.startClassLabel.text = Class.classStartedText
-                    })
-                }
-            }else{
-                MBProgressHUD.hideHUDForView(self.view, animated: true)
-                print("error getting location for starting class \(error)")
-            }
-        }
+    func canNotAttendClass() {
+        print("student outside the geofence for the class!")
     }
-    
-    private func doStopClass() {
-        currentClass.finish()
-        UIView.animateWithDuration(0.5, animations: { () -> Void in
-//            self.startClassLabel.text = Class.classFinishedText
-//            self.startClassView.backgroundColor = UIColor.redColor()
-        })
-    }
-    
-    
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.

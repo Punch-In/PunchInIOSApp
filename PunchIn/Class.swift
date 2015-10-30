@@ -15,6 +15,7 @@ class Class : PFObject, PFSubclassing, LocationProviderGeofenceDelegate {
     static let classNotStartedText = "Start Class"
     
     static let insideClassGeofenceNotification = "InsideClassGeofenceNotification"
+    static let outsideClassGeofenceNotification = "OutsideClassGeofenceNotification"
 
     
     // MARK: Parse subclassing
@@ -187,6 +188,7 @@ class Class : PFObject, PFSubclassing, LocationProviderGeofenceDelegate {
     
     func isOutsideGeofence() {
         print("outside geofence...")
+        NSNotificationCenter.defaultCenter().postNotificationName(Class.outsideClassGeofenceNotification, object: nil)
     }
     
     func isUnknown() {
