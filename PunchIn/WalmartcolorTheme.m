@@ -28,7 +28,7 @@
 }
 
 -(UIColor *)primaryBlueColor{
-    return [UIColor colorWithRed:68 green:127 blue:168 alpha:1.0];
+    return [UIColor colorWithRed:93 green:168 blue:212 alpha:1.0];
 }
 
 -(UIColor *)primaryDarkBlueColor{
@@ -39,7 +39,6 @@
 -(UIColor *)primaryGreyColor{
     return [UIColor colorWithRed:165 green:165 blue:165 alpha:1.0];
 }
-
 
 -(UIColor *)primaryYellowColor{
     return [UIColor colorWithRed:215 green:156 blue:71 alpha:1.0];
