@@ -28,30 +28,21 @@
 }
 
 -(UIColor *)primaryBlueColor{
-    return [UIColor colorWithRed:93 green:168 blue:212 alpha:1.0];
+    return [UIColor colorWithRed:93/255.0f green:168/255.0f blue:212/255.0f alpha:1.0];
 }
 
 -(UIColor *)primaryDarkBlueColor{
-    return [UIColor colorWithRed:69 green:128 blue:162 alpha:1.0];
+    return [UIColor colorWithRed:69/255.0f green:128/255.0f blue:162/255.0f alpha:1.0];
 }
 
 
 -(UIColor *)primaryGreyColor{
-    return [UIColor colorWithRed:165 green:165 blue:165 alpha:1.0];
+    return [UIColor colorWithRed:165/255.0f green:165/255.0f blue:165/255.0f alpha:1.0];
 }
 
 -(UIColor *)primaryYellowColor{
-    return [UIColor colorWithRed:215 green:156 blue:71 alpha:1.0];
+    return [UIColor colorWithRed:215/255.0f green:156/255.0f blue:71/255.0f alpha:1.0];
 }
-
-
-
-
-
-
-
-
-
 
 - (void)themeForTitleLabels:(UILabel *)label{
     label.textColor = [self secondaryTextColor];

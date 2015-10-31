@@ -23,7 +23,6 @@
 -(UIColor *)primaryBlueColor;
 -(UIColor *)primaryDarkBlueColor;
 -(UIColor *)primaryGreyColor;
--(UIColor *)primaryDarkBlueColor;
 -(UIColor *)primaryYellowColor;
 
 - (void)themeForTitleLabels:(UILabel *)label;

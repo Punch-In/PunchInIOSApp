@@ -24,8 +24,6 @@
 -(UIColor *)primaryDarkBlueColor;
 
 -(UIColor *)primaryGreyColor;
--(UIColor *)primaryDarlBlueColor;
-
 -(UIColor *)primaryYellowColor;
 
 
