@@ -124,8 +124,28 @@ class LocationProvider : NSObject, CLLocationManagerDelegate {
     }
     
     // MARK: CLLocationManagerDelegate delegates
-    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+    class func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         print("location authorization status change! \(status.rawValue)") // TODO:  need to handle 
+        switch status {
+        case .NotDetermined:
+            //instance.requestAlwaysAuthorization()
+            
+            break
+        case .AuthorizedWhenInUse:
+           instance.startUpdatingLocation()
+            break
+        case .AuthorizedAlways:
+            instance.startUpdatingLocation()
+            break
+        case .Restricted:
+            // restricted by e.g. parental controls. User can't enable Location Services
+            break
+        case .Denied:
+            // user denied your app access to Location Services, but can grant access from Settings.app
+            break
+        default:
+            break
+        }
     }
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
