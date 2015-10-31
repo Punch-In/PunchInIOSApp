@@ -247,7 +247,7 @@ class LocationProvider : NSObject, CLLocationManagerDelegate {
         
         instance.monitoredRegions[region] = delegate
         instance.manager.startMonitoringForRegion(region)
-        print("monitoring \(instance.manager.monitoredRegions.count)")
+        print("add: region monitoring count:\(instance.manager.monitoredRegions.count)")
     }
     
     class func removeNotifyForRegion(region:CLCircularRegion) {
@@ -256,6 +256,7 @@ class LocationProvider : NSObject, CLLocationManagerDelegate {
         instance.manager.stopMonitoringForRegion(region)
         
         instance.monitoredRegions.removeValueForKey(region)
+        print("remove: region monitoring count:\(instance.manager.monitoredRegions.count)")
     }
     
     class func notifyWhenInsideGeofence(region:CLCircularRegion, delegate: LocationProviderGeofenceDelegate){

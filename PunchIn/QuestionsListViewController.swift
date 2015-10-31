@@ -23,6 +23,7 @@ class QuestionsListViewController: UIViewController, UITableViewDelegate, UITabl
     var theClass: Class!
     private var questions: [Question] = [] {
         didSet {
+            // order by newest first
             questions.sortInPlace{ $0.date.compare($1.date) == .OrderedDescending }
             questionTableView.reloadData()
         }

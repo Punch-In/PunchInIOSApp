@@ -32,6 +32,7 @@ class Course: PFObject, PFSubclassing {
     @NSManaged private(set) var courseId: String!
     @NSManaged private(set) var courseTime: String! // TODO: fix me
     @NSManaged private(set) var courseDay: String! // TODO: fix me
+    @NSManaged private(set) var courseDurationMin: Int // in minutes
     @NSManaged private(set) var courseDescription: String!
     @NSManaged private(set) var courseInstructors: [Instructor]?
     @NSManaged private(set) var courseTAs: [Instructor]?

@@ -62,17 +62,12 @@ class InstructorCourseDraggableViewController: UIViewController {
     }
     
     func setUpValues(){
-        course.classes?.count
         // show current class
-        if classIndex < 0 {
-        return
-        }
         currentClass = course.classes![classIndex]
-        
-        classDescription.text = currentClass.classDescription
         currentClass.refreshDetails { (error) -> Void in
             if error == nil {
                 dispatch_async(dispatch_get_main_queue()){
+                    self.classDescription.text = self.currentClass.classDescription
                     self.attendanceCount.text = "\(self.currentClass.attendance!.count)"
                     self.questionCount.text = "\(self.currentClass.questions!.count)"
                     self.unansweredQuestionCount.text = "\(self.currentClass.questions!.filter({!$0.isAnswered}).count)"

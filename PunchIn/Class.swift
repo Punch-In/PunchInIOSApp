@@ -47,6 +47,7 @@ class Class : PFObject, PFSubclassing, LocationProviderGeofenceDelegate {
     @NSManaged private(set) var questions: [Question]?
     @NSManaged private(set) var startTime: NSDate!
     @NSManaged private(set) var finishTime: NSDate!
+    @NSManaged private var classDuration: String? // grr.. to allow optionals
     @NSManaged var location: Location?
     
     var geofenceRegion: CLCircularRegion? {
@@ -55,6 +56,18 @@ class Class : PFObject, PFSubclassing, LocationProviderGeofenceDelegate {
                 return LocationProvider.createGeofenceRegion(location, id: self.name)
             }else {
                 return nil
+            }
+        }
+    }
+    
+    /// grr... because NSManaged doesn't allow optionals on Ints, use this approach to 
+    //      dynamically source the duration of the class
+    var duration:Int {
+        get {
+            if let cd = classDuration {
+                return Int(cd)!
+            }else{
+                return parentCourse.courseDurationMin
             }
         }
     }
@@ -72,6 +85,24 @@ class Class : PFObject, PFSubclassing, LocationProviderGeofenceDelegate {
         return allDataAvailable
     }
     
+    private func copyFrom(otherClass:Class?){
+        if let other = otherClass {
+            self.parentCourse = other.parentCourse
+            self.name = other.name
+            self.courseIndex = other.courseIndex
+            self.classDescription = other.classDescription
+            self.isStarted = other.isStarted
+            self.isFinished = other.isFinished
+            self.attendance = other.attendance
+            self.date = other.date
+            self.questions = other.questions
+            self.startTime = other.startTime
+            self.finishTime = other.finishTime
+            self.classDuration = other.classDuration
+            self.location = other.location
+        }
+    }
+    
     // MARK: Refresh data
     
     private func fetchAllFields(forceFetch: Bool=false, completion:((myClass:Class?, error:NSError?)->Void)) {
@@ -85,11 +116,22 @@ class Class : PFObject, PFSubclassing, LocationProviderGeofenceDelegate {
         query?.includeKey("attendance")
         query?.includeKey("location")
         query?.includeKey("questions")
+        
+        if self.areAllFieldsAvailable() {
+            // only refresh if the object has been updated
+            query?.whereKey("updatedAt", greaterThan: self.updatedAt!)
+        }
+        
         query?.getFirstObjectInBackgroundWithBlock({ (obj: PFObject?, error: NSError?) -> Void in
             if error==nil, let theClass = obj as? Class {
-                // do nothing...
-                completion(myClass:theClass, error:nil)
+                // copy the contents to self
+                self.copyFrom(theClass)
+                completion(myClass:self, error:nil)
+            }else if error!.code == 101 {
+                // object not found means the class wasn't updated, so just pass the original object back
+                completion(myClass:self, error:nil)
             }else{
+                // some other error
                 completion(myClass:nil, error:error)
             }
         })
@@ -170,6 +212,7 @@ class Class : PFObject, PFSubclassing, LocationProviderGeofenceDelegate {
         completion(confirmed:true)
     }
 
+    private var classEndTimer: NSTimer?
     func notifyWhenStudentCanAttendClass() {
         guard !self.isFinished else {
             return
@@ -194,6 +237,22 @@ class Class : PFObject, PFSubclassing, LocationProviderGeofenceDelegate {
     func isOutsideGeofence() {
         print("outside geofence...")
         NSNotificationCenter.defaultCenter().postNotificationName(Class.outsideClassGeofenceNotification, object: nil)
+
+        // disable location tracking after estimated class end
+        let estimatedClassEnd = self.startTime.dateByAddingTimeInterval(Double(self.duration*60))
+        let now = NSDate().dateByAddingTimeInterval(Double(NSTimeZone.localTimeZone().secondsFromGMT))
+        switch now.compare(estimatedClassEnd) {
+        case .OrderedSame:
+            // class has likely ended -- stop tracking
+            stopCheckingForGeofence()
+        case .OrderedDescending:
+            // now is later than class end -- stop track
+            stopCheckingForGeofence()
+        case .OrderedAscending:
+            // now is earlier than class end -- set timer for difference
+            let ti = estimatedClassEnd.timeIntervalSinceDate(now)
+            self.classEndTimer = NSTimer.scheduledTimerWithTimeInterval(ti, target: self, selector: "stopCheckingForGeofence", userInfo: nil, repeats: false)
+        }
     }
     
     func isUnknown() {
@@ -204,8 +263,9 @@ class Class : PFObject, PFSubclassing, LocationProviderGeofenceDelegate {
         print("error getting location! \(error)")
     }
     
-    private func stopCheckingForGeofence() {
+    func stopCheckingForGeofence() {
         // triggered by NSTimer
+        print("stopping check for geofence")
         LocationProvider.removeNotifyForRegion(self.geofenceRegion!)
     }
 

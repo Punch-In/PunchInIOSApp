@@ -15,7 +15,6 @@
 		450C2D821BDF221600149934 /* LocationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450C2D811BDF221600149934 /* LocationProvider.swift */; settings = {ASSET_TAGS = (); }; };
 		450C2D841BDF2C9900149934 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 450C2D831BDF2C9900149934 /* CoreLocation.framework */; };
 		454BA75A1BE445C100B73833 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454BA7591BE445C100B73833 /* Person.swift */; settings = {ASSET_TAGS = (); }; };
-		4567BC7D1BDC7162003C247A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4567BC7C1BDC7162003C247A /* Constants.swift */; settings = {ASSET_TAGS = (); }; };
 		45F39D4A1BDE03F800E385E8 /* AttendanceCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F39D491BDE03F800E385E8 /* AttendanceCollectionViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		45F7535D1BDCBDE10011FE00 /* DataInjector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F7535C1BDCBDE10011FE00 /* DataInjector.swift */; settings = {ASSET_TAGS = (); }; };
 		45FC02DE1BDD9F2E006E37E3 /* QuestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FC02DD1BDD9F2E006E37E3 /* QuestionTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
@@ -75,7 +74,6 @@
 		450C2D811BDF221600149934 /* LocationProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationProvider.swift; sourceTree = "<group>"; };
 		450C2D831BDF2C9900149934 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		454BA7591BE445C100B73833 /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
-		4567BC7C1BDC7162003C247A /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		45F39D491BDE03F800E385E8 /* AttendanceCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttendanceCollectionViewController.swift; sourceTree = "<group>"; };
 		45F7535C1BDCBDE10011FE00 /* DataInjector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataInjector.swift; sourceTree = "<group>"; };
 		45FC02DD1BDD9F2E006E37E3 /* QuestionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionTableViewCell.swift; sourceTree = "<group>"; };
@@ -242,7 +240,6 @@
 				4505093D1BDC469B00ED17FF /* Class.swift */,
 				4505093F1BDC475D00ED17FF /* Location.swift */,
 				450509411BDC479200ED17FF /* Question.swift */,
-				4567BC7C1BDC7162003C247A /* Constants.swift */,
 				45F7535C1BDCBDE10011FE00 /* DataInjector.swift */,
 				454BA7591BE445C100B73833 /* Person.swift */,
 			);
@@ -543,7 +540,6 @@
 				C460FD191BD8416200CD9DBC /* MKTextField.swift in Sources */,
 				C460FD3A1BDB27ED00CD9DBC /* DailyAttendanceCollectionViewCell.swift in Sources */,
 				C460FCE41BD75F9A00CD9DBC /* Course.swift in Sources */,
-				4567BC7D1BDC7162003C247A /* Constants.swift in Sources */,
 				4505093E1BDC469B00ED17FF /* Class.swift in Sources */,
 				C4A78A021BE1679A0040C270 /* InstructorCourseView.swift in Sources */,
 				C460FD231BD8B05A00CD9DBC /* Student.swift in Sources */,

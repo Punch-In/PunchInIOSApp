@@ -35,6 +35,7 @@ class StudentCourseDraggableViewController: UIViewController {
     @IBOutlet weak var questionsView: UIView!
     @IBOutlet var questionsTapGestureRecognizer: UITapGestureRecognizer!
     
+    @IBOutlet weak var attendClassLabel: UILabel!
     @IBOutlet weak var attendClassView: UIView!
     //PageController Property.
     var indexNumber:Int!
@@ -75,19 +76,14 @@ class StudentCourseDraggableViewController: UIViewController {
     
     //  MARK: Setup Values
     func setUpValues(){
-        course.classes?.count
         // show current class
-        if classIndex < 0 {
-            classIndex = 0
-        }else if classIndex >= course.classes!.count {
-            classIndex = course.classes!.count-1
-        }
         currentClass = course.classes![classIndex]
         currentClass.refreshDetails { (error) -> Void in
             if error == nil {
                 dispatch_async(dispatch_get_main_queue()){
                     self.questionCount.text = "\(self.currentClass.questions!.count)"
                     self.unansweredQuestionCount.text = "\(self.currentClass.questions!.filter({!$0.isAnswered}).count)"
+                    self.attendClassLabel.text = self.currentClass.name
                     // set "class start" view based on class status
                     if self.currentClass.isFinished {
                         self.imageView3.hidden = true
@@ -182,34 +178,33 @@ class StudentCourseDraggableViewController: UIViewController {
     }
     
     func resetAttendView() {
-        imageView3.backgroundColor =
-            UIColor.grayColor()
-        allowedToCheckIn = false
+        imageView3.hidden = false
+        imageView3.backgroundColor = UIColor.grayColor()
     }
     
     func setupAttendView() {
         if currentClass.isFinished {
+            allowedToCheckIn = false
             imageView3.hidden = true
-            print("Class is finished");
+            print("Class \(currentClass.name) is finished");
             return
         }
         
         if !currentClass.isStarted {
-            print("class is not started")
-            imageView3.backgroundColor =
-            UIColor.grayColor()
+            print("class \(currentClass.name) has not started")
+            imageView3.backgroundColor = UIColor.grayColor()
             allowedToCheckIn = false
             imageView3.hidden = true
             return
         }
         
         if self.currentClass.didStudentAttend(student!) {
-            print("Class has started, and student has already attended")
-           self.allowedToCheckIn = false
+            print("Class \(currentClass.name) has started, and student has already attended")
+            self.allowedToCheckIn = false
             self.imageView3.backgroundColor = UIColor.greenColor()
             imageView3.hidden = false
         }else{
-            print("Class has started, but student has not checked in yet")
+            print("Class \(currentClass.name) has started, but student has not checked in yet")
             self.allowedToCheckIn = true
             self.imageView3.backgroundColor = UIColor.redColor()
             imageView3.hidden = false
@@ -217,7 +212,7 @@ class StudentCourseDraggableViewController: UIViewController {
     }
     
     func attendClassTapped() {
-        print("tapped attend class!")
+        print("tapped attend class \(currentClass.name)")
         
         guard ParseDB.isStudent else {
             print("instructor can't attend a class")
@@ -234,22 +229,22 @@ class StudentCourseDraggableViewController: UIViewController {
         
         guard !currentClass.isFinished else {
             // class already done... do nothing
-            print("class already finished; can't attend")
+            print("class \(currentClass.name) already finished; can't attend")
             imageView3.hidden = true
             allowedToCheckIn = false
             return
         }
         
         guard currentClass.isStarted else {
-            print("class hasn't started yet")
-            imageView3.hidden = false
+            print("class \(currentClass.name) hasn't started yet")
+            imageView3.hidden = true
             allowedToCheckIn = false
             imageView3.backgroundColor = UIColor.redColor()
             return
         }
         
         guard !currentClass.didStudentAttend(student!) else {
-            print("student already attended class")
+            print("student already attended class \(currentClass.name) ")
             return
         }
         
@@ -258,9 +253,9 @@ class StudentCourseDraggableViewController: UIViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "canNotAttendClass", name: Class.outsideClassGeofenceNotification, object: nil)
         currentClass.notifyWhenStudentCanAttendClass()
     }
-    
+        
     func canAttendClass() {
-        print("student can attend class!")
+        print("student can attend class \(currentClass.name)!")
         self.allowedToCheckIn = true
         imageView3.backgroundColor = UIColor.greenColor()
         attendClassView.backgroundColor = UIColor.greenColor()
@@ -268,13 +263,11 @@ class StudentCourseDraggableViewController: UIViewController {
         NSNotificationCenter.defaultCenter().removeObserver(self, name: Class.outsideClassGeofenceNotification, object: nil)
         currentClass.attendClass(self.student) { (confirmed) -> Void in
             print("woo")
-            
-            
         }
     }
     
     func canNotAttendClass() {
-        print("student outside the geofence for the class!")
+        print("student outside the geofence for the class \(currentClass.name) !")
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

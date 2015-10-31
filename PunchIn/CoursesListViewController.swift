@@ -11,6 +11,7 @@ import MBProgressHUD
 
 class CoursesListViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource {
     
+    static let storyboardName = "CoursesListViewController"
     let CoursesListCellIdentifier  = "CoursesListCell"
     //var userType:String!
     
