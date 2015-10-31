@@ -33,6 +33,11 @@ class Question : PFObject, PFSubclassing {
     @NSManaged private(set) var date: NSDate!
     @NSManaged private(set) weak var forClass: Class!
     
+    var sinceDateString: String {
+        let interval = NSDate().timeIntervalSinceDate(date)
+        return Question.elapsedTimeFormatter.stringFromTimeInterval(interval)!
+    }
+    
     override init() {
         super.init()
     }
@@ -41,6 +46,19 @@ class Question : PFObject, PFSubclassing {
         isAnswered = true
         self.saveEventually()
     }
+    
+    
+    // MARK: time formatting; to display elapsed time as "2d" or "1w" ... etc
+    private static var elapsedTimeFormatter: NSDateComponentsFormatter = {
+        let formatter = NSDateComponentsFormatter()
+        formatter.unitsStyle = NSDateComponentsFormatterUnitsStyle.Abbreviated
+        formatter.collapsesLargestUnit = true
+        formatter.maximumUnitCount = 1
+        return formatter
+        }()
+    
+    
+    // MARK: utility functions to create data
     
     class func createQuestion(email:String, text:String, date: NSDate, inClass: Class) -> Question {
         let question = Question()

@@ -81,6 +81,8 @@ class StudentCourseDraggableViewController: UIViewController {
         currentClass.refreshDetails { (error) -> Void in
             if error == nil {
                 dispatch_async(dispatch_get_main_queue()){
+                    self.questionCount.hidden = false
+                    self.unansweredQuestionCount.hidden = false
                     self.questionCount.text = "\(self.currentClass.questions!.count)"
                     self.unansweredQuestionCount.text = "\(self.currentClass.questions!.filter({!$0.isAnswered}).count)"
                     self.attendClassLabel.text = self.currentClass.name
@@ -180,6 +182,8 @@ class StudentCourseDraggableViewController: UIViewController {
     func resetAttendView() {
         imageView3.hidden = false
         imageView3.backgroundColor = UIColor.grayColor()
+        self.questionCount.hidden = true
+        self.unansweredQuestionCount.hidden = true
     }
     
     func setupAttendView() {

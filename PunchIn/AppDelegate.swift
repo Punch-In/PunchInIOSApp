@@ -9,6 +9,8 @@
 import UIKit
 import Parse
 
+// Command line to start simulator:  open -n /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 

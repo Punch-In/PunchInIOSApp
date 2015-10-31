@@ -15,6 +15,9 @@ class LoginViewController: UIViewController {
     
     static let userTypes = [ "Student", "Instructor" ]
     
+    private let initialEmailAddress = "email@address.com"
+    private let initialPassword = "password"
+    
     private static let noUserProvidedText = "Please provide an email address"
     private static let noPasswordProvidedText = "Please provide a password"
     private static let badUserText = "Email and/or Password is not valid"
@@ -24,8 +27,11 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var typeSelector: UISegmentedControl!
     @IBOutlet weak var invalidEntryLabel: UILabel!
+    @IBOutlet var studentIndicatorTapGesture: UITapGestureRecognizer!
+    @IBOutlet weak var studentIndicatorImage: UIImageView!
+    
+    private var isStudent: Bool = false
     
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self, name: ParseDB.BadLoginNotificationName, object: nil)
@@ -34,6 +40,9 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupUI()
+        setupGestureRecognizer()
      
         // Do any additional setup after loading the view.
         invalidEntryLabel.hidden = true
@@ -46,14 +55,51 @@ class LoginViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+ 
+    private func setupUI() {
+        // set color schemes, etc
+        
+        // set background color
+        self.view.backgroundColor = ThemeManager.theme().primaryDarkBlueColor()
+        
+        // set background color for email address & password field
+        nameTextField.backgroundColor = ThemeManager.theme().primaryBlueColor()
+        nameTextField.textColor = UIColor.whiteColor()
+        nameTextField.text = initialEmailAddress
+        passwordTextField.backgroundColor = ThemeManager.theme().primaryBlueColor()
+        passwordTextField.textColor = UIColor.whiteColor()
+        passwordTextField.text = initialPassword
+        
+        // set login
+        loginButton.layer.borderColor = UIColor.whiteColor().CGColor
+        loginButton.layer.borderWidth = 1.0
+        loginButton.tintColor = UIColor.whiteColor()
+        
+    }
     
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
-        return 1
+    private func setupGestureRecognizer() {
+        studentIndicatorTapGesture.addTarget(self, action: "didTapStudentIndicator")
+    }
+    
+    func didTapStudentIndicator() {
+        if isStudent {
+            // change to not student
+            studentIndicatorImage.image = UIImage(named: "unselected_button_login.png")
+        }else{
+            // change to student
+            studentIndicatorImage.image = UIImage(named: "selected_button_login.png")
+        }
     }
     
     
     func validateInput() -> Bool {
-        return !nameTextField.text!.isEmpty && !passwordTextField.text!.isEmpty
+        var goodInput: Bool = true
+        goodInput = goodInput && !nameTextField.text!.isEmpty
+        goodInput = goodInput && !passwordTextField.text!.isEmpty
+        goodInput = goodInput && !(nameTextField.text==initialEmailAddress)
+        goodInput = goodInput && !(passwordTextField.text==initialPassword)
+        
+        return goodInput
     }
     
     private func updateInvalidDataText(status: String) {
@@ -70,7 +116,7 @@ class LoginViewController: UIViewController {
     }
     
     func badType() {
-        let errorText = typeSelector.selectedSegmentIndex==0 ? LoginViewController.notStudentText : LoginViewController.notInstructorText
+        let errorText = isStudent ? LoginViewController.notStudentText : LoginViewController.notInstructorText
         updateInvalidDataText(self.nameTextField.text! + errorText)
     }
 
@@ -87,7 +133,7 @@ class LoginViewController: UIViewController {
         
         self.invalidEntryLabel.hidden = true
         ParseDB.login(nameTextField!.text!, password: passwordTextField!.text!,
-            type: LoginViewController.userTypes[typeSelector.selectedSegmentIndex])
+            type: isStudent ? LoginViewController.userTypes[0] : LoginViewController.userTypes[1])
     }
 
     

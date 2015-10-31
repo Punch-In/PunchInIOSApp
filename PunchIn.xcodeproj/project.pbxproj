@@ -47,12 +47,6 @@
 		C460FD191BD8416200CD9DBC /* MKTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C460FD121BD8416200CD9DBC /* MKTextField.swift */; settings = {ASSET_TAGS = (); }; };
 		C460FD201BD8778E00CD9DBC /* new.png in Resources */ = {isa = PBXBuildFile; fileRef = C460FD1F1BD8778E00CD9DBC /* new.png */; settings = {ASSET_TAGS = (); }; };
 		C460FD231BD8B05A00CD9DBC /* Student.swift in Sources */ = {isa = PBXBuildFile; fileRef = C460FD221BD8B05A00CD9DBC /* Student.swift */; settings = {ASSET_TAGS = (); }; };
-		C460FD2A1BD8B22C00CD9DBC /* student1.png in Resources */ = {isa = PBXBuildFile; fileRef = C460FD241BD8B22C00CD9DBC /* student1.png */; settings = {ASSET_TAGS = (); }; };
-		C460FD2B1BD8B22C00CD9DBC /* student2.png in Resources */ = {isa = PBXBuildFile; fileRef = C460FD251BD8B22C00CD9DBC /* student2.png */; settings = {ASSET_TAGS = (); }; };
-		C460FD2C1BD8B22C00CD9DBC /* student3.png in Resources */ = {isa = PBXBuildFile; fileRef = C460FD261BD8B22C00CD9DBC /* student3.png */; settings = {ASSET_TAGS = (); }; };
-		C460FD2D1BD8B22C00CD9DBC /* student4.png in Resources */ = {isa = PBXBuildFile; fileRef = C460FD271BD8B22C00CD9DBC /* student4.png */; settings = {ASSET_TAGS = (); }; };
-		C460FD2E1BD8B22C00CD9DBC /* student5.png in Resources */ = {isa = PBXBuildFile; fileRef = C460FD281BD8B22C00CD9DBC /* student5.png */; settings = {ASSET_TAGS = (); }; };
-		C460FD2F1BD8B22C00CD9DBC /* student6.png in Resources */ = {isa = PBXBuildFile; fileRef = C460FD291BD8B22C00CD9DBC /* student6.png */; settings = {ASSET_TAGS = (); }; };
 		C460FD341BDAF8E500CD9DBC /* WalmartcolorTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = C460FD331BDAF8E500CD9DBC /* WalmartcolorTheme.m */; settings = {ASSET_TAGS = (); }; };
 		C460FD381BDB1AF300CD9DBC /* AttendanceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C460FD371BDB1AF300CD9DBC /* AttendanceCollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		C460FD3A1BDB27ED00CD9DBC /* DailyAttendanceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C460FD391BDB27ED00CD9DBC /* DailyAttendanceCollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
@@ -118,12 +112,6 @@
 		C460FD121BD8416200CD9DBC /* MKTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKTextField.swift; sourceTree = "<group>"; };
 		C460FD1F1BD8778E00CD9DBC /* new.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = new.png; sourceTree = "<group>"; };
 		C460FD221BD8B05A00CD9DBC /* Student.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Student.swift; sourceTree = "<group>"; };
-		C460FD241BD8B22C00CD9DBC /* student1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = student1.png; sourceTree = "<group>"; };
-		C460FD251BD8B22C00CD9DBC /* student2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = student2.png; sourceTree = "<group>"; };
-		C460FD261BD8B22C00CD9DBC /* student3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = student3.png; sourceTree = "<group>"; };
-		C460FD271BD8B22C00CD9DBC /* student4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = student4.png; sourceTree = "<group>"; };
-		C460FD281BD8B22C00CD9DBC /* student5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = student5.png; sourceTree = "<group>"; };
-		C460FD291BD8B22C00CD9DBC /* student6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = student6.png; sourceTree = "<group>"; };
 		C460FD321BDAF8E500CD9DBC /* WalmartcolorTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalmartcolorTheme.h; sourceTree = "<group>"; };
 		C460FD331BDAF8E500CD9DBC /* WalmartcolorTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalmartcolorTheme.m; sourceTree = "<group>"; };
 		C460FD371BDB1AF300CD9DBC /* AttendanceCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttendanceCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -258,12 +246,6 @@
 			isa = PBXGroup;
 			children = (
 				C49895701BE4365C00B5E490 /* door.png */,
-				C460FD241BD8B22C00CD9DBC /* student1.png */,
-				C460FD251BD8B22C00CD9DBC /* student2.png */,
-				C460FD261BD8B22C00CD9DBC /* student3.png */,
-				C460FD271BD8B22C00CD9DBC /* student4.png */,
-				C460FD281BD8B22C00CD9DBC /* student5.png */,
-				C460FD291BD8B22C00CD9DBC /* student6.png */,
 				C460FD1F1BD8778E00CD9DBC /* new.png */,
 				C43414791BCE443E00AA63DB /* Main.storyboard */,
 				C434147C1BCE443E00AA63DB /* Assets.xcassets */,
@@ -436,17 +418,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C460FD2B1BD8B22C00CD9DBC /* student2.png in Resources */,
 				C460FD201BD8778E00CD9DBC /* new.png in Resources */,
-				C460FD2D1BD8B22C00CD9DBC /* student4.png in Resources */,
-				C460FD2C1BD8B22C00CD9DBC /* student3.png in Resources */,
-				C460FD2F1BD8B22C00CD9DBC /* student6.png in Resources */,
 				C43414801BCE443E00AA63DB /* LaunchScreen.storyboard in Resources */,
 				C434147D1BCE443E00AA63DB /* Assets.xcassets in Resources */,
 				C49895711BE4365C00B5E490 /* door.png in Resources */,
-				C460FD2E1BD8B22C00CD9DBC /* student5.png in Resources */,
 				C434147B1BCE443E00AA63DB /* Main.storyboard in Resources */,
-				C460FD2A1BD8B22C00CD9DBC /* student1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

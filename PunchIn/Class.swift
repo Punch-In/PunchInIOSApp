@@ -239,6 +239,7 @@ class Class : PFObject, PFSubclassing, LocationProviderGeofenceDelegate {
         NSNotificationCenter.defaultCenter().postNotificationName(Class.outsideClassGeofenceNotification, object: nil)
 
         // disable location tracking after estimated class end
+        /*
         let estimatedClassEnd = self.startTime.dateByAddingTimeInterval(Double(self.duration*60))
         let now = NSDate().dateByAddingTimeInterval(Double(NSTimeZone.localTimeZone().secondsFromGMT))
         switch now.compare(estimatedClassEnd) {
@@ -253,6 +254,7 @@ class Class : PFObject, PFSubclassing, LocationProviderGeofenceDelegate {
             let ti = estimatedClassEnd.timeIntervalSinceDate(now)
             self.classEndTimer = NSTimer.scheduledTimerWithTimeInterval(ti, target: self, selector: "stopCheckingForGeofence", userInfo: nil, repeats: false)
         }
+        */
     }
     
     func isUnknown() {

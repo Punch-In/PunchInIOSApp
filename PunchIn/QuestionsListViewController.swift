@@ -29,6 +29,10 @@ class QuestionsListViewController: UIViewController, UITableViewDelegate, UITabl
         }
     }
     
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self);
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -49,6 +53,9 @@ class QuestionsListViewController: UIViewController, UITableViewDelegate, UITabl
 
         // show questions (if exist)
         questions = theClass.questions!
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
     }
     
     func fetchData() {
@@ -108,6 +115,35 @@ class QuestionsListViewController: UIViewController, UITableViewDelegate, UITabl
         questions.append(question)
         initializeNewQuestionText()
         newQuestionText.resignFirstResponder()
+    }
+    
+    // MARK: keyboard handling
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    func keyboardWillShow(notification: NSNotification!) {
+        let userInfo: [NSObject : AnyObject] = notification.userInfo!
+        let keyboardSize: CGSize = userInfo[UIKeyboardFrameBeginUserInfoKey]!.CGRectValue.size
+        let offsetSize: CGSize = userInfo[UIKeyboardFrameEndUserInfoKey]!.CGRectValue.size
+        let durationValue = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber
+        let animationDuration = durationValue.doubleValue
+        
+        if keyboardSize.height == offsetSize.height {
+            UIView.animateWithDuration(animationDuration, animations: { () -> Void in
+                //self.bottomConstraint.constant = keyboardSize.height + 8
+            })
+        }else{
+            UIView.animateWithDuration(animationDuration, animations: { () -> Void in
+                //self.bottomConstraint.constant = offsetSize.height + 8
+            })
+        }
+    }
+    
+    func keyboardWillHide(notification: NSNotification!) {
+        let userInfo: [NSObject : AnyObject] = notification.userInfo!
+        let durationValue = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber
+        let animationDuration = durationValue.doubleValue
+        UIView.animateWithDuration(animationDuration, animations: { () -> Void in
+            //self.bottomConstraint.constant = 8
+        })
     }
 
     /*

@@ -20,13 +20,16 @@ class QuestionTableViewCell: UITableViewCell {
         didSet {
             studentNameField.text = question.askedBy
             questionTextField.text = question.questionText
-            questionDateField.text = QuestionTableViewCell.questionDateFormatter.stringFromDate(question.date)
+            //questionDateField.text = QuestionTableViewCell.questionDateFormatter.stringFromDate(question.date)
+            questionDateField.text = question.sinceDateString
+            questionAnsweredControl.selectedSegmentIndex = question.isAnswered ? 1 : 0
         }
     }
     
+    @IBOutlet private weak var questionTextField: UITextField!
     @IBOutlet private weak var studentNameField: UILabel!
-    @IBOutlet private weak var questionTextField: UILabel!
     @IBOutlet private weak var questionDateField: UILabel!
+    @IBOutlet private weak var questionAnsweredControl: UISegmentedControl!
     
     override func awakeFromNib() {
         super.awakeFromNib()
