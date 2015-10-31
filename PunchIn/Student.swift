@@ -9,7 +9,7 @@
 import UIKit
 import Parse
 
-class Student: PFObject, PFSubclassing {
+class Student: PFObject, PFSubclassing, Person {
     
     // MARK: Parse subclassing
     private static let className = "Student"
@@ -36,6 +36,10 @@ class Student: PFObject, PFSubclassing {
     // MARK: Properties not saved
     private(set) var studentImage:UIImage?
     
+    deinit {
+        print("student is deinitialized!")
+    }
+    
     override init() {
         super.init()
     }
@@ -52,8 +56,9 @@ class Student: PFObject, PFSubclassing {
         self.studentImageFile = PFFile(name:studentName+".png", data:imageData!)
     }
     
-    func getStudentImage(completion: ((image:UIImage?, error:NSError?)-> Void)) {
-        guard !(studentImageFile?.isDataAvailable)! || studentImage == nil else {
+    func getImage(completion: ((image:UIImage?, error:NSError?)-> Void)) {
+        // check to see if image already exists
+        guard studentImage == nil else {
             return completion(image:studentImage, error:nil)
         }
         

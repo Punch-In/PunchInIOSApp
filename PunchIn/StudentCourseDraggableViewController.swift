@@ -23,8 +23,8 @@ class StudentCourseDraggableViewController: UIViewController {
     //private var classIndex: Int!
     private var currentClass: Class!
     
-    @IBOutlet weak var imageView1: UIImageView!
-    @IBOutlet weak var imageView2: UIImageView!
+    @IBOutlet weak var studentAvatar: UIImageView!
+    @IBOutlet weak var openDoorImage: UIImageView!
     @IBOutlet weak var imageView3: UIImageView!
     
     @IBOutlet var attendanceTapGestureRecognizer: UITapGestureRecognizer!
@@ -38,7 +38,9 @@ class StudentCourseDraggableViewController: UIViewController {
     @IBOutlet weak var attendClassView: UIView!
     //PageController Property.
     var indexNumber:Int!
-    private var student: Student!
+    
+    /* the Student */
+    var student: Student!
     
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self, name: Class.outsideClassGeofenceNotification, object: nil)
@@ -57,14 +59,17 @@ class StudentCourseDraggableViewController: UIViewController {
     // MARK: View Controller Methods.
     override func viewDidLoad() {
         super.viewDidLoad()
+        student = ParseDB.currentPerson as! Student
+        
+        resetAttendView()
         setUpUI()
         setUpValues()
         setUpGestures()
         
+        
         //This shows we cannnot login as such.
         imageView3.backgroundColor = UIColor.grayColor()
         
-        setupAttendView()
         allowedToCheckIn = false
     }
     
@@ -78,26 +83,40 @@ class StudentCourseDraggableViewController: UIViewController {
             classIndex = course.classes!.count-1
         }
         currentClass = course.classes![classIndex]
-        currentClass.refreshDetails { (theClass, error) -> Void in
+        currentClass.refreshDetails { (error) -> Void in
             if error == nil {
                 dispatch_async(dispatch_get_main_queue()){
-                
                     self.questionCount.text = "\(self.currentClass.questions!.count)"
                     self.unansweredQuestionCount.text = "\(self.currentClass.questions!.filter({!$0.isAnswered}).count)"
+                    // set "class start" view based on class status
+                    if self.currentClass.isFinished {
+                        self.imageView3.hidden = true
+                    }else if self.currentClass.isStarted {
+                        self.imageView3.hidden = false
+                        //imageView3.backgroundColor = UIColor.greenColor()
+                    }else {
+                        //    imageView3.backgroundColor = UIColor.grayColor()
+                        self.imageView3.hidden = true
+                    }
+                    self.setupAttendView()
                 }
             }
         }
 
-        // set "class start" view based on class status
-        if currentClass.isFinished {
-            imageView3.hidden = true
-        }else if currentClass.isStarted {
-            
-            //imageView3.backgroundColor = UIColor.greenColor()
-        }else {
-        //    imageView3.backgroundColor = UIColor.grayColor()
-        }
         
+        student.getImage{ (image, error) -> Void in
+            if error == nil {
+                dispatch_async(dispatch_get_main_queue()){
+                    self.studentAvatar.alpha = 0
+                    self.studentAvatar.image = image
+                    UIView.animateWithDuration(0.3, animations: { () -> Void in
+                        self.studentAvatar.alpha = 1
+                    })
+                }
+            }else{
+                print("error getting image for student \(self.student.studentName)")
+            }
+        }
     }
     
 
@@ -106,8 +125,8 @@ class StudentCourseDraggableViewController: UIViewController {
         if allowedToCheckIn == true {
         switch sender.state {
         case .Began:
-            initialCenterPoint = self.imageView1.center
-            lastCenterPoint = self.imageView2.center
+            initialCenterPoint = self.studentAvatar.center
+            lastCenterPoint = self.openDoorImage.center
         case .Cancelled:
             fallthrough
         case .Ended:
@@ -118,13 +137,13 @@ class StudentCourseDraggableViewController: UIViewController {
             fallthrough
         case .Changed:
             
-            if(self.imageView1.center.x < ((initialCenterPoint?.x)!)  || translation.x < 0){
+            if(self.studentAvatar.center.x < ((initialCenterPoint?.x)!)  || translation.x < 0){
             }
-            if (translation.x > 0 && self.imageView1.center.x < self.imageView2.center.x){
-            self.imageView1.center.x = (initialCenterPoint?.x)! + translation.x
+            if (translation.x > 0 && self.studentAvatar.center.x < self.openDoorImage.center.x){
+                self.studentAvatar.center.x = (initialCenterPoint?.x)! + translation.x
             }
             
-            if imageView1.center.x > lastCenterPoint?.x {
+            if studentAvatar.center.x > lastCenterPoint?.x {
                 imageView3.hidden = true
                 print("Student Attended")
                 
@@ -162,6 +181,11 @@ class StudentCourseDraggableViewController: UIViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
+    func resetAttendView() {
+        imageView3.backgroundColor =
+            UIColor.grayColor()
+        allowedToCheckIn = false
+    }
     
     func setupAttendView() {
         if currentClass.isFinished {
@@ -175,20 +199,20 @@ class StudentCourseDraggableViewController: UIViewController {
             imageView3.backgroundColor =
             UIColor.grayColor()
             allowedToCheckIn = false
+            imageView3.hidden = true
             return
         }
         
-       ParseDB.student { (student, error) -> Void in
-            self.student = student
-            if self.currentClass.didStudentAttend(student!) {
-                print("Can attend class and location is verified -- Can swap now.")
-               self.allowedToCheckIn = true
-                self.imageView3.backgroundColor = UIColor.greenColor()
-            }else{
-                print("Can attend class but did not attend yet, and can verify location")
-                self.allowedToCheckIn = false
-                self.imageView3.backgroundColor = UIColor.redColor()
-            }
+        if self.currentClass.didStudentAttend(student!) {
+            print("Class has started, and student has already attended")
+           self.allowedToCheckIn = false
+            self.imageView3.backgroundColor = UIColor.greenColor()
+            imageView3.hidden = false
+        }else{
+            print("Class has started, but student has not checked in yet")
+            self.allowedToCheckIn = true
+            self.imageView3.backgroundColor = UIColor.redColor()
+            imageView3.hidden = false
         }
     }
     
@@ -208,7 +232,7 @@ class StudentCourseDraggableViewController: UIViewController {
             return
         }
         
-        guard currentClass.isFinished else {
+        guard !currentClass.isFinished else {
             // class already done... do nothing
             print("class already finished; can't attend")
             imageView3.hidden = true

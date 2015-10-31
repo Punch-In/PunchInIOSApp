@@ -32,8 +32,8 @@ class DataInjector {
         let nelson = Student.createStudent("nelson muntz", id: "nelson12345", email: "nelson@spru.edu", image: UIImage(named: "student2.png"))
 
         // instructors
-        let frink = Instructor.createInstructor("john frink", email: "frink@spru.edu", id: "frink12345")
-        let apu = Instructor.createInstructor("apu nahasapeemapetilon", email: "apu@spru.edu", id: "apu12345")
+        let frink = Instructor.create("john frink", email: "frink@spru.edu", id: "frink12345", image: UIImage(named:"student1.png"))
+        let apu = Instructor.create("apu nahasapeemapetilon", email: "apu@spru.edu", id: "apu12345", image:UIImage(named:"student2.png"))
         
         // classes
         let location1 = Location(address: "699 8th St, San Francisco, CA 94103", coordinates: CLLocation(latitude: 37.771073, longitude: -122.403945))

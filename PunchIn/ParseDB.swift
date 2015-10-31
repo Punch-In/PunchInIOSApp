@@ -36,6 +36,7 @@ class ParseDB {
     }
     
     class func logout() {
+        currentPerson = nil
         PFUser.logOut()
         dispatch_async(dispatch_get_main_queue()){
             NSNotificationCenter.defaultCenter().postNotificationName(ParseDB.UserLoggedOutNotificationName, object: nil)
@@ -60,9 +61,7 @@ class ParseDB {
                 if let userType = newUser.objectForKey("type") as? String {
                     if userType == type {
                         // registered type matches login type
-                        dispatch_async(dispatch_get_main_queue()) {
-                            NSNotificationCenter.defaultCenter().postNotificationName(ParseDB.UserLoggedInNotificatioName, object: nil)
-                        }
+                        postLogin()
                     }else{
                         // registered type does not match login type for user
                         print("registered type \(userType) for user does not match login type \(type)")
@@ -76,9 +75,19 @@ class ParseDB {
                     print("user \(name) did not have a registered type. Adding type as \(type)")
                     newUser["type"] =  type
                     newUser.saveEventually()
-                    dispatch_async(dispatch_get_main_queue()){
-                        NSNotificationCenter.defaultCenter().postNotificationName(ParseDB.UserLoggedInNotificatioName, object: nil)
-                    }
+                    postLogin()
+                }
+            }
+        }
+    }
+    
+    private class func postLogin(){
+        ParseDB.person { (person, error) -> Void in
+            if error != nil {
+                print("ParseDB error getting person! \(error)")
+            }else{
+                dispatch_async(dispatch_get_main_queue()) {
+                    NSNotificationCenter.defaultCenter().postNotificationName(ParseDB.UserLoggedInNotificatioName, object: nil)
                 }
             }
         }
@@ -87,6 +96,34 @@ class ParseDB {
     static var isStudent:Bool  {
         get{
             return PFUser.currentUser()?.objectForKey("type") as? String == LoginViewController.userTypes[0]
+        }
+    }
+    
+    static private(set) var currentPerson: Person?
+    
+    class func initializeCurrentPerson() {
+        ParseDB.person { (person, error) -> Void in
+            if error != nil {
+                print("ParseDB error getting person! \(error)")
+            }
+        }
+    }
+    
+    private class func person(completion:((person:Person?,error:NSError?)->Void)) {
+        guard currentPerson == nil else {
+            return completion(person:currentPerson, error:nil)
+        }
+        
+        if isStudent {
+            student({ (student, error) -> Void in
+                currentPerson = student
+                completion(person:currentPerson, error:error)
+            })
+        }else{
+            instructor({ (instructor, error) -> Void in
+                currentPerson = instructor
+                completion(person:currentPerson, error:error)
+            })
         }
     }
     

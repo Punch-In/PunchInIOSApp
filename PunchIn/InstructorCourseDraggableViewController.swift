@@ -33,11 +33,16 @@ class InstructorCourseDraggableViewController: UIViewController {
     @IBOutlet weak var questionsView: UIView!
     @IBOutlet var questionsTapGestureRecognizer: UITapGestureRecognizer!
     
+    /* the Instructor */
+    var instructor:Instructor!
+    
     //PageController Property.
     var indexNumber:Int!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.instructor = ParseDB.currentPerson as! Instructor
+        
         setUpUI()
         setUpValues()
         setUpGestures()
@@ -65,28 +70,27 @@ class InstructorCourseDraggableViewController: UIViewController {
         currentClass = course.classes![classIndex]
         
         classDescription.text = currentClass.classDescription
-        currentClass.refreshDetails { (theClass, error) -> Void in
+        currentClass.refreshDetails { (error) -> Void in
             if error == nil {
                 dispatch_async(dispatch_get_main_queue()){
                     self.attendanceCount.text = "\(self.currentClass.attendance!.count)"
                     self.questionCount.text = "\(self.currentClass.questions!.count)"
                     self.unansweredQuestionCount.text = "\(self.currentClass.questions!.filter({!$0.isAnswered}).count)"
+                    
+                    // set "class start" view based on class status
+                    if self.currentClass.isFinished {
+                        self.startClassLabel.text = Class.classFinishedText
+                        self.startClassView.backgroundColor = UIColor.redColor()
+                    }else if self.currentClass.isStarted {
+                        self.startClassLabel.text = Class.classStartedText
+                        self.startClassView.backgroundColor = UIColor.greenColor()
+                    }else {
+                        self.startClassLabel.text = Class.classNotStartedText
+                        ThemeManager.theme().themeForSecondaryContentView(self.startClassView)
+                    }
                 }
             }
         }
-        
-        // set "class start" view based on class status
-        if currentClass.isFinished {
-            self.startClassLabel.text = Class.classFinishedText
-            self.startClassView.backgroundColor = UIColor.redColor()
-        }else if currentClass.isStarted {
-            self.startClassLabel.text = Class.classStartedText
-            self.startClassView.backgroundColor = UIColor.greenColor()
-        }else {
-            self.startClassLabel.text = Class.classNotStartedText
-            ThemeManager.theme().themeForSecondaryContentView(startClassView)
-        }
-        
     }
     func setUpUI(){
         ThemeManager.theme().themeForContentView(attendanceView)

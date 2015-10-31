@@ -143,8 +143,6 @@ class LocationProvider : NSObject, CLLocationManagerDelegate {
         case .Denied:
             // user denied your app access to Location Services, but can grant access from Settings.app
             break
-        default:
-            break
         }
     }
     

@@ -43,7 +43,7 @@ class DetailAttendanceViewController: UIViewController,UICollectionViewDataSourc
         className.text = course.courseName
     
         // get student image
-        student.getStudentImage { (image, error) -> Void in
+        student.getImage { (image, error) -> Void in
             if error == nil {
                 dispatch_async(dispatch_get_main_queue()){
                     self.studentImage.image = image

@@ -14,6 +14,7 @@
 		450509421BDC479200ED17FF /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450509411BDC479200ED17FF /* Question.swift */; settings = {ASSET_TAGS = (); }; };
 		450C2D821BDF221600149934 /* LocationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450C2D811BDF221600149934 /* LocationProvider.swift */; settings = {ASSET_TAGS = (); }; };
 		450C2D841BDF2C9900149934 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 450C2D831BDF2C9900149934 /* CoreLocation.framework */; };
+		454BA75A1BE445C100B73833 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454BA7591BE445C100B73833 /* Person.swift */; settings = {ASSET_TAGS = (); }; };
 		4567BC7D1BDC7162003C247A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4567BC7C1BDC7162003C247A /* Constants.swift */; settings = {ASSET_TAGS = (); }; };
 		45F39D4A1BDE03F800E385E8 /* AttendanceCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F39D491BDE03F800E385E8 /* AttendanceCollectionViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		45F7535D1BDCBDE10011FE00 /* DataInjector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F7535C1BDCBDE10011FE00 /* DataInjector.swift */; settings = {ASSET_TAGS = (); }; };
@@ -73,6 +74,7 @@
 		450509411BDC479200ED17FF /* Question.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		450C2D811BDF221600149934 /* LocationProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationProvider.swift; sourceTree = "<group>"; };
 		450C2D831BDF2C9900149934 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		454BA7591BE445C100B73833 /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		4567BC7C1BDC7162003C247A /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		45F39D491BDE03F800E385E8 /* AttendanceCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttendanceCollectionViewController.swift; sourceTree = "<group>"; };
 		45F7535C1BDCBDE10011FE00 /* DataInjector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataInjector.swift; sourceTree = "<group>"; };
@@ -242,6 +244,7 @@
 				450509411BDC479200ED17FF /* Question.swift */,
 				4567BC7C1BDC7162003C247A /* Constants.swift */,
 				45F7535C1BDCBDE10011FE00 /* DataInjector.swift */,
+				454BA7591BE445C100B73833 /* Person.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -523,6 +526,7 @@
 				C460FCDC1BD75B4B00CD9DBC /* CourseViewController.swift in Sources */,
 				45FC02DE1BDD9F2E006E37E3 /* QuestionTableViewCell.swift in Sources */,
 				C498956F1BE1B87600B5E490 /* StudentCourseDraggableViewController.swift in Sources */,
+				454BA75A1BE445C100B73833 /* Person.swift in Sources */,
 				C460FCE01BD75BA800CD9DBC /* DetailAttendanceViewController.swift in Sources */,
 				C460FD0A1BD8410D00CD9DBC /* BFPaperCollectionViewCell.m in Sources */,
 				C460FD071BD8410D00CD9DBC /* BFPaperButton.m in Sources */,

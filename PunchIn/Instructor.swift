@@ -8,7 +8,7 @@
 
 import Parse
 
-class Instructor: PFObject, PFSubclassing {
+class Instructor: PFObject, PFSubclassing, Person {
     
     // MARK: Parse subclassing
     private static let className = "Instructor"
@@ -22,7 +22,6 @@ class Instructor: PFObject, PFSubclassing {
         }
     }
     
-    
     class func parseClassName() -> String {
         return className
     }
@@ -31,18 +30,46 @@ class Instructor: PFObject, PFSubclassing {
     @NSManaged private(set) var instructorName: String!
     @NSManaged private(set) var instructorEmail: String!
     @NSManaged private(set) var instructorId: String!
+    @NSManaged private(set) var instructorImageFile:PFFile?
+
+    // MARK: Properties not saved
+    private(set) var instructorImage:UIImage?
     
     override init() {
         super.init()
     }
     
-    init(name: String, email: String, id: String) {
+    init(name: String, email: String, id: String, image:UIImage) {
         super.init()
 
         instructorName = name
         instructorEmail = email
         instructorId = id
+        
+        let imageData = UIImagePNGRepresentation(image)
+        self.instructorImageFile = PFFile(name:instructorName+".png", data:imageData!)
     }
+    
+    func getImage(completion: ((image:UIImage?, error:NSError?)-> Void)) {
+        guard instructorImageFile == nil else {
+            return completion(image:instructorImage, error:nil)
+        }
+        
+        if let imageFile = instructorImageFile {
+            imageFile.getDataInBackgroundWithBlock {
+                (imageData: NSData?, error: NSError?) -> Void in
+                if error == nil {
+                    if let imageData = imageData {
+                        self.instructorImage = UIImage(data:imageData)
+                        completion(image:self.instructorImage, error:nil)
+                    }
+                }else{
+                    completion(image:nil, error:error)
+                }
+            }
+        }
+    }
+
     
     // get instructor from email address
     class func instructor(forEmail: String, completion: ((instructor:Instructor?, error:NSError?)->Void)) {
@@ -61,11 +88,17 @@ class Instructor: PFObject, PFSubclassing {
     
     // MARK: Data Injection functions
     
-    class func createInstructor(name:String, email:String, id:String) -> Instructor {
+    class func create(name:String, email:String, id:String, image:UIImage?) -> Instructor {
         let instructor = Instructor()
         instructor.instructorName = name
         instructor.instructorEmail = email
         instructor.instructorId = id
+        
+        instructor.instructorImage = image
+        
+        let imageData = UIImagePNGRepresentation(image!)
+        instructor.instructorImageFile = PFFile(name:name+".png", data:imageData!)
+
         
         return instructor
     }

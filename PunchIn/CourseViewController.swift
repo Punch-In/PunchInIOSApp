@@ -26,7 +26,6 @@ class CourseViewController: UIViewController,UINavigationBarDelegate,UIPageViewC
     @IBOutlet weak var courseDate: UILabel!
     @IBOutlet weak var courseAddress: UILabel!
     
- 
     /*  Attendance  */
     
     deinit {
@@ -48,7 +47,6 @@ class CourseViewController: UIViewController,UINavigationBarDelegate,UIPageViewC
         courseDate.text = String("\(course.courseTime); \(course.courseDay)")
         courseAddress.text = course.courseLocation.address
        // registeredCount.text = "\(course.registeredStudents!.count)"
-    
     }
     
     func setUpUI(){

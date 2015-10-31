@@ -95,12 +95,12 @@ class Class : PFObject, PFSubclassing, LocationProviderGeofenceDelegate {
         })
     }
     
-    func refreshDetails(completion:((theClass:Class?, error:NSError?)->Void)) {
+    func refreshDetails(completion:((error:NSError?)->Void)) {
         self.fetchAllFields(true) { (myClass, error) -> Void in
             if error == nil {
-                completion(theClass: myClass, error: nil)
+                completion(error: nil)
             }else{
-                completion(theClass: nil, error: error)
+                completion(error: error)
             }
         }
     }
@@ -129,6 +129,10 @@ class Class : PFObject, PFSubclassing, LocationProviderGeofenceDelegate {
     
     // MARK: class workflow
     func start(completion: ((error:NSError?)->Void)) {
+        self.startMe(self.parentCourse.courseLocation)
+        completion(error:nil)
+        // allow option to start class using current location or stored location
+        /*
         LocationProvider.location{ (location, error) -> Void in
             if error == nil {
                 self.startMe(location)
@@ -138,6 +142,7 @@ class Class : PFObject, PFSubclassing, LocationProviderGeofenceDelegate {
                 completion(error:error)
             }
         }
+        */
     }
     
     private func startMe(location: Location?) {
