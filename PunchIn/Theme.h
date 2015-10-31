@@ -19,13 +19,24 @@
 -(UIColor *)primaryTextColor;
 -(UIColor *)secondaryTextColor;
 
+
+-(UIColor *)primaryBlueColor;
+-(UIColor *)primaryDarkBlueColor;
+
+-(UIColor *)primaryGreyColor;
+-(UIColor *)primaryDarlBlueColor;
+
+-(UIColor *)primaryYellowColor;
+
+
+
+
+
 - (void)themeForTitleLabels:(UILabel *)label;
 - (void)themeForSubTitleLabels:(UILabel *)label;
 - (void)themeForContentView:(UIView *)view;
 - (void)themeForSecondaryContentView:(UIView *)view;
 - (void)themeForCourseCollectionView:(UICollectionView *)courseCollectionView forView:(UIView *)view;
-
-
-
+- (void)themeForCourseCollectionView:(UICollectionView *)courseCollectionView forView:(UIView *)view forRow:(long)row;
 
 @end
