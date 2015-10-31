@@ -137,6 +137,7 @@ class StudentCourseDraggableViewController: UIViewController {
     func setUpGestures() {
         questionsTapGestureRecognizer.addTarget(self, action: "questionsViewTapped")
         startClassTapGestureRecognizer.addTarget(self, action: "attendClassTapped")
+        attendanceTapGestureRecognizer.addTarget(self, action: "attendanceViewTapped")
     }
     
     //Attendance View Tapped.

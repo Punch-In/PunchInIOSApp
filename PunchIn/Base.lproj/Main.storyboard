@@ -1071,17 +1071,17 @@
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7WW-RA-tRE">
-                                <rect key="frame" x="30" y="225" width="540" height="160"/>
+                                <rect key="frame" x="30" y="225" width="540" height="120"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Ho-7K-czE">
-                                        <rect key="frame" x="49" y="91" width="78" height="21"/>
+                                        <rect key="frame" x="49" y="51" width="78" height="21"/>
                                         <animations/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Questions" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S2F-3P-CGq">
-                                        <rect key="frame" x="49" y="120" width="78" height="21"/>
+                                        <rect key="frame" x="49" y="80" width="78" height="21"/>
                                         <animations/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="78" id="0NA-JL-LGc"/>
@@ -1092,14 +1092,14 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="13" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mep-B1-5eu">
-                                        <rect key="frame" x="388" y="91" width="96" height="21"/>
+                                        <rect key="frame" x="388" y="51" width="96" height="21"/>
                                         <animations/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unanswered" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R7b-f1-twm">
-                                        <rect key="frame" x="388" y="120" width="96" height="21"/>
+                                        <rect key="frame" x="388" y="80" width="96" height="21"/>
                                         <animations/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="ixZ-KR-3Kg"/>
@@ -1125,6 +1125,7 @@
                                 <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <gestureRecognizers/>
                                 <constraints>
+                                    <constraint firstAttribute="height" constant="120" id="2ST-Nq-RJc"/>
                                     <constraint firstItem="R7b-f1-twm" firstAttribute="top" secondItem="Mep-B1-5eu" secondAttribute="bottom" constant="8" id="2Vd-Bj-fKF"/>
                                     <constraint firstItem="S2F-3P-CGq" firstAttribute="top" secondItem="7Ho-7K-czE" secondAttribute="bottom" constant="8" id="8BW-UI-mZp"/>
                                     <constraint firstAttribute="bottom" secondItem="R7b-f1-twm" secondAttribute="bottom" constant="19" id="9Nn-62-C2W"/>
@@ -1145,10 +1146,10 @@
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JlF-WS-cPf">
-                                <rect key="frame" x="30" y="421" width="540" height="160"/>
+                                <rect key="frame" x="30" y="355" width="540" height="120"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap here to view attendance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zUq-Cr-hA9">
-                                        <rect key="frame" x="162" y="69" width="217" height="21"/>
+                                        <rect key="frame" x="162" y="49" width="217" height="21"/>
                                         <animations/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="Ety-RX-c0b"/>
@@ -1182,10 +1183,15 @@
                             <constraint firstItem="JlF-WS-cPf" firstAttribute="height" secondItem="7WW-RA-tRE" secondAttribute="height" id="VTp-zp-CiN"/>
                             <constraint firstItem="Wjc-xH-XnI" firstAttribute="width" secondItem="l8c-J7-exA" secondAttribute="width" multiplier="0.9" id="ZUC-5K-9BY"/>
                             <constraint firstItem="JlF-WS-cPf" firstAttribute="centerX" secondItem="7WW-RA-tRE" secondAttribute="centerX" id="bTg-dl-Ncu"/>
-                            <constraint firstItem="JlF-WS-cPf" firstAttribute="top" secondItem="7WW-RA-tRE" secondAttribute="bottom" constant="36" id="hGp-ie-BgW"/>
+                            <constraint firstItem="JlF-WS-cPf" firstAttribute="top" secondItem="7WW-RA-tRE" secondAttribute="bottom" constant="10" id="hGp-ie-BgW"/>
                             <constraint firstItem="7WW-RA-tRE" firstAttribute="width" secondItem="Wjc-xH-XnI" secondAttribute="width" id="mYR-9b-wnD"/>
                             <constraint firstItem="JlF-WS-cPf" firstAttribute="width" secondItem="7WW-RA-tRE" secondAttribute="width" id="zDA-Il-jKK"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="GzT-Gd-LxT"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="attendClassView" destination="Wjc-xH-XnI" id="fa1-tI-AIF"/>
