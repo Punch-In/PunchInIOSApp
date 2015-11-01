@@ -26,7 +26,7 @@ class QuestionsListViewController: UIViewController, UITableViewDelegate, UITabl
     private var questions: [Question] = [] {
         didSet {
             // order by newest first
-            questions.sortInPlace{ $0.date.compare($1.date) == .OrderedDescending }
+//            questions.sortInPlace{ $0.date.compare($1.date) == .OrderedDescending }
             questionTableView.reloadData()
         }
     }
@@ -55,10 +55,6 @@ class QuestionsListViewController: UIViewController, UITableViewDelegate, UITabl
         initializeNewQuestionText()
 
         // show questions (if exist)
-        
-        print(theClass.questions)
-        print(theClass.questions!.description)
-        print(theClass.questions![0].date)
         
         questions = theClass.questions!
         

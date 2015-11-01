@@ -238,7 +238,13 @@ class StudentCourseDraggableViewController: UICollectionViewController {
     
  // MARK: Collection View Controller Methods : 
    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
-        return 4;
+        return 3;
+    }
+    
+    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.row == 2 {
+            questionsViewTapped()
+        }
     }
     
 
@@ -269,10 +275,6 @@ class StudentCourseDraggableViewController: UICollectionViewController {
             questionCell.layer.borderWidth = 0.5
             questionCell.setupUI()
             questionCell.numQuestions = currentClass.questions!.count
-            
-            // for now
-            let gesture = UITapGestureRecognizer(target: self, action: "questionsViewTapped")
-            questionCell.addGestureRecognizer(gesture)
             
             return questionCell
         }

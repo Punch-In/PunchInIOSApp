@@ -42,9 +42,9 @@ class Class : PFObject, PFSubclassing, LocationProviderGeofenceDelegate {
     @NSManaged private(set) var classDescription: String!
     @NSManaged private(set) var isStarted: Bool
     @NSManaged private(set) var isFinished: Bool
-    @NSManaged private(set) var attendance: [Student]?
+    @NSManaged private(set) var attendance: [Student]!
     @NSManaged private(set) var date: NSDate!
-    @NSManaged private(set) var questions: [Question]?
+    @NSManaged private(set) var questions: [Question]!
     @NSManaged private(set) var startTime: NSDate!
     @NSManaged private(set) var finishTime: NSDate!
     @NSManaged private var classDuration: String? // grr.. to allow optionals
