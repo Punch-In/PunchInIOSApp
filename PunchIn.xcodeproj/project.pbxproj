@@ -82,7 +82,7 @@
 		45F7535C1BDCBDE10011FE00 /* DataInjector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataInjector.swift; sourceTree = "<group>"; };
 		45FC02DD1BDD9F2E006E37E3 /* QuestionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionTableViewCell.swift; sourceTree = "<group>"; };
 		671141AE5759EFD24DC8F9D5 /* Pods-PunchIn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PunchIn.release.xcconfig"; path = "Pods/Target Support Files/Pods-PunchIn/Pods-PunchIn.release.xcconfig"; sourceTree = "<group>"; };
-		C43414721BCE443E00AA63DB /* PunchIn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PunchIn.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C43414721BCE443E00AA63DB /* CheckIn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CheckIn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C43414751BCE443E00AA63DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C434147A1BCE443E00AA63DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C434147C1BCE443E00AA63DB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -185,7 +185,7 @@
 		C43414731BCE443E00AA63DB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C43414721BCE443E00AA63DB /* PunchIn.app */,
+				C43414721BCE443E00AA63DB /* CheckIn.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -393,7 +393,7 @@
 			);
 			name = PunchIn;
 			productName = PunchIn;
-			productReference = C43414721BCE443E00AA63DB /* PunchIn.app */;
+			productReference = C43414721BCE443E00AA63DB /* CheckIn.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -659,7 +659,8 @@
 				INFOPLIST_FILE = PunchIn/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.codepath.app.PunchIn;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
+				PRODUCT_NAME = CheckIn;
 				SWIFT_OBJC_BRIDGING_HEADER = "PunchIn/PunchIn-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -674,7 +675,8 @@
 				INFOPLIST_FILE = PunchIn/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.codepath.app.PunchIn;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
+				PRODUCT_NAME = CheckIn;
 				SWIFT_OBJC_BRIDGING_HEADER = "PunchIn/PunchIn-Bridging-Header.h";
 			};
 			name = Release;
