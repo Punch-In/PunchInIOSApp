@@ -10,4 +10,7 @@ import UIKit
 
 class QuestionsCollectionViewCell: UICollectionViewCell {
     
+    
+    @IBOutlet weak var questionsCount: UILabel!
+    
 }

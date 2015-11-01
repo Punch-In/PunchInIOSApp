@@ -43,13 +43,9 @@ class AttendanceCollectionViewCell: UICollectionViewCell {
             }
         }
     }
-  
+
     func formatCell() {
-        let attr = NSDictionary(object: UIFont(name: "HelveticaNeue-Bold", size: 8.0)!, forKey: NSFontAttributeName)
-        self.segmentControl.setTitleTextAttributes(attr as [NSObject : AnyObject], forState: .Normal)
-        self.layer.borderWidth = 2.0;
-        self.layer.borderColor = UIColor.blackColor().CGColor
-        self.backgroundColor = ThemeManager.theme().secondaryPrimaryColor()
+        self.backgroundColor = ThemeManager.theme().primaryBlueColor()
         self.studentName?.textColor = UIColor.whiteColor()
         self.layer.shadowRadius = 2.0;
         self.layer.shadowOpacity = 0.5;

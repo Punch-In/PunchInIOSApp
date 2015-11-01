@@ -93,6 +93,9 @@ class DetailAttendanceViewController: UIViewController,UICollectionViewDataSourc
         cell.layer.borderWidth = 2.0
         cell.layer.cornerRadius = 10
         
+        
+        
+        
         return cell
     }
     

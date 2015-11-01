@@ -28,6 +28,10 @@ class AttendanceCollectionViewController: UIViewController,UICollectionViewDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.navigationBar.barTintColor = ThemeManager.theme().primaryDarkBlueColor()
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        
         setCollectionViewLayout()
         attendanceCollectionView.delegate = self
         attendanceCollectionView.dataSource = self
@@ -82,7 +86,8 @@ class AttendanceCollectionViewController: UIViewController,UICollectionViewDeleg
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell{
         let cell = attendanceCollectionView.dequeueReusableCellWithReuseIdentifier(AttendanceCollectionViewController.AttendanceCollectionViewCellName, forIndexPath: indexPath) as! AttendanceCollectionViewCell
-        cell.student = studentArray[indexPath.row]        
+        cell.student = studentArray[indexPath.row]
+        
         return cell
     }
     

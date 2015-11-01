@@ -18,6 +18,7 @@ class StudentCourseDraggableViewController: UICollectionViewController {
     var allowedToCheckIn:Bool?
     //PageController Property.
         var indexNumber:Int!
+    @IBOutlet var studentDraggableViewCollectionView: UICollectionView!
     
     /*Start Class*/
     /*Class Details*/
@@ -53,7 +54,7 @@ class StudentCourseDraggableViewController: UICollectionViewController {
         setUpUI()
        
         setUpGestures()
-    
+        setCollectionViewLayout()
         allowedToCheckIn = false
     }
     
@@ -168,35 +169,54 @@ class StudentCourseDraggableViewController: UICollectionViewController {
     }
     
     
+    func setCollectionViewLayout(){
+        let flowLayout : UICollectionViewFlowLayout = UICollectionViewFlowLayout.init()
+        flowLayout.itemSize = CGSizeMake(self.view.bounds.width-20, self.view.bounds.height/5)
+        flowLayout.minimumInteritemSpacing = 0
+        flowLayout.minimumLineSpacing = 0
+        flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0)
+        studentDraggableViewCollectionView.setCollectionViewLayout(flowLayout, animated: true)
+    }
+
+    
     
     
  // MARK: Collection View Controller Methods : 
    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
-        return 1;
+        return 4;
     }
     
+
     // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell{
         var cell :UICollectionViewCell!
         
         if indexPath.row == 0{
-         cell = collectionView.dequeueReusableCellWithReuseIdentifier("CheckInCell", forIndexPath: indexPath) as! CheckInCollectionViewCell
-            return cell;
+            let checkIncell:CheckInCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier("CheckInCell", forIndexPath: indexPath) as! CheckInCollectionViewCell
+            checkIncell.backgroundColor = ThemeManager.theme().primaryYellowColor()
+            checkIncell.setUpUI()
+            return checkIncell;
         }
         if(indexPath.row == 1){
             cell = collectionView.dequeueReusableCellWithReuseIdentifier("ClassNameCell", forIndexPath: indexPath) as! ClassNameCollectionViewCell
-            return cell
+            cell.backgroundColor = UIColor.whiteColor()
+            cell.layer.borderColor = ThemeManager.theme().primaryDarkBlueColor().CGColor
+            cell.layer.borderWidth = 0.5
+            
         }
         
         if(indexPath.row == 2){
-            cell = collectionView.dequeueReusableCellWithReuseIdentifier("AttendanceCell", forIndexPath: indexPath) as! AttendanceCollectionViewCell
-            return cell
+            cell = collectionView.dequeueReusableCellWithReuseIdentifier("AttendanceDisplayCell", forIndexPath: indexPath) as! AttendanceDisplayCollectionViewCell
+            cell.backgroundColor = UIColor.whiteColor()
+            cell.layer.borderColor = ThemeManager.theme().primaryDarkBlueColor().CGColor
+            cell.layer.borderWidth = 0.5
         }
         if(indexPath.row == 3){
             cell = collectionView.dequeueReusableCellWithReuseIdentifier("QuestionsCell",forIndexPath:indexPath) as! QuestionsCollectionViewCell
-            return cell
+            cell.backgroundColor = UIColor.whiteColor()
+            cell.layer.borderColor = ThemeManager.theme().primaryDarkBlueColor().CGColor
+            cell.layer.borderWidth = 0.5
         }
-        
         return cell;
     }
 

@@ -71,7 +71,7 @@
 }
 
 - (void)themeForContentView:(UIView *)view{
-    view.backgroundColor = UIColorFromRGB(0x145dfc);
+    view.backgroundColor = [self primaryBlueColor];
     view.layer.shadowRadius = 2.0;
     view.layer.shadowOpacity = 0.5;
     view.layer.shadowOffset = CGSizeZero;
