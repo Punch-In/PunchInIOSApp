@@ -24,8 +24,8 @@
 		82FEDFDFA7C3E9CBE09D154A /* Pods_PunchIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0926E69D8C5ACE24A61E9D24 /* Pods_PunchIn.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		C43414761BCE443E00AA63DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43414751BCE443E00AA63DB /* AppDelegate.swift */; };
 		C434147B1BCE443E00AA63DB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C43414791BCE443E00AA63DB /* Main.storyboard */; };
-		C434147D1BCE443E00AA63DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C434147C1BCE443E00AA63DB /* Assets.xcassets */; };
 		C43414801BCE443E00AA63DB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C434147E1BCE443E00AA63DB /* LaunchScreen.storyboard */; };
+		C460F76D1BE6BD0A0016FC71 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C460F76C1BE6BD0A0016FC71 /* Assets.xcassets */; settings = {ASSET_TAGS = (); }; };
 		C460FCD81BD75B2700CD9DBC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C460FCD71BD75B2700CD9DBC /* LoginViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		C460FCDA1BD75B3F00CD9DBC /* CoursesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C460FCD91BD75B3F00CD9DBC /* CoursesListViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		C460FCDC1BD75B4B00CD9DBC /* CourseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C460FCDB1BD75B4B00CD9DBC /* CourseViewController.swift */; settings = {ASSET_TAGS = (); }; };
@@ -87,9 +87,9 @@
 		C43414721BCE443E00AA63DB /* PunchIn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PunchIn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C43414751BCE443E00AA63DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C434147A1BCE443E00AA63DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		C434147C1BCE443E00AA63DB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C434147F1BCE443E00AA63DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C43414811BCE443E00AA63DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C460F76C1BE6BD0A0016FC71 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C460FCD31BD75AFF00CD9DBC /* PunchIn-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PunchIn-Bridging-Header.h"; sourceTree = "<group>"; };
 		C460FCD71BD75B2700CD9DBC /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		C460FCD91BD75B3F00CD9DBC /* CoursesListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursesListViewController.swift; sourceTree = "<group>"; };
@@ -275,7 +275,7 @@
 				C4EB01D01BE5940A00B3127A /* map.png */,
 				C460FD1F1BD8778E00CD9DBC /* new.png */,
 				C43414791BCE443E00AA63DB /* Main.storyboard */,
-				C434147C1BCE443E00AA63DB /* Assets.xcassets */,
+				C460F76C1BE6BD0A0016FC71 /* Assets.xcassets */,
 				C434147E1BCE443E00AA63DB /* LaunchScreen.storyboard */,
 			);
 			name = StoryBoard;
@@ -449,8 +449,8 @@
 				C4EB01D11BE5940A00B3127A /* map.png in Resources */,
 				C460FD201BD8778E00CD9DBC /* new.png in Resources */,
 				C43414801BCE443E00AA63DB /* LaunchScreen.storyboard in Resources */,
-				C434147D1BCE443E00AA63DB /* Assets.xcassets in Resources */,
 				C49895711BE4365C00B5E490 /* door.png in Resources */,
+				C460F76D1BE6BD0A0016FC71 /* Assets.xcassets in Resources */,
 				C434147B1BCE443E00AA63DB /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

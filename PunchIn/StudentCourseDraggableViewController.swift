@@ -15,10 +15,10 @@ class StudentCourseDraggableViewController: UICollectionViewController {
     var classIndex:Int!
     var initialCenterPoint:CGPoint?
     var lastCenterPoint:CGPoint?
-    var allowedToCheckIn:Bool?
-    
+    private var allowedToCheckIn:Bool?
+    let refreshControl = UIRefreshControl()
     //PageController Property.
-        var indexNumber:Int!
+    var indexNumber:Int!
     @IBOutlet var studentDraggableViewCollectionView: UICollectionView!
     
     /*Start Class*/
@@ -51,17 +51,12 @@ class StudentCourseDraggableViewController: UICollectionViewController {
         super.viewDidLoad()
         student = ParseDB.currentPerson as! Student
         
-        let refreshControl = UIRefreshControl()
         refreshControl.tintColor = UIColor.grayColor()
         refreshControl.addTarget(self, action: "refreshValues", forControlEvents: .ValueChanged)
         studentDraggableViewCollectionView.addSubview(refreshControl)
         studentDraggableViewCollectionView.alwaysBounceVertical = true
-        
-        
-//        let dummyCollectionViewController  = UICollectionViewController()
-//        dummyCollectionViewController.collectionView = studentDraggableViewCollectionView
-//        dummyCollectionViewController.refreshControl = 
-      //  resetAttendView()
+    
+        resetAttendView()
        // setUpUI()
         setUpValues()
         //setUpGestures()
@@ -114,6 +109,14 @@ class StudentCourseDraggableViewController: UICollectionViewController {
         }
     }
     
+    
+    func resetAttendView() {
+        //        imageView3.hidden = false
+        //        imageView3.backgroundColor = UIColor.grayColor()
+           //     self.questionCount.hidden = true
+            //    self.unansweredQuestionCount.hidden = true
+    }
+
         //  MARK: Setup Values
     func setUpValues(){
             // show current class
@@ -162,6 +165,7 @@ class StudentCourseDraggableViewController: UICollectionViewController {
             print("Class \(currentClass.name) has started, but student has not checked in yet")
             self.allowedToCheckIn = true
         }
+        attendClassTapped()
     }
     
     func attendClassTapped() {
@@ -202,6 +206,8 @@ class StudentCourseDraggableViewController: UICollectionViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "canAttendClass", name: Class.insideClassGeofenceNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "canNotAttendClass", name: Class.outsideClassGeofenceNotification, object: nil)
         currentClass.notifyWhenStudentCanAttendClass()
+        refreshControl.endRefreshing()
+        studentDraggableViewCollectionView.reloadData()
     }
         
     func canAttendClass() {
@@ -247,7 +253,7 @@ class StudentCourseDraggableViewController: UICollectionViewController {
             let checkIncell:CheckInCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier("CheckInCell", forIndexPath: indexPath) as! CheckInCollectionViewCell
             checkIncell.backgroundColor = ThemeManager.theme().primaryYellowColor()
             checkIncell.setUpUI()
-            checkIncell.setUpValuesForCheckIn(currentClass, allowedToCheckIn: allowedToCheckIn!)
+            checkIncell.setUpValuesForCheckIn(currentClass, allowedToCheckIn: allowedToCheckIn!,message: " ")
             return checkIncell;
         }
         if(indexPath.row == 1){
