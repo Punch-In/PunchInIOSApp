@@ -20,61 +20,63 @@ class CheckInCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var mapButton: UIButton!
     
     
+    
     func setUpUI(){
         checkInButton.imageView?.image = UIImage.init(named: "unselected_checkin")
         checkinWarningLabel.text = ""
         checkIntoClassLabel.text = "Check in to the class"
         checkIntoClassLabel.textColor = UIColor.whiteColor()
-        
         self.backgroundColor = ThemeManager.theme().primaryYellowColor()
     }
     
  
+    func setUpValuesForCheckIn(currentClass : Class, allowedToCheckIn : Bool){
+        
+    }
     
-//    
-//    //  MARK: Setup Values
-//    func setUpValues(){
-//        // show current class
-//        currentClass = course.classes![classIndex]
-//        currentClass.refreshDetails { (error) -> Void in
-//            if error == nil {
-//                dispatch_async(dispatch_get_main_queue()){
+    func setUpValues(classIndex:Int, course:Course,allowedToCheckIn:Bool){
+        // show current class
+        var currentClass = course.classes![classIndex]
+        currentClass.refreshDetails { (error) -> Void in
+            if error == nil {
+                dispatch_async(dispatch_get_main_queue()){
 //                    self.questionCount.hidden = false
 //                    self.unansweredQuestionCount.hidden = false
 //                    self.questionCount.text = "\(self.currentClass.questions!.count)"
 //                    self.unansweredQuestionCount.text = "\(self.currentClass.questions!.filter({!$0.isAnswered}).count)"
 //                    self.attendClassLabel.text = self.currentClass.name
-//                    // set "class start" view based on class status
-//                    if self.currentClass.isFinished {
+                    // set "class start" view based on class status
+                    if currentClass.isFinished {
 //                        self.imageView3.hidden = true
-//                    }else if self.currentClass.isStarted {
+                    }else if currentClass.isStarted {
 //                        self.imageView3.hidden = false
-//                        //imageView3.backgroundColor = UIColor.greenColor()
-//                    }else {
-//                        //    imageView3.backgroundColor = UIColor.grayColor()
+                        //imageView3.backgroundColor = UIColor.greenColor()
+                    }else {
+                        //    imageView3.backgroundColor = UIColor.grayColor()
 //                        self.imageView3.hidden = true
-//                    }
+                    }
 //                    self.setupAttendView()
-//                }
-//            }
-//        }
-//        
-//        
-//        student.getImage{ (image, error) -> Void in
-//            if error == nil {
-//                dispatch_async(dispatch_get_main_queue()){
-//                    self.studentAvatar.alpha = 0
-//                    self.studentAvatar.image = image
-//                    UIView.animateWithDuration(0.3, animations: { () -> Void in
-//                        self.studentAvatar.alpha = 1
-//                    })
-//                }
-//            }else{
-//                print("error getting image for student \(self.student.studentName)")
-//            }
-//        }
-//    }
-//    
+                }
+            }
+        }
+        
+        /*
+        student.getImage{ (image, error) -> Void in
+            if error == nil {
+                dispatch_async(dispatch_get_main_queue()){
+                    self.studentAvatar.alpha = 0
+                    self.studentAvatar.image = image
+                    UIView.animateWithDuration(0.3, animations: { () -> Void in
+                        self.studentAvatar.alpha = 1
+                    })
+                }
+            }else{
+                print("error getting image for student \(self.student.studentName)")
+            }
+
+        }*/
+    }
+//
 //    
 //    @IBAction func presentAction(sender: UIPanGestureRecognizer) {
 //        let translation = sender.translationInView(self.attendClassView)

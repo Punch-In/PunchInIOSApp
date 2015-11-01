@@ -16,6 +16,7 @@ class StudentCourseDraggableViewController: UICollectionViewController {
     var initialCenterPoint:CGPoint?
     var lastCenterPoint:CGPoint?
     var allowedToCheckIn:Bool?
+    
     //PageController Property.
         var indexNumber:Int!
     @IBOutlet var studentDraggableViewCollectionView: UICollectionView!
@@ -50,21 +51,75 @@ class StudentCourseDraggableViewController: UICollectionViewController {
         super.viewDidLoad()
         student = ParseDB.currentPerson as! Student
         
-        resetAttendView()
-        setUpUI()
-       
-        setUpGestures()
+        let refreshControl = UIRefreshControl()
+        refreshControl.tintColor = UIColor.grayColor()
+        refreshControl.addTarget(self, action: "refreshValues", forControlEvents: .ValueChanged)
+        studentDraggableViewCollectionView.addSubview(refreshControl)
+        studentDraggableViewCollectionView.alwaysBounceVertical = true
+        
+        
+//        let dummyCollectionViewController  = UICollectionViewController()
+//        dummyCollectionViewController.collectionView = studentDraggableViewCollectionView
+//        dummyCollectionViewController.refreshControl = 
+      //  resetAttendView()
+       // setUpUI()
+        setUpValues()
+        //setUpGestures()
         setCollectionViewLayout()
         allowedToCheckIn = false
     }
     
     
-
-    func setUpUI(){
-     }
+    func refreshValues (){
+        currentClass = course.classes![classIndex]
+        
+        currentClass.refreshDetails { (error) -> Void in
+        if error == nil {
+        dispatch_async(dispatch_get_main_queue()){
+          //         self.questionCount.hidden = false
+         //          self.unansweredQuestionCount.hidden = false
+        //           self.questionCount.text = "\(self.currentClass.questions!.count)"
+        //           self.unansweredQuestionCount.text = "\(self.currentClass.questions!.filter({!$0.isAnswered}).count)"
+        //           self.attendClassLabel.text = self.currentClass.name
+        
+        // set "class start" view based on class status
+        if self.currentClass.isFinished {
+        //        self.imageView3.hidden = true
+        }else if self.currentClass.isStarted {
+        //        self.imageView3.hidden = false
+        //imageView3.backgroundColor = UIColor.greenColor()
+        }else {
+        //    imageView3.backgroundColor = UIColor.grayColor()
+        //         self.imageView3.hidden = true
+        }
+          self.setupAttendView()
+        }
+        }
+        }
+        
+        
+        student.getImage{ (image, error) -> Void in
+        if error == nil {
+        dispatch_async(dispatch_get_main_queue()){
+        //        self.studentAvatar.alpha = 0
+        //        self.studentAvatar.image = image
+        
+        UIView.animateWithDuration(0.3, animations: { () -> Void in
+        //           self.studentAvatar.alpha = 1
+        })
+        }
+        }else{
+        print("error getting image for student \(self.student.studentName)")
+        }
+        }
+    }
     
-    func setUpGestures() {
-      }
+        //  MARK: Setup Values
+    func setUpValues(){
+            // show current class
+            currentClass = course.classes![classIndex]
+    }
+
     
     //Attendance View Tapped.
     func attendanceViewTapped(){
@@ -84,10 +139,7 @@ class StudentCourseDraggableViewController: UICollectionViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    func resetAttendView() {
-        
-    }
-    
+
     func setupAttendView() {
         if currentClass.isFinished {
             allowedToCheckIn = false
@@ -109,7 +161,6 @@ class StudentCourseDraggableViewController: UICollectionViewController {
         }else{
             print("Class \(currentClass.name) has started, but student has not checked in yet")
             self.allowedToCheckIn = true
-           
         }
     }
     
@@ -132,7 +183,7 @@ class StudentCourseDraggableViewController: UICollectionViewController {
         guard !currentClass.isFinished else {
             // class already done... do nothing
             print("class \(currentClass.name) already finished; can't attend")
-                       allowedToCheckIn = false
+            allowedToCheckIn = false
             return
         }
         
@@ -166,6 +217,7 @@ class StudentCourseDraggableViewController: UICollectionViewController {
     
     func canNotAttendClass() {
         print("student outside the geofence for the class \(currentClass.name) !")
+        allowedToCheckIn = false
     }
     
     
@@ -195,6 +247,7 @@ class StudentCourseDraggableViewController: UICollectionViewController {
             let checkIncell:CheckInCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier("CheckInCell", forIndexPath: indexPath) as! CheckInCollectionViewCell
             checkIncell.backgroundColor = ThemeManager.theme().primaryYellowColor()
             checkIncell.setUpUI()
+            checkIncell.setUpValuesForCheckIn(currentClass, allowedToCheckIn: allowedToCheckIn!)
             return checkIncell;
         }
         if(indexPath.row == 1){
