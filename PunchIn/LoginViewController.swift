@@ -43,6 +43,9 @@ class LoginViewController: UIViewController {
         
         setupUI()
         setupGestureRecognizer()
+        
+        isStudent = false
+        studentIndicatorImage.image = UIImage(named: "unselected_button_login.png")
      
         // Do any additional setup after loading the view.
         invalidEntryLabel.hidden = true
@@ -65,15 +68,18 @@ class LoginViewController: UIViewController {
         // set background color for email address & password field
         nameTextField.backgroundColor = ThemeManager.theme().primaryBlueColor()
         nameTextField.textColor = UIColor.whiteColor()
-        nameTextField.text = initialEmailAddress
+        nameTextField.placeholder = initialEmailAddress
         passwordTextField.backgroundColor = ThemeManager.theme().primaryBlueColor()
         passwordTextField.textColor = UIColor.whiteColor()
-        passwordTextField.text = initialPassword
+        passwordTextField.placeholder = initialPassword
         
         // set login
         loginButton.layer.borderColor = UIColor.whiteColor().CGColor
         loginButton.layer.borderWidth = 1.0
         loginButton.tintColor = UIColor.whiteColor()
+        
+        // set color for invalid entry
+        invalidEntryLabel.textColor = ThemeManager.theme().primaryYellowColor()
         
     }
     
@@ -84,9 +90,11 @@ class LoginViewController: UIViewController {
     func didTapStudentIndicator() {
         if isStudent {
             // change to not student
+            isStudent = false
             studentIndicatorImage.image = UIImage(named: "unselected_button_login.png")
         }else{
             // change to student
+            isStudent = true
             studentIndicatorImage.image = UIImage(named: "selected_button_login.png")
         }
     }

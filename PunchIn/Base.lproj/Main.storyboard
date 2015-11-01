@@ -61,7 +61,7 @@
                                 <rect key="frame" x="178" y="142.5" width="242.5" height="18"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                                <color key="textColor" red="0.62615804760000005" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.97284637724601775" green="0.0092206603743207743" blue="0.018068414406020826" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CheckIn" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zvm-CU-W1r">
@@ -76,7 +76,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unselected_button_login" translatesAutoresizingMaskIntoConstraints="NO" id="p1z-0r-CYv">
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unselected_button_login" translatesAutoresizingMaskIntoConstraints="NO" id="p1z-0r-CYv">
                                 <rect key="frame" x="532" y="281" width="32" height="32"/>
                                 <gestureRecognizers/>
                                 <constraints>

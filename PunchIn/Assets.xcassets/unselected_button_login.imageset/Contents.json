@@ -2,7 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "unselected_button_login.png",
+      "filename" : "selected_button_login.png",
       "scale" : "1x"
     },
     {
