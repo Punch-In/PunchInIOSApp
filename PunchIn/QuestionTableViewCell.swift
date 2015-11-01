@@ -43,6 +43,7 @@ class QuestionTableViewCell: UITableViewCell {
         // configure font colors
         personNameField.textColor = ThemeManager.theme().primaryGreyColor()
         questionTextView.textColor = ThemeManager.theme().primaryBlueColor()
+        questionTextView.backgroundColor = UIColor.redColor()
         questionDateField.textColor = ThemeManager.theme().primaryBlueColor()
     }
 

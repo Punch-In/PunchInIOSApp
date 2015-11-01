@@ -27,12 +27,12 @@ class ParseDB {
         Parse.setApplicationId(appId, clientKey: clientKey)
         
         // hack to initialize Parse models....
-        Course.initialize()
+        Location.initialize()
+        Question.initialize()
         Student.initialize()
         Instructor.initialize()
         Class.initialize()
-        Location.initialize()
-        Question.initialize()
+        Course.initialize()
     }
     
     class func logout() {

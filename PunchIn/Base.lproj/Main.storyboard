@@ -880,7 +880,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="101" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="IoB-AQ-oOr">
-                                <rect key="frame" x="0.0" y="20" width="600" height="492"/>
+                                <rect key="frame" x="0.0" y="20" width="600" height="500"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="QuestionTableViewCell" rowHeight="101" id="qYi-Oh-wwA" customClass="QuestionTableViewCell" customModule="CheckIn" customModuleProvider="target">
@@ -928,9 +928,9 @@
                                 </prototypes>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ws8-oT-3Pd">
-                                <rect key="frame" x="0.0" y="544" width="600" height="48"/>
+                                <rect key="frame" x="0.0" y="552" width="600" height="48"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="i have a new question" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RW0-BK-tri">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RW0-BK-tri">
                                         <rect key="frame" x="8" y="9" width="532" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -965,7 +965,7 @@
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="i11-76-tIa" firstAttribute="top" secondItem="Ws8-oT-3Pd" secondAttribute="bottom" constant="8" id="BEb-Kg-DYd"/>
+                            <constraint firstItem="i11-76-tIa" firstAttribute="top" secondItem="Ws8-oT-3Pd" secondAttribute="bottom" id="BEb-Kg-DYd"/>
                             <constraint firstAttribute="trailing" secondItem="Ws8-oT-3Pd" secondAttribute="trailing" id="FSZ-Sl-95r"/>
                             <constraint firstItem="Ws8-oT-3Pd" firstAttribute="top" secondItem="IoB-AQ-oOr" secondAttribute="bottom" constant="32" id="Knb-NH-Dds"/>
                             <constraint firstItem="Ws8-oT-3Pd" firstAttribute="leading" secondItem="QBH-wX-1sR" secondAttribute="leading" id="MfM-iS-xF4"/>
@@ -1212,7 +1212,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wjc-xH-XnI">
                                 <rect key="frame" x="30" y="28" width="540" height="160"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DE065FF2-836B-4A2A-89A2-1E943B011745" highlightedImage="DE065FF2-836B-4A2A-89A2-1E943B011745" translatesAutoresizingMaskIntoConstraints="NO" id="P7e-8M-9OS">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="499F8AE4-B103-47AB-8F04-000D8A846C26" highlightedImage="499F8AE4-B103-47AB-8F04-000D8A846C26" translatesAutoresizingMaskIntoConstraints="NO" id="P7e-8M-9OS">
                                         <rect key="frame" x="422" y="42" width="108" height="108"/>
                                         <animations/>
                                         <constraints>
@@ -1568,7 +1568,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="DE065FF2-836B-4A2A-89A2-1E943B011745" width="128" height="128">
+        <image name="499F8AE4-B103-47AB-8F04-000D8A846C26" width="128" height="128">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOzxYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISksLzU4VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA

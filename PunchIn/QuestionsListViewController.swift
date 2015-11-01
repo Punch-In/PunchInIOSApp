@@ -55,6 +55,11 @@ class QuestionsListViewController: UIViewController, UITableViewDelegate, UITabl
         initializeNewQuestionText()
 
         // show questions (if exist)
+        
+        print(theClass.questions)
+        print(theClass.questions!.description)
+        print(theClass.questions![0].date)
+        
         questions = theClass.questions!
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
@@ -68,13 +73,14 @@ class QuestionsListViewController: UIViewController, UITableViewDelegate, UITabl
         newQuestionView.backgroundColor = ThemeManager.theme().primaryBlueColor()
         
         sendButton.tintColor = UIColor.whiteColor()
-        sendButton.titleLabel!.text = "SEND"
+        sendButton.setTitle("SEND", forState: .Normal)
         
     }
     
     func initializeNewQuestionText() {
         newQuestionTextField.textColor = UIColor.grayColor()
-        newQuestionTextField.text = "What's your question?"
+        newQuestionTextField.placeholder = "What's your question?"
+        newQuestionTextField.text = ""
     }
 
     
@@ -124,6 +130,10 @@ class QuestionsListViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     @IBAction func postButtonTapped(sender: AnyObject) {
+        guard !newQuestionTextField.text!.isEmpty else {
+            return
+        }
+        
         // create new question
         let question = Question.createQuestion(ParseDB.currentPerson!.getName(), text:newQuestionTextField.text!, date:NSDate(), inClass: theClass)
         theClass.addQuestion(question)

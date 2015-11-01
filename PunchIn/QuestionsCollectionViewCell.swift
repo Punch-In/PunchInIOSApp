@@ -11,7 +11,17 @@ import UIKit
 class QuestionsCollectionViewCell: UICollectionViewCell {
     
     
-    @IBOutlet weak var questionsCount: UILabel!
+    @IBOutlet private weak var questionsCount: UILabel!
     
+    var numQuestions:Int! {
+        didSet{
+            questionsCount.text = "\(numQuestions)"
+            questionsCount.hidden = false
+        }
+    }
+    
+    func setupUI() {
+        questionsCount.hidden = true
+    }
     
 }

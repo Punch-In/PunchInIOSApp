@@ -28,9 +28,6 @@ class StudentCourseDraggableViewController: UICollectionViewController {
     
     /* the Student */
     var student: Student!
-
-    // MARK: refresh hacks
-    var refreshControl : UIRefreshControl!
     
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self, name: Class.outsideClassGeofenceNotification, object: nil)
@@ -51,30 +48,25 @@ class StudentCourseDraggableViewController: UICollectionViewController {
         super.viewDidLoad()
         student = ParseDB.currentPerson as! Student
         
-        refreshControl.tintColor = UIColor.grayColor()
-        refreshControl.addTarget(self, action: "refreshValues", forControlEvents: .ValueChanged)
-        studentDraggableViewCollectionView.addSubview(refreshControl)
-        studentDraggableViewCollectionView.alwaysBounceVertical = true
-    
         resetAttendView()
-       // setUpUI()
+        setUpUI()
+        setUpGestures()
         setUpValues()
-        //setUpGestures()
         setCollectionViewLayout()
         allowedToCheckIn = false
+
+        fetchData()
     }
     
     func setUpUI() {
     
     }
     
-    func setUpGestures() {    
-        // hack
-        refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: "fetchData", forControlEvents: UIControlEvents.ValueChanged)
-        
-        studentDraggableViewCollectionView.alwaysBounceVertical = true
+    func setUpGestures() {
+        refreshControl.tintColor = UIColor.grayColor()
+        refreshControl.addTarget(self, action: "fetchData", forControlEvents: .ValueChanged)
         studentDraggableViewCollectionView.addSubview(refreshControl)
+        studentDraggableViewCollectionView.alwaysBounceVertical = true
     }
     
     func fetchData() {
@@ -82,10 +74,12 @@ class StudentCourseDraggableViewController: UICollectionViewController {
         let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         hud.labelText = "Updating class details..."
         
+        currentClass = course.classes![classIndex]
         currentClass.refreshDetails{ (error) -> Void in
             if error == nil {
                 dispatch_async(dispatch_get_main_queue()){
                     // TODO: show class details
+                    self.setupAttendView()
                     self.refreshControl.endRefreshing()
                     MBProgressHUD.hideHUDForView(self.view, animated: true)
                 }
@@ -95,50 +89,22 @@ class StudentCourseDraggableViewController: UICollectionViewController {
                 MBProgressHUD.hideHUDForView(self.view, animated: true)
             }
         }
-    }
+        
+//        student.getImage{ (image, error) -> Void in
+//            if error == nil {
+//                dispatch_async(dispatch_get_main_queue()){
+//                    //        self.studentAvatar.alpha = 0
+//                    //        self.studentAvatar.image = image
+//                    
+//                    UIView.animateWithDuration(0.3, animations: { () -> Void in
+//                        //           self.studentAvatar.alpha = 1
+//                    })
+//                }
+//            }else{
+//                print("error getting image for student \(self.student.studentName)")
+//            }
+//        }
 
-    func refreshValues (){
-        currentClass = course.classes![classIndex]
-        
-        currentClass.refreshDetails { (error) -> Void in
-            if error == nil {
-                dispatch_async(dispatch_get_main_queue()){
-                    //         self.questionCount.hidden = false
-                    //          self.unansweredQuestionCount.hidden = false
-                    //           self.questionCount.text = "\(self.currentClass.questions!.count)"
-                    //           self.unansweredQuestionCount.text = "\(self.currentClass.questions!.filter({!$0.isAnswered}).count)"
-                    //           self.attendClassLabel.text = self.currentClass.name
-                    
-                    // set "class start" view based on class status
-                    if self.currentClass.isFinished {
-                        //        self.imageView3.hidden = true
-                    }else if self.currentClass.isStarted {
-                        //        self.imageView3.hidden = false
-                        //imageView3.backgroundColor = UIColor.greenColor()
-                    }else {
-                        //    imageView3.backgroundColor = UIColor.grayColor()
-                        //         self.imageView3.hidden = true
-                    }
-                    self.setupAttendView()
-                }
-            }
-        }
-        
-        
-        student.getImage{ (image, error) -> Void in
-            if error == nil {
-                dispatch_async(dispatch_get_main_queue()){
-                    //        self.studentAvatar.alpha = 0
-                    //        self.studentAvatar.image = image
-                    
-                    UIView.animateWithDuration(0.3, animations: { () -> Void in
-                        //           self.studentAvatar.alpha = 1
-                    })
-                }
-            }else{
-                print("error getting image for student \(self.student.studentName)")
-            }
-        }
     }
     
     
@@ -151,8 +117,8 @@ class StudentCourseDraggableViewController: UICollectionViewController {
 
         //  MARK: Setup Values
     func setUpValues(){
-            // show current class
-            currentClass = course.classes![classIndex]
+        // show current class
+        currentClass = course.classes![classIndex]
     }
 
     
@@ -197,7 +163,6 @@ class StudentCourseDraggableViewController: UICollectionViewController {
             print("Class \(currentClass.name) has started, but student has not checked in yet")
             self.allowedToCheckIn = true
         }
-        attendClassTapped()
     }
     
     func attendClassTapped() {
@@ -298,15 +263,18 @@ class StudentCourseDraggableViewController: UICollectionViewController {
         }
         
         if(indexPath.row == 2){
-            cell = collectionView.dequeueReusableCellWithReuseIdentifier("QuestionsCell",forIndexPath:indexPath) as! QuestionsCollectionViewCell
-            cell.backgroundColor = UIColor.whiteColor()
-            cell.layer.borderColor = ThemeManager.theme().primaryDarkBlueColor().CGColor
-            cell.layer.borderWidth = 0.5
+            let questionCell = collectionView.dequeueReusableCellWithReuseIdentifier("QuestionsCell",forIndexPath:indexPath) as! QuestionsCollectionViewCell
+            questionCell.backgroundColor = UIColor.whiteColor()
+            questionCell.layer.borderColor = ThemeManager.theme().primaryDarkBlueColor().CGColor
+            questionCell.layer.borderWidth = 0.5
+            questionCell.setupUI()
+            questionCell.numQuestions = currentClass.questions!.count
             
             // for now
             let gesture = UITapGestureRecognizer(target: self, action: "questionsViewTapped")
-            cell.addGestureRecognizer(gesture)
+            questionCell.addGestureRecognizer(gesture)
             
+            return questionCell
         }
         
         return cell;
