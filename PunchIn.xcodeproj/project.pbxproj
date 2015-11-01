@@ -48,9 +48,13 @@
 		C460FD201BD8778E00CD9DBC /* new.png in Resources */ = {isa = PBXBuildFile; fileRef = C460FD1F1BD8778E00CD9DBC /* new.png */; settings = {ASSET_TAGS = (); }; };
 		C460FD231BD8B05A00CD9DBC /* Student.swift in Sources */ = {isa = PBXBuildFile; fileRef = C460FD221BD8B05A00CD9DBC /* Student.swift */; settings = {ASSET_TAGS = (); }; };
 		C460FD341BDAF8E500CD9DBC /* WalmartcolorTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = C460FD331BDAF8E500CD9DBC /* WalmartcolorTheme.m */; settings = {ASSET_TAGS = (); }; };
-		C460FD381BDB1AF300CD9DBC /* AttendanceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C460FD371BDB1AF300CD9DBC /* AttendanceCollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		C460FD3A1BDB27ED00CD9DBC /* DailyAttendanceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C460FD391BDB27ED00CD9DBC /* DailyAttendanceCollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		C460FD3C1BDB287700CD9DBC /* Attendance.swift in Sources */ = {isa = PBXBuildFile; fileRef = C460FD3B1BDB287700CD9DBC /* Attendance.swift */; settings = {ASSET_TAGS = (); }; };
+		C47DCAAE1BE68BD3007F2B2B /* QuestionsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47DCAAD1BE68BD3007F2B2B /* QuestionsCollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		C47DCAB01BE68BF4007F2B2B /* AttendanceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47DCAAF1BE68BF4007F2B2B /* AttendanceCollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		C47DCAB21BE68C06007F2B2B /* CheckInCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47DCAB11BE68C06007F2B2B /* CheckInCollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		C47DCAB41BE68C12007F2B2B /* ClassNameCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47DCAB31BE68C12007F2B2B /* ClassNameCollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		C47DCAB61BE692D0007F2B2B /* AttendanceDisplayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47DCAB51BE692D0007F2B2B /* AttendanceDisplayCollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		C498956F1BE1B87600B5E490 /* StudentCourseDraggableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C498956E1BE1B87600B5E490 /* StudentCourseDraggableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		C49895711BE4365C00B5E490 /* door.png in Resources */ = {isa = PBXBuildFile; fileRef = C49895701BE4365C00B5E490 /* door.png */; settings = {ASSET_TAGS = (); }; };
 		C4A78A021BE1679A0040C270 /* InstructorCourseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A78A011BE1679A0040C270 /* InstructorCourseView.swift */; settings = {ASSET_TAGS = (); }; };
@@ -117,6 +121,11 @@
 		C460FD371BDB1AF300CD9DBC /* AttendanceCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttendanceCollectionViewCell.swift; sourceTree = "<group>"; };
 		C460FD391BDB27ED00CD9DBC /* DailyAttendanceCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyAttendanceCollectionViewCell.swift; sourceTree = "<group>"; };
 		C460FD3B1BDB287700CD9DBC /* Attendance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attendance.swift; sourceTree = "<group>"; };
+		C47DCAAD1BE68BD3007F2B2B /* QuestionsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionsCollectionViewCell.swift; sourceTree = "<group>"; };
+		C47DCAAF1BE68BF4007F2B2B /* AttendanceCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttendanceCollectionViewCell.swift; sourceTree = "<group>"; };
+		C47DCAB11BE68C06007F2B2B /* CheckInCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckInCollectionViewCell.swift; sourceTree = "<group>"; };
+		C47DCAB31BE68C12007F2B2B /* ClassNameCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassNameCollectionViewCell.swift; sourceTree = "<group>"; };
+		C47DCAB51BE692D0007F2B2B /* AttendanceDisplayCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttendanceDisplayCollectionViewCell.swift; sourceTree = "<group>"; };
 		C498956E1BE1B87600B5E490 /* StudentCourseDraggableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentCourseDraggableViewController.swift; sourceTree = "<group>"; };
 		C49895701BE4365C00B5E490 /* door.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = door.png; sourceTree = "<group>"; };
 		C4A78A011BE1679A0040C270 /* InstructorCourseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructorCourseView.swift; sourceTree = "<group>"; };
@@ -199,6 +208,11 @@
 		C460FCE71BD8333700CD9DBC /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C47DCAB51BE692D0007F2B2B /* AttendanceDisplayCollectionViewCell.swift */,
+				C47DCAB31BE68C12007F2B2B /* ClassNameCollectionViewCell.swift */,
+				C47DCAB11BE68C06007F2B2B /* CheckInCollectionViewCell.swift */,
+				C47DCAAF1BE68BF4007F2B2B /* AttendanceCollectionViewCell.swift */,
+				C47DCAAD1BE68BD3007F2B2B /* QuestionsCollectionViewCell.swift */,
 				C460FCE11BD75E9500CD9DBC /* CoursesListsCollectionViewCell.swift */,
 				C460FD371BDB1AF300CD9DBC /* AttendanceCollectionViewCell.swift */,
 				C460FD391BDB27ED00CD9DBC /* DailyAttendanceCollectionViewCell.swift */,
@@ -485,6 +499,7 @@
 				450509401BDC475D00ED17FF /* Location.swift in Sources */,
 				C460FD061BD8410D00CD9DBC /* BFPaperTabBarController.m in Sources */,
 				450509421BDC479200ED17FF /* Question.swift in Sources */,
+				C47DCAB61BE692D0007F2B2B /* AttendanceDisplayCollectionViewCell.swift in Sources */,
 				C460FCE21BD75E9500CD9DBC /* CoursesListsCollectionViewCell.swift in Sources */,
 				C460FD131BD8416200CD9DBC /* MKButton.swift in Sources */,
 				C460FD181BD8416200CD9DBC /* MKTableViewCell.swift in Sources */,
@@ -497,10 +512,12 @@
 				C460FD051BD8410D00CD9DBC /* BFPaperCheckbox.m in Sources */,
 				C460FCDA1BD75B3F00CD9DBC /* CoursesListViewController.swift in Sources */,
 				C460FCDC1BD75B4B00CD9DBC /* CourseViewController.swift in Sources */,
+				C47DCAAE1BE68BD3007F2B2B /* QuestionsCollectionViewCell.swift in Sources */,
 				45FC02DE1BDD9F2E006E37E3 /* QuestionTableViewCell.swift in Sources */,
 				C498956F1BE1B87600B5E490 /* StudentCourseDraggableViewController.swift in Sources */,
 				454BA75A1BE445C100B73833 /* Person.swift in Sources */,
 				C460FCE01BD75BA800CD9DBC /* DetailAttendanceViewController.swift in Sources */,
+				C47DCAB01BE68BF4007F2B2B /* AttendanceCollectionViewCell.swift in Sources */,
 				C460FD0A1BD8410D00CD9DBC /* BFPaperCollectionViewCell.m in Sources */,
 				C460FD071BD8410D00CD9DBC /* BFPaperButton.m in Sources */,
 				C460FD171BD8416200CD9DBC /* MKLayer.swift in Sources */,
@@ -509,6 +526,7 @@
 				C460FD081BD8410D00CD9DBC /* UIColor+BFPaperColors.m in Sources */,
 				C460FD341BDAF8E500CD9DBC /* WalmartcolorTheme.m in Sources */,
 				C460FCF81BD840CE00CD9DBC /* MaterialDesignTheme.m in Sources */,
+				C47DCAB41BE68C12007F2B2B /* ClassNameCollectionViewCell.swift in Sources */,
 				450509341BDC234C00ED17FF /* ParseDB.swift in Sources */,
 				C43414761BCE443E00AA63DB /* AppDelegate.swift in Sources */,
 				45F39D4A1BDE03F800E385E8 /* AttendanceCollectionViewController.swift in Sources */,
@@ -517,11 +535,11 @@
 				C460FD3A1BDB27ED00CD9DBC /* DailyAttendanceCollectionViewCell.swift in Sources */,
 				C460FCE41BD75F9A00CD9DBC /* Course.swift in Sources */,
 				4505093E1BDC469B00ED17FF /* Class.swift in Sources */,
+				C47DCAB21BE68C06007F2B2B /* CheckInCollectionViewCell.swift in Sources */,
 				C4A78A021BE1679A0040C270 /* InstructorCourseView.swift in Sources */,
 				C460FD231BD8B05A00CD9DBC /* Student.swift in Sources */,
 				450C2D821BDF221600149934 /* LocationProvider.swift in Sources */,
 				C4A78A041BE170FE0040C270 /* InstructorCourseDraggableViewController.swift in Sources */,
-				C460FD381BDB1AF300CD9DBC /* AttendanceCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,4 +10,9 @@ import UIKit
 
 class ClassNameCollectionViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var classTitleName: UILabel!
+    @IBOutlet weak var classDescription: UILabel!
+    
+    
+    
 }

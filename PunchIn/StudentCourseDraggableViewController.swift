@@ -25,6 +25,7 @@ class StudentCourseDraggableViewController: UICollectionViewController {
     private var currentClass: Class!
     
     
+    @IBOutlet var studentCollectionView: UICollectionView!
     
     
     /* the Student */
@@ -51,9 +52,8 @@ class StudentCourseDraggableViewController: UICollectionViewController {
         
         resetAttendView()
         setUpUI()
-       
         setUpGestures()
-    
+        setCollectionFlowLayout()
         allowedToCheckIn = false
     }
     
@@ -169,10 +169,20 @@ class StudentCourseDraggableViewController: UICollectionViewController {
     
     
     
+    func setCollectionFlowLayout(){
+        let flowLayout : UICollectionViewFlowLayout = UICollectionViewFlowLayout.init()
+        flowLayout.itemSize = CGSizeMake(self.view.bounds.width-20, self.view.bounds.height/5)
+        flowLayout.minimumInteritemSpacing = 0
+        flowLayout.minimumLineSpacing = 0
+        flowLayout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10)
+    studentCollectionView.setCollectionViewLayout(flowLayout, animated: true)
+        
+    }
+    
     
  // MARK: Collection View Controller Methods : 
-   override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
-        return 1;
+  override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
+        return 4;
     }
     
     // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
@@ -180,32 +190,37 @@ class StudentCourseDraggableViewController: UICollectionViewController {
         var cell :UICollectionViewCell!
         
         if indexPath.row == 0{
-         cell = collectionView.dequeueReusableCellWithReuseIdentifier("CheckInCell", forIndexPath: indexPath) as! CheckInCollectionViewCell
+            let  cell:CheckInCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier("CheckInCell", forIndexPath: indexPath) as! CheckInCollectionViewCell
+            cell.backgroundColor = ThemeManager.theme().primaryYellowColor()
+            cell.setCheckInCollectionViewCell()
             return cell;
         }
         if(indexPath.row == 1){
-            cell = collectionView.dequeueReusableCellWithReuseIdentifier("ClassNameCell", forIndexPath: indexPath) as! ClassNameCollectionViewCell
+        let cell:ClassNameCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier("ClassNameCell", forIndexPath: indexPath) as! ClassNameCollectionViewCell
+            cell.layer.borderWidth = 0.25
+            cell.layer.borderColor = ThemeManager.theme().primaryBlueColor().CGColor
+            
             return cell
         }
         
         if(indexPath.row == 2){
-            cell = collectionView.dequeueReusableCellWithReuseIdentifier("AttendanceCell", forIndexPath: indexPath) as! AttendanceCollectionViewCell
+            let cell:AttendanceDisplayCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier("AttendanceDisplayCell", forIndexPath: indexPath) as! AttendanceDisplayCollectionViewCell
+            cell.layer.borderWidth = 0.25
+            cell.layer.borderColor = ThemeManager.theme().primaryBlueColor().CGColor
+            
             return cell
         }
         if(indexPath.row == 3){
-            cell = collectionView.dequeueReusableCellWithReuseIdentifier("QuestionsCell",forIndexPath:indexPath) as! QuestionsCollectionViewCell
+            let cell:QuestionsCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier("QuestionsCell",forIndexPath:indexPath) as! QuestionsCollectionViewCell
+            cell.layer.borderWidth = 0.25
+            cell.layer.borderColor = ThemeManager.theme().primaryBlueColor().CGColor
+            
             return cell
         }
-        
         return cell;
     }
 
-    
-    
-    
-    
-    
-//    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+//  func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 //        // Get the new view controller using segue.destinationViewController.
 //        // Pass the selected object to the new view controller.
 //        if(segue.identifier == "DetailAttedanceViewControllerSegue"){

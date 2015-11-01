@@ -59,7 +59,8 @@ class CoursesListViewController: UIViewController,UICollectionViewDelegate,UICol
     
     func setUpUI(){
         coursesCollectionView.backgroundColor = UIColor.whiteColor()
-        self.navigationController?.navigationBar.barTintColor = ThemeManager.theme().primaryColor()
+        self.navigationController?.navigationBar.barTintColor = ThemeManager.theme().primaryDarkBlueColor()
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         self.navigationItem.title = "Courses"
         self.navigationController?.navigationItem.title = "Courses"
         self.navigationController?.navigationBar.titleTextAttributes = NSDictionary.init(dictionary:
@@ -67,6 +68,7 @@ class CoursesListViewController: UIViewController,UICollectionViewDelegate,UICol
         
         // logout button
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Logout", style: UIBarButtonItemStyle.Plain, target:self, action: "tappedLogout")
+        self.navigationItem.rightBarButtonItem?.tintColor = UIColor.whiteColor()
         
     }
     
@@ -76,9 +78,9 @@ class CoursesListViewController: UIViewController,UICollectionViewDelegate,UICol
     
     func setCollectionViewLayout(){
         let flowLayout : UICollectionViewFlowLayout = UICollectionViewFlowLayout.init()
-        flowLayout.itemSize = CGSizeMake(self.view.bounds.width/2-20, self.view.bounds.height/5)
-        flowLayout.minimumInteritemSpacing = 10
-        flowLayout.minimumLineSpacing = 10
+        flowLayout.itemSize = CGSizeMake(self.view.bounds.width-20, self.view.bounds.height/5)
+        flowLayout.minimumInteritemSpacing = 0
+        flowLayout.minimumLineSpacing = 0
         flowLayout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10)
         coursesCollectionView.setCollectionViewLayout(flowLayout, animated: true)
     }
@@ -92,9 +94,12 @@ class CoursesListViewController: UIViewController,UICollectionViewDelegate,UICol
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell{
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(CoursesListCellIdentifier, forIndexPath: indexPath) as! CoursesListsCollectionViewCell
         cell.setCoursesListCollectionViewCell(courseArray[indexPath.row])
-        cell.layer.borderWidth = 2.0;
-        cell.layer.borderColor = UIColor.blackColor().CGColor
-        cell.backgroundColor = ThemeManager.theme().secondaryPrimaryColor()
+
+        if(indexPath.row % 2 == 0){
+            cell.backgroundColor = ThemeManager.theme().primaryBlueColor()
+        }else{
+            cell.backgroundColor = ThemeManager.theme().primaryGreyColor()
+        }
         cell.courseNameLabel?.textColor = UIColor.whiteColor()
         cell.layer.shadowRadius = 2.0;
         cell.layer.shadowOpacity = 0.5;
