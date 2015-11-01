@@ -42,6 +42,7 @@ class CoursesListViewController: UIViewController,UICollectionViewDelegate,UICol
             if error == nil {
                 dispatch_async(dispatch_get_main_queue(), {
                     self.courseArray = courses!
+//                    print(self.courseArray[0].classes?[0])
                     MBProgressHUD.hideHUDForView(self.view, animated: true)
                 })
             }else{

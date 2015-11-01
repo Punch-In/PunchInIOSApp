@@ -58,23 +58,19 @@ class Course: PFObject, PFSubclassing {
     }
     
     class func courses(handler: ((courses: [Course]?, error:NSError?)->Void)){
-        if ParseDB.isStudent {
-            Student.student((PFUser.currentUser()?.email!)!, completion: { (student, error) -> Void in
-                if error == nil {
-                    Course.courses(student!, completion: handler)
-                }else{
-                    handler(courses: nil, error: error)
+        ParseDB.initializeCurrentPerson({ (error) -> Void in
+            if error == nil {
+                if ParseDB.isStudent {
+                    Course.courses(ParseDB.currentPerson as! Student, completion: handler)
+                }else {
+                    Course.courses(ParseDB.currentPerson as! Instructor, completion: handler)
                 }
-            })
-        }else {
-            Instructor.instructor((PFUser.currentUser()?.email!)!, completion: { (instructor, error) -> Void in
-                if error == nil {
-                    Course.courses(instructor!, completion: handler)
-                }else{
-                    handler(courses: nil, error: error)
-                }
-            })
-        }
+            }else{
+                /// TODO...
+                print("error initializing ParseDB.person \(error)")
+                handler(courses:nil, error:error)
+            }
+        })
     }
     
     @objc(getCoursesForInstructor:instructor:)

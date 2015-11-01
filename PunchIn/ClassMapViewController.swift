@@ -10,28 +10,58 @@ import UIKit
 import MapKit
 import MBProgressHUD
 
-class ClassMapViewController: UIViewController, MKMapViewDelegate {
+class ClassMapViewController: UIViewController, MKMapViewDelegate, LocationProviderContinousDelegate {
 
     @IBOutlet weak var locationMapView: MKMapView!
-    @IBOutlet weak var showClassLocation: UIImageView!
-    @IBOutlet weak var showPersonLocation: UIImageView!
+    @IBOutlet weak var showClassLocationImage: UIImageView!
+    @IBOutlet weak var showPersonLocationImage: UIImageView!
+    @IBOutlet weak var showLocationsContainerView: UIView!
+    
+    private var isShowingPersonRegion: Bool = false {
+        didSet {
+            if isShowingPersonRegion == false {
+                LocationProvider.stopUpdatingLocation()
+            }else{
+                LocationProvider.continuousLocation(self)
+            }
+        }
+    }
+    
+    private var centerOnPerson: Bool = false
     
     var currentClass:Class!
-    var person:Person!
     private var personImage: UIImage!
+    private var personAnnotation = MKPointAnnotation()
+    private var personName: String!
+    private var hud: MBProgressHUD!
 
+
+    deinit {
+        LocationProvider.stopUpdatingLocation()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.person = ParseDB.currentPerson
+        self.isShowingPersonRegion = false
+
         self.locationMapView.delegate = self
+        self.locationMapView.addAnnotation(personAnnotation)
         self.locationMapView.showsUserLocation = true
+        self.locationMapView.userTrackingMode = .Follow
+        
+        if let student = ParseDB.currentPerson as? Student {
+            personName = student.studentName
+        }else{
+            let instructor = ParseDB.currentPerson as? Instructor
+            personName = instructor?.instructorName
+        }
+
 
         setupNavigationImages()
-        
-        showClassLocationOnMap()
+        addClassLocationToMap()
         goToClassLocation()
-        showPersonLocationOnMap()
+        addPersonLocationToMap()
         
         // Do any additional setup after loading the view.
     }
@@ -41,28 +71,64 @@ class ClassMapViewController: UIViewController, MKMapViewDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewDidDisappear(animated: Bool) {
+        LocationProvider.stopUpdatingLocation()
+        self.locationMapView.removeAnnotation(self.personAnnotation)
+    }
+    
     func setupNavigationImages() {
+        showClassLocationImage.layer.borderWidth = 1.0
+        showClassLocationImage.layer.borderColor = ThemeManager.theme().primaryDarkBlueColor().CGColor
+        showClassLocationImage.backgroundColor = UIColor.whiteColor()
+        showClassLocationImage.layer.cornerRadius = showClassLocationImage.frame.size.width / 2
+        showClassLocationImage.clipsToBounds = true
         currentClass.parentCourse.getImage { (image, error) -> Void in
             if error == nil {
                 dispatch_async(dispatch_get_main_queue()){
-                    self.showClassLocation.image = image
-                    self.showClassLocation.alpha = 0
+                    self.showClassLocationImage.image = image
+                    self.showClassLocationImage.alpha = 0
                     UIView.animateWithDuration(0.2, animations: { () -> Void in
-                        self.showClassLocation.alpha = 1
+                        self.showClassLocationImage.alpha = 1
                     })
+                    let gesture = UITapGestureRecognizer(target: self, action: "goToClassLocation")
+                    self.showClassLocationImage.addGestureRecognizer(gesture)
                 }
             }
         }
+
+        showPersonLocationImage.layer.borderWidth = 1.0
+        showPersonLocationImage.layer.borderColor = ThemeManager.theme().primaryDarkBlueColor().CGColor
+        showPersonLocationImage.backgroundColor = UIColor.whiteColor()
+        showPersonLocationImage.layer.cornerRadius = showClassLocationImage.frame.size.width / 2
+        showPersonLocationImage.clipsToBounds = true
+        ParseDB.currentPerson!.getImage { (image, error) -> Void in
+            if error == nil {
+                dispatch_async(dispatch_get_main_queue()){
+                    self.showPersonLocationImage.image = image
+                    self.showPersonLocationImage.alpha = 0
+                    UIView.animateWithDuration(0.2, animations: { () -> Void in
+                        self.showPersonLocationImage.alpha = 1
+                    })
+                    let gesture = UITapGestureRecognizer(target: self, action: "goToPersonLocation")
+                    self.showPersonLocationImage.addGestureRecognizer(gesture)
+                }
+            }
+        }
+
+        showLocationsContainerView.layer.borderWidth = 2.0
+        showLocationsContainerView.layer.borderColor = ThemeManager.theme().primaryDarkBlueColor().CGColor
+        showLocationsContainerView.backgroundColor = ThemeManager.theme().primaryGreyColor().colorWithAlphaComponent(0.2)
+        showLocationsContainerView.layer.cornerRadius = 10.0
     }
     
     // MARK: MapView delegates
     func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
         if overlay is MKCircle {
             let circle = MKCircleRenderer(overlay: overlay)
-//            circle.strokeColor = UIColor.redColor()
-//            circle.fillColor = UIColor(red: 255, green: 0, blue: 0, alpha: 0.1)
-            circle.strokeColor = ThemeManager.theme().primaryDarkBlueColor()
-            circle.fillColor = circle.strokeColor?.colorWithAlphaComponent(0.1)
+            circle.strokeColor = UIColor.redColor()
+            circle.fillColor = UIColor.redColor().colorWithAlphaComponent(0.1)
+//            circle.strokeColor = ThemeManager.theme().primaryDarkBlueColor()
+//            circle.fillColor = circle.strokeColor?.colorWithAlphaComponent(0.1)
             circle.lineWidth = 1
             return circle
         }else{
@@ -75,25 +141,16 @@ class ClassMapViewController: UIViewController, MKMapViewDelegate {
         
         var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(annotationReuseId)
         if (annotationView == nil) {
-            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationReuseId)
+            annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: annotationReuseId)
+            annotationView!.canShowCallout = true
+            annotationView!.leftCalloutAccessoryView = UIImageView(frame: CGRect(x:0, y:0, width: 48, height:48))
         }
         
-        person.getImage { (image, error) -> Void in
+        ParseDB.currentPerson!.getImage { (image, error) -> Void in
             if error == nil {
-                // resize the immage to show in the annotation
-                let resizeImageView = UIImageView(frame: CGRectMake(0, 0, 45, 45))
-                resizeImageView.layer.borderColor = ThemeManager.theme().primaryDarkBlueColor().CGColor
-                resizeImageView.layer.borderWidth = CGFloat(3.0)
-                resizeImageView.contentMode = UIViewContentMode.ScaleAspectFill
-                resizeImageView.image = image
-                
-                UIGraphicsBeginImageContext(resizeImageView.frame.size)
-                resizeImageView.layer.renderInContext(UIGraphicsGetCurrentContext()!)
-                let thumb = UIGraphicsGetImageFromCurrentImageContext()
-                UIGraphicsEndImageContext()
-                
                 dispatch_async(dispatch_get_main_queue()){
-                    annotationView!.image = thumb
+                    let imageView = annotationView?.leftCalloutAccessoryView as! UIImageView
+                    imageView.image = image
                 }
             }else{
                 print("error getting image for person \(error)")
@@ -104,8 +161,31 @@ class ClassMapViewController: UIViewController, MKMapViewDelegate {
         return annotationView
     }
     
+    private var regionChangeIsFromUserInteraction = false
+    func mapView(mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
+        let view = self.locationMapView.subviews.first
+        if let gestureRecognizers = view?.gestureRecognizers {
+            for gesture in gestureRecognizers {
+                if gesture.state == .Began || gesture.state == .Ended {
+                    self.regionChangeIsFromUserInteraction = true
+                    break
+                }
+            }
+        }
+    }
+    
+    func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        if self.regionChangeIsFromUserInteraction {
+            self.regionChangeIsFromUserInteraction = false
+            self.centerOnPerson = false
+        }
+    }
+//      add if want to do something fancy with a HUD while map is still loading
+//    func mapViewDidFinishRenderingMap(mapView: MKMapView, fullyRendered: Bool) {
+//    }
+    
     // MARK: show location functions
-    private func showClassLocationOnMap(){
+    private func addClassLocationToMap(){
         if let classGeofence = currentClass.geofenceRegion {
             // show class geofence
             let classCircle = MKCircle(centerCoordinate: classGeofence.center, radius: classGeofence.radius)
@@ -115,52 +195,51 @@ class ClassMapViewController: UIViewController, MKMapViewDelegate {
     }
     
     func goToClassLocation() {
+        self.hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        self.hud.labelText = "Let's show where \(currentClass.name) is...."
+        isShowingPersonRegion = false
         if let classGeofence = currentClass.geofenceRegion {
             // show class region
-            let classRegion = MKCoordinateRegionMake(classGeofence.center, MKCoordinateSpanMake(0.01, 0.01))
+            self.locationMapView.deselectAnnotation(self.personAnnotation, animated: true)
+            let classRegion = MKCoordinateRegionMake(classGeofence.center, MKCoordinateSpanMake(0.005, 0.005))
             self.locationMapView.setRegion(classRegion, animated: true)
         }
+        self.hud.hide(true)
     }
     
-    private func showPersonLocationOnMap(){
-        var name: String!
-        if let student = person as? Student {
-            name = student.studentName
-        }else{
-            let instructor = person as? Instructor
-            name = instructor?.instructorName
-        }
-        
-        let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-        hud.labelText = "Getting location..."
-        
+    private func addPersonLocationToMap(){
         LocationProvider.location { (location, error) -> Void in
-            if error == nil {
-                let annotation = MKPointAnnotation()
-                annotation.coordinate = (location?.coordinates)!
-                annotation.title = name
-                self.locationMapView.addAnnotation(annotation)
+            if error == nil || (location != nil && location!.address.isEmpty){
+                self.personAnnotation.coordinate = (location?.coordinates)!
             }else{
                 print("map view: error getting location \(error)")
             }
-            MBProgressHUD.hideHUDForView(self.view, animated: true)
         }
     }
     
     func goToPersonLocation() {
-        let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-        hud.labelText = "Getting location..."
-        
-        LocationProvider.location { (location, error) -> Void in
-            if error == nil {
-                let personRegion = MKCoordinateRegionMake((location?.coordinates)!, MKCoordinateSpanMake(0.01, 0.01))
+        self.hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        self.hud.labelText = "Let's show where you are..."
+        isShowingPersonRegion = true
+        centerOnPerson = true
+        let personRegion = MKCoordinateRegionMake(self.personAnnotation.coordinate, MKCoordinateSpanMake(0.01, 0.01))
+        self.locationMapView.setRegion(personRegion, animated: true)
+        self.hud.hide(true)
+    }
+    
+    func didUpdateLocation(location:Location?) {
+        dispatch_async(dispatch_get_main_queue()){
+            self.personAnnotation.coordinate = (location?.coordinates)!
+            self.personAnnotation.title = self.personName
+            self.locationMapView.selectAnnotation(self.personAnnotation, animated: true)
+            
+            if self.centerOnPerson {
+                let personRegion = MKCoordinateRegionMake(self.personAnnotation.coordinate, MKCoordinateSpanMake(0.01, 0.01))
                 self.locationMapView.setRegion(personRegion, animated: true)
-            }else{
-                print("map view: error getting location \(error)")
             }
-            MBProgressHUD.hideHUDForView(self.view, animated: true)
         }
     }
+
 
     /*
     // MARK: - Navigation

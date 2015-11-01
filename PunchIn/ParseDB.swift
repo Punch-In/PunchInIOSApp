@@ -101,10 +101,17 @@ class ParseDB {
     
     static private(set) var currentPerson: Person?
     
-    class func initializeCurrentPerson() {
+    class func initializeCurrentPerson(handler: ((error:NSError?)->Void)) {
+        guard currentPerson == nil else {
+            return handler(error:nil)
+        }
+        
         ParseDB.person { (person, error) -> Void in
             if error != nil {
                 print("ParseDB error getting person! \(error)")
+                handler(error:error)
+            }else{
+                handler(error:nil)
             }
         }
     }

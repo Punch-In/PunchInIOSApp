@@ -18,6 +18,7 @@
 		450C6B5C1BE5BEBD002CC641 /* QuestionsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450C6B5B1BE5BEBD002CC641 /* QuestionsCollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		450C6B5E1BE5BEC6002CC641 /* ClassNameCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450C6B5D1BE5BEC6002CC641 /* ClassNameCollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		450C6B601BE5BECD002CC641 /* ClassMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450C6B5F1BE5BECD002CC641 /* ClassMapViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		450DC4FE1BE5C4B8005E6ACB /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 450DC4FD1BE5C4B8005E6ACB /* MapKit.framework */; };
 		454BA75A1BE445C100B73833 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454BA7591BE445C100B73833 /* Person.swift */; settings = {ASSET_TAGS = (); }; };
 		45F39D4A1BDE03F800E385E8 /* AttendanceCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F39D491BDE03F800E385E8 /* AttendanceCollectionViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		45F7535D1BDCBDE10011FE00 /* DataInjector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F7535C1BDCBDE10011FE00 /* DataInjector.swift */; settings = {ASSET_TAGS = (); }; };
@@ -75,6 +76,7 @@
 		450C6B5B1BE5BEBD002CC641 /* QuestionsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionsCollectionViewCell.swift; sourceTree = "<group>"; };
 		450C6B5D1BE5BEC6002CC641 /* ClassNameCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassNameCollectionViewCell.swift; sourceTree = "<group>"; };
 		450C6B5F1BE5BECD002CC641 /* ClassMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassMapViewController.swift; sourceTree = "<group>"; };
+		450DC4FD1BE5C4B8005E6ACB /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		454BA7591BE445C100B73833 /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		45F39D491BDE03F800E385E8 /* AttendanceCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttendanceCollectionViewController.swift; sourceTree = "<group>"; };
 		45F7535C1BDCBDE10011FE00 /* DataInjector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataInjector.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				450DC4FE1BE5C4B8005E6ACB /* MapKit.framework in Frameworks */,
 				450C2D841BDF2C9900149934 /* CoreLocation.framework in Frameworks */,
 				82FEDFDFA7C3E9CBE09D154A /* Pods_PunchIn.framework in Frameworks */,
 			);
@@ -363,6 +366,7 @@
 		CD8FC80B0AD3E39675544999 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				450DC4FD1BE5C4B8005E6ACB /* MapKit.framework */,
 				450C2D831BDF2C9900149934 /* CoreLocation.framework */,
 				0926E69D8C5ACE24A61E9D24 /* Pods_PunchIn.framework */,
 			);

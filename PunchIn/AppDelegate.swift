@@ -62,9 +62,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func userLoggedIn() {
-        if ParseDB.currentPerson == nil {
-            ParseDB.initializeCurrentPerson()
-        }
         let vc = self.mainStoryboard.instantiateViewControllerWithIdentifier(CoursesListViewController.storyboardName) as! CoursesListViewController
         let navigationController = UINavigationController(rootViewController: vc)
         self.window?.rootViewController = navigationController
