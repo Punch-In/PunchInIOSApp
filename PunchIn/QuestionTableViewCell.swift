@@ -12,23 +12,25 @@ class QuestionTableViewCell: UITableViewCell {
     
     var question:Question! {
         didSet {
-            studentNameField.text = question.askedBy
-            questionTextField.text = question.questionText
+            personNameField.text = question.askedBy
+            questionTextView.text = question.questionText
             
             questionDateField.text = question.absoluteDateString
             if let forClass = question.forClass {
                 if !forClass.isFinished {
+                    // if class isn't finished, instaed show time since question
                     questionDateField.text = question.sinceDateString + " ago"
                 }
             }
-            questionAnsweredControl.selectedSegmentIndex = question.isAnswered ? 1 : 0
+//            questionAnsweredControl.selectedSegmentIndex = question.isAnswered ? 1 : 0
         }
     }
     
-    @IBOutlet private weak var questionTextField: UITextField!
-    @IBOutlet private weak var studentNameField: UILabel!
+    
+    
+    @IBOutlet weak var questionTextView: UITextView!
+    @IBOutlet private weak var personNameField: UILabel!
     @IBOutlet private weak var questionDateField: UILabel!
-    @IBOutlet private weak var questionAnsweredControl: UISegmentedControl!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -39,11 +41,9 @@ class QuestionTableViewCell: UITableViewCell {
     
     private func setupUI() {
         // configure font colors
-        studentNameField.textColor = ThemeManager.theme().primaryGreyColor()
-        questionTextField.textColor = ThemeManager.theme().primaryBlueColor()
+        personNameField.textColor = ThemeManager.theme().primaryGreyColor()
+        questionTextView.textColor = ThemeManager.theme().primaryBlueColor()
         questionDateField.textColor = ThemeManager.theme().primaryBlueColor()
-        
-        
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

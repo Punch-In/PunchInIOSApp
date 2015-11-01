@@ -66,7 +66,7 @@ class Question : PFObject, PFSubclassing {
     private static var absoluteTimeFormatter: NSDateFormatter = {
         var formatter = NSDateFormatter()
         formatter.timeZone = NSTimeZone.localTimeZone()
-        formatter.dateFormat = "EEEEEE, MMM dd, y @ h:mma"
+        formatter.dateFormat = "MMM dd, y @ h:mma"
         return formatter
     }()
     

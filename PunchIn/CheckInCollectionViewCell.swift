@@ -19,6 +19,8 @@ class CheckInCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var checkInButton: UIButton!
     @IBOutlet weak var mapButton: UIButton!
     
+    weak var currentClass:Class!
+    
     
     func setUpUI(){
         checkInButton.imageView?.image = UIImage.init(named: "unselected_checkin")

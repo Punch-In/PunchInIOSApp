@@ -25,11 +25,11 @@ class StudentCourseDraggableViewController: UICollectionViewController {
     //private var classIndex: Int!
     private var currentClass: Class!
     
-    
-    
-    
     /* the Student */
     var student: Student!
+
+    // MARK: refresh hacks
+    var refreshControl : UIRefreshControl!
     
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self, name: Class.outsideClassGeofenceNotification, object: nil)
@@ -50,6 +50,7 @@ class StudentCourseDraggableViewController: UICollectionViewController {
         super.viewDidLoad()
         student = ParseDB.currentPerson as! Student
         
+        fetchData()
         resetAttendView()
         setUpUI()
        
@@ -60,11 +61,38 @@ class StudentCourseDraggableViewController: UICollectionViewController {
     
     
 
-    func setUpUI(){
-     }
+    func setUpUI() {
     
-    func setUpGestures() {
-      }
+    }
+    
+    func setUpGestures() {    
+        // hack
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: "fetchData", forControlEvents: UIControlEvents.ValueChanged)
+        
+        studentDraggableViewCollectionView.alwaysBounceVertical = true
+        studentDraggableViewCollectionView.addSubview(refreshControl)
+    }
+    
+    func fetchData() {
+        // referesh class details
+        let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        hud.labelText = "Updating class details..."
+        
+        currentClass.refreshDetails{ (error) -> Void in
+            if error == nil {
+                dispatch_async(dispatch_get_main_queue()){
+                    // TODO: show class details
+                    self.refreshControl.endRefreshing()
+                    MBProgressHUD.hideHUDForView(self.view, animated: true)
+                }
+            }else{
+                print("error updating class details! \(error)")
+                self.refreshControl.endRefreshing()
+                MBProgressHUD.hideHUDForView(self.view, animated: true)
+            }
+        }
+    }
     
     //Attendance View Tapped.
     func attendanceViewTapped(){
@@ -197,6 +225,7 @@ class StudentCourseDraggableViewController: UICollectionViewController {
             checkIncell.setUpUI()
             return checkIncell;
         }
+        
         if(indexPath.row == 1){
             cell = collectionView.dequeueReusableCellWithReuseIdentifier("ClassNameCell", forIndexPath: indexPath) as! ClassNameCollectionViewCell
             cell.backgroundColor = UIColor.whiteColor()
@@ -206,17 +235,17 @@ class StudentCourseDraggableViewController: UICollectionViewController {
         }
         
         if(indexPath.row == 2){
-            cell = collectionView.dequeueReusableCellWithReuseIdentifier("AttendanceDisplayCell", forIndexPath: indexPath) as! AttendanceDisplayCollectionViewCell
-            cell.backgroundColor = UIColor.whiteColor()
-            cell.layer.borderColor = ThemeManager.theme().primaryDarkBlueColor().CGColor
-            cell.layer.borderWidth = 0.5
-        }
-        if(indexPath.row == 3){
             cell = collectionView.dequeueReusableCellWithReuseIdentifier("QuestionsCell",forIndexPath:indexPath) as! QuestionsCollectionViewCell
             cell.backgroundColor = UIColor.whiteColor()
             cell.layer.borderColor = ThemeManager.theme().primaryDarkBlueColor().CGColor
             cell.layer.borderWidth = 0.5
+            
+            // for now
+            let gesture = UITapGestureRecognizer(target: self, action: "questionsViewTapped")
+            cell.addGestureRecognizer(gesture)
+            
         }
+        
         return cell;
     }
 

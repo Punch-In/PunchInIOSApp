@@ -65,8 +65,7 @@ class AttendanceCollectionViewController: UIViewController,UICollectionViewDeleg
                 self.refreshControl.endRefreshing()
                 MBProgressHUD.hideHUDForView(self.view, animated: true)
             }
-        }
-        
+        }        
     }
     
     // MARK: Setup UI Methods

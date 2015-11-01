@@ -179,6 +179,15 @@ class Class : PFObject, PFSubclassing, LocationProviderGeofenceDelegate {
         }
     }
     
+    func absentStudents() -> [Student] {
+        if let registered = parentCourse.registeredStudents {
+            return registered.filter{ !self.attendance!.contains($0) }
+        }else{
+            print("registered students for course \(self.parentCourse.courseName) is nil")
+            return []
+        }
+    }
+    
     
     // MARK: class workflow
     func start(completion: ((error:NSError?)->Void)) {
