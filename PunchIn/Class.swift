@@ -55,7 +55,7 @@ class Class : PFObject, PFSubclassing, LocationProviderGeofenceDelegate {
             if let location = self.location {
                 return LocationProvider.createGeofenceRegion(location, id: self.name)
             }else {
-                return nil
+                return LocationProvider.createGeofenceRegion(self.parentCourse.courseLocation, id: self.name)
             }
         }
     }

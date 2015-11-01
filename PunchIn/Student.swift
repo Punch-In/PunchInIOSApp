@@ -77,6 +77,10 @@ class Student: PFObject, PFSubclassing, Person {
         }
     }
     
+    func getType() -> PersonType {
+        return PersonType.Student
+    }
+    
     class func student(forEmail: String, completion: ((student:Student?, error:NSError?)->Void)) {
         if let query = Student.query() {
             query.whereKey("studentEmail", equalTo: forEmail)

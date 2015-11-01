@@ -70,6 +70,9 @@ class Instructor: PFObject, PFSubclassing, Person {
         }
     }
 
+    func getType() -> PersonType {
+        return PersonType.Instructor
+    }
     
     // get instructor from email address
     class func instructor(forEmail: String, completion: ((instructor:Instructor?, error:NSError?)->Void)) {

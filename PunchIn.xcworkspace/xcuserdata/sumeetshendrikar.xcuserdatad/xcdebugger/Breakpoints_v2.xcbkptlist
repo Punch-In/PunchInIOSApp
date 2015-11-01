@@ -266,13 +266,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PunchIn/StudentCourseDraggableViewController.swift"
-            timestampString = "467968916.115336"
+            timestampString = "468035190.910554"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "5">
+            startingLineNumber = "62"
+            endingLineNumber = "62"
+            landmarkName = "StudentCourseDraggableViewController"
+            landmarkType = "3">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -314,12 +314,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PunchIn/StudentCourseDraggableViewController.swift"
-            timestampString = "467968916.115336"
+            timestampString = "468035190.910554"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
-            landmarkName = "viewDidLoad()"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
+            landmarkName = "attendanceViewTapped()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -330,13 +330,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PunchIn/StudentCourseDraggableViewController.swift"
-            timestampString = "467968916.115336"
+            timestampString = "468035190.910554"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "201"
-            endingLineNumber = "201"
-            landmarkName = "setupAttendView()"
-            landmarkType = "5">
+            startingLineNumber = "211"
+            endingLineNumber = "211"
+            landmarkName = "StudentCourseDraggableViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -393,13 +393,29 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "PunchIn/StudentCourseDraggableViewController.swift"
-            timestampString = "467968916.115336"
+            filePath = "PunchIn/CourseViewController.swift"
+            timestampString = "467971589.135783"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "189"
-            endingLineNumber = "189"
-            landmarkName = "setupAttendView()"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
+            landmarkName = "setUpPageViewController()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PunchIn/Class.swift"
+            timestampString = "468021324.64783"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "270"
+            endingLineNumber = "270"
+            landmarkName = "stopCheckingForGeofence()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -409,13 +425,29 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "PunchIn/CourseViewController.swift"
-            timestampString = "467971589.135783"
+            filePath = "PunchIn/LoginViewController.swift"
+            timestampString = "468029564.597683"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
-            landmarkName = "setUpPageViewController()"
+            startingLineNumber = "92"
+            endingLineNumber = "92"
+            landmarkName = "didTapStudentIndicator()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PunchIn/LoginViewController.swift"
+            timestampString = "468029564.597683"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
+            landmarkName = "validateInput()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

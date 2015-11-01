@@ -114,5 +114,13 @@ class CoursesListViewController: UIViewController,UICollectionViewDelegate,UICol
             courseViewController.course = selectedCourse
         }
     }
+    
+    @IBAction func showMapViewTapped(sender: AnyObject) {
+        let storyBoardName = "Main"
+        let storyBoard = UIStoryboard.init(name: storyBoardName, bundle: nil);
+        let vc = storyBoard.instantiateViewControllerWithIdentifier("ClassMapViewController") as! ClassMapViewController
+        vc.currentClass = courseArray[0].classes![0]
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 
 }

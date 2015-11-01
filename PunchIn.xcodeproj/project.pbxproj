@@ -14,6 +14,8 @@
 		450509421BDC479200ED17FF /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450509411BDC479200ED17FF /* Question.swift */; settings = {ASSET_TAGS = (); }; };
 		450C2D821BDF221600149934 /* LocationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450C2D811BDF221600149934 /* LocationProvider.swift */; settings = {ASSET_TAGS = (); }; };
 		450C2D841BDF2C9900149934 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 450C2D831BDF2C9900149934 /* CoreLocation.framework */; };
+		45492CF31BE591C600065194 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45492CF21BE591C600065194 /* MapKit.framework */; };
+		45492CF51BE5921800065194 /* ClassMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45492CF41BE5921800065194 /* ClassMapViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		454BA75A1BE445C100B73833 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454BA7591BE445C100B73833 /* Person.swift */; settings = {ASSET_TAGS = (); }; };
 		45F39D4A1BDE03F800E385E8 /* AttendanceCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F39D491BDE03F800E385E8 /* AttendanceCollectionViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		45F7535D1BDCBDE10011FE00 /* DataInjector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F7535C1BDCBDE10011FE00 /* DataInjector.swift */; settings = {ASSET_TAGS = (); }; };
@@ -67,6 +69,8 @@
 		450509411BDC479200ED17FF /* Question.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		450C2D811BDF221600149934 /* LocationProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationProvider.swift; sourceTree = "<group>"; };
 		450C2D831BDF2C9900149934 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		45492CF21BE591C600065194 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		45492CF41BE5921800065194 /* ClassMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassMapViewController.swift; sourceTree = "<group>"; };
 		454BA7591BE445C100B73833 /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		45F39D491BDE03F800E385E8 /* AttendanceCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttendanceCollectionViewController.swift; sourceTree = "<group>"; };
 		45F7535C1BDCBDE10011FE00 /* DataInjector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataInjector.swift; sourceTree = "<group>"; };
@@ -128,6 +132,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45492CF31BE591C600065194 /* MapKit.framework in Frameworks */,
 				450C2D841BDF2C9900149934 /* CoreLocation.framework in Frameworks */,
 				82FEDFDFA7C3E9CBE09D154A /* Pods_PunchIn.framework in Frameworks */,
 			);
@@ -212,6 +217,7 @@
 			isa = PBXGroup;
 			children = (
 				C460FCD71BD75B2700CD9DBC /* LoginViewController.swift */,
+				45492CF41BE5921800065194 /* ClassMapViewController.swift */,
 				C460FCEE1BD833A500CD9DBC /* Student */,
 				C460FCED1BD8339D00CD9DBC /* Instructor */,
 			);
@@ -351,6 +357,7 @@
 		CD8FC80B0AD3E39675544999 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				45492CF21BE591C600065194 /* MapKit.framework */,
 				450C2D831BDF2C9900149934 /* CoreLocation.framework */,
 				0926E69D8C5ACE24A61E9D24 /* Pods_PunchIn.framework */,
 			);
@@ -489,6 +496,7 @@
 				C460FD131BD8416200CD9DBC /* MKButton.swift in Sources */,
 				C460FD181BD8416200CD9DBC /* MKTableViewCell.swift in Sources */,
 				4505093C1BDC391100ED17FF /* Instructor.swift in Sources */,
+				45492CF51BE5921800065194 /* ClassMapViewController.swift in Sources */,
 				C460FCD81BD75B2700CD9DBC /* LoginViewController.swift in Sources */,
 				C460FD141BD8416200CD9DBC /* MKColor.swift in Sources */,
 				C460FD161BD8416200CD9DBC /* MKLabel.swift in Sources */,

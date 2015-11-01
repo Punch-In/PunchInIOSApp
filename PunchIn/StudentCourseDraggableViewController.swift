@@ -9,7 +9,7 @@
 import UIKit
 import MBProgressHUD
 
-class StudentCourseDraggableViewController: UICollectionViewController {
+class StudentCourseDraggableViewController : UIViewController {
 
     var course:Course!
     var classIndex:Int!
@@ -24,9 +24,7 @@ class StudentCourseDraggableViewController: UICollectionViewController {
     //private var classIndex: Int!
     private var currentClass: Class!
     
-    
-    
-    
+
     /* the Student */
     var student: Student!
     
@@ -167,38 +165,46 @@ class StudentCourseDraggableViewController: UICollectionViewController {
         print("student outside the geofence for the class \(currentClass.name) !")
     }
     
+    @IBAction func showMapViewTapped(sender: AnyObject) {
+        let storyBoardName = "Main"
+        let storyBoard = UIStoryboard.init(name: storyBoardName, bundle: nil);
+        let vc = storyBoard.instantiateViewControllerWithIdentifier("ClassMapViewController") as! ClassMapViewController
+        vc.currentClass = currentClass
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
     
     
     
  // MARK: Collection View Controller Methods : 
-   override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
-        return 1;
-    }
-    
-    // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell{
-        var cell :UICollectionViewCell!
-        
-        if indexPath.row == 0{
-         cell = collectionView.dequeueReusableCellWithReuseIdentifier("CheckInCell", forIndexPath: indexPath) as! CheckInCollectionViewCell
-            return cell;
-        }
-        if(indexPath.row == 1){
-            cell = collectionView.dequeueReusableCellWithReuseIdentifier("ClassNameCell", forIndexPath: indexPath) as! ClassNameCollectionViewCell
-            return cell
-        }
-        
-        if(indexPath.row == 2){
-            cell = collectionView.dequeueReusableCellWithReuseIdentifier("AttendanceCell", forIndexPath: indexPath) as! AttendanceCollectionViewCell
-            return cell
-        }
-        if(indexPath.row == 3){
-            cell = collectionView.dequeueReusableCellWithReuseIdentifier("QuestionsCell",forIndexPath:indexPath) as! QuestionsCollectionViewCell
-            return cell
-        }
-        
-        return cell;
-    }
+//   override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
+//        return 1;
+//    }
+//    
+//    // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
+//    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell{
+//        var cell :UICollectionViewCell!
+//        
+//        if indexPath.row == 0{
+//         cell = collectionView.dequeueReusableCellWithReuseIdentifier("CheckInCell", forIndexPath: indexPath) as! CheckInCollectionViewCell
+//            return cell;
+//        }
+//        if(indexPath.row == 1){
+//            cell = collectionView.dequeueReusableCellWithReuseIdentifier("ClassNameCell", forIndexPath: indexPath) as! ClassNameCollectionViewCell
+//            return cell
+//        }
+//        
+//        if(indexPath.row == 2){
+//            cell = collectionView.dequeueReusableCellWithReuseIdentifier("AttendanceCell", forIndexPath: indexPath) as! AttendanceCollectionViewCell
+//            return cell
+//        }
+//        if(indexPath.row == 3){
+//            cell = collectionView.dequeueReusableCellWithReuseIdentifier("QuestionsCell",forIndexPath:indexPath) as! QuestionsCollectionViewCell
+//            return cell
+//        }
+//        
+//        return cell;
+//    }
 
     
     
