@@ -1316,7 +1316,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wjc-xH-XnI">
                                 <rect key="frame" x="30" y="28" width="540" height="160"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="A7B0EB07-1E9E-457F-9353-22BA44330317" highlightedImage="A7B0EB07-1E9E-457F-9353-22BA44330317" translatesAutoresizingMaskIntoConstraints="NO" id="P7e-8M-9OS">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="41B40EC2-D2F9-4E27-B545-2C9234537A59" highlightedImage="41B40EC2-D2F9-4E27-B545-2C9234537A59" translatesAutoresizingMaskIntoConstraints="NO" id="P7e-8M-9OS">
                                         <rect key="frame" x="422" y="42" width="108" height="108"/>
                                         <animations/>
                                         <constraints>
@@ -1604,7 +1604,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="A7B0EB07-1E9E-457F-9353-22BA44330317" width="128" height="128">
+        <image name="41B40EC2-D2F9-4E27-B545-2C9234537A59" width="128" height="128">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOzxYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISksLzU4VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
@@ -2769,7 +2769,7 @@ AAEOnQABDqAAAQ6yAAEOtQABDroAAAAAAAAEAQAAAAAAAAA/AAAAAAAAAAAAAAAAAAEOvA
 </mutableData>
         </image>
         <image name="map.png" width="50" height="47"/>
-        <image name="selected_checkin" width="48" height="48"/>
-        <image name="unselected_button_login" width="48" height="48"/>
+        <image name="selected_checkin" width="24" height="24"/>
+        <image name="unselected_button_login" width="24" height="24"/>
     </resources>
 </document>
