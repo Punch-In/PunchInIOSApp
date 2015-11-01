@@ -9,19 +9,18 @@
 import UIKit
 
 class QuestionTableViewCell: UITableViewCell {
-
-    private static var questionDateFormatter: NSDateFormatter = {
-        let formatter = NSDateFormatter()
-        formatter.dateFormat = "HH:mm:ssa MMM dd y"
-        return formatter
-    }()
     
     var question:Question! {
         didSet {
             studentNameField.text = question.askedBy
             questionTextField.text = question.questionText
-            //questionDateField.text = QuestionTableViewCell.questionDateFormatter.stringFromDate(question.date)
-            questionDateField.text = question.sinceDateString
+            
+            questionDateField.text = question.absoluteDateString
+            if let forClass = question.forClass {
+                if !forClass.isFinished {
+                    questionDateField.text = question.sinceDateString + " ago"
+                }
+            }
             questionAnsweredControl.selectedSegmentIndex = question.isAnswered ? 1 : 0
         }
     }
@@ -33,7 +32,18 @@ class QuestionTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        setupUI()
         // Initialization code
+    }
+    
+    private func setupUI() {
+        // configure font colors
+        studentNameField.textColor = ThemeManager.theme().primaryGreyColor()
+        questionTextField.textColor = ThemeManager.theme().primaryBlueColor()
+        questionDateField.textColor = ThemeManager.theme().primaryBlueColor()
+        
+        
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

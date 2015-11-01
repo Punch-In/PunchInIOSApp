@@ -56,6 +56,7 @@ class Student: PFObject, PFSubclassing, Person {
         self.studentImageFile = PFFile(name:studentName+".png", data:imageData!)
     }
     
+    // MARK: Person protocol
     func getImage(completion: ((image:UIImage?, error:NSError?)-> Void)) {
         // check to see if image already exists
         guard studentImage == nil else {
@@ -75,6 +76,14 @@ class Student: PFObject, PFSubclassing, Person {
                 }
             }
         }
+    }
+    
+    func getType() -> PersonType {
+        return PersonType.Student
+    }
+    
+    func getName() -> String {
+        return self.studentName
     }
     
     class func student(forEmail: String, completion: ((student:Student?, error:NSError?)->Void)) {

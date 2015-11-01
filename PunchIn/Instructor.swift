@@ -50,6 +50,7 @@ class Instructor: PFObject, PFSubclassing, Person {
         self.instructorImageFile = PFFile(name:instructorName+".png", data:imageData!)
     }
     
+    // MARK: Person protocol
     func getImage(completion: ((image:UIImage?, error:NSError?)-> Void)) {
         guard instructorImageFile == nil else {
             return completion(image:instructorImage, error:nil)
@@ -68,6 +69,14 @@ class Instructor: PFObject, PFSubclassing, Person {
                 }
             }
         }
+    }
+
+    func getType() -> PersonType {
+        return PersonType.Instructor
+    }
+    
+    func getName() -> String {
+        return self.instructorName
     }
 
     

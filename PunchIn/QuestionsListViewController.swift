@@ -49,6 +49,7 @@ class QuestionsListViewController: UIViewController, UITableViewDelegate, UITabl
         dummyTableVC.tableView = questionTableView
         dummyTableVC.refreshControl = refreshControl
         
+        setupUI()
         initializeNewQuestionText()
 
         // show questions (if exist)
@@ -57,6 +58,16 @@ class QuestionsListViewController: UIViewController, UITableViewDelegate, UITabl
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
     }
+    
+    private func setupUI() {
+        // need to do anything?
+    }
+    
+    func initializeNewQuestionText() {
+        newQuestionText.textColor = UIColor.grayColor()
+        newQuestionText.text = "What's your question?"
+    }
+
     
     func fetchData() {
         let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
@@ -75,11 +86,6 @@ class QuestionsListViewController: UIViewController, UITableViewDelegate, UITabl
                 MBProgressHUD.hideHUDForView(self.view, animated: true)
             }
         }
-    }
-    
-    func initializeNewQuestionText() {
-        newQuestionText.textColor = UIColor.grayColor()
-        newQuestionText.text = "What's your question?"
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -110,7 +116,7 @@ class QuestionsListViewController: UIViewController, UITableViewDelegate, UITabl
     
     @IBAction func postButtonTapped(sender: AnyObject) {
         // create new question
-        let question = Question.createQuestion(PFUser.currentUser()!.email!, text:newQuestionText.text, date:NSDate(), inClass: theClass)
+        let question = Question.createQuestion(ParseDB.currentPerson!.getName(), text:newQuestionText.text, date:NSDate(), inClass: theClass)
         theClass.addQuestion(question)
         questions.append(question)
         initializeNewQuestionText()

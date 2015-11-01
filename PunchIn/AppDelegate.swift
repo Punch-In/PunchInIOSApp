@@ -20,17 +20,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         ParseDB.initialize()
-        //DataInjector.doIt()
-//        LocationProvider.startUpdatingLocation()
-        
         
         // add notification handler for user log in & log out events
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "userLoggedIn", name: ParseDB.UserLoggedInNotificatioName, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "userLoggedOut", name: ParseDB.UserLoggedOutNotificationName, object:nil)
         
-        // test ... REMOVE ME
-   //     NSNotificationCenter.defaultCenter().addObserver(self, selector: "printLocation", name:LocationProvider.locationAvailableNotificationName, object:nil)
-
+        setupGlobalUI()
+    
         // skip login if user is already logged in
         if let user = PFUser.currentUser() {
             // check if session needs to be reauthenticated
@@ -44,6 +40,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         return true
+    }
+    
+    func setupGlobalUI() {
+        UINavigationBar.appearance().tintColor = UIColor.whiteColor()  // Back buttons and such
+        UINavigationBar.appearance().barTintColor = ThemeManager.theme().primaryDarkBlueColor() // Bar's background color
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor()]  // Title's text color
+        //UINavigationBar.appearance().translucent = false
+        UINavigationBar.appearance().barStyle = UIBarStyle.Black
     }
     
     func printLocation(){
@@ -62,9 +66,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func userLoggedIn() {
-        if ParseDB.currentPerson == nil {
-            ParseDB.initializeCurrentPerson()
-        }
         let vc = self.mainStoryboard.instantiateViewControllerWithIdentifier(CoursesListViewController.storyboardName) as! CoursesListViewController
         let navigationController = UINavigationController(rootViewController: vc)
         self.window?.rootViewController = navigationController

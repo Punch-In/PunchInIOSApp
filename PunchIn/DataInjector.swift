@@ -13,7 +13,7 @@ import CoreLocation
 class DataInjector {
     class func dateHelper(dateStr:String, format:String="yyyy-MM-d") -> NSDate {
         let dateFmt = NSDateFormatter()
-        dateFmt.timeZone = NSTimeZone.defaultTimeZone()
+        dateFmt.timeZone = NSTimeZone.localTimeZone()
         dateFmt.dateFormat = format
         return dateFmt.dateFromString(dateStr)!
     }
@@ -59,9 +59,9 @@ class DataInjector {
         }
         
         // course
-        let course1 = Course.createCourse("iOS Bootcamp", id: "iOS1234", time: "7-9PM", day: "Monday,Wednesday", desc: "iOS Bootcamp for Senior Engineers", location: location1, instructors: [frink])
+        let course1 = Course.createCourse("iOS Bootcamp", id: "iOS1234", time: "7-9PM", day: "Monday,Wednesday", desc: "iOS Bootcamp for Senior Engineers", location: location1, instructors: [frink], image:UIImage(named:"student1.png")!)
         let course2 = Course.createCourse("Golden Gate Bridge History", id: "gg1234", time: "1-3PM", day: "Monday,Tuesday,Wednesday,Thursday,Friday",
-            desc: "History of the Golden Gate Bridge for Senior Engineers", location:location2, instructors: [apu])
+            desc: "History of the Golden Gate Bridge for Senior Engineers", location:location2, instructors: [apu], image:UIImage(named:"student1.png")!)
         
         try! course1.save()
         try! course2.save()

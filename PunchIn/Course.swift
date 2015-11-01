@@ -30,15 +30,19 @@ class Course: PFObject, PFSubclassing {
     // MARK: Properties stored to Parse
     @NSManaged private(set) var courseName: String!
     @NSManaged private(set) var courseId: String!
-    @NSManaged private(set) var courseTime: String! // TODO: fix me
-    @NSManaged private(set) var courseDay: String! // TODO: fix me
+    @NSManaged private(set) var courseTime: String! // TODO: fix me; should be a date? duration?
+    @NSManaged private(set) var courseDay: String! // TODO: fix me; should be a date?
     @NSManaged private(set) var courseDurationMin: Int // in minutes
     @NSManaged private(set) var courseDescription: String!
     @NSManaged private(set) var courseInstructors: [Instructor]?
     @NSManaged private(set) var courseTAs: [Instructor]?
     @NSManaged private(set) var registeredStudents: [Student]?
     @NSManaged private(set) var classes: [Class]?
-    @NSManaged private(set) var courseLocation: Location! // TODO: fix me
+    @NSManaged private(set) var courseLocation: Location!
+    @NSManaged private(set) var courseImageFile: PFFile?
+    
+    // MARK: Properties not saved
+    private(set) var courseImage:UIImage?
     
     override init() {
         super.init()
@@ -54,23 +58,19 @@ class Course: PFObject, PFSubclassing {
     }
     
     class func courses(handler: ((courses: [Course]?, error:NSError?)->Void)){
-        if ParseDB.isStudent {
-            Student.student((PFUser.currentUser()?.email!)!, completion: { (student, error) -> Void in
-                if error == nil {
-                    Course.courses(student!, completion: handler)
-                }else{
-                    handler(courses: nil, error: error)
+        ParseDB.initializeCurrentPerson({ (error) -> Void in
+            if error == nil {
+                if ParseDB.isStudent {
+                    Course.courses(ParseDB.currentPerson as! Student, completion: handler)
+                }else {
+                    Course.courses(ParseDB.currentPerson as! Instructor, completion: handler)
                 }
-            })
-        }else {
-            Instructor.instructor((PFUser.currentUser()?.email!)!, completion: { (instructor, error) -> Void in
-                if error == nil {
-                    Course.courses(instructor!, completion: handler)
-                }else{
-                    handler(courses: nil, error: error)
-                }
-            })
-        }
+            }else{
+                /// TODO...
+                print("error initializing ParseDB.person \(error)")
+                handler(courses:nil, error:error)
+            }
+        })
     }
     
     @objc(getCoursesForInstructor:instructor:)
@@ -132,10 +132,31 @@ class Course: PFObject, PFSubclassing {
         completion(classes: attendedClasses, isRegistered:true)
     }
     
+    func getImage(completion: ((image:UIImage?, error:NSError?)-> Void)) {
+        // check to see if image already exists
+        guard courseImage == nil else {
+            return completion(image:courseImage, error:nil)
+        }
+        
+        if let imageFile = courseImageFile {
+            imageFile.getDataInBackgroundWithBlock {
+                (imageData: NSData?, error: NSError?) -> Void in
+                if error == nil {
+                    if let imageData = imageData {
+                        self.courseImage = UIImage(data:imageData)
+                        completion(image:self.courseImage, error:nil)
+                    }
+                }else{
+                    completion(image:nil, error:error)
+                }
+            }
+        }
+    }
+    
     
     // MARK: for data loading purposes
     
-    class func createCourse(name:String, id:String, time:String, day:String, desc:String, location: Location, instructors: [Instructor]) -> Course {
+    class func createCourse(name:String, id:String, time:String, day:String, desc:String, location: Location, instructors: [Instructor], image:UIImage) -> Course {
         let course = Course()
         course.courseName = name
         course.courseId = id
@@ -146,7 +167,12 @@ class Course: PFObject, PFSubclassing {
         course.registeredStudents = []
         course.classes = []
         course.courseLocation = location
+
+        course.courseImage = image
         
+        let imageData = UIImagePNGRepresentation(image)
+        course.courseImageFile = PFFile(name:name+".png", data:imageData!)
+
         return course
     }
     

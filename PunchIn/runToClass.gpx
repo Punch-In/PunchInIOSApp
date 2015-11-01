@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+ 
+<gpx xmlns="http://www.topografix.com/GPX/1/1" creator="bikehike.co.uk" version="1.1" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+  
+    <wpt lat="37.780080" lon="-122.394300">
+      <ele>0</ele>
+      <time>2015-11-01T08:33:23Z</time>
+      <name>pt0</name>
+    </wpt>
+    <wpt lat="37.779680" lon="-122.394830">
+      <ele>0</ele>
+      <time>2015-11-01T08:33:24Z</time>
+      <name>pt1</name>
+    </wpt>
+    <wpt lat="37.779610" lon="-122.394950">
+      <ele>0</ele>
+      <time>2015-11-01T08:33:25Z</time>
+      <name>pt2</name>
+    </wpt>
+    <wpt lat="37.777160" lon="-122.398050">
+      <ele>0</ele>
+      <time>2015-11-01T08:33:26Z</time>
+      <name>pt3</name>
+    </wpt>
+    <wpt lat="37.777090" lon="-122.398220">
+      <ele>0</ele>
+      <time>2015-11-01T08:33:27Z</time>
+      <name>pt4</name>
+    </wpt>
+    <wpt lat="37.776830" lon="-122.398540">
+      <ele>0</ele>
+      <time>2015-11-01T08:33:28Z</time>
+      <name>pt5</name>
+    </wpt>
+    <wpt lat="37.776630" lon="-122.398820">
+      <ele>0</ele>
+      <time>2015-11-01T08:33:29Z</time>
+      <name>pt6</name>
+    </wpt>
+    <wpt lat="37.775130" lon="-122.400660">
+      <ele>0</ele>
+      <time>2015-11-01T08:33:30Z</time>
+      <name>pt7</name>
+    </wpt>
+    <wpt lat="37.774960" lon="-122.400890">
+      <ele>0</ele>
+      <time>2015-11-01T08:33:31Z</time>
+      <name>pt8</name>
+    </wpt>
+    <wpt lat="37.774850" lon="-122.400960">
+      <ele>0</ele>
+      <time>2015-11-01T08:33:32Z</time>
+      <name>pt9</name>
+    </wpt>
+    <wpt lat="37.774790" lon="-122.401030">
+      <ele>0</ele>
+      <time>2015-11-01T08:33:33Z</time>
+      <name>pt10</name>
+    </wpt>
+    <wpt lat="37.773490" lon="-122.402700">
+      <ele>0</ele>
+      <time>2015-11-01T08:33:34Z</time>
+      <name>pt11</name>
+    </wpt>
+    <wpt lat="37.771270" lon="-122.405490">
+      <ele>0</ele>
+      <time>2015-11-01T08:33:35Z</time>
+      <name>pt12</name>
+    </wpt>
+    <wpt lat="37.771210" lon="-122.405340">
+      <ele>0</ele>
+      <time>2015-11-01T08:33:36Z</time>
+      <name>pt13</name>
+    </wpt>
+    <wpt lat="37.770720" lon="-122.404750">
+      <ele>0</ele>
+      <time>2015-11-01T08:33:37Z</time>
+      <name>pt14</name>
+    </wpt>
+    <wpt lat="37.771073" lon="-122.403942">
+      <ele>0</ele>
+      <time>2015-11-01T08:33:38Z</time>
+      <name>pt15</name>
+    </wpt>
+    <wpt lat="37.771073" lon="-122.403943">
+      <ele>0</ele>
+      <time>2015-11-01T08:33:39Z</time>
+      <name>pt16</name>
+    </wpt>
+    <wpt lat="37.771073" lon="-122.403944">
+      <ele>0</ele>
+      <time>2015-11-01T08:33:59Z</time>
+      <name>pt17</name>
+    </wpt>
+    <wpt lat="37.771073" lon="-122.403945">
+      <ele>0</ele>
+      <time>2015-11-01T08:34:39Z</time>
+      <name>pt18</name>
+    </wpt>
+    <wpt lat="37.771073" lon="-122.403946">
+      <ele>0</ele>
+      <time>2015-11-01T08:35:39Z</time>
+      <name>pt19</name>
+    </wpt>
+    <wpt lat="37.771073" lon="-122.403947">
+      <ele>0</ele>
+      <time>2015-11-01T08:36:39Z</time>
+      <name>pt20</name>
+    </wpt>
+</gpx>

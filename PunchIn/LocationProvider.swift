@@ -16,6 +16,10 @@ protocol LocationProviderGeofenceDelegate {
     func errorGettingLocation(error:NSError)
 }
 
+protocol LocationProviderContinousDelegate {
+    func didUpdateLocation(location:Location?)
+}
+
 class LocationProvider : NSObject, CLLocationManagerDelegate {
     
     // MARK: static constants
@@ -28,7 +32,7 @@ class LocationProvider : NSObject, CLLocationManagerDelegate {
     static let didEnterGeofenceNotificationName = "DidEnterGeofence"
     static let didExitGeofenceNotificationName = "DidExitGeofence"
     
-    static let defaultGeofenceDistance = 20.0 // 20 meters
+    static let defaultGeofenceDistance = 10.0 // 10 meters
     
     // MARK: CLLocation Manager instance
     private let manager: CLLocationManager = {
@@ -100,23 +104,25 @@ class LocationProvider : NSObject, CLLocationManagerDelegate {
     
     class func stopUpdatingLocation() {
         print("stopped updating location")
+        instance.continousCompletionDelegate = nil
         instance.isContinuousLocation = false
         instance.manager.stopUpdatingLocation()
     }
     
     private var isContinuousLocation = false
-    private var locationCompletionHandler: ((location:Location?,error:NSError?)->Void)?
+    private var continousCompletionDelegate: LocationProviderContinousDelegate?
+    private var singleCompletionHandler: ((location:Location?,error:NSError?)->Void)?
     
-    class func continuousLocation(completion: ((location:Location?, error:NSError?)->Void)) {
-        instance.locationCompletionHandler = completion
+    class func continuousLocation(delegate:LocationProviderContinousDelegate?) {
+        instance.continousCompletionDelegate = delegate
         instance.isContinuousLocation = true
         instance.startUpdatingLocation()
     }
     
     class func location(completion: ((location:Location?, error:NSError?)->Void)) {
+        instance.singleCompletionHandler = completion
         instance.checkAuthorizationState()
         if CLLocationManager.authorizationStatus() == .AuthorizedAlways {
-            instance.locationCompletionHandler = completion
             instance.manager.requestLocation()
         }else{
             print("ruh roh.... not authorized to get location")
@@ -147,7 +153,11 @@ class LocationProvider : NSObject, CLLocationManagerDelegate {
     }
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let handler = self.locationCompletionHandler else {
+        if isContinuousLocation && self.continousCompletionDelegate == nil {
+            return
+        }
+        
+        if !isContinuousLocation && self.singleCompletionHandler == nil  {
             return
         }
         
@@ -160,21 +170,32 @@ class LocationProvider : NSObject, CLLocationManagerDelegate {
                     if let placemark = placemarks?.last {
                         if let addrList = placemark.addressDictionary?["FormattedAddressLines"] as? [String] {
                             let address =  addrList.joinWithSeparator(",")
-                            handler(location: Location(address: address, coordinates: location), error: nil)
+                            if self.isContinuousLocation {
+                                self.continousCompletionDelegate?.didUpdateLocation(Location(address: address, coordinates: location))
+                            }
+                            
+                            if let handler = self.singleCompletionHandler {
+                                handler(location:Location(address: address, coordinates: location), error:error)
+                            }
                         }
                     }
                 }else{
                     print("error obtaining address from reverseGeocodeLocation \(error)")
-                    handler(location:Location(address: "", coordinates: location), error:error)
+                    if self.isContinuousLocation {
+                        self.continousCompletionDelegate?.didUpdateLocation(Location(address: "", coordinates: location))
+                    }
+                    
+                    if let handler = self.singleCompletionHandler {
+                        handler(location:Location(address: "", coordinates: location), error:error)
+                    }
+                }
+                
+                // check if one time needs to be reset
+                if self.singleCompletionHandler != nil {
+                    // reset completion handler
+                    self.singleCompletionHandler = nil
                 }
             })
-            
-            if !isContinuousLocation {
-                // stop updates
-                self.manager.stopUpdatingLocation()
-                // reset completion handler
-                self.locationCompletionHandler = nil
-            }
         }
     }
     
