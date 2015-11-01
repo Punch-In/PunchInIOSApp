@@ -10,12 +10,14 @@ import UIKit
 import Parse
 import MBProgressHUD
 
-class QuestionsListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
+class QuestionsListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate {
 
     private static let cellIdentifier = "QuestionTableViewCell"
     
+    private let placeholderText = "What's your question?"
+    
     @IBOutlet weak var questionTableView: UITableView!
-    @IBOutlet weak var newQuestionTextField: UITextField!
+    @IBOutlet weak var newQuestionTextView: UITextView!
     @IBOutlet weak var newQuestionView: UIView!
     @IBOutlet weak var sendButton: UIButton!
     
@@ -41,7 +43,7 @@ class QuestionsListViewController: UIViewController, UITableViewDelegate, UITabl
         // Do any additional setup after loading the view.
         questionTableView.dataSource = self
         questionTableView.delegate = self
-        newQuestionTextField.delegate = self
+        newQuestionTextView.delegate = self
         
         // hack
         refreshControl = UIRefreshControl()
@@ -71,12 +73,12 @@ class QuestionsListViewController: UIViewController, UITableViewDelegate, UITabl
         sendButton.tintColor = UIColor.whiteColor()
         sendButton.setTitle("SEND", forState: .Normal)
         
+        newQuestionTextView.backgroundColor = UIColor.whiteColor()
     }
     
     func initializeNewQuestionText() {
-        newQuestionTextField.textColor = UIColor.grayColor()
-        newQuestionTextField.placeholder = "What's your question?"
-        newQuestionTextField.text = ""
+        newQuestionTextView.textColor = UIColor.grayColor()
+        newQuestionTextView.text = placeholderText
     }
 
     
@@ -111,14 +113,15 @@ class QuestionsListViewController: UIViewController, UITableViewDelegate, UITabl
         return cell
     }
     
-    func textFieldDidBeginEditing(textField: UITextField) {
-        newQuestionTextField.textColor = UIColor.blackColor()
-        newQuestionTextField.text = ""
+    func textViewDidBeginEditing(textView: UITextView) {
+        newQuestionTextView.textColor = UIColor.blackColor()
+        newQuestionTextView.text = ""
     }
     
-    func textFieldDidEndEditing(textField: UITextField) {
-        newQuestionTextField.resignFirstResponder()
+    func textViewDidEndEditing(textView: UITextView) {
+        newQuestionTextView.resignFirstResponder()
     }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -126,20 +129,24 @@ class QuestionsListViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     @IBAction func postButtonTapped(sender: AnyObject) {
-        guard !newQuestionTextField.text!.isEmpty else {
+        guard !newQuestionTextView.text!.isEmpty else {
+            return
+        }
+        
+        guard newQuestionTextView != placeholderText else {
             return
         }
         
         // create new question
-        let question = Question.createQuestion(ParseDB.currentPerson!.getName(), text:newQuestionTextField.text!, date:NSDate(), inClass: theClass)
+        let question = Question.createQuestion(ParseDB.currentPerson!.getName(), text:newQuestionTextView.text!, date:NSDate(), inClass: theClass)
         theClass.addQuestion(question)
         questions.append(question)
         initializeNewQuestionText()
-        newQuestionTextField.resignFirstResponder()
+        newQuestionTextView.resignFirstResponder()
     }
     
     // MARK: keyboard handling
-    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var newQuestionViewBottomConstraint: NSLayoutConstraint!
     func keyboardWillShow(notification: NSNotification!) {
         let userInfo: [NSObject : AnyObject] = notification.userInfo!
         let keyboardSize: CGSize = userInfo[UIKeyboardFrameBeginUserInfoKey]!.CGRectValue.size

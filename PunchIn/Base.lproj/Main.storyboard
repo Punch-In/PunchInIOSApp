@@ -891,30 +891,39 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="homer simpson" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eJU-2D-ONS">
-                                                    <rect key="frame" x="16" y="16" width="87" height="14.5"/>
+                                                    <rect key="frame" x="16" y="8" width="87" height="14.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Nov 11, 2015 07:30pm" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gox-wn-i8O">
-                                                    <rect key="frame" x="468" y="43.5" width="116" height="13.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Nov 11, 2015 07:30pm" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gox-wn-i8O">
+                                                    <rect key="frame" x="468" y="43" width="116" height="13.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" text="is this a question?" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="SSR-Y0-pbu">
-                                                    <rect key="frame" x="16" y="46" width="444" height="30"/>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" verticalCompressionResistancePriority="749" scrollEnabled="NO" editable="NO" text="is this a question?" translatesAutoresizingMaskIntoConstraints="NO" id="SSR-Y0-pbu">
+                                                    <rect key="frame" x="16" y="30.5" width="436" height="54"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="eB1-Ly-J6S"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                    <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES" calendarEvent="YES"/>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="eB1-Ly-J6S"/>
+                                                        </mask>
+                                                    </variation>
                                                 </textView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="SSR-Y0-pbu" firstAttribute="top" secondItem="eJU-2D-ONS" secondAttribute="bottom" constant="16" id="0lY-jd-6DE"/>
-                                                <constraint firstItem="Gox-wn-i8O" firstAttribute="leading" secondItem="SSR-Y0-pbu" secondAttribute="trailing" constant="8" id="3ZC-sB-pW0"/>
+                                                <constraint firstItem="SSR-Y0-pbu" firstAttribute="top" secondItem="eJU-2D-ONS" secondAttribute="bottom" constant="8" id="0lY-jd-6DE"/>
+                                                <constraint firstItem="Gox-wn-i8O" firstAttribute="leading" secondItem="SSR-Y0-pbu" secondAttribute="trailing" constant="16" id="3ZC-sB-pW0"/>
                                                 <constraint firstItem="eJU-2D-ONS" firstAttribute="leading" secondItem="9la-R8-ubf" secondAttribute="leading" constant="16" id="D0l-7w-TY2"/>
                                                 <constraint firstItem="SSR-Y0-pbu" firstAttribute="leading" secondItem="eJU-2D-ONS" secondAttribute="leading" id="DgJ-KJ-fjq"/>
-                                                <constraint firstItem="eJU-2D-ONS" firstAttribute="top" secondItem="9la-R8-ubf" secondAttribute="top" constant="16" id="IVY-K2-Zfn"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="SSR-Y0-pbu" secondAttribute="bottom" constant="16" id="PAV-Ka-MUC"/>
+                                                <constraint firstItem="eJU-2D-ONS" firstAttribute="top" secondItem="9la-R8-ubf" secondAttribute="top" constant="8" id="IVY-K2-Zfn"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="SSR-Y0-pbu" secondAttribute="bottom" constant="8" id="PAV-Ka-MUC"/>
                                                 <constraint firstAttribute="trailing" secondItem="Gox-wn-i8O" secondAttribute="trailing" constant="16" id="QdC-Eq-Klx"/>
                                                 <constraint firstItem="Gox-wn-i8O" firstAttribute="centerY" secondItem="9la-R8-ubf" secondAttribute="centerY" id="Twh-dV-fN7"/>
                                             </constraints>
@@ -922,7 +931,7 @@
                                         <connections>
                                             <outlet property="personNameField" destination="eJU-2D-ONS" id="ZaG-3U-lxj"/>
                                             <outlet property="questionDateField" destination="Gox-wn-i8O" id="bQa-ey-YNO"/>
-                                            <outlet property="questionTextView" destination="SSR-Y0-pbu" id="J5Y-0L-PkC"/>
+                                            <outlet property="questionTextView" destination="SSR-Y0-pbu" id="3A3-3M-FU1"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -930,11 +939,6 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ws8-oT-3Pd">
                                 <rect key="frame" x="0.0" y="552" width="600" height="48"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RW0-BK-tri">
-                                        <rect key="frame" x="8" y="9" width="532" height="30"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B1E-wG-3um">
                                         <rect key="frame" x="548" y="9" width="36" height="30"/>
                                         <state key="normal" title="Send"/>
@@ -942,24 +946,24 @@
                                             <action selector="postButtonTapped:" destination="5sk-sp-kbf" eventType="touchUpInside" id="dc2-Q2-kuE"/>
                                         </connections>
                                     </button>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" text="Question Text" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Fas-tH-5VT">
+                                        <rect key="frame" x="8" y="8" width="532" height="31"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="31" id="Qja-Fq-txc"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="RW0-BK-tri" firstAttribute="leading" secondItem="Ws8-oT-3Pd" secondAttribute="leading" constant="8" id="Beu-sD-nfl"/>
                                     <constraint firstAttribute="trailing" secondItem="B1E-wG-3um" secondAttribute="trailing" constant="16" id="KSs-gb-DVS"/>
                                     <constraint firstItem="B1E-wG-3um" firstAttribute="centerY" secondItem="Ws8-oT-3Pd" secondAttribute="centerY" id="MwE-ho-aXq"/>
-                                    <constraint firstItem="B1E-wG-3um" firstAttribute="leading" secondItem="RW0-BK-tri" secondAttribute="trailing" constant="8" id="bU5-5M-2qk"/>
-                                    <constraint firstItem="RW0-BK-tri" firstAttribute="centerY" secondItem="Ws8-oT-3Pd" secondAttribute="centerY" id="cwk-dJ-Stq"/>
-                                    <constraint firstItem="B1E-wG-3um" firstAttribute="centerY" secondItem="Ws8-oT-3Pd" secondAttribute="centerY" id="gy2-oH-o2N"/>
-                                    <constraint firstItem="B1E-wG-3um" firstAttribute="centerX" secondItem="Ws8-oT-3Pd" secondAttribute="centerX" id="jJ8-0V-Wod"/>
+                                    <constraint firstItem="Fas-tH-5VT" firstAttribute="leading" secondItem="Ws8-oT-3Pd" secondAttribute="leading" constant="8" id="PyY-Jx-24c"/>
                                     <constraint firstAttribute="height" constant="48" id="p45-Qw-ade"/>
+                                    <constraint firstItem="Fas-tH-5VT" firstAttribute="centerY" secondItem="Ws8-oT-3Pd" secondAttribute="centerY" id="yZ6-OJ-v1f"/>
+                                    <constraint firstItem="B1E-wG-3um" firstAttribute="leading" secondItem="Fas-tH-5VT" secondAttribute="trailing" constant="8" id="zMn-Dz-dvd"/>
                                 </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="gy2-oH-o2N"/>
-                                        <exclude reference="jJ8-0V-Wod"/>
-                                    </mask>
-                                </variation>
                             </view>
                         </subviews>
                         <animations/>
@@ -975,8 +979,9 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="newQuestionTextField" destination="RW0-BK-tri" id="1aq-TT-IKL"/>
+                        <outlet property="newQuestionTextView" destination="Fas-tH-5VT" id="3Uk-cp-rVs"/>
                         <outlet property="newQuestionView" destination="Ws8-oT-3Pd" id="MLR-BR-cph"/>
+                        <outlet property="newQuestionViewBottomConstraint" destination="BEb-Kg-DYd" id="XCd-Rv-BwM"/>
                         <outlet property="questionTableView" destination="IoB-AQ-oOr" id="iJW-t6-uWL"/>
                         <outlet property="sendButton" destination="B1E-wG-3um" id="p7Z-bb-6Ab"/>
                     </connections>
@@ -1212,7 +1217,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wjc-xH-XnI">
                                 <rect key="frame" x="30" y="28" width="540" height="160"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="499F8AE4-B103-47AB-8F04-000D8A846C26" highlightedImage="499F8AE4-B103-47AB-8F04-000D8A846C26" translatesAutoresizingMaskIntoConstraints="NO" id="P7e-8M-9OS">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="20C47A8D-0E46-46BA-A363-D60271DBB65B" highlightedImage="20C47A8D-0E46-46BA-A363-D60271DBB65B" translatesAutoresizingMaskIntoConstraints="NO" id="P7e-8M-9OS">
                                         <rect key="frame" x="422" y="42" width="108" height="108"/>
                                         <animations/>
                                         <constraints>
@@ -1568,7 +1573,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="499F8AE4-B103-47AB-8F04-000D8A846C26" width="128" height="128">
+        <image name="20C47A8D-0E46-46BA-A363-D60271DBB65B" width="128" height="128">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOzxYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISksLzU4VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
