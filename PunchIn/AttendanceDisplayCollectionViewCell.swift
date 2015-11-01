@@ -10,4 +10,6 @@ import UIKit
 
 class AttendanceDisplayCollectionViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var studentCount: UILabel!
+    @IBOutlet weak var checkInStudentsCount: UILabel!
 }

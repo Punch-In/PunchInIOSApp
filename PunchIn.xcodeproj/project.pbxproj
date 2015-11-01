@@ -14,9 +14,7 @@
 		450509421BDC479200ED17FF /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450509411BDC479200ED17FF /* Question.swift */; settings = {ASSET_TAGS = (); }; };
 		450C2D821BDF221600149934 /* LocationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450C2D811BDF221600149934 /* LocationProvider.swift */; settings = {ASSET_TAGS = (); }; };
 		450C2D841BDF2C9900149934 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 450C2D831BDF2C9900149934 /* CoreLocation.framework */; };
-		450C6B5A1BE5BEB7002CC641 /* CheckInCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450C6B591BE5BEB7002CC641 /* CheckInCollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		450C6B5C1BE5BEBD002CC641 /* QuestionsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450C6B5B1BE5BEBD002CC641 /* QuestionsCollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
-		450C6B5E1BE5BEC6002CC641 /* ClassNameCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450C6B5D1BE5BEC6002CC641 /* ClassNameCollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		450C6B601BE5BECD002CC641 /* ClassMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450C6B5F1BE5BECD002CC641 /* ClassMapViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		450DC4FE1BE5C4B8005E6ACB /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 450DC4FD1BE5C4B8005E6ACB /* MapKit.framework */; };
 		454BA75A1BE445C100B73833 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454BA7591BE445C100B73833 /* Person.swift */; settings = {ASSET_TAGS = (); }; };
@@ -60,6 +58,10 @@
 		C49895711BE4365C00B5E490 /* door.png in Resources */ = {isa = PBXBuildFile; fileRef = C49895701BE4365C00B5E490 /* door.png */; settings = {ASSET_TAGS = (); }; };
 		C4A78A021BE1679A0040C270 /* InstructorCourseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A78A011BE1679A0040C270 /* InstructorCourseView.swift */; settings = {ASSET_TAGS = (); }; };
 		C4A78A041BE170FE0040C270 /* InstructorCourseDraggableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A78A031BE170FE0040C270 /* InstructorCourseDraggableViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		C4EB01D11BE5940A00B3127A /* map.png in Resources */ = {isa = PBXBuildFile; fileRef = C4EB01D01BE5940A00B3127A /* map.png */; settings = {ASSET_TAGS = (); }; };
+		C4EB01D51BE599C000B3127A /* AttendanceDisplayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4EB01D41BE599C000B3127A /* AttendanceDisplayCollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		C4EB01D71BE599CC00B3127A /* ClassNameCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4EB01D61BE599CC00B3127A /* ClassNameCollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		C4EB01D91BE599D800B3127A /* CheckInCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4EB01D81BE599D800B3127A /* CheckInCollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -131,6 +133,11 @@
 		C49895701BE4365C00B5E490 /* door.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = door.png; sourceTree = "<group>"; };
 		C4A78A011BE1679A0040C270 /* InstructorCourseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructorCourseView.swift; sourceTree = "<group>"; };
 		C4A78A031BE170FE0040C270 /* InstructorCourseDraggableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructorCourseDraggableViewController.swift; sourceTree = "<group>"; };
+		C4EB01D01BE5940A00B3127A /* map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map.png; sourceTree = "<group>"; };
+		C4EB01D21BE5999B00B3127A /* QuestionsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionsCollectionViewCell.swift; sourceTree = "<group>"; };
+		C4EB01D41BE599C000B3127A /* AttendanceDisplayCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttendanceDisplayCollectionViewCell.swift; sourceTree = "<group>"; };
+		C4EB01D61BE599CC00B3127A /* ClassNameCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassNameCollectionViewCell.swift; sourceTree = "<group>"; };
+		C4EB01D81BE599D800B3127A /* CheckInCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckInCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -218,6 +225,10 @@
 				450C6B5B1BE5BEBD002CC641 /* QuestionsCollectionViewCell.swift */,
 				45FC02DD1BDD9F2E006E37E3 /* QuestionTableViewCell.swift */,
 				C4A78A011BE1679A0040C270 /* InstructorCourseView.swift */,
+				C4EB01D21BE5999B00B3127A /* QuestionsCollectionViewCell.swift */,
+				C4EB01D41BE599C000B3127A /* AttendanceDisplayCollectionViewCell.swift */,
+				C4EB01D61BE599CC00B3127A /* ClassNameCollectionViewCell.swift */,
+				C4EB01D81BE599D800B3127A /* CheckInCollectionViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -261,6 +272,7 @@
 			isa = PBXGroup;
 			children = (
 				C49895701BE4365C00B5E490 /* door.png */,
+				C4EB01D01BE5940A00B3127A /* map.png */,
 				C460FD1F1BD8778E00CD9DBC /* new.png */,
 				C43414791BCE443E00AA63DB /* Main.storyboard */,
 				C434147C1BCE443E00AA63DB /* Assets.xcassets */,
@@ -434,6 +446,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C4EB01D11BE5940A00B3127A /* map.png in Resources */,
 				C460FD201BD8778E00CD9DBC /* new.png in Resources */,
 				C43414801BCE443E00AA63DB /* LaunchScreen.storyboard in Resources */,
 				C434147D1BCE443E00AA63DB /* Assets.xcassets in Resources */,
@@ -510,6 +523,7 @@
 				C460FD141BD8416200CD9DBC /* MKColor.swift in Sources */,
 				C460FD161BD8416200CD9DBC /* MKLabel.swift in Sources */,
 				C460FD151BD8416200CD9DBC /* MKImageView.swift in Sources */,
+				C4EB01D51BE599C000B3127A /* AttendanceDisplayCollectionViewCell.swift in Sources */,
 				C460FD091BD8410D00CD9DBC /* BFPaperTableViewCell.m in Sources */,
 				C460FD051BD8410D00CD9DBC /* BFPaperCheckbox.m in Sources */,
 				C460FCDA1BD75B3F00CD9DBC /* CoursesListViewController.swift in Sources */,
@@ -518,17 +532,17 @@
 				C498956F1BE1B87600B5E490 /* StudentCourseDraggableViewController.swift in Sources */,
 				454BA75A1BE445C100B73833 /* Person.swift in Sources */,
 				C460FCE01BD75BA800CD9DBC /* DetailAttendanceViewController.swift in Sources */,
+				C4EB01D71BE599CC00B3127A /* ClassNameCollectionViewCell.swift in Sources */,
 				C460FD0A1BD8410D00CD9DBC /* BFPaperCollectionViewCell.m in Sources */,
-				450C6B5E1BE5BEC6002CC641 /* ClassNameCollectionViewCell.swift in Sources */,
 				C460FD071BD8410D00CD9DBC /* BFPaperButton.m in Sources */,
 				C460FD171BD8416200CD9DBC /* MKLayer.swift in Sources */,
 				C460FD3C1BDB287700CD9DBC /* Attendance.swift in Sources */,
 				45F7535D1BDCBDE10011FE00 /* DataInjector.swift in Sources */,
+				C4EB01D91BE599D800B3127A /* CheckInCollectionViewCell.swift in Sources */,
 				C460FD081BD8410D00CD9DBC /* UIColor+BFPaperColors.m in Sources */,
 				C460FD341BDAF8E500CD9DBC /* WalmartcolorTheme.m in Sources */,
 				450C6B601BE5BECD002CC641 /* ClassMapViewController.swift in Sources */,
 				C460FCF81BD840CE00CD9DBC /* MaterialDesignTheme.m in Sources */,
-				450C6B5A1BE5BEB7002CC641 /* CheckInCollectionViewCell.swift in Sources */,
 				450509341BDC234C00ED17FF /* ParseDB.swift in Sources */,
 				C43414761BCE443E00AA63DB /* AppDelegate.swift in Sources */,
 				45F39D4A1BDE03F800E385E8 /* AttendanceCollectionViewController.swift in Sources */,
