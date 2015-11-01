@@ -38,6 +38,10 @@ class Question : PFObject, PFSubclassing {
         return Question.elapsedTimeFormatter.stringFromTimeInterval(interval)!
     }
     
+    var absoluteDateString: String {
+        return Question.absoluteTimeFormatter.stringFromDate(self.date)
+    }
+    
     override init() {
         super.init()
     }
@@ -48,14 +52,23 @@ class Question : PFObject, PFSubclassing {
     }
     
     
-    // MARK: time formatting; to display elapsed time as "2d" or "1w" ... etc
+    // MARK: time formatting
+    // to display elapsed time as "2d" or "1w" ... etc
     private static var elapsedTimeFormatter: NSDateComponentsFormatter = {
         let formatter = NSDateComponentsFormatter()
         formatter.unitsStyle = NSDateComponentsFormatterUnitsStyle.Abbreviated
         formatter.collapsesLargestUnit = true
         formatter.maximumUnitCount = 1
         return formatter
-        }()
+    }()
+    
+    // to display absolute time
+    private static var absoluteTimeFormatter: NSDateFormatter = {
+        var formatter = NSDateFormatter()
+        formatter.timeZone = NSTimeZone.localTimeZone()
+        formatter.dateFormat = "EEEEEE, MMM dd, y @ h:mma"
+        return formatter
+    }()
     
     
     // MARK: utility functions to create data

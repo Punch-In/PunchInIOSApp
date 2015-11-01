@@ -60,7 +60,7 @@ class CoursesListViewController: UIViewController,UICollectionViewDelegate,UICol
     
     func setUpUI(){
         coursesCollectionView.backgroundColor = UIColor.whiteColor()
-        self.navigationController?.navigationBar.barTintColor = ThemeManager.theme().primaryColor()
+        self.navigationController?.navigationBar.barTintColor = ThemeManager.theme().primaryDarkBlueColor()
         self.navigationItem.title = "Courses"
         self.navigationController?.navigationItem.title = "Courses"
         self.navigationController?.navigationBar.titleTextAttributes = NSDictionary.init(dictionary:
@@ -68,7 +68,10 @@ class CoursesListViewController: UIViewController,UICollectionViewDelegate,UICol
         
         // logout button
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Logout", style: UIBarButtonItemStyle.Plain, target:self, action: "tappedLogout")
+        self.navigationItem.rightBarButtonItem?.tintColor = UIColor.whiteColor()
         
+        // tint color
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
     }
     
     func tappedLogout() {

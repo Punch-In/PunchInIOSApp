@@ -98,6 +98,7 @@ class DetailAttendanceViewController: UIViewController,UICollectionViewDataSourc
     
     private static var classDateFormatter: NSDateFormatter = {
         let formatter = NSDateFormatter()
+        formatter.timeZone = NSTimeZone.localTimeZone()
         formatter.dateFormat = "MMM dd y"
         return formatter
     }()

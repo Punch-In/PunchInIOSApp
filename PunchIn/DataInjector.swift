@@ -13,7 +13,7 @@ import CoreLocation
 class DataInjector {
     class func dateHelper(dateStr:String, format:String="yyyy-MM-d") -> NSDate {
         let dateFmt = NSDateFormatter()
-        dateFmt.timeZone = NSTimeZone.defaultTimeZone()
+        dateFmt.timeZone = NSTimeZone.localTimeZone()
         dateFmt.dateFormat = format
         return dateFmt.dateFromString(dateStr)!
     }

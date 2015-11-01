@@ -63,12 +63,23 @@ class Class : PFObject, PFSubclassing, LocationProviderGeofenceDelegate {
     /// grr... because NSManaged doesn't allow optionals on Ints, use this approach to 
     //      dynamically source the duration of the class
     var duration:Int {
+        if let cd = classDuration {
+            return Int(cd)!
+        }else{
+            return parentCourse.courseDurationMin
+        }
+    }
+    
+    private static let timeFormatter : NSDateFormatter = {
+        var formatter = NSDateFormatter()
+        formatter.dateFormat = "EEEEEE, MMM dd, y @ h:mma"
+        formatter.timeZone = NSTimeZone.localTimeZone()
+        return formatter
+    }()
+    
+    var dateString: String {
         get {
-            if let cd = classDuration {
-                return Int(cd)!
-            }else{
-                return parentCourse.courseDurationMin
-            }
+            return Class.timeFormatter.stringFromDate(self.date)
         }
     }
     

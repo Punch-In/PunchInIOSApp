@@ -14,4 +14,5 @@ enum PersonType : String {
 protocol Person {
     func getImage(completion: ((image:UIImage?, error:NSError?)-> Void))
     func getType() -> PersonType
+    func getName() -> String
 }
