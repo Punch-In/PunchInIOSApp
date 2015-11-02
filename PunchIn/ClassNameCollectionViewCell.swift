@@ -12,6 +12,15 @@ class ClassNameCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var className: UILabel!
     @IBOutlet weak var classDescription: UILabel!
+    @IBOutlet weak var classDate: UILabel!
+    
+    weak var displayClass: Class! {
+        didSet {
+            className.text = displayClass.name
+            classDescription.text = displayClass.classDescription
+            classDate.text = displayClass.dateString
+        }
+    }
     
     func setUpclassCell(){
     

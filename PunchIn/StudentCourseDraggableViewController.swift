@@ -277,6 +277,7 @@ class StudentCourseDraggableViewController: UICollectionViewController, Question
             classNameCell.layer.borderColor = ThemeManager.theme().primaryDarkBlueColor().CGColor
             classNameCell.layer.borderWidth = 0.5
             classNameCell.setUpclassCell()
+            classNameCell.displayClass = currentClass
             return classNameCell
         }
         

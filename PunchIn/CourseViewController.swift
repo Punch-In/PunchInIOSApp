@@ -25,6 +25,7 @@ class CourseViewController: UIViewController,UINavigationBarDelegate,UIPageViewC
     @IBOutlet weak var courseNumber: UILabel!
     @IBOutlet weak var courseDate: UILabel!
     @IBOutlet weak var courseAddress: UILabel!
+    @IBOutlet weak var courseImageView: UIImageView!
     
     /*  Attendance  */
     
@@ -46,6 +47,23 @@ class CourseViewController: UIViewController,UINavigationBarDelegate,UIPageViewC
         courseNumber.text = course.courseId
         courseDate.text = String("\(course.courseDay) \(course.courseTime)")
         courseAddress.text = course.courseLocation.address
+        
+        // format address... ugly for now
+        let address = course.courseLocation.address
+        if let commaLoc = address.characters.indexOf(",") {
+            let newAddr = address.substringToIndex(commaLoc) + "\n" + address.substringFromIndex(commaLoc.advancedBy(2))
+            courseAddress.text = newAddr
+        }
+        
+        course.getImage { (image, error) -> Void in
+            if error == nil {
+                self.courseImageView.alpha = 0.0
+                self.courseImageView.image = image
+                UIView.animateWithDuration(0.2, animations: { () -> Void in
+                    self.courseImageView.alpha = 1.0
+                })
+            }
+        }
     }
     
     func setUpUI(){
@@ -94,7 +112,11 @@ class CourseViewController: UIViewController,UINavigationBarDelegate,UIPageViewC
         self.pageController.view.frame = self.courseBaseView.bounds
         
         // pick starting class: the first class that has not already finished
-        let index = course.classes?.indexOf{ !$0.isFinished }
+        var index = course.classes?.indexOf{ !$0.isFinished }
+        if index == nil {
+            // all classes finished for the course
+            index = 0
+        }
         
         let viewControllerObject:UIViewController = self.viewControllerAtIndex(withIndex:index!)
         let viewcontrollers:[UIViewController] = [viewControllerObject]
