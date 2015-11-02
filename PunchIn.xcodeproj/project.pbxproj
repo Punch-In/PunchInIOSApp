@@ -227,7 +227,6 @@
 		C460FCE71BD8333700CD9DBC /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				C49D64D31BE70DC7003EAB48 /* New Group */,
 				C460FCE11BD75E9500CD9DBC /* CoursesListsCollectionViewCell.swift */,
 				C460FD371BDB1AF300CD9DBC /* AttendanceCollectionViewCell.swift */,
 				C460FD391BDB27ED00CD9DBC /* DailyAttendanceCollectionViewCell.swift */,
@@ -236,6 +235,7 @@
 				450C6B5B1BE5BEBD002CC641 /* QuestionsCollectionViewCell.swift */,
 				45FC02DD1BDD9F2E006E37E3 /* QuestionTableViewCell.swift */,
 				C4A78A011BE1679A0040C270 /* InstructorCourseView.swift */,
+				C49D64D31BE70DC7003EAB48 /* InstructorCells */,
 				C49D64D21BE70DBE003EAB48 /* StudentCells */,
 			);
 			name = Views;
@@ -306,8 +306,8 @@
 				C460FCDB1BD75B4B00CD9DBC /* CourseViewController.swift */,
 				C460FCDF1BD75BA800CD9DBC /* DetailAttendanceViewController.swift */,
 				C460FCDD1BD75B5800CD9DBC /* QuestionsListViewController.swift */,
-				C4A78A031BE170FE0040C270 /* InstructorCourseDraggableViewController.swift */,
 				C49D64D01BE70BF5003EAB48 /* InstructorDraggableCollectionViewController.swift */,
+				C49D64DC1BE727B6003EAB48 /* Ignore */,
 			);
 			name = Instructor;
 			sourceTree = "<group>";
@@ -395,7 +395,7 @@
 			name = StudentCells;
 			sourceTree = "<group>";
 		};
-		C49D64D31BE70DC7003EAB48 /* New Group */ = {
+		C49D64D31BE70DC7003EAB48 /* InstructorCells */ = {
 			isa = PBXGroup;
 			children = (
 				C49D64D41BE70E86003EAB48 /* InstructorCourseStartCellCollectionViewCell.swift */,
@@ -403,7 +403,15 @@
 				C49D64D81BE70FD6003EAB48 /* InstructorAttendanceCollectionViewCell.swift */,
 				C49D64DA1BE70FE5003EAB48 /* InstructorQuestionCollectionViewCell.swift */,
 			);
-			name = "New Group";
+			name = InstructorCells;
+			sourceTree = "<group>";
+		};
+		C49D64DC1BE727B6003EAB48 /* Ignore */ = {
+			isa = PBXGroup;
+			children = (
+				C4A78A031BE170FE0040C270 /* InstructorCourseDraggableViewController.swift */,
+			);
+			name = Ignore;
 			sourceTree = "<group>";
 		};
 		CD8FC80B0AD3E39675544999 /* Frameworks */ = {

@@ -54,9 +54,10 @@ class DetailAttendanceViewController: UIViewController,UICollectionViewDataSourc
         }
         
         setCollectionViewLayout()
-        attendanceCollectionView.backgroundColor = ThemeManager.theme().primaryColor()
-       
-        ThemeManager.theme().themeForContentView(dailyAttendanceView)
+        
+        attendanceCollectionView.backgroundColor = UIColor.whiteColor()
+        dailyAttendanceView.backgroundColor = ThemeManager.theme().primaryBlueColor()
+    
         ThemeManager.theme().themeForTitleLabels(studentName)
         ThemeManager.theme().themeForTitleLabels(className)
         ThemeManager.theme().themeForTitleLabels(totalAttendance)
@@ -71,7 +72,7 @@ class DetailAttendanceViewController: UIViewController,UICollectionViewDataSourc
 
     func setCollectionViewLayout(){
         let flowLayout : UICollectionViewFlowLayout = UICollectionViewFlowLayout.init()
-        flowLayout.itemSize = CGSizeMake(self.view.bounds.width, self.view.bounds.height/10)
+        flowLayout.itemSize = CGSizeMake(self.view.bounds.width, self.view.bounds.height/9)
         flowLayout.minimumInteritemSpacing = 10
         attendanceCollectionView.setCollectionViewLayout(flowLayout, animated: true)
     }
@@ -87,15 +88,9 @@ class DetailAttendanceViewController: UIViewController,UICollectionViewDataSourc
         cell.className.text = theClass.classDescription
         cell.classDate.text = DetailAttendanceViewController.classDateFormatter.stringFromDate(theClass.date)
         cell.classPresentOrAbsent.text = theClass.didStudentAttend(student) ? "Present" : "Absent"
-        
+        cell.layer.borderColor = ThemeManager.theme().primaryBlueColor().CGColor
         cell.backgroundColor = UIColor.whiteColor()
-        cell.layer.borderColor = UIColor.blackColor().CGColor
-        cell.layer.borderWidth = 2.0
-        cell.layer.cornerRadius = 10
-        
-        
-        
-        
+        cell.layer.borderWidth = 0.25
         return cell
     }
     
