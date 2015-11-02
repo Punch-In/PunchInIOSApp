@@ -10,6 +10,11 @@ import UIKit
 import Parse
 import MBProgressHUD
 
+protocol QuestionPostedNewProtocol {
+    func didPostNewQuestion(question:Question?)
+}
+
+
 class QuestionsListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate {
 
     private static let cellIdentifier = "QuestionTableViewCell"
@@ -32,6 +37,8 @@ class QuestionsListViewController: UIViewController, UITableViewDelegate, UITabl
             questionTableView.reloadData()
         }
     }
+    
+    var newQuestionDelegate: QuestionPostedNewProtocol?
     
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self);
@@ -84,7 +91,7 @@ class QuestionsListViewController: UIViewController, UITableViewDelegate, UITabl
     
     func fetchData() {
         let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-        hud.labelText = "Fetching new questions..."
+        hud.labelText = "Looking for new questions..."
 
         theClass.refreshQuestions { (questions, error) -> Void in
             if error == nil {
@@ -143,6 +150,11 @@ class QuestionsListViewController: UIViewController, UITableViewDelegate, UITabl
         questions.append(question)
         initializeNewQuestionText()
         newQuestionTextView.resignFirstResponder()
+        
+        if let delegate = self.newQuestionDelegate {
+            delegate.didPostNewQuestion(question)
+        }
+        
     }
     
     // MARK: keyboard handling
@@ -156,11 +168,11 @@ class QuestionsListViewController: UIViewController, UITableViewDelegate, UITabl
         
         if keyboardSize.height == offsetSize.height {
             UIView.animateWithDuration(animationDuration, animations: { () -> Void in
-                //self.bottomConstraint.constant = keyboardSize.height + 8
+                self.newQuestionViewBottomConstraint.constant = keyboardSize.height + 2
             })
         }else{
             UIView.animateWithDuration(animationDuration, animations: { () -> Void in
-                //self.bottomConstraint.constant = offsetSize.height + 8
+                self.newQuestionViewBottomConstraint.constant = offsetSize.height + 2
             })
         }
     }
@@ -170,7 +182,7 @@ class QuestionsListViewController: UIViewController, UITableViewDelegate, UITabl
         let durationValue = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber
         let animationDuration = durationValue.doubleValue
         UIView.animateWithDuration(animationDuration, animations: { () -> Void in
-            //self.bottomConstraint.constant = 8
+            self.newQuestionViewBottomConstraint.constant = 0
         })
     }
 

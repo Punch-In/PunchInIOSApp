@@ -9,7 +9,7 @@
 import UIKit
 import MBProgressHUD
 
-class StudentCourseDraggableViewController: UICollectionViewController {
+class StudentCourseDraggableViewController: UICollectionViewController, QuestionPostedNewProtocol {
 
     var course:Course!
     var classIndex:Int!
@@ -56,6 +56,9 @@ class StudentCourseDraggableViewController: UICollectionViewController {
         allowedToCheckIn = false
 
         fetchData()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
     }
     
     func setUpUI() {
@@ -137,9 +140,17 @@ class StudentCourseDraggableViewController: UICollectionViewController {
         let storyBoard = UIStoryboard.init(name: storyBoardName, bundle: nil);
         let vc = storyBoard.instantiateViewControllerWithIdentifier("QuestionsListViewController") as! QuestionsListViewController
         vc.theClass = currentClass
+        vc.newQuestionDelegate = self
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
+    func didPostNewQuestion(question: Question?) {
+        let indexPath = NSIndexPath(forRow: 2, inSection: 0)
+        if let questionCell = studentDraggableViewCollectionView.cellForItemAtIndexPath(indexPath) as? QuestionsCollectionViewCell {
+            // new question created... need to make sure to refresh the count
+            questionCell.numQuestions = currentClass.questions!.count
+        }
+    }
 
     func setupAttendView() {
         if currentClass.isFinished {
@@ -257,6 +268,12 @@ class StudentCourseDraggableViewController: UICollectionViewController {
             checkIncell.backgroundColor = ThemeManager.theme().primaryYellowColor()
             checkIncell.setUpUI()
             checkIncell.setUpValuesForCheckIn(currentClass, allowedToCheckIn: allowedToCheckIn!,message: " ")
+            
+            // for now
+            let gesture = UITapGestureRecognizer(target: self, action: "attendClassTapped")
+            checkIncell.checkIntoClassLabel.addGestureRecognizer(gesture)
+            checkIncell.checkIntoClassLabel.userInteractionEnabled = true
+            
             return checkIncell;
         }
         
@@ -283,7 +300,14 @@ class StudentCourseDraggableViewController: UICollectionViewController {
     }
 
     
-    
+    // MARK: show map view
+    @IBAction func mapButtonTapped(sender: AnyObject) {
+        let storyBoardName = "Main"
+        let storyBoard = UIStoryboard.init(name: storyBoardName, bundle: nil);
+        let vc = storyBoard.instantiateViewControllerWithIdentifier("ClassMapViewController") as! ClassMapViewController
+        vc.currentClass = currentClass
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
     
     
     

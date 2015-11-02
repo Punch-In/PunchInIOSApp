@@ -21,8 +21,12 @@ class ClassMapViewController: UIViewController, MKMapViewDelegate, LocationProvi
         didSet {
             if isShowingPersonRegion == false {
                 LocationProvider.stopUpdatingLocation()
+                showPersonLocationImage.alpha = 0.5
+                showClassLocationImage.alpha = 1.0
             }else{
                 LocationProvider.continuousLocation(self)
+                showPersonLocationImage.alpha = 1.0
+                showClassLocationImage.alpha = 0.5
             }
         }
     }
@@ -47,7 +51,7 @@ class ClassMapViewController: UIViewController, MKMapViewDelegate, LocationProvi
 
         self.locationMapView.delegate = self
         self.locationMapView.addAnnotation(personAnnotation)
-        self.locationMapView.showsUserLocation = true
+        self.locationMapView.showsUserLocation = false
         self.locationMapView.userTrackingMode = .Follow
         
         if let student = ParseDB.currentPerson as? Student {
@@ -86,9 +90,10 @@ class ClassMapViewController: UIViewController, MKMapViewDelegate, LocationProvi
             if error == nil {
                 dispatch_async(dispatch_get_main_queue()){
                     self.showClassLocationImage.image = image
+                    let ogAlpha = self.showClassLocationImage.alpha
                     self.showClassLocationImage.alpha = 0
                     UIView.animateWithDuration(0.2, animations: { () -> Void in
-                        self.showClassLocationImage.alpha = 1
+                        self.showClassLocationImage.alpha = ogAlpha
                     })
                     let gesture = UITapGestureRecognizer(target: self, action: "goToClassLocation")
                     self.showClassLocationImage.addGestureRecognizer(gesture)
@@ -105,9 +110,10 @@ class ClassMapViewController: UIViewController, MKMapViewDelegate, LocationProvi
             if error == nil {
                 dispatch_async(dispatch_get_main_queue()){
                     self.showPersonLocationImage.image = image
+                    let ogAlpha = self.showPersonLocationImage.alpha
                     self.showPersonLocationImage.alpha = 0
                     UIView.animateWithDuration(0.2, animations: { () -> Void in
-                        self.showPersonLocationImage.alpha = 1
+                        self.showPersonLocationImage.alpha = ogAlpha
                     })
                     let gesture = UITapGestureRecognizer(target: self, action: "goToPersonLocation")
                     self.showPersonLocationImage.addGestureRecognizer(gesture)
@@ -161,6 +167,9 @@ class ClassMapViewController: UIViewController, MKMapViewDelegate, LocationProvi
         return annotationView
     }
     
+    // this and the next function are to prevent the map from automatically
+    //  recentering on the user's current location if the user scrolls away from
+    //  the current location
     private var regionChangeIsFromUserInteraction = false
     func mapView(mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
         let view = self.locationMapView.subviews.first
@@ -197,7 +206,7 @@ class ClassMapViewController: UIViewController, MKMapViewDelegate, LocationProvi
     func goToClassLocation() {
         self.hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         self.hud.labelText = "Let's show where \(currentClass.name) is...."
-        isShowingPersonRegion = false
+        self.isShowingPersonRegion = false
         if let classGeofence = currentClass.geofenceRegion {
             // show class region
             self.locationMapView.deselectAnnotation(self.personAnnotation, animated: true)
@@ -232,6 +241,8 @@ class ClassMapViewController: UIViewController, MKMapViewDelegate, LocationProvi
             self.personAnnotation.coordinate = (location?.coordinates)!
             self.personAnnotation.title = self.personName
             self.locationMapView.selectAnnotation(self.personAnnotation, animated: true)
+            
+            print("# annotations: \(self.locationMapView.annotations.count)")
             
             if self.centerOnPerson {
                 let personRegion = MKCoordinateRegionMake(self.personAnnotation.coordinate, MKCoordinateSpanMake(0.01, 0.01))

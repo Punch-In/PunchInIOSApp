@@ -55,7 +55,6 @@ class CheckInCollectionViewCell: UICollectionViewCell {
             checkInButton.selected = !checkInButton.selected;
             checkinWarningLabel.text = " "
         }
-
     }
 }
 

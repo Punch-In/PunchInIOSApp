@@ -175,18 +175,6 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E5J-Sk-WWh">
-                                                    <rect key="frame" x="115" y="114" width="32" height="32"/>
-                                                    <animations/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="32" id="1WB-TQ-Wp5"/>
-                                                        <constraint firstAttribute="width" constant="32" id="b26-Ya-c2a"/>
-                                                    </constraints>
-                                                    <state key="normal" backgroundImage="map"/>
-                                                    <connections>
-                                                        <action selector="showMapViewTapped:" destination="m4w-gi-j3V" eventType="touchUpInside" id="aV4-8l-NUt"/>
-                                                    </connections>
-                                                </button>
                                             </subviews>
                                             <animations/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -195,10 +183,8 @@
                                         <constraints>
                                             <constraint firstItem="kRX-3C-X5X" firstAttribute="width" secondItem="t96-m2-T0y" secondAttribute="width" id="9Tq-c9-vZs"/>
                                             <constraint firstItem="kRX-3C-X5X" firstAttribute="height" secondItem="t96-m2-T0y" secondAttribute="height" id="IPp-Vi-zR8"/>
-                                            <constraint firstItem="E5J-Sk-WWh" firstAttribute="top" secondItem="kRX-3C-X5X" secondAttribute="bottom" constant="16" id="aqR-4S-8Iq"/>
                                             <constraint firstItem="kRX-3C-X5X" firstAttribute="centerX" secondItem="t96-m2-T0y" secondAttribute="centerX" id="icc-AL-45y"/>
                                             <constraint firstItem="kRX-3C-X5X" firstAttribute="centerY" secondItem="t96-m2-T0y" secondAttribute="centerY" id="pG0-GD-A9c"/>
-                                            <constraint firstItem="E5J-Sk-WWh" firstAttribute="centerX" secondItem="t96-m2-T0y" secondAttribute="centerX" id="vyF-JA-C93"/>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
@@ -1044,6 +1030,9 @@
                                                 <constraint firstAttribute="width" constant="48" id="Ko5-tj-0vL"/>
                                             </constraints>
                                             <state key="normal" image="map"/>
+                                            <connections>
+                                                <action selector="mapButtonTapped:" destination="26A-4w-bvP" eventType="touchUpInside" id="Qii-jA-RnK"/>
+                                            </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Not in the class location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cDY-fm-dQ9">
                                             <rect key="frame" x="26" y="73" width="351" height="21"/>
@@ -1217,7 +1206,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wjc-xH-XnI">
                                 <rect key="frame" x="30" y="28" width="540" height="160"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="20C47A8D-0E46-46BA-A363-D60271DBB65B" highlightedImage="20C47A8D-0E46-46BA-A363-D60271DBB65B" translatesAutoresizingMaskIntoConstraints="NO" id="P7e-8M-9OS">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="6681DB61-EA11-49BF-B2A0-4C38F6BF00D5" highlightedImage="6681DB61-EA11-49BF-B2A0-4C38F6BF00D5" translatesAutoresizingMaskIntoConstraints="NO" id="P7e-8M-9OS">
                                         <rect key="frame" x="422" y="42" width="108" height="108"/>
                                         <animations/>
                                         <constraints>
@@ -1573,7 +1562,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="20C47A8D-0E46-46BA-A363-D60271DBB65B" width="128" height="128">
+        <image name="6681DB61-EA11-49BF-B2A0-4C38F6BF00D5" width="128" height="128">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOzxYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISksLzU4VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA

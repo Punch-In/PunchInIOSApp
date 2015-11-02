@@ -225,6 +225,8 @@ class LocationProvider : NSObject, CLLocationManagerDelegate {
         }
     }
     
+    /*
+    // this is only useful if we can call requestStateForRegion(), which is only available with iBeacons
     func locationManager(manager: CLLocationManager, didDetermineState state: CLRegionState, forRegion region: CLRegion) {
         guard (region as? CLCircularRegion != nil) else {
             print("region \(region.identifier) not a circular region")
@@ -233,7 +235,7 @@ class LocationProvider : NSObject, CLLocationManagerDelegate {
         
         let region = region as! CLCircularRegion
         guard  let delegate = self.monitoredRegions[region] else {
-            print("didDetermineState but no completion handler")
+            print("didDetermineState but no completion handler for region \(region.identifier)")
             return
         }
         
@@ -243,6 +245,7 @@ class LocationProvider : NSObject, CLLocationManagerDelegate {
             // always notify if inside geofence
             delegate.isInsideGeofence()
         case .Outside:
+            delegate.isOutsideGeofence()
             break
         case .Unknown:
             // TODO: fix me
@@ -252,6 +255,7 @@ class LocationProvider : NSObject, CLLocationManagerDelegate {
         // remove delegate; was a onetime operation
         self.monitoredRegions.removeValueForKey(region)
     }
+    */
     
     class func createGeofenceRegion(location: Location, distance: CLLocationDistance=LocationProvider.defaultGeofenceDistance, id:String) -> CLCircularRegion? {
         guard CLLocationManager.isMonitoringAvailableForClass(CLCircularRegion) else {
