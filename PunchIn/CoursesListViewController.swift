@@ -93,8 +93,6 @@ class CoursesListViewController: UIViewController,UICollectionViewDelegate,UICol
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell{
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(CoursesListCellIdentifier, forIndexPath: indexPath) as! CoursesListsCollectionViewCell
         
-        cell.setCoursesListCollectionViewCell(courseArray[indexPath.row])
-        cell.courseNameLabel?.textColor = UIColor.whiteColor()
         cell.layer.shadowRadius = 2.0;
         cell.layer.shadowOpacity = 0.5;
         cell.layer.shadowOffset = CGSizeZero
@@ -104,6 +102,9 @@ class CoursesListViewController: UIViewController,UICollectionViewDelegate,UICol
         }else{
             cell.backgroundColor = ThemeManager.theme().primaryBlueColor()
         }
+                
+        cell.setupUI()
+        cell.displayCourse = courseArray[indexPath.row]
         return cell;
     }
     
