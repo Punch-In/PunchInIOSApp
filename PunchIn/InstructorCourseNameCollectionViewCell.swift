@@ -22,4 +22,10 @@ class InstructorCourseNameCollectionViewCell: UICollectionViewCell {
         classDescription.textColor = ThemeManager.theme().primaryBlueColor()
         classDescription.font = ThemeManager.theme().primarySubTitleFont()
     }
+    
+    func setUpClassNameAndClassDescription(aclassName:String,aclassDescription:String){
+        className.text = aclassName
+        classDescription.text = aclassDescription
+    }
+    
 }

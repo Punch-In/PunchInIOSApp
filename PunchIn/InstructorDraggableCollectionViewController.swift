@@ -16,11 +16,12 @@ class InstructorDraggableCollectionViewController: UICollectionViewController {
     var indexNumber:Int!
     private var currentClass: Class!
     let refreshControl = UIRefreshControl()
-    
+    private var classDescription:String!
     @IBOutlet var instructorDraggableCollectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        classDescription = " ";
         setUpValues()
         setCollectionViewLayout()
         refreshControl.tintColor = UIColor.grayColor()
@@ -35,15 +36,7 @@ class InstructorDraggableCollectionViewController: UICollectionViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
 
     func setUpValues(){
         // show current class
@@ -51,16 +44,17 @@ class InstructorDraggableCollectionViewController: UICollectionViewController {
         currentClass.refreshDetails { (error) -> Void in
             if error == nil {
                 dispatch_async(dispatch_get_main_queue()){
-                    //self.classDescription.text = self.currentClass.classDescription
+                    self.classDescription = self.currentClass.classDescription
                                       // set "class start" view based on class status
+                    
                     if self.currentClass.isFinished {
-                       // self.startClassLabel.text = Class.classFinishedText
+                    self.classDescription = Class.classFinishedText
                         
                     }else if self.currentClass.isStarted {
-                        //self.startClassLabel.text = Class.classStartedText
-                    }else {
-                        //self.startClassLabel.text = Class.classNotStartedText
+                    self.classDescription = Class.classStartedText
                         
+                    }else {
+                        self.classDescription = Class.classStartedText
                     }
                 }
             }
@@ -134,10 +128,11 @@ class InstructorDraggableCollectionViewController: UICollectionViewController {
             cell.backgroundColor = UIColor.whiteColor()
             cell.layer.borderColor = ThemeManager.theme().primaryDarkBlueColor().CGColor
             cell.setUpCourseName()
+            cell.setUpClassNameAndClassDescription(currentClass.name, aclassDescription: classDescription)
             cell.layer.borderWidth = 0.5
             return cell
         }
-        
+    
         if indexPath.row == 2{
             let questionCell:InstructorAttendanceCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier("InstructorAttendanceCell",forIndexPath:indexPath) as! InstructorAttendanceCollectionViewCell
             
@@ -145,8 +140,6 @@ class InstructorDraggableCollectionViewController: UICollectionViewController {
             questionCell.layer.borderColor = ThemeManager.theme().primaryDarkBlueColor().CGColor
             questionCell.layer.borderWidth = 0.5
             questionCell.setAttendanceCollectionViewCell()
-//            questionCell.setupUI()
-//            questionCell.numQuestions = currentClass.questions!.count
             return questionCell
         }
         
@@ -155,9 +148,9 @@ class InstructorDraggableCollectionViewController: UICollectionViewController {
             questionCell.layer.borderColor = ThemeManager.theme().primaryDarkBlueColor().CGColor
             questionCell.layer.borderWidth = 0.5
             questionCell.questionsCollectionViewCell()
-            //            questionCell.setupUI()
-            //            questionCell.numQuestions = currentClass.questions!.count
-            return questionCell
+            let questionsCount = "\(currentClass.questions!.count)";
+        questionCell.setQuestionValues(questionsCount)
+        return questionCell
     
     }
 }

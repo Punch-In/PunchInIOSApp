@@ -12,4 +12,14 @@ class ClassNameCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var className: UILabel!
     @IBOutlet weak var classDescription: UILabel!
+    
+    func setUpclassCell(){
+    
+        className.textColor = ThemeManager.theme().primaryBlueColor()
+        className.font = ThemeManager.theme().primaryTitleFont()
+        
+        classDescription.textColor = ThemeManager.theme().primaryBlueColor()
+        classDescription.font = ThemeManager.theme().primarySubTitleFont()
+    
+    }
 }

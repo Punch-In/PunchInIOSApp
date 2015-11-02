@@ -32,4 +32,8 @@ class InstructorQuestionCollectionViewCell: UICollectionViewCell {
         
         
     }
+    
+    func setQuestionValues(numberOfQuestions:String){
+        questionsCount.text = numberOfQuestions
+    }
 }
