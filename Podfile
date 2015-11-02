@@ -5,10 +5,7 @@ platform :ios, '9.0'
 use_frameworks!
 
 target 'PunchIn' do
-	pod 'AFNetworking'
 	pod 'Parse'
-	pod 'SwiftyJSON'
 	pod 'MBProgressHUD'
-	pod 'UIImageEffects'
 end
 

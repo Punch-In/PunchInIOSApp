@@ -52,18 +52,12 @@ code_sign_if_enabled() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework 'Pods-PunchIn/AFNetworking.framework'
   install_framework 'Pods-PunchIn/Bolts.framework'
   install_framework 'Pods-PunchIn/MBProgressHUD.framework'
   install_framework 'Pods-PunchIn/Parse.framework'
-  install_framework 'Pods-PunchIn/SwiftyJSON.framework'
-  install_framework 'Pods-PunchIn/UIImageEffects.framework'
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework 'Pods-PunchIn/AFNetworking.framework'
   install_framework 'Pods-PunchIn/Bolts.framework'
   install_framework 'Pods-PunchIn/MBProgressHUD.framework'
   install_framework 'Pods-PunchIn/Parse.framework'
-  install_framework 'Pods-PunchIn/SwiftyJSON.framework'
-  install_framework 'Pods-PunchIn/UIImageEffects.framework'
 fi
