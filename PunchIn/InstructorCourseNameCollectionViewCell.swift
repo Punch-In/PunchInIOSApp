@@ -11,21 +11,29 @@ import UIKit
 class InstructorCourseNameCollectionViewCell: UICollectionViewCell {
     
     
+    
     @IBOutlet weak var className: UILabel!
     @IBOutlet weak var classDescription: UILabel!
+    @IBOutlet weak var classDateLabel: UILabel!
     
-    func setUpCourseName(){
+    weak var displayClass: Class! {
+        didSet {
+            className.text = displayClass.name
+            classDescription.text = displayClass.classDescription
+            classDateLabel.text = displayClass.dateString
+        }
+    }
+
+    
+    func setupUI(){
         //Class Names
-        className.textColor = ThemeManager.theme().primaryBlueColor()
-        className.font = ThemeManager.theme().primaryTitleFont()
+        className.textColor = ThemeManager.theme().primaryDarkBlueColor()
+//        className.font = ThemeManager.theme().primaryTitleFont()
         //Class Description
         classDescription.textColor = ThemeManager.theme().primaryBlueColor()
-        classDescription.font = ThemeManager.theme().primarySubTitleFont()
-    }
-    
-    func setUpClassNameAndClassDescription(aclassName:String,aclassDescription:String){
-        className.text = aclassName
-        classDescription.text = aclassDescription
+//        classDescription.font = ThemeManager.theme().primarySubTitleFont()
+        
+        classDateLabel.textColor = ThemeManager.theme().primaryGreyColor()
     }
     
 }

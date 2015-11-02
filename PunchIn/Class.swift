@@ -12,7 +12,7 @@ class Class : PFObject, PFSubclassing, LocationProviderGeofenceDelegate {
     
     static let classFinishedText = "Class has ended!"
     static let classStartedText = "Class has started"
-    static let classNotStartedText = "Start Class"
+    static let classNotStartedText = "Start the class"
     
     static let insideClassGeofenceNotification = "InsideClassGeofenceNotification"
     static let outsideClassGeofenceNotification = "OutsideClassGeofenceNotification"

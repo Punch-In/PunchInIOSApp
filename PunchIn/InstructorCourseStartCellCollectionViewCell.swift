@@ -19,9 +19,33 @@ class InstructorCourseStartCellCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var checkInStatus: UILabel!
     @IBOutlet weak var checkInButon: UIButton!
-    var currentClass:Class!
     var newInstructorCourseStartDelegate: InstructorCourseStartProtocol?
     
+    var displayClass : Class! {
+        didSet {
+            updateCheckInText()
+            checkInButon.selected = displayClass.isStarted || displayClass.isFinished
+        }
+    }
+
+    private func updateCheckInText() {
+        if displayClass.isFinished {
+            checkInStatus.text = Class.classFinishedText
+        }else if displayClass.isStarted {
+            checkInStatus.text = Class.classStartedText
+        }else{
+            checkInStatus.text = Class.classNotStartedText
+        }
+    }
+    
+    func setupUI() {
+        checkInButon.setImage(UIImage.init(named:"selected_checkin"), forState: .Selected)
+        checkInButon.setImage(UIImage.init(named:"unselected_checkin"), forState: .Normal)
+        checkInStatus.textColor = UIColor.whiteColor()
+        checkInStatus.font = ThemeManager.theme().primarySubTitleFont()
+    }
+    
+    /*
     func setUpCourseStartCell(aCurrentClass:Class){
         checkInButon.setImage(UIImage.init(named:"selected_checkin"), forState: .Selected)
         checkInButon.setImage(UIImage.init(named:"unselected_checkin"), forState: .Normal)
@@ -29,6 +53,7 @@ class InstructorCourseStartCellCollectionViewCell: UICollectionViewCell {
         checkInStatus.textColor = UIColor.whiteColor()
         checkInStatus.font = ThemeManager.theme().primarySubTitleFont()
     }
+    */
     
     @IBAction func checkInButtonAction(sender: AnyObject) {
         checkInButon.selected = !checkInButon.selected
@@ -51,13 +76,13 @@ class InstructorCourseStartCellCollectionViewCell: UICollectionViewCell {
             return
         }
         
-        guard !currentClass.isFinished else {
+        guard !displayClass.isFinished else {
             // class already done... do nothing
         
             return
         }
         
-        if currentClass.isStarted {
+        if displayClass.isStarted {
             // stop class
             doStopClass()
         }else {
@@ -71,11 +96,12 @@ class InstructorCourseStartCellCollectionViewCell: UICollectionViewCell {
         let hud = MBProgressHUD.showHUDAddedTo(self, animated: true)
         hud.labelText = "Starting class..."
         
-        currentClass.start { (error) -> Void in
+        displayClass.start { (error) -> Void in
             if error == nil {
                 dispatch_async(dispatch_get_main_queue()) {
                     MBProgressHUD.hideHUDForView(self, animated: true)
                     self.newInstructorCourseStartDelegate?.classStarted()
+                    self.updateCheckInText()
                     print("Start Class");
                     UIView.animateWithDuration(0.5, animations: { () -> Void in
                         //           self.startClassView.backgroundColor = UIColor.greenColor()
@@ -90,7 +116,7 @@ class InstructorCourseStartCellCollectionViewCell: UICollectionViewCell {
     }
     
     private func doStopClass() {
-        currentClass.finish()
+        displayClass.finish()
         self.newInstructorCourseStartDelegate?.classEnded()
         print("End Class")
         UIView.animateWithDuration(0.5, animations: { () -> Void in

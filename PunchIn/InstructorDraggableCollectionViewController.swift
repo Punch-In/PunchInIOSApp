@@ -16,12 +16,10 @@ class InstructorDraggableCollectionViewController: UICollectionViewController {
     var indexNumber:Int!
     private var currentClass: Class!
     let refreshControl = UIRefreshControl()
-    private var classDescription:String!
     @IBOutlet var instructorDraggableCollectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        classDescription = " ";
         setUpValues()
         setCollectionViewLayout()
         refreshControl.tintColor = UIColor.grayColor()
@@ -44,22 +42,10 @@ class InstructorDraggableCollectionViewController: UICollectionViewController {
         currentClass.refreshDetails { (error) -> Void in
             if error == nil {
                 dispatch_async(dispatch_get_main_queue()){
-                    self.classDescription = self.currentClass.classDescription
-                                      // set "class start" view based on class status
-                    
-                    if self.currentClass.isFinished {
-                    self.classDescription = Class.classFinishedText
-                        
-                    }else if self.currentClass.isStarted {
-                    self.classDescription = Class.classStartedText
-                        
-                    }else {
-                        self.classDescription = Class.classStartedText
-                    }
+                    self.instructorDraggableCollectionView.reloadData()
                 }
             }
         }
-        instructorDraggableCollectionView.reloadData()
         refreshControl.endRefreshing()
     }
     
@@ -118,8 +104,9 @@ class InstructorDraggableCollectionViewController: UICollectionViewController {
         
         if indexPath.row == 0{
             let checkIncell:InstructorCourseStartCellCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier("InstructorCourseCheckInCell", forIndexPath: indexPath) as! InstructorCourseStartCellCollectionViewCell
-            checkIncell.setUpCourseStartCell(currentClass)
             checkIncell.backgroundColor = ThemeManager.theme().primaryYellowColor()
+            checkIncell.setupUI()
+            checkIncell.displayClass = currentClass
             return checkIncell;
         }
         
@@ -127,9 +114,9 @@ class InstructorDraggableCollectionViewController: UICollectionViewController {
           let  cell:InstructorCourseNameCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier("InstructorCourseNameCell", forIndexPath: indexPath) as! InstructorCourseNameCollectionViewCell
             cell.backgroundColor = UIColor.whiteColor()
             cell.layer.borderColor = ThemeManager.theme().primaryDarkBlueColor().CGColor
-            cell.setUpCourseName()
-            cell.setUpClassNameAndClassDescription(currentClass.name, aclassDescription: classDescription)
             cell.layer.borderWidth = 0.5
+            cell.setupUI()
+            cell.displayClass = currentClass
             return cell
         }
     
