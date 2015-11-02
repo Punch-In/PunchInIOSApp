@@ -492,7 +492,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hZZ-GJ-nsu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-460" y="4163"/>
+            <point key="canvasLocation" x="-293" y="4160"/>
         </scene>
         <!--Course View Controller-->
         <scene sceneID="Srl-lz-cu4">
@@ -1321,7 +1321,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wjc-xH-XnI">
                                 <rect key="frame" x="30" y="28" width="540" height="160"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EA5FAB9B-2F21-4DB9-ACEB-D84E0D00D0A6" highlightedImage="EA5FAB9B-2F21-4DB9-ACEB-D84E0D00D0A6" translatesAutoresizingMaskIntoConstraints="NO" id="P7e-8M-9OS">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DD3FD63F-80A4-4DF3-A78F-FDF0E5901DB2" highlightedImage="DD3FD63F-80A4-4DF3-A78F-FDF0E5901DB2" translatesAutoresizingMaskIntoConstraints="NO" id="P7e-8M-9OS">
                                         <rect key="frame" x="422" y="42" width="108" height="108"/>
                                         <animations/>
                                         <constraints>
@@ -1677,7 +1677,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="EA5FAB9B-2F21-4DB9-ACEB-D84E0D00D0A6" width="128" height="128">
+        <image name="DD3FD63F-80A4-4DF3-A78F-FDF0E5901DB2" width="128" height="128">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOjtYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISgrLjQ3VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
