@@ -4,11 +4,6 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>AFNetworking.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Bolts.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -29,50 +24,25 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>SwiftyJSON.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>UIImageEffects.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>11D0873CB966D3DFA5F9CA2F438D76CC</key>
+		<key>216C977FD0D7176B741C22EC2B6E667B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>160ADEDD495F9AF2CA01453A9BDBFEF8</key>
+		<key>21B622912D085414377C610B47257B91</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>18F3D37DDB93A0B478844EF3600067DA</key>
+		<key>36A4A27336A7126C414FE1C1C54F59AC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4EFAB9D43491ED1CD3F79B01C5EE977D</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>B9A04D3C9B208813656510FDA8ADAE02</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>C763FA558424E495F38AE8E70A44DCA9</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>F17170F0F5B8D92D7A19EDBA1048C10F</key>
+		<key>686E292967D872B9EBBFEF847C639D21</key>
 		<dict>
 			<key>primary</key>
 			<true/>

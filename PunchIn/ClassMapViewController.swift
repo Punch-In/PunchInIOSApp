@@ -152,6 +152,14 @@ class ClassMapViewController: UIViewController, MKMapViewDelegate, LocationProvi
             annotationView!.leftCalloutAccessoryView = UIImageView(frame: CGRect(x:0, y:0, width: 48, height:48))
         }
         
+        // dont show current location
+        if let title = annotation.title {
+            if title == mapView.userLocation.title {
+                annotationView!.hidden = true
+                return annotationView
+            }
+        }
+        
         ParseDB.currentPerson!.getImage { (image, error) -> Void in
             if error == nil {
                 dispatch_async(dispatch_get_main_queue()){
@@ -219,6 +227,7 @@ class ClassMapViewController: UIViewController, MKMapViewDelegate, LocationProvi
     private func addPersonLocationToMap(){
         LocationProvider.location { (location, error) -> Void in
             if error == nil || (location != nil && location!.address.isEmpty){
+                self.personAnnotation.title = self.personName
                 self.personAnnotation.coordinate = (location?.coordinates)!
             }else{
                 print("map view: error getting location \(error)")
@@ -241,8 +250,6 @@ class ClassMapViewController: UIViewController, MKMapViewDelegate, LocationProvi
             self.personAnnotation.coordinate = (location?.coordinates)!
             self.personAnnotation.title = self.personName
             self.locationMapView.selectAnnotation(self.personAnnotation, animated: true)
-            
-            print("# annotations: \(self.locationMapView.annotations.count)")
             
             if self.centerOnPerson {
                 let personRegion = MKCoordinateRegionMake(self.personAnnotation.coordinate, MKCoordinateSpanMake(0.01, 0.01))
