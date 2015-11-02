@@ -20,6 +20,12 @@
 -(UIColor *)secondaryTextColor;
 
 
+-(UIFont *)primaryTitleFont;
+-(UIFont *)primarySubTitleFont;
+-(UIFont *)primaryTextFont;
+
+
+
 -(UIColor *)primaryBlueColor;
 -(UIColor *)primaryDarkBlueColor;
 -(UIColor *)primaryGreyColor;

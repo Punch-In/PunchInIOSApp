@@ -14,22 +14,15 @@ class StudentCourseDraggableViewController: UICollectionViewController, Question
     var course:Course!
     var classIndex:Int!
     var indexNumber:Int!
-    var initialCenterPoint:CGPoint?
-    var lastCenterPoint:CGPoint?
-    private var allowedToCheckIn:Bool?
-    let refreshControl = UIRefreshControl()
-    //PageController Property.
-   
-    @IBOutlet var studentDraggableViewCollectionView: UICollectionView!
-    
-    /*Start Class*/
-    /*Class Details*/
-    //private var classIndex: Int!
-    private var currentClass: Class!
-    
-    /* the Student */
     var student: Student!
     
+    private var currentClass: Class!
+    private var allowedToCheckIn:Bool?
+    
+    let refreshControl = UIRefreshControl()
+    @IBOutlet var studentDraggableViewCollectionView: UICollectionView!
+    
+    //private var classIndex: Int!
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self, name: Class.outsideClassGeofenceNotification, object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: Class.insideClassGeofenceNotification, object: nil)
@@ -238,7 +231,7 @@ class StudentCourseDraggableViewController: UICollectionViewController, Question
     
     func setCollectionViewLayout(){
         let flowLayout : UICollectionViewFlowLayout = UICollectionViewFlowLayout.init()
-        flowLayout.itemSize = CGSizeMake(self.view.bounds.width-20, self.view.bounds.height/5)
+        flowLayout.itemSize = CGSizeMake(self.view.bounds.width, self.view.bounds.height/5)
         flowLayout.minimumInteritemSpacing = 0
         flowLayout.minimumLineSpacing = 0
         flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0)
@@ -279,11 +272,12 @@ class StudentCourseDraggableViewController: UICollectionViewController, Question
         }
         
         if(indexPath.row == 1){
-            cell = collectionView.dequeueReusableCellWithReuseIdentifier("ClassNameCell", forIndexPath: indexPath) as! ClassNameCollectionViewCell
-            cell.backgroundColor = UIColor.whiteColor()
-            cell.layer.borderColor = ThemeManager.theme().primaryDarkBlueColor().CGColor
-            cell.layer.borderWidth = 0.5
-            
+            let  classNameCell:ClassNameCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier("ClassNameCell", forIndexPath: indexPath) as! ClassNameCollectionViewCell
+            classNameCell.backgroundColor = UIColor.whiteColor()
+            classNameCell.layer.borderColor = ThemeManager.theme().primaryDarkBlueColor().CGColor
+            classNameCell.layer.borderWidth = 0.5
+            classNameCell.setUpclassCell()
+            return classNameCell
         }
         
         if(indexPath.row == 2){
@@ -296,10 +290,8 @@ class StudentCourseDraggableViewController: UICollectionViewController, Question
             
             return questionCell
         }
-        
         return cell;
     }
-
     
     // MARK: show map view
     @IBAction func mapButtonTapped(sender: AnyObject) {
@@ -309,30 +301,5 @@ class StudentCourseDraggableViewController: UICollectionViewController, Question
         vc.currentClass = currentClass
         self.navigationController?.pushViewController(vc, animated: true)
     }
-    
-    
-    
-//    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//        // Get the new view controller using segue.destinationViewController.
-//        // Pass the selected object to the new view controller.
-//        if(segue.identifier == "DetailAttedanceViewControllerSegue"){
-//            //   var vc:
-//            
-//        }else if(segue.identifier == "QuestionsViewControllerSegue"){
-//        }
-//    }
-//    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-
     
 }

@@ -26,14 +26,14 @@ class InstructorCourseStartCellCollectionViewCell: UICollectionViewCell {
         checkInButon.setImage(UIImage.init(named:"selected_checkin"), forState: .Selected)
         checkInButon.setImage(UIImage.init(named:"unselected_checkin"), forState: .Normal)
         currentClass = aCurrentClass
+        checkInStatus.textColor = UIColor.whiteColor()
+        checkInStatus.font = ThemeManager.theme().primarySubTitleFont()
     }
     
     @IBAction func checkInButtonAction(sender: AnyObject) {
         checkInButon.selected = !checkInButon.selected
         startClassTapped()
     }
-    
-    
     
     func startClassTapped() {
         print("tapped start class!")
@@ -53,6 +53,7 @@ class InstructorCourseStartCellCollectionViewCell: UICollectionViewCell {
         
         guard !currentClass.isFinished else {
             // class already done... do nothing
+        
             return
         }
         
@@ -75,6 +76,7 @@ class InstructorCourseStartCellCollectionViewCell: UICollectionViewCell {
                 dispatch_async(dispatch_get_main_queue()) {
                     MBProgressHUD.hideHUDForView(self, animated: true)
                     self.newInstructorCourseStartDelegate?.classStarted()
+                    print("Start Class");
                     UIView.animateWithDuration(0.5, animations: { () -> Void in
                         //           self.startClassView.backgroundColor = UIColor.greenColor()
                         //         self.startClassLabel.text = Class.classStartedText
@@ -90,7 +92,7 @@ class InstructorCourseStartCellCollectionViewCell: UICollectionViewCell {
     private func doStopClass() {
         currentClass.finish()
         self.newInstructorCourseStartDelegate?.classEnded()
-        
+        print("End Class")
         UIView.animateWithDuration(0.5, animations: { () -> Void in
             // self.startClassLabel.text = Class.classFinishedText
             // self.startClassView.backgroundColor = UIColor.redColor()

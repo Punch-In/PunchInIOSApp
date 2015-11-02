@@ -27,6 +27,7 @@
     return UIColorFromRGB(0xffffff);
 }
 
+
 -(UIColor *)primaryBlueColor{
     return [UIColor colorWithRed:93/255.0f green:168/255.0f blue:212/255.0f alpha:1.0];
 }
@@ -42,6 +43,17 @@
 
 -(UIColor *)primaryYellowColor{
     return [UIColor colorWithRed:215/255.0f green:156/255.0f blue:71/255.0f alpha:1.0];
+}
+
+-(UIFont *)primaryTitleFont{
+    return [UIFont fontWithName:@"Avenir-Black" size:20.0];
+}
+-(UIFont *)primarySubTitleFont{
+    return [UIFont fontWithName:@"Avenir-Heavy" size:18.0];
+}
+
+-(UIFont *)primaryTextFont{
+    return [UIFont fontWithName:@"Avenir-Book" size:15.0];
 }
 
 - (void)themeForTitleLabels:(UILabel *)label{

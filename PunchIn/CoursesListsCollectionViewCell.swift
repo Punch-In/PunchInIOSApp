@@ -17,6 +17,8 @@ class CoursesListsCollectionViewCell: UICollectionViewCell {
     
     func setCoursesListCollectionViewCell(course:Course){
         courseNameLabel?.text = course.courseName as String!;
+        courseNameLabel?.textColor = UIColor.whiteColor()
+        courseNameLabel?.font = ThemeManager.theme().primaryTitleFont()
     }
     
     

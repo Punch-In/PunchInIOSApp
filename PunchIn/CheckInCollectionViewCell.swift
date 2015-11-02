@@ -28,11 +28,18 @@ class CheckInCollectionViewCell: UICollectionViewCell {
     
     
     func setUpUI(){
+        
         checkinWarningLabel.text = ""
+        checkinWarningLabel.textColor = UIColor.greenColor()
+        
         checkIntoClassLabel.text = "Check in to the class"
         checkIntoClassLabel.textColor = UIColor.whiteColor()
+        checkIntoClassLabel.font = ThemeManager.theme().primaryTitleFont()
+        
+        
+        
+        
         self.backgroundColor = ThemeManager.theme().primaryYellowColor()
-        //checkInButton.imageView?.image = UIImage.init(named: "unselected_checkin",)
         checkInButton.setImage(UIImage.init(named: "unselected_checkin"), forState: .Normal)
         checkInButton.setImage(UIImage.init(named: "selected_checkin"), forState: .Selected)
     }
