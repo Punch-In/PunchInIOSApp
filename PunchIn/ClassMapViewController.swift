@@ -163,6 +163,7 @@ class ClassMapViewController: UIViewController, MKMapViewDelegate, LocationProvi
         ParseDB.currentPerson!.getImage { (image, error) -> Void in
             if error == nil {
                 dispatch_async(dispatch_get_main_queue()){
+                    annotationView!.hidden = false
                     let imageView = annotationView?.leftCalloutAccessoryView as! UIImageView
                     imageView.image = image
                 }
