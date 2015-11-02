@@ -44,7 +44,7 @@ class CourseViewController: UIViewController,UINavigationBarDelegate,UIPageViewC
         /*Setting the course details*/
         courseName.text = course.courseName
         courseNumber.text = course.courseId
-        courseDate.text = String("\(course.courseTime); \(course.courseDay)")
+        courseDate.text = String("\(course.courseDay) \(course.courseTime)")
         courseAddress.text = course.courseLocation.address
     }
     

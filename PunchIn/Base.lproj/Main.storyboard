@@ -1206,7 +1206,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wjc-xH-XnI">
                                 <rect key="frame" x="30" y="28" width="540" height="160"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="6681DB61-EA11-49BF-B2A0-4C38F6BF00D5" highlightedImage="6681DB61-EA11-49BF-B2A0-4C38F6BF00D5" translatesAutoresizingMaskIntoConstraints="NO" id="P7e-8M-9OS">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2A27F1E8-BD3A-4EBA-867C-DDC8BD44EA7B" highlightedImage="2A27F1E8-BD3A-4EBA-867C-DDC8BD44EA7B" translatesAutoresizingMaskIntoConstraints="NO" id="P7e-8M-9OS">
                                         <rect key="frame" x="422" y="42" width="108" height="108"/>
                                         <animations/>
                                         <constraints>
@@ -1562,7 +1562,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="6681DB61-EA11-49BF-B2A0-4C38F6BF00D5" width="128" height="128">
+        <image name="2A27F1E8-BD3A-4EBA-867C-DDC8BD44EA7B" width="128" height="128">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOzxYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISksLzU4VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
