@@ -13,12 +13,13 @@ class StudentCourseDraggableViewController: UICollectionViewController, Question
 
     var course:Course!
     var classIndex:Int!
+    var indexNumber:Int!
     var initialCenterPoint:CGPoint?
     var lastCenterPoint:CGPoint?
     private var allowedToCheckIn:Bool?
     let refreshControl = UIRefreshControl()
     //PageController Property.
-    var indexNumber:Int!
+   
     @IBOutlet var studentDraggableViewCollectionView: UICollectionView!
     
     /*Start Class*/
