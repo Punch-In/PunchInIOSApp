@@ -27,6 +27,7 @@ class InstructorDraggableCollectionViewController: UICollectionViewController {
         refreshControl.addTarget(self, action: "setUpValues", forControlEvents: .ValueChanged)
         instructorDraggableCollectionView.addSubview(refreshControl)
         instructorDraggableCollectionView.alwaysBounceVertical = true
+        instructorDraggableCollectionView.backgroundColor = UIColor.whiteColor()
     }
 
     override func didReceiveMemoryWarning() {
@@ -72,7 +73,7 @@ class InstructorDraggableCollectionViewController: UICollectionViewController {
     // MARK: UICollectionViewDataSource
     func setCollectionViewLayout(){
         let flowLayout : UICollectionViewFlowLayout = UICollectionViewFlowLayout.init()
-        flowLayout.itemSize = CGSizeMake(self.view.bounds.width-20, self.view.bounds.height/6)
+        flowLayout.itemSize = CGSizeMake(self.view.bounds.width, self.view.bounds.height/6)
         flowLayout.minimumInteritemSpacing = 0
         flowLayout.minimumLineSpacing = 0
         flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0)

@@ -26,14 +26,14 @@ class InstructorCourseStartCellCollectionViewCell: UICollectionViewCell {
         checkInButon.setImage(UIImage.init(named:"selected_checkin"), forState: .Selected)
         checkInButon.setImage(UIImage.init(named:"unselected_checkin"), forState: .Normal)
         currentClass = aCurrentClass
+        checkInStatus.textColor = UIColor.whiteColor()
+        checkInStatus.font = ThemeManager.theme().primarySubTitleFont()
     }
     
     @IBAction func checkInButtonAction(sender: AnyObject) {
         checkInButon.selected = !checkInButon.selected
         startClassTapped()
     }
-    
-    
     
     func startClassTapped() {
         print("tapped start class!")

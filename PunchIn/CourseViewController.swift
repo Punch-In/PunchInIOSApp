@@ -55,15 +55,28 @@ class CourseViewController: UIViewController,UINavigationBarDelegate,UIPageViewC
         self.navigationController?.navigationItem.title = "Course"
         self.navigationController?.navigationBar.titleTextAttributes = NSDictionary.init(dictionary:
             [NSForegroundColorAttributeName:UIColor.whiteColor()]) as? [String : AnyObject]
-       // self.navigationController!.navigationItem.backBarButtonItem?.tintColor = UIColor.whiteColor()
+ 
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         //Content Views
         ThemeManager.theme().themeForContentView(courseView)
+ 
         courseView.backgroundColor = ThemeManager.theme().primaryBlueColor()
-        ThemeManager.theme().themeForTitleLabels(courseName)
+        /*ThemeManager.theme().themeForTitleLabels(courseName)
         ThemeManager.theme().themeForTitleLabels(courseNumber)
         ThemeManager.theme().themeForTitleLabels(courseDate)
         ThemeManager.theme().themeForTitleLabels(courseAddress)
+        */
+        courseName.textColor = UIColor.whiteColor()
+        courseName.font = ThemeManager.theme().primaryTitleFont()
+        
+        courseNumber.textColor = UIColor.whiteColor()
+        courseNumber.font  = ThemeManager.theme().primarySubTitleFont()
+        
+        courseDate.textColor = UIColor.whiteColor()
+        courseDate.font = ThemeManager.theme().primaryTextFont()
+        
+        courseAddress.textColor = UIColor.whiteColor()
+        courseAddress.font = ThemeManager.theme().primaryTextFont()
     }
     
     override func didReceiveMemoryWarning() {

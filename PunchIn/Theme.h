@@ -26,8 +26,9 @@
 -(UIColor *)primaryGreyColor;
 -(UIColor *)primaryYellowColor;
 
-
-
+-(UIFont *)primaryTitleFont;
+-(UIFont *)primarySubTitleFont;
+-(UIFont *)primaryTextFont;
 
 
 - (void)themeForTitleLabels:(UILabel *)label;
