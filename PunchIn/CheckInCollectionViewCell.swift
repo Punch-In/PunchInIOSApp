@@ -34,7 +34,7 @@ class CheckInCollectionViewCell: UICollectionViewCell {
         
         checkIntoClassLabel.text = "Check in to the class"
         checkIntoClassLabel.textColor = UIColor.whiteColor()
-        checkIntoClassLabel.font = ThemeManager.theme().primaryTitleFont()
+        //checkIntoClassLabel.font = ThemeManager.theme().primaryTitleFont()
         
         
         

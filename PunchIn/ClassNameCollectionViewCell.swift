@@ -24,11 +24,14 @@ class ClassNameCollectionViewCell: UICollectionViewCell {
     
     func setUpclassCell(){
     
-        className.textColor = ThemeManager.theme().primaryBlueColor()
-        className.font = ThemeManager.theme().primaryTitleFont()
+        className.textColor = ThemeManager.theme().primaryDarkBlueColor()
+        //className.font = ThemeManager.theme().primaryTitleFont()
         
         classDescription.textColor = ThemeManager.theme().primaryBlueColor()
-        classDescription.font = ThemeManager.theme().primarySubTitleFont()
+        //classDescription.font = ThemeManager.theme().primarySubTitleFont()
+        
+        classDate.textColor = ThemeManager.theme().primaryGreyColor()
+        //classDescription.font = ThemeManager.theme().primarySubTitleFont()
     
     }
 }
