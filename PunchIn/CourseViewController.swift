@@ -96,7 +96,7 @@ class CourseViewController: UIViewController,UINavigationBarDelegate,UIPageViewC
         var index:Int!
         
         if !ParseDB.isStudent{
-            let instructorDraggableView =  viewController as! InstructorCourseDraggableViewController
+            let instructorDraggableView =  viewController as! InstructorDraggableCollectionViewController
             index = instructorDraggableView.indexNumber
         }else{
             let studentDraggableView = viewController as! StudentCourseDraggableViewController
@@ -114,7 +114,7 @@ class CourseViewController: UIViewController,UINavigationBarDelegate,UIPageViewC
         var index:Int!
         
         if !ParseDB.isStudent{
-           let instructorDraggableView =  viewController as! InstructorCourseDraggableViewController
+           let instructorDraggableView =  viewController as! InstructorDraggableCollectionViewController
            index = instructorDraggableView.indexNumber
         }else{
             let studentDraggableView = viewController as! StudentCourseDraggableViewController
@@ -135,7 +135,7 @@ class CourseViewController: UIViewController,UINavigationBarDelegate,UIPageViewC
         let storyBoard = UIStoryboard.init(name: storyBoardName, bundle: nil);
         
         if !ParseDB.isStudent {
-            let   childViewController   = storyBoard.instantiateViewControllerWithIdentifier("DraggableView") as! InstructorCourseDraggableViewController
+            let   childViewController   = storyBoard.instantiateViewControllerWithIdentifier("DraggableView") as! InstructorDraggableCollectionViewController
             childViewController.indexNumber = index
             childViewController.course = course
             childViewController.classIndex = index

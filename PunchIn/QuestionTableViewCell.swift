@@ -22,7 +22,12 @@ class QuestionTableViewCell: UITableViewCell {
                     questionDateField.text = question.sinceDateString + " ago"
                 }
             }
-//            questionAnsweredControl.selectedSegmentIndex = question.isAnswered ? 1 : 0
+            
+//            if question.isAnswered {
+//                questionAnsweredImage.hidden = false
+//            }else{
+//                questionAnsweredImage.hidden = true
+//            }
         }
     }
     
@@ -31,6 +36,7 @@ class QuestionTableViewCell: UITableViewCell {
     @IBOutlet weak var questionTextView: UITextView!
     @IBOutlet private weak var personNameField: UILabel!
     @IBOutlet private weak var questionDateField: UILabel!
+    @IBOutlet weak var questionAnsweredImage: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

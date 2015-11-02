@@ -52,6 +52,10 @@ class QuestionsListViewController: UIViewController, UITableViewDelegate, UITabl
         questionTableView.delegate = self
         newQuestionTextView.delegate = self
         
+        questionTableView.layoutMargins = UIEdgeInsetsZero
+        questionTableView.separatorInset = UIEdgeInsetsZero
+        self.automaticallyAdjustsScrollViewInsets = false
+        
         // hack
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: "fetchData", forControlEvents: UIControlEvents.ValueChanged)
@@ -80,6 +84,10 @@ class QuestionsListViewController: UIViewController, UITableViewDelegate, UITabl
         sendButton.tintColor = UIColor.whiteColor()
         sendButton.setTitle("SEND", forState: .Normal)
         
+        // determine whether to show new question view; only if class is in session
+        if theClass.isFinished || !theClass.isStarted {
+            newQuestionView.hidden = true
+        }
         newQuestionTextView.backgroundColor = UIColor.whiteColor()
     }
     
@@ -106,6 +114,10 @@ class QuestionsListViewController: UIViewController, UITableViewDelegate, UITabl
                 MBProgressHUD.hideHUDForView(self.view, animated: true)
             }
         }
+    }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

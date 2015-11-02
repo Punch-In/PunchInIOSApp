@@ -30,6 +30,7 @@ class ParseDB {
         Location.initialize()
         Question.initialize()
         Student.initialize()
+        Attendance.initialize()
         Instructor.initialize()
         Class.initialize()
         Course.initialize()

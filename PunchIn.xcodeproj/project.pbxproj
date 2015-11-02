@@ -56,6 +56,11 @@
 		C460FD3C1BDB287700CD9DBC /* Attendance.swift in Sources */ = {isa = PBXBuildFile; fileRef = C460FD3B1BDB287700CD9DBC /* Attendance.swift */; settings = {ASSET_TAGS = (); }; };
 		C498956F1BE1B87600B5E490 /* StudentCourseDraggableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C498956E1BE1B87600B5E490 /* StudentCourseDraggableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		C49895711BE4365C00B5E490 /* door.png in Resources */ = {isa = PBXBuildFile; fileRef = C49895701BE4365C00B5E490 /* door.png */; settings = {ASSET_TAGS = (); }; };
+		C49D64D11BE70BF5003EAB48 /* InstructorDraggableCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49D64D01BE70BF5003EAB48 /* InstructorDraggableCollectionViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		C49D64D51BE70E86003EAB48 /* InstructorCourseStartCellCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49D64D41BE70E86003EAB48 /* InstructorCourseStartCellCollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		C49D64D71BE70FC4003EAB48 /* InstructorCourseNameCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49D64D61BE70FC4003EAB48 /* InstructorCourseNameCollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		C49D64D91BE70FD6003EAB48 /* InstructorAttendanceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49D64D81BE70FD6003EAB48 /* InstructorAttendanceCollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		C49D64DB1BE70FE5003EAB48 /* InstructorQuestionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49D64DA1BE70FE5003EAB48 /* InstructorQuestionCollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		C4A78A021BE1679A0040C270 /* InstructorCourseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A78A011BE1679A0040C270 /* InstructorCourseView.swift */; settings = {ASSET_TAGS = (); }; };
 		C4A78A041BE170FE0040C270 /* InstructorCourseDraggableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A78A031BE170FE0040C270 /* InstructorCourseDraggableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		C4EB01D11BE5940A00B3127A /* map.png in Resources */ = {isa = PBXBuildFile; fileRef = C4EB01D01BE5940A00B3127A /* map.png */; settings = {ASSET_TAGS = (); }; };
@@ -131,6 +136,11 @@
 		C460FD3B1BDB287700CD9DBC /* Attendance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attendance.swift; sourceTree = "<group>"; };
 		C498956E1BE1B87600B5E490 /* StudentCourseDraggableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentCourseDraggableViewController.swift; sourceTree = "<group>"; };
 		C49895701BE4365C00B5E490 /* door.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = door.png; sourceTree = "<group>"; };
+		C49D64D01BE70BF5003EAB48 /* InstructorDraggableCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructorDraggableCollectionViewController.swift; sourceTree = "<group>"; };
+		C49D64D41BE70E86003EAB48 /* InstructorCourseStartCellCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructorCourseStartCellCollectionViewCell.swift; sourceTree = "<group>"; };
+		C49D64D61BE70FC4003EAB48 /* InstructorCourseNameCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructorCourseNameCollectionViewCell.swift; sourceTree = "<group>"; };
+		C49D64D81BE70FD6003EAB48 /* InstructorAttendanceCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructorAttendanceCollectionViewCell.swift; sourceTree = "<group>"; };
+		C49D64DA1BE70FE5003EAB48 /* InstructorQuestionCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructorQuestionCollectionViewCell.swift; sourceTree = "<group>"; };
 		C4A78A011BE1679A0040C270 /* InstructorCourseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructorCourseView.swift; sourceTree = "<group>"; };
 		C4A78A031BE170FE0040C270 /* InstructorCourseDraggableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructorCourseDraggableViewController.swift; sourceTree = "<group>"; };
 		C4EB01D01BE5940A00B3127A /* map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map.png; sourceTree = "<group>"; };
@@ -225,10 +235,8 @@
 				450C6B5B1BE5BEBD002CC641 /* QuestionsCollectionViewCell.swift */,
 				45FC02DD1BDD9F2E006E37E3 /* QuestionTableViewCell.swift */,
 				C4A78A011BE1679A0040C270 /* InstructorCourseView.swift */,
-				C4EB01D21BE5999B00B3127A /* QuestionsCollectionViewCell.swift */,
-				C4EB01D41BE599C000B3127A /* AttendanceDisplayCollectionViewCell.swift */,
-				C4EB01D61BE599CC00B3127A /* ClassNameCollectionViewCell.swift */,
-				C4EB01D81BE599D800B3127A /* CheckInCollectionViewCell.swift */,
+				C49D64D31BE70DC7003EAB48 /* InstructorCells */,
+				C49D64D21BE70DBE003EAB48 /* StudentCells */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -298,7 +306,8 @@
 				C460FCDB1BD75B4B00CD9DBC /* CourseViewController.swift */,
 				C460FCDF1BD75BA800CD9DBC /* DetailAttendanceViewController.swift */,
 				C460FCDD1BD75B5800CD9DBC /* QuestionsListViewController.swift */,
-				C4A78A031BE170FE0040C270 /* InstructorCourseDraggableViewController.swift */,
+				C49D64D01BE70BF5003EAB48 /* InstructorDraggableCollectionViewController.swift */,
+				C49D64DC1BE727B6003EAB48 /* Ignore */,
 			);
 			name = Instructor;
 			sourceTree = "<group>";
@@ -373,6 +382,36 @@
 				C460FD121BD8416200CD9DBC /* MKTextField.swift */,
 			);
 			name = MaterialKit;
+			sourceTree = "<group>";
+		};
+		C49D64D21BE70DBE003EAB48 /* StudentCells */ = {
+			isa = PBXGroup;
+			children = (
+				C4EB01D21BE5999B00B3127A /* QuestionsCollectionViewCell.swift */,
+				C4EB01D41BE599C000B3127A /* AttendanceDisplayCollectionViewCell.swift */,
+				C4EB01D61BE599CC00B3127A /* ClassNameCollectionViewCell.swift */,
+				C4EB01D81BE599D800B3127A /* CheckInCollectionViewCell.swift */,
+			);
+			name = StudentCells;
+			sourceTree = "<group>";
+		};
+		C49D64D31BE70DC7003EAB48 /* InstructorCells */ = {
+			isa = PBXGroup;
+			children = (
+				C49D64D41BE70E86003EAB48 /* InstructorCourseStartCellCollectionViewCell.swift */,
+				C49D64D61BE70FC4003EAB48 /* InstructorCourseNameCollectionViewCell.swift */,
+				C49D64D81BE70FD6003EAB48 /* InstructorAttendanceCollectionViewCell.swift */,
+				C49D64DA1BE70FE5003EAB48 /* InstructorQuestionCollectionViewCell.swift */,
+			);
+			name = InstructorCells;
+			sourceTree = "<group>";
+		};
+		C49D64DC1BE727B6003EAB48 /* Ignore */ = {
+			isa = PBXGroup;
+			children = (
+				C4A78A031BE170FE0040C270 /* InstructorCourseDraggableViewController.swift */,
+			);
+			name = Ignore;
 			sourceTree = "<group>";
 		};
 		CD8FC80B0AD3E39675544999 /* Frameworks */ = {
@@ -531,9 +570,11 @@
 				45FC02DE1BDD9F2E006E37E3 /* QuestionTableViewCell.swift in Sources */,
 				C498956F1BE1B87600B5E490 /* StudentCourseDraggableViewController.swift in Sources */,
 				454BA75A1BE445C100B73833 /* Person.swift in Sources */,
+				C49D64D71BE70FC4003EAB48 /* InstructorCourseNameCollectionViewCell.swift in Sources */,
 				C460FCE01BD75BA800CD9DBC /* DetailAttendanceViewController.swift in Sources */,
 				C4EB01D71BE599CC00B3127A /* ClassNameCollectionViewCell.swift in Sources */,
 				C460FD0A1BD8410D00CD9DBC /* BFPaperCollectionViewCell.m in Sources */,
+				C49D64D11BE70BF5003EAB48 /* InstructorDraggableCollectionViewController.swift in Sources */,
 				C460FD071BD8410D00CD9DBC /* BFPaperButton.m in Sources */,
 				C460FD171BD8416200CD9DBC /* MKLayer.swift in Sources */,
 				C460FD3C1BDB287700CD9DBC /* Attendance.swift in Sources */,
@@ -549,13 +590,16 @@
 				C460FCF71BD840CE00CD9DBC /* ThemeManager.m in Sources */,
 				C460FD191BD8416200CD9DBC /* MKTextField.swift in Sources */,
 				C460FD3A1BDB27ED00CD9DBC /* DailyAttendanceCollectionViewCell.swift in Sources */,
+				C49D64DB1BE70FE5003EAB48 /* InstructorQuestionCollectionViewCell.swift in Sources */,
 				C460FCE41BD75F9A00CD9DBC /* Course.swift in Sources */,
+				C49D64D91BE70FD6003EAB48 /* InstructorAttendanceCollectionViewCell.swift in Sources */,
 				4505093E1BDC469B00ED17FF /* Class.swift in Sources */,
 				C4A78A021BE1679A0040C270 /* InstructorCourseView.swift in Sources */,
 				C460FD231BD8B05A00CD9DBC /* Student.swift in Sources */,
 				450C2D821BDF221600149934 /* LocationProvider.swift in Sources */,
 				C4A78A041BE170FE0040C270 /* InstructorCourseDraggableViewController.swift in Sources */,
 				C460FD381BDB1AF300CD9DBC /* AttendanceCollectionViewCell.swift in Sources */,
+				C49D64D51BE70E86003EAB48 /* InstructorCourseStartCellCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

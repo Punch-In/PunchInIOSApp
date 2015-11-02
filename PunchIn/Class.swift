@@ -125,6 +125,9 @@ class Class : PFObject, PFSubclassing, LocationProviderGeofenceDelegate {
         let query = Class.query()
         query?.whereKey("objectId", equalTo: self.objectId!)
         query?.includeKey("attendance")
+        // query?.includeKey("attendance.student")
+        // query?.includeKey("attendance.location")
+        // query?.includeKey("attendance.forClass")
         query?.includeKey("location")
         query?.includeKey("questions")
         
