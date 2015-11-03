@@ -219,23 +219,24 @@ class StudentCourseDraggableViewController: UICollectionViewController, Question
         NSNotificationCenter.defaultCenter().removeObserver(self, name: Class.insideClassGeofenceNotification, object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: Class.outsideClassGeofenceNotification, object: nil)
         currentClass.attendClass(self.student) { (confirmed) -> Void in
-            print("woo \(self.view.window) \(self.view.hidden)")
+            print("woo")
+            if UIApplication.sharedApplication().applicationState != UIApplicationState.Active {
+                // in background... notification
+                print(" \(UIApplication.sharedApplication().applicationState.rawValue) notification!")
+                return
+            }
+            
             if self.view.window == nil {
                 // view is currently not visible
-                if UIApplication.sharedApplication().applicationState == UIApplicationState.Background {
-                    // in background... notification
-                    print("notification!")
-                }else{
-                    // assume foreground... alert
-                    let alertController = UIAlertController(
-                        title: "CheckIn",
-                        message: "Woo hoo! You've checked in for class \(self.currentClass.name)",
-                        preferredStyle: .Alert)
-                    
-                    let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
-                    alertController.addAction(okAction)
-                    self.presentViewController(alertController, animated: true, completion: nil)
-                }
+                // assume foreground... alert
+                let alertController = UIAlertController(
+                    title: "CheckIn",
+                    message: "\(self.student.studentName), you've checked in for class \(self.currentClass.name)",
+                    preferredStyle: .Alert)
+                
+                let okAction = UIAlertAction(title: "Woo Hoo", style: .Default, handler: nil)
+                alertController.addAction(okAction)
+                self.presentViewController(alertController, animated: true, completion: nil)
             }
         }
     }
@@ -254,8 +255,6 @@ class StudentCourseDraggableViewController: UICollectionViewController, Question
         flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0)
         studentDraggableViewCollectionView.setCollectionViewLayout(flowLayout, animated: true)
     }
-
-    
     
     
  // MARK: Collection View Controller Methods : 
@@ -264,9 +263,15 @@ class StudentCourseDraggableViewController: UICollectionViewController, Question
     }
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.row == 2 {
+        switch indexPath.row {
+        case 1:
+            attendanceViewTapped()
+        case 2:
             questionsViewTapped()
+        default:
+            print("tapped row: \(indexPath.row)")
         }
+        
     }
     
 
@@ -278,13 +283,7 @@ class StudentCourseDraggableViewController: UICollectionViewController, Question
             let checkIncell:CheckInCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier("CheckInCell", forIndexPath: indexPath) as! CheckInCollectionViewCell
             checkIncell.backgroundColor = ThemeManager.theme().primaryYellowColor()
             checkIncell.setUpUI()
-            checkIncell.setUpValuesForCheckIn(currentClass, allowedToCheckIn: allowedToCheckIn!,message: " ")
-            
-            // for now
-            let gesture = UITapGestureRecognizer(target: self, action: "attendClassTapped")
-            checkIncell.checkIntoClassLabel.addGestureRecognizer(gesture)
-            checkIncell.checkIntoClassLabel.userInteractionEnabled = true
-            
+            checkIncell.setUpValuesForCheckIn(currentClass, allowedToCheckIn: allowedToCheckIn!,message: " ")            
             return checkIncell;
         }
         
