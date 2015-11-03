@@ -219,7 +219,24 @@ class StudentCourseDraggableViewController: UICollectionViewController, Question
         NSNotificationCenter.defaultCenter().removeObserver(self, name: Class.insideClassGeofenceNotification, object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: Class.outsideClassGeofenceNotification, object: nil)
         currentClass.attendClass(self.student) { (confirmed) -> Void in
-            print("woo")
+            print("woo \(self.view.window) \(self.view.hidden)")
+            if self.view.window == nil {
+                // view is currently not visible
+                if UIApplication.sharedApplication().applicationState == UIApplicationState.Background {
+                    // in background... notification
+                    print("notification!")
+                }else{
+                    // assume foreground... alert
+                    let alertController = UIAlertController(
+                        title: "CheckIn",
+                        message: "Woo hoo! You've checked in for class \(self.currentClass.name)",
+                        preferredStyle: .Alert)
+                    
+                    let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                    alertController.addAction(okAction)
+                    self.presentViewController(alertController, animated: true, completion: nil)
+                }
+            }
         }
     }
     
