@@ -16,24 +16,27 @@ class InstructorQuestionCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var unsweredSubtitleLabels: UILabel!
     @IBOutlet weak var questionsSubTitleLabel: UILabel!
     
+    var displayClass: Class! {
+        didSet {
+            questionsCount.text = "\(displayClass.questions!.count)"
+            unansweredCount.text = "\(displayClass.questions!.filter({!$0.isAnswered}).count)"
+        }
+    }
+    
     func questionsCollectionViewCell(){
         unansweredCount.textColor = ThemeManager.theme().primaryBlueColor()
         questionsCount.textColor = ThemeManager.theme().primaryBlueColor()
         
         /*Static Labels*/
         questionsTitleLabel.textColor = ThemeManager.theme().primaryBlueColor()
-        questionsTitleLabel.font = ThemeManager.theme().primaryTitleFont()
+        //questionsTitleLabel.font = ThemeManager.theme().primaryTitleFont()
         
         unsweredSubtitleLabels.textColor = ThemeManager.theme().primaryBlueColor()
-        unsweredSubtitleLabels.font = ThemeManager.theme().primarySubTitleFont()
+        //unsweredSubtitleLabels.font = ThemeManager.theme().primarySubTitleFont()
         
         questionsSubTitleLabel.textColor = ThemeManager.theme().primaryBlueColor()
-        questionsSubTitleLabel.font = ThemeManager.theme().primarySubTitleFont()
+        //questionsSubTitleLabel.font = ThemeManager.theme().primarySubTitleFont()
         
         
-    }
-    
-    func setQuestionValues(numberOfQuestions:String){
-        questionsCount.text = numberOfQuestions
-    }
+    }    
 }

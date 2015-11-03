@@ -25,9 +25,16 @@ class AttendanceCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-    
+        
     func loadData() {
         self.studentName.text = student.studentName
+        
+        self.studentImage.layer.borderWidth = 1.0
+        self.studentImage.layer.borderColor = ThemeManager.theme().primaryDarkBlueColor().CGColor
+        self.studentImage.backgroundColor = UIColor.whiteColor()
+        self.studentImage.layer.cornerRadius = self.studentImage.frame.size.width / 2
+        self.studentImage.clipsToBounds = true
+
         // get student image
         student.getImage { (image, error) -> Void in
             if error == nil {

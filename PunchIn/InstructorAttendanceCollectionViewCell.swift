@@ -19,18 +19,17 @@ class InstructorAttendanceCollectionViewCell: UICollectionViewCell {
     
     func setAttendanceCollectionViewCell(){
         attendanceStudentsCount.textColor = ThemeManager.theme().primaryBlueColor()
-        registeredStudentsCount.textColor =
-            ThemeManager.theme().primaryBlueColor()
+        registeredStudentsCount.textColor = ThemeManager.theme().primaryBlueColor()
     
         /*Other Static Labels*/
         attendanceLabel.textColor  = ThemeManager.theme().primaryBlueColor()
-        attendanceLabel.font = ThemeManager.theme().primarySubTitleFont()
+//        attendanceLabel.font = ThemeManager.theme().primarySubTitleFont()
         
         attendanceTitleLabel.textColor = ThemeManager.theme().primaryBlueColor()
-        attendanceTitleLabel.font = ThemeManager.theme().primaryTitleFont()
+//        attendanceTitleLabel.font = ThemeManager.theme().primaryTitleFont()
         
         registeredStudentsLabel.textColor = ThemeManager.theme().primaryBlueColor()
-        registeredStudentsLabel.font = ThemeManager.theme().primarySubTitleFont()
+//        registeredStudentsLabel.font = ThemeManager.theme().primarySubTitleFont()
 
     }
 }

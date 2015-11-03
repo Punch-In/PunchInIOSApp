@@ -52,7 +52,7 @@ class Instructor: PFObject, PFSubclassing, Person {
     
     // MARK: Person protocol
     func getImage(completion: ((image:UIImage?, error:NSError?)-> Void)) {
-        guard instructorImageFile == nil else {
+        guard instructorImage == nil else {
             return completion(image:instructorImage, error:nil)
         }
         

@@ -59,13 +59,13 @@ class DetailAttendanceViewController: UIViewController,UICollectionViewDataSourc
         dailyAttendanceView.backgroundColor = ThemeManager.theme().primaryBlueColor()
     
         studentName.textColor = UIColor.whiteColor()
-        studentName.font = ThemeManager.theme().primaryTitleFont()
+        //studentName.font = ThemeManager.theme().primaryTitleFont()
         
         className.textColor = UIColor.whiteColor()
-        className.font = ThemeManager.theme().primarySubTitleFont()
+        //className.font = ThemeManager.theme().primarySubTitleFont()
         
         totalAttendance.textColor = UIColor.whiteColor()
-        totalAttendance.font = ThemeManager.theme().primaryTextFont()
+        //totalAttendance.font = ThemeManager.theme().primaryTextFont()
         
         // calculate attendance percentage
         let numClassesAttended = course.classes!.filter({$0.didStudentAttend(self.student)}).count

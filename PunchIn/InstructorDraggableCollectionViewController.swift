@@ -18,6 +18,7 @@ class InstructorDraggableCollectionViewController: UICollectionViewController {
     let refreshControl = UIRefreshControl()
     @IBOutlet var instructorDraggableCollectionView: UICollectionView!
     
+    @IBOutlet weak var mapButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpValues()
@@ -33,7 +34,6 @@ class InstructorDraggableCollectionViewController: UICollectionViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
 
 
     func setUpValues(){
@@ -135,9 +135,17 @@ class InstructorDraggableCollectionViewController: UICollectionViewController {
             questionCell.layer.borderColor = ThemeManager.theme().primaryDarkBlueColor().CGColor
             questionCell.layer.borderWidth = 0.5
             questionCell.questionsCollectionViewCell()
-            let questionsCount = "\(currentClass.questions!.count)";
-        questionCell.setQuestionValues(questionsCount)
-        return questionCell
-    
+            questionCell.displayClass = currentClass
+            return questionCell
     }
+    
+    // MARK: show map view
+    @IBAction func mapButtonTapped(sender: AnyObject) {
+        let storyBoardName = "Main"
+        let storyBoard = UIStoryboard.init(name: storyBoardName, bundle: nil);
+        let vc = storyBoard.instantiateViewControllerWithIdentifier("ClassMapViewController") as! ClassMapViewController
+        vc.currentClass = currentClass
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+
 }

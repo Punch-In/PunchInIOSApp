@@ -18,13 +18,13 @@ class DailyAttendanceCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
         className.textColor = ThemeManager.theme().primaryBlueColor()
-        className.font = ThemeManager.theme().primaryTextFont()
+//        className.font = ThemeManager.theme().primaryTextFont()
         
         classDate.textColor = ThemeManager.theme().primaryBlueColor()
-        classDate.font = ThemeManager.theme().primaryTextFont()
+//        classDate.font = ThemeManager.theme().primaryTextFont()
         
         classPresentOrAbsent.textColor = ThemeManager.theme().primaryBlueColor()
-        classPresentOrAbsent.font = ThemeManager.theme().primaryTextFont()
+//        classPresentOrAbsent.font = ThemeManager.theme().primaryTextFont()
     }
     
 
