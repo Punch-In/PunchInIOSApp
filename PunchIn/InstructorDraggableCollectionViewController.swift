@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 
 class InstructorDraggableCollectionViewController: UICollectionViewController {
@@ -23,6 +24,7 @@ class InstructorDraggableCollectionViewController: UICollectionViewController {
         super.viewDidLoad()
         setUpValues()
         setCollectionViewLayout()
+
         refreshControl.tintColor = UIColor.grayColor()
         refreshControl.addTarget(self, action: "setUpValues", forControlEvents: .ValueChanged)
         instructorDraggableCollectionView.addSubview(refreshControl)
@@ -38,15 +40,21 @@ class InstructorDraggableCollectionViewController: UICollectionViewController {
 
     func setUpValues(){
         // show current class
+        let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        hud.labelText = "Refreshing class info..."
         currentClass = course.classes![classIndex]
         currentClass.refreshDetails { (error) -> Void in
             if error == nil {
                 dispatch_async(dispatch_get_main_queue()){
+                    self.refreshControl.endRefreshing()
                     self.instructorDraggableCollectionView.reloadData()
+                    MBProgressHUD.hideHUDForView(self.view, animated: true)
                 }
+            }else{
+                self.refreshControl.endRefreshing()
+                MBProgressHUD.hideHUDForView(self.view, animated: true)
             }
         }
-        refreshControl.endRefreshing()
     }
     
     
@@ -121,13 +129,14 @@ class InstructorDraggableCollectionViewController: UICollectionViewController {
         }
     
         if indexPath.row == 2{
-            let questionCell:InstructorAttendanceCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier("InstructorAttendanceCell",forIndexPath:indexPath) as! InstructorAttendanceCollectionViewCell
+            let attendanceCell:InstructorAttendanceCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier("InstructorAttendanceCell",forIndexPath:indexPath) as! InstructorAttendanceCollectionViewCell
             
-            questionCell.backgroundColor = UIColor.whiteColor()
-            questionCell.layer.borderColor = ThemeManager.theme().primaryDarkBlueColor().CGColor
-            questionCell.layer.borderWidth = 0.5
-            questionCell.setAttendanceCollectionViewCell()
-            return questionCell
+            attendanceCell.backgroundColor = UIColor.whiteColor()
+            attendanceCell.layer.borderColor = ThemeManager.theme().primaryDarkBlueColor().CGColor
+            attendanceCell.layer.borderWidth = 0.5
+            attendanceCell.setAttendanceCollectionViewCell()
+            attendanceCell.displayClass = currentClass
+            return attendanceCell
         }
         
         let questionCell:InstructorQuestionCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier("InstructorQuestionsCell",forIndexPath:indexPath) as! InstructorQuestionCollectionViewCell

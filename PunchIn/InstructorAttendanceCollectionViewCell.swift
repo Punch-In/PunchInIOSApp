@@ -17,6 +17,13 @@ class InstructorAttendanceCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var attendanceLabel: UILabel!
     @IBOutlet weak var registeredStudentsLabel: UILabel!
     
+    var displayClass:Class!{
+        didSet {
+            attendanceStudentsCount.text = "\(displayClass.attendance!.count)"
+            registeredStudentsCount.text = "\(displayClass.parentCourse.registeredStudents!.count)"
+        }
+    }
+    
     func setAttendanceCollectionViewCell(){
         attendanceStudentsCount.textColor = ThemeManager.theme().primaryBlueColor()
         registeredStudentsCount.textColor = ThemeManager.theme().primaryBlueColor()
