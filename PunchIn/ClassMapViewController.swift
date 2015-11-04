@@ -248,7 +248,9 @@ class ClassMapViewController: UIViewController, MKMapViewDelegate, LocationProvi
     
     func didUpdateLocation(location:Location?) {
         dispatch_async(dispatch_get_main_queue()){
-            self.personAnnotation.coordinate = (location?.coordinates)!
+            UIView.animateWithDuration(0.16, animations: { () -> Void in
+                self.personAnnotation.coordinate = (location?.coordinates)!
+            })
             self.personAnnotation.title = self.personName
             self.locationMapView.selectAnnotation(self.personAnnotation, animated: true)
             

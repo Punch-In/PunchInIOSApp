@@ -19,7 +19,15 @@ class InstructorQuestionCollectionViewCell: UICollectionViewCell {
     var displayClass: Class! {
         didSet {
             questionsCount.text = "\(displayClass.questions!.count)"
-            unansweredCount.text = "\(displayClass.questions!.filter({!$0.isAnswered}).count)"
+            displayClass.refreshQuestions { (questions, error) -> Void in
+                if error == nil {
+                    dispatch_async(dispatch_get_main_queue()){
+                        self.unansweredCount.text = "\(questions!.filter({!$0.isAnswered}).count)"
+                    }
+                }else{
+                    print("error getting questions???")
+                }
+            }
         }
     }
     

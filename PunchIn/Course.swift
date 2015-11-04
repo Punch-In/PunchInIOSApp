@@ -50,6 +50,9 @@ class Course: PFObject, PFSubclassing {
         
     class func allCourses(completion: ((courses: [Course]?, error:NSError?)->Void)){
         if let query = Course.query() {
+//            query.includeKey("registeredStudents")
+//            query.includeKey("courseTAs")
+//            query.includeKey("courseInstructors")
             query.findObjectsInBackgroundWithBlock {
                 (courses: [PFObject]?, error: NSError?) -> Void in
                 completion(courses: courses as? [Course], error: error)
@@ -80,6 +83,7 @@ class Course: PFObject, PFSubclassing {
             query.includeKey("courseLocation")
             query.includeKey("classes")
             query.includeKey("registeredStudents")
+            query.includeKey("courseInstructors")
             query.findObjectsInBackgroundWithBlock {
                 (courses: [PFObject]?, error: NSError?) -> Void in
                 completion(courses: courses as? [Course], error: error)
@@ -94,6 +98,7 @@ class Course: PFObject, PFSubclassing {
             query.includeKey("courseLocation")
             query.includeKey("classes")
             query.includeKey("registeredStudents")
+            query.includeKey("courseInstructors")
             query.findObjectsInBackgroundWithBlock {
                 (courses: [PFObject]?, error: NSError?) -> Void in
                 completion(courses: courses as? [Course], error: error)
@@ -113,6 +118,30 @@ class Course: PFObject, PFSubclassing {
                 })
             }
         }
+    }
+    
+    func instructors(completion: ((instructors:[Instructor]?, error:NSError?)->Void)) {
+        var available:Bool = true
+        courseInstructors?.forEach{ available = available && $0.isDataAvailable()  }
+        
+        if available {
+            // all data is available.
+            completion(instructors: self.courseInstructors, error: nil)
+            return
+        }
+        
+
+        // ugly solution to refresh the instructors array of data
+        var counter = 0
+        for instructor in self.courseInstructors! {
+            instructor.fetchIfNeededInBackgroundWithBlock({ (object: PFObject?, error: NSError?) -> Void in
+                counter++
+                if counter == self.courseInstructors!.count {
+                    completion(instructors: self.courseInstructors, error: nil)
+                }
+            })
+        }
+        
     }
     
     func attendanceForCourse(student: Student, completion: ((classes:[Class]?, isRegistered: Bool)->Void)) {

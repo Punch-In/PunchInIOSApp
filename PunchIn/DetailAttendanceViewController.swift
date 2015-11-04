@@ -90,12 +90,11 @@ class DetailAttendanceViewController: UIViewController,UICollectionViewDataSourc
         let cell = attendanceCollectionView.dequeueReusableCellWithReuseIdentifier("DailyAttendanceCollectionViewCell", forIndexPath: indexPath) as! DailyAttendanceCollectionViewCell
         
         let theClass = classes[indexPath.row]
-        cell.className.text = theClass.classDescription
-        cell.classDate.text = DetailAttendanceViewController.classDateFormatter.stringFromDate(theClass.date)
-        cell.classPresentOrAbsent.text = theClass.didStudentAttend(student) ? "Present" : "Absent"
         cell.layer.borderColor = ThemeManager.theme().primaryBlueColor().CGColor
         cell.backgroundColor = UIColor.whiteColor()
         cell.layer.borderWidth = 0.25
+        cell.student = student
+        cell.displayClass = theClass
         return cell
     }
     

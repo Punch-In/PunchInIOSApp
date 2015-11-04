@@ -11,13 +11,18 @@ import MBProgressHUD
 
 class StudentCourseDraggableViewController: UICollectionViewController, QuestionPostedNewProtocol,UICollectionViewDelegateFlowLayout{
 
+    private enum CollectionViewCellIndex : Int {
+        case CheckInCell = 0
+        case ClassInfoCell = 1
+        case QuestionsCell = 2
+    }
+    
     var course:Course!
     var classIndex:Int!
     var indexNumber:Int!
     var student: Student!
     
     private var currentClass: Class!
-    private var allowedToCheckIn:Bool?
     
     let refreshControl = UIRefreshControl()
     @IBOutlet var studentDraggableViewCollectionView: UICollectionView!
@@ -42,12 +47,10 @@ class StudentCourseDraggableViewController: UICollectionViewController, Question
         super.viewDidLoad()
         student = ParseDB.currentPerson as! Student
         
-        resetAttendView()
         setUpUI()
         setUpGestures()
         setUpValues()
         setCollectionViewLayout()
-        allowedToCheckIn = false
 
         fetchData()
     }
@@ -55,11 +58,11 @@ class StudentCourseDraggableViewController: UICollectionViewController, Question
     override func viewWillAppear(animated: Bool) {
     }
     
-    func setUpUI() {
+    private func setUpUI() {
     
     }
     
-    func setUpGestures() {
+    private func setUpGestures() {
         refreshControl.tintColor = UIColor.grayColor()
         refreshControl.addTarget(self, action: "fetchData", forControlEvents: .ValueChanged)
         studentDraggableViewCollectionView.addSubview(refreshControl)
@@ -75,9 +78,8 @@ class StudentCourseDraggableViewController: UICollectionViewController, Question
         currentClass.refreshDetails{ (error) -> Void in
             if error == nil {
                 dispatch_async(dispatch_get_main_queue()){
-                    // TODO: show class details
-                    self.setupAttendView()
                     self.refreshControl.endRefreshing()
+                    self.studentDraggableViewCollectionView.reloadData()
                     MBProgressHUD.hideHUDForView(self.view, animated: true)
                 }
             }else{
@@ -86,41 +88,17 @@ class StudentCourseDraggableViewController: UICollectionViewController, Question
                 MBProgressHUD.hideHUDForView(self.view, animated: true)
             }
         }
-        
-//        student.getImage{ (image, error) -> Void in
-//            if error == nil {
-//                dispatch_async(dispatch_get_main_queue()){
-//                    //        self.studentAvatar.alpha = 0
-//                    //        self.studentAvatar.image = image
-//                    
-//                    UIView.animateWithDuration(0.3, animations: { () -> Void in
-//                        //           self.studentAvatar.alpha = 1
-//                    })
-//                }
-//            }else{
-//                print("error getting image for student \(self.student.studentName)")
-//            }
-//        }
-
     }
     
-    
-    func resetAttendView() {
-        //        imageView3.hidden = false
-        //        imageView3.backgroundColor = UIColor.grayColor()
-           //     self.questionCount.hidden = true
-            //    self.unansweredQuestionCount.hidden = true
-    }
-
-        //  MARK: Setup Values
-    func setUpValues(){
+    //  MARK: Setup Values
+    private func setUpValues(){
         // show current class
         currentClass = course.classes![classIndex]
     }
 
     
     //Attendance View Tapped.
-    func attendanceViewTapped(){
+    private func attendanceViewTapped(){
         let storyBoardName = "Main"
         let storyBoard = UIStoryboard.init(name: storyBoardName, bundle: nil);
         let vc = storyBoard.instantiateViewControllerWithIdentifier("AttendanceCollectionViewController") as! AttendanceCollectionViewController
@@ -129,7 +107,7 @@ class StudentCourseDraggableViewController: UICollectionViewController, Question
     }
     
     //Questions View Tapped.
-    func questionsViewTapped(){
+    private func questionsViewTapped(){
         let storyBoardName = "Main"
         let storyBoard = UIStoryboard.init(name: storyBoardName, bundle: nil);
         let vc = storyBoard.instantiateViewControllerWithIdentifier("QuestionsListViewController") as! QuestionsListViewController
@@ -145,57 +123,130 @@ class StudentCourseDraggableViewController: UICollectionViewController, Question
             questionCell.numQuestions = currentClass.questions!.count
         }
     }
+    
+    private func setCollectionViewLayout(){
+        let flowLayout : UICollectionViewFlowLayout = UICollectionViewFlowLayout.init()
+        
+        flowLayout.itemSize = CGSizeMake(self.view.bounds.width, self.view.bounds.height/5)
+        flowLayout.minimumInteritemSpacing = 0
+        flowLayout.minimumLineSpacing = 0
+        flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0)
+        studentDraggableViewCollectionView.setCollectionViewLayout(flowLayout, animated: true)
+    }
+    
+    
+ // MARK: Collection View Controller Methods : 
+   override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
+        return 3;
+    }
+    
+    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        guard let cellIndex = CollectionViewCellIndex(rawValue: indexPath.row) else {
+            // ???
+            print("tapped row: \(indexPath.row)")
+            return
+        }
 
-    func setupAttendView() {
-        if currentClass.isFinished {
-            allowedToCheckIn = false
-            print("Class \(currentClass.name) is finished");
-            return
+        switch cellIndex {
+        case .CheckInCell:
+            attendClassTapped()
+            break
+        case .ClassInfoCell:
+//            attendanceViewTapped()
+            break
+        case .QuestionsCell:
+            questionsViewTapped()
         }
         
-        if !currentClass.isStarted {
-            print("class \(currentClass.name) has not started")
-            
-            allowedToCheckIn = false
-            return
-        }
+    }
+
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize{
         
-        if self.currentClass.didStudentAttend(student!) {
-            print("Class \(currentClass.name) has started, and student has already attended")
-            self.allowedToCheckIn = false
-            
-        }else{
-            print("Class \(currentClass.name) has started, but student has not checked in yet")
-            self.allowedToCheckIn = true
+        let defaultSize = CGSizeMake(self.view.bounds.width, self.view.bounds.height/5)
+        guard let cellIndex = CollectionViewCellIndex(rawValue: indexPath.row) else {
+            // ???
+            print("size for row: \(indexPath.row)")
+            return defaultSize
+        }
+
+        switch cellIndex  {
+        case .CheckInCell:
+            return CGSizeMake(self.view.bounds.size.width,60)
+        case .ClassInfoCell:
+            if(self.currentClass.classDescription.characters.count < 200){
+                CGSizeMake(self.view.bounds.size.width,100)
+            }else if(self.currentClass.classDescription.characters.count > 200 && self.currentClass.classDescription.characters.count < 250){
+                return CGSizeMake(self.view.bounds.size.width,130)
+            }else if(self.currentClass.classDescription.characters.count > 250 && self.currentClass.classDescription.characters.count < 300){
+                return CGSizeMake(self.view.bounds.size.width,160)
+            }else if(self.currentClass.classDescription.characters.count > 300 && self.currentClass.classDescription.characters.count < 350){
+                return CGSizeMake(self.view.bounds.size.width,190)
+            }
+            return defaultSize
+        case .QuestionsCell:
+            return defaultSize
         }
     }
     
-    func attendClassTapped() {
-        print("tapped attend class \(currentClass.name)")
-        
-        guard ParseDB.isStudent else {
-            print("instructor can't attend a class")
-            let alertController = UIAlertController(
-                title: "InstructorCantAttendClass",
-                message: "Instructors can't attend a class",
-                preferredStyle: .Alert)
-            
-            let dismissAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
-            alertController.addAction(dismissAction)
-            self.presentViewController(alertController, animated: true, completion: nil)
-            return
+    // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
+    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell{
+        guard let cellIndex = CollectionViewCellIndex(rawValue: indexPath.row) else {
+            print("cell for index path \(indexPath.row) unknown")
+            // ???
+            return UICollectionViewCell()
         }
+        
+        switch cellIndex {
+        case .CheckInCell:
+            let checkIncell:CheckInCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier("CheckInCell", forIndexPath: indexPath) as! CheckInCollectionViewCell
+            checkIncell.backgroundColor = ThemeManager.theme().primaryYellowColor()
+            checkIncell.setUpUI()
+            checkIncell.student = student
+            checkIncell.displayClass = currentClass
+            return checkIncell;
+        case .ClassInfoCell:
+            let  classNameCell:ClassNameCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier("ClassNameCell", forIndexPath: indexPath) as! ClassNameCollectionViewCell
+            classNameCell.backgroundColor = UIColor.whiteColor()
+            classNameCell.layer.borderColor = ThemeManager.theme().primaryDarkBlueColor().CGColor
+            classNameCell.layer.borderWidth = 0.5
+            classNameCell.setUpclassCell()
+            classNameCell.displayClass = currentClass
+            self.studentDraggableViewCollectionView.collectionViewLayout.invalidateLayout()
+            return classNameCell
+        case .QuestionsCell:
+            let questionCell = collectionView.dequeueReusableCellWithReuseIdentifier("QuestionsCell",forIndexPath:indexPath) as! QuestionsCollectionViewCell
+            questionCell.backgroundColor = UIColor.whiteColor()
+            questionCell.layer.borderColor = ThemeManager.theme().primaryDarkBlueColor().CGColor
+            questionCell.layer.borderWidth = 0.5
+            questionCell.setupUI()
+            questionCell.numQuestions = currentClass.questions!.count
+
+            return questionCell
+        }
+        
+    }
+    
+    // MARK: show map view
+    @IBAction func mapButtonTapped(sender: AnyObject) {
+        let storyBoardName = "Main"
+        let storyBoard = UIStoryboard.init(name: storyBoardName, bundle: nil);
+        let vc = storyBoard.instantiateViewControllerWithIdentifier("ClassMapViewController") as! ClassMapViewController
+        vc.currentClass = currentClass
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    // MARK: check in functionality
+    private func attendClassTapped() {
+        print("tapped attend class \(currentClass.name)")
         
         guard !currentClass.isFinished else {
             // class already done... do nothing
             print("class \(currentClass.name) already finished; can't attend")
-            allowedToCheckIn = false
             return
         }
         
         guard currentClass.isStarted else {
             print("class \(currentClass.name) hasn't started yet")
-            allowedToCheckIn = false
             return
         }
         
@@ -204,18 +255,18 @@ class StudentCourseDraggableViewController: UICollectionViewController, Question
             return
         }
         
+        let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        hud.labelText = "Trying to check in...."
         // class has started, check if student is inside geofence
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "canAttendClass", name: Class.insideClassGeofenceNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "allowedToAttendClass", name: Class.insideClassGeofenceNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "canNotAttendClass", name: Class.outsideClassGeofenceNotification, object: nil)
         currentClass.notifyWhenStudentCanAttendClass()
-        refreshControl.endRefreshing()
         studentDraggableViewCollectionView.reloadData()
     }
-        
-    func canAttendClass() {
+    
+    func allowedToAttendClass() {
         print("student can attend class \(currentClass.name)!")
-        self.allowedToCheckIn = true
-       
+        
         NSNotificationCenter.defaultCenter().removeObserver(self, name: Class.insideClassGeofenceNotification, object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: Class.outsideClassGeofenceNotification, object: nil)
         currentClass.attendClass(self.student) { (confirmed) -> Void in
@@ -238,104 +289,22 @@ class StudentCourseDraggableViewController: UICollectionViewController, Question
                 alertController.addAction(okAction)
                 self.presentViewController(alertController, animated: true, completion: nil)
             }
+            
+            self.studentDraggableViewCollectionView.reloadData()
+            MBProgressHUD.hideHUDForView(self.view, animated: true)
         }
     }
     
     func canNotAttendClass() {
+        MBProgressHUD.hideHUDForView(self.view, animated: true)
         print("student outside the geofence for the class \(currentClass.name) !")
-        allowedToCheckIn = false
-    }
-    
-    
-    func setCollectionViewLayout(){
-        let flowLayout : UICollectionViewFlowLayout = UICollectionViewFlowLayout.init()
+        // need to update the cell somehow
         
-        flowLayout.itemSize = CGSizeMake(self.view.bounds.width, self.view.bounds.height/5)
-        flowLayout.minimumInteritemSpacing = 0
-        flowLayout.minimumLineSpacing = 0
-        flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0)
-        studentDraggableViewCollectionView.setCollectionViewLayout(flowLayout, animated: true)
-    }
-    
-    
- // MARK: Collection View Controller Methods : 
-   override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
-        return 3;
-    }
-    
-    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        switch indexPath.row {
-        case 1:
-            attendanceViewTapped()
-        case 2:
-            questionsViewTapped()
-        default:
-            print("tapped row: \(indexPath.row)")
+        if let checkInCell = studentDraggableViewCollectionView.cellForItemAtIndexPath(NSIndexPath(forRow: CollectionViewCellIndex.CheckInCell.rawValue, inSection: 0)) as? CheckInCollectionViewCell {
+            checkInCell.showWarning()
+        }else{
+            print("couldn't get checkin cell!")
         }
-        
-    }
-
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize{
-      if(indexPath.row == 0){
-        return CGSizeMake(self.view.bounds.size.width,60)
-        }
-        if(indexPath.row == 1){
-            if(self.currentClass.classDescription.characters.count < 200){
-                CGSizeMake(self.view.bounds.size.width,100)
-            }else if(self.currentClass.classDescription.characters.count > 200 && self.currentClass.classDescription.characters.count < 250){
-                return CGSizeMake(self.view.bounds.size.width,130)
-            }else if(self.currentClass.classDescription.characters.count > 250 && self.currentClass.classDescription.characters.count < 300){
-                return CGSizeMake(self.view.bounds.size.width,160)
-            }else if(self.currentClass.classDescription.characters.count > 300 && self.currentClass.classDescription.characters.count < 350){
-                return CGSizeMake(self.view.bounds.size.width,190)
-            }
-        }
-        return CGSizeMake(self.view.bounds.width, self.view.bounds.height/5)
-    }
-    
-    // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell{
-        var cell :UICollectionViewCell!
-        
-        if indexPath.row == 0{
-            let checkIncell:CheckInCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier("CheckInCell", forIndexPath: indexPath) as! CheckInCollectionViewCell
-            checkIncell.backgroundColor = ThemeManager.theme().primaryYellowColor()
-            checkIncell.setUpUI()
-            checkIncell.setUpValuesForCheckIn(currentClass, allowedToCheckIn: allowedToCheckIn!,message: " ")            
-            return checkIncell;
-        }
-        
-        if(indexPath.row == 1){
-            let  classNameCell:ClassNameCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier("ClassNameCell", forIndexPath: indexPath) as! ClassNameCollectionViewCell
-            classNameCell.backgroundColor = UIColor.whiteColor()
-            classNameCell.layer.borderColor = ThemeManager.theme().primaryDarkBlueColor().CGColor
-            classNameCell.layer.borderWidth = 0.5
-            classNameCell.setUpclassCell()
-            classNameCell.displayClass = currentClass
-            self.studentDraggableViewCollectionView.collectionViewLayout.invalidateLayout()
-            return classNameCell
-        }
-        
-        if(indexPath.row == 2){
-            let questionCell = collectionView.dequeueReusableCellWithReuseIdentifier("QuestionsCell",forIndexPath:indexPath) as! QuestionsCollectionViewCell
-            questionCell.backgroundColor = UIColor.whiteColor()
-            questionCell.layer.borderColor = ThemeManager.theme().primaryDarkBlueColor().CGColor
-            questionCell.layer.borderWidth = 0.5
-            questionCell.setupUI()
-            questionCell.numQuestions = currentClass.questions!.count
-            
-            return questionCell
-        }
-        return cell;
-    }
-    
-    // MARK: show map view
-    @IBAction func mapButtonTapped(sender: AnyObject) {
-        let storyBoardName = "Main"
-        let storyBoard = UIStoryboard.init(name: storyBoardName, bundle: nil);
-        let vc = storyBoard.instantiateViewControllerWithIdentifier("ClassMapViewController") as! ClassMapViewController
-        vc.currentClass = currentClass
-        self.navigationController?.pushViewController(vc, animated: true)
     }
     
 }

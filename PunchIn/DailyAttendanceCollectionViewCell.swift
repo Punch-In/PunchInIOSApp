@@ -10,9 +10,18 @@ import UIKit
 
 class DailyAttendanceCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet weak var className: UILabel!
-    @IBOutlet weak var classDate: UILabel!
-    @IBOutlet weak var classPresentOrAbsent: UILabel!
+    @IBOutlet private weak var className: UILabel!
+    @IBOutlet private weak var classDate: UILabel!
+    @IBOutlet private weak var classPresentOrAbsent: UILabel!
+    
+    weak var student: Student!
+    var displayClass: Class! {
+        didSet {
+            className.text = displayClass.name
+            classDate.text = displayClass.dateString
+            classPresentOrAbsent.text = displayClass.didStudentAttend(student) ? "Present" : "Absent"
+        }
+    }
         
     override func awakeFromNib() {
         super.awakeFromNib()

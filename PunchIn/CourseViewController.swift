@@ -55,12 +55,24 @@ class CourseViewController: UIViewController,UINavigationBarDelegate,UIPageViewC
             courseAddress.text = newAddr
         }
         
-        course.getImage { (image, error) -> Void in
-            if error == nil {
-                self.courseImageView.alpha = 0.0
-                self.courseImageView.image = image
-                UIView.animateWithDuration(0.2, animations: { () -> Void in
-                    self.courseImageView.alpha = 1.0
+//        course.getImage { (image, error) -> Void in
+//            if error == nil {
+//                self.courseImageView.alpha = 0.0
+//                self.courseImageView.image = image
+//                UIView.animateWithDuration(0.2, animations: { () -> Void in
+//                    self.courseImageView.alpha = 1.0
+//                })
+//            }
+//        }
+        
+        course.instructors { (instructors, error) -> Void in
+            if let instructors = instructors {
+                instructors[0].getImage({ (image, error) -> Void in
+                    self.courseImageView.alpha = 0.0
+                    self.courseImageView.image = image
+                    UIView.animateWithDuration(0.2, animations: { () -> Void in
+                        self.courseImageView.alpha = 1.0
+                    })
                 })
             }
         }
@@ -79,22 +91,13 @@ class CourseViewController: UIViewController,UINavigationBarDelegate,UIPageViewC
         ThemeManager.theme().themeForContentView(courseView)
  
         courseView.backgroundColor = ThemeManager.theme().primaryBlueColor()
-        /*ThemeManager.theme().themeForTitleLabels(courseName)
-        ThemeManager.theme().themeForTitleLabels(courseNumber)
-        ThemeManager.theme().themeForTitleLabels(courseDate)
-        ThemeManager.theme().themeForTitleLabels(courseAddress)
-        */
         courseName.textColor = UIColor.whiteColor()
-        courseName.font = ThemeManager.theme().primaryTitleFont()
         
         courseNumber.textColor = UIColor.whiteColor()
-        courseNumber.font  = ThemeManager.theme().primarySubTitleFont()
         
         courseDate.textColor = UIColor.whiteColor()
-        courseDate.font = ThemeManager.theme().primaryTextFont()
         
         courseAddress.textColor = UIColor.whiteColor()
-        courseAddress.font = ThemeManager.theme().primaryTextFont()
     }
     
     override func didReceiveMemoryWarning() {
