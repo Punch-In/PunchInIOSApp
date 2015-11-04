@@ -11,9 +11,16 @@ import MBProgressHUD
 
 class AttendanceCollectionViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource {
     
+    private enum SwitcherSegmentIndex : Int {
+        case Present = 0
+        case Absent = 1
+    }
+    
     private static let AttendanceCollectionViewCellName = "AttendanceCollectionViewCell"
     
+    @IBOutlet weak var presentOrAbsentSwitcher: UISegmentedControl!
     @IBOutlet weak var attendanceCollectionView: UICollectionView!
+    
     var theClass: Class!
     private var studentArray: [Student]! {
         didSet {
@@ -31,7 +38,14 @@ class AttendanceCollectionViewController: UIViewController,UICollectionViewDeleg
         self.navigationController?.navigationBar.barTintColor = ThemeManager.theme().primaryDarkBlueColor()
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         
+        setupUI()
         setCollectionViewLayout()
+        
+        // data
+        studentArray = theClass.attendance!
+    }
+    
+    func setupUI() {
         attendanceCollectionView.delegate = self
         attendanceCollectionView.dataSource = self
         attendanceCollectionView.backgroundColor = UIColor.whiteColor()
@@ -39,12 +53,11 @@ class AttendanceCollectionViewController: UIViewController,UICollectionViewDeleg
         // hack
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: "fetchData", forControlEvents: UIControlEvents.ValueChanged)
-        
         attendanceCollectionView.alwaysBounceVertical = true
         attendanceCollectionView.addSubview(refreshControl)
         
-        // data
-        studentArray = theClass.attendance!
+        // set initial segmented index
+        presentOrAbsentSwitcher.selectedSegmentIndex = SwitcherSegmentIndex.Present.rawValue
     }
     
     // MARK: data fetch
@@ -70,7 +83,7 @@ class AttendanceCollectionViewController: UIViewController,UICollectionViewDeleg
     // MARK: Setup UI Methods
     func setCollectionViewLayout(){
         let flowLayout : UICollectionViewFlowLayout = UICollectionViewFlowLayout.init()
-        flowLayout.itemSize = CGSizeMake(self.view.bounds.width/3-30, 125)
+        flowLayout.itemSize = CGSizeMake(self.view.bounds.width/3-16, 100)
         flowLayout.minimumInteritemSpacing = 10
         flowLayout.minimumLineSpacing = 10
         flowLayout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10)
@@ -84,9 +97,23 @@ class AttendanceCollectionViewController: UIViewController,UICollectionViewDeleg
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell{
         let cell = attendanceCollectionView.dequeueReusableCellWithReuseIdentifier(AttendanceCollectionViewController.AttendanceCollectionViewCellName, forIndexPath: indexPath) as! AttendanceCollectionViewCell
+        cell.setupUI()
         cell.student = studentArray[indexPath.row]
         
         return cell
+    }
+    
+    // MARK: present or absent switcher action
+    @IBAction func didTapPresentOrAbsent(sender: AnyObject) {
+        let selected = SwitcherSegmentIndex(rawValue: self.presentOrAbsentSwitcher.selectedSegmentIndex)!
+        
+        switch selected {
+        case .Absent:
+            self.studentArray = theClass.absentStudents()
+        case .Present:
+            self.studentArray = theClass.attendance!
+        }
+        
     }
     
     // MARK: - Navigation

@@ -17,7 +17,6 @@ class AttendanceCollectionViewCell: UICollectionViewCell {
     var student: Student! {
         didSet {
             loadData()
-            formatCell()
         }
     }
     
@@ -29,12 +28,6 @@ class AttendanceCollectionViewCell: UICollectionViewCell {
     func loadData() {
         self.studentName.text = student.studentName
         
-        self.studentImage.layer.borderWidth = 1.0
-        self.studentImage.layer.borderColor = ThemeManager.theme().primaryDarkBlueColor().CGColor
-        self.studentImage.backgroundColor = UIColor.whiteColor()
-        self.studentImage.layer.cornerRadius = self.studentImage.frame.size.width / 2
-        self.studentImage.clipsToBounds = true
-
         // get student image
         student.getImage { (image, error) -> Void in
             if error == nil {
@@ -51,13 +44,13 @@ class AttendanceCollectionViewCell: UICollectionViewCell {
         }
     }
 
-    func formatCell() {
-        self.backgroundColor = ThemeManager.theme().primaryBlueColor()
-        self.studentName?.textColor = UIColor.whiteColor()
-        self.layer.shadowRadius = 2.0;
-        self.layer.shadowOpacity = 0.5;
-        self.layer.shadowOffset = CGSizeZero
-        self.layer.cornerRadius = 10
+    func setupUI() {
+        self.studentName?.textColor = ThemeManager.theme().primaryBlueColor()
+        self.studentImage.layer.borderWidth = 2.0
+        self.studentImage.layer.borderColor = ThemeManager.theme().primaryDarkBlueColor().CGColor
+        self.studentImage.backgroundColor = UIColor.whiteColor()
+        self.studentImage.layer.cornerRadius = self.studentImage.frame.size.width / 2
+        self.studentImage.clipsToBounds = true
     }
     
     

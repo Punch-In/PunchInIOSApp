@@ -9,7 +9,7 @@
 import UIKit
 import MBProgressHUD
 
-class CoursesListViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource {
+class CoursesListViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource, CourseListsGoToAttendanceViewDelegate {
     
     static let storyboardName = "CoursesListViewController"
     let CoursesListCellIdentifier  = "CoursesListCell"
@@ -23,12 +23,15 @@ class CoursesListViewController: UIViewController,UICollectionViewDelegate,UICol
     
     @IBOutlet weak var coursesCollectionView: UICollectionView!
     
+    @IBOutlet weak var personImageView: UIImageView!
+    @IBOutlet weak var personNameLabel: UILabel!
     
     // MARK: View Controller Methods.
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpDelegates()
         setUpUI()
+        setUpGreeting()
         setCollectionViewLayout()
         fetchData()
     }
@@ -71,6 +74,43 @@ class CoursesListViewController: UIViewController,UICollectionViewDelegate,UICol
         self.navigationItem.rightBarButtonItem?.tintColor = UIColor.whiteColor()
     }
     
+    func setUpGreeting() {
+        personNameLabel.hidden = true
+        personImageView.hidden = true
+
+        personNameLabel.textColor = ThemeManager.theme().primaryDarkBlueColor()
+        
+        personImageView.layer.borderWidth = 1.0
+        personImageView.layer.borderColor = ThemeManager.theme().primaryDarkBlueColor().CGColor
+        personImageView.backgroundColor = UIColor.whiteColor()
+        personImageView.layer.cornerRadius = personImageView.frame.size.width / 2
+        personImageView.clipsToBounds = true
+        
+        ParseDB.initializeCurrentPerson { (error) -> Void in
+            if error == nil {
+                ParseDB.currentPerson!.getImage { (image, error) -> Void in
+                    if error == nil {
+                        dispatch_async(dispatch_get_main_queue()){
+                            self.personNameLabel.hidden = false
+                            self.personImageView.hidden = false
+                            self.personImageView.image = image
+                            self.personNameLabel.text = "Welcome \(ParseDB.currentPerson!.getName())!"
+                            self.personImageView.alpha = 0
+                            self.personNameLabel.alpha = 0
+                            UIView.animateWithDuration(0.2, animations: { () -> Void in
+                                self.personImageView.alpha = 1
+                                self.personNameLabel.alpha = 1
+                            })
+                        }
+                    }
+                }
+            }else{
+                print("error getting current person! \(error)")
+            }
+        }
+        
+    }
+    
     func tappedLogout() {
         ParseDB.logout()
     }
@@ -104,6 +144,7 @@ class CoursesListViewController: UIViewController,UICollectionViewDelegate,UICol
         }
                 
         cell.setupUI()
+        cell.goToAttendanceDelegate = self
         cell.displayCourse = courseArray[indexPath.row]
         return cell;
     }
@@ -125,6 +166,16 @@ class CoursesListViewController: UIViewController,UICollectionViewDelegate,UICol
         let storyBoard = UIStoryboard.init(name: storyBoardName, bundle: nil);
         let vc = storyBoard.instantiateViewControllerWithIdentifier("ClassMapViewController") as! ClassMapViewController
         vc.currentClass = courseArray[0].classes![0]
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    // go to attendance details for student
+    func goToAttendanceDetails(course: Course) {
+        let storyBoardName = "Main"
+        let storyBoard = UIStoryboard.init(name: storyBoardName, bundle: nil);
+        let vc = storyBoard.instantiateViewControllerWithIdentifier("DetailAttendanceCollectionViewController") as! DetailAttendanceViewController
+        vc.course = course
+        vc.student = ParseDB.currentPerson as! Student
         self.navigationController?.pushViewController(vc, animated: true)
     }
 

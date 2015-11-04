@@ -11,7 +11,7 @@ import Parse
 class Class : PFObject, PFSubclassing, LocationProviderGeofenceDelegate {
     
     static let textForClassFinished = "Class has ended!"
-    static let textForInstructorClassStarted = "You've started the class. Tap again to finish"
+    static let textForInstructorClassStarted = "You've started the class.\nTap again to finish"
     static let textForInstructorClassNotStarted = "Start the class"
     static let textForStudentClassNotStarted = "Class hasn't started yet"
     static let textForStudentClassStarted = "Class has started.\nTap to check in -->"

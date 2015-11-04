@@ -8,10 +8,17 @@
 
 import UIKit
 
+protocol CourseListsGoToAttendanceViewDelegate: class {
+    func goToAttendanceDetails(course:Course)
+}
+
 class CoursesListsCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet weak var courseNameLabel:UILabel!
-    @IBOutlet weak var courseImageView: UIImageView!
+    @IBOutlet private weak var courseNameLabel:UILabel!
+    @IBOutlet private weak var courseImageView: UIImageView!
+    @IBOutlet private weak var goToAttendanceLabel: UILabel!
+    
+    weak var goToAttendanceDelegate: CourseListsGoToAttendanceViewDelegate?
     
     weak var displayCourse: Course! {
         didSet {
@@ -30,9 +37,22 @@ class CoursesListsCollectionViewCell: UICollectionViewCell {
     
     func setupUI(){
         courseNameLabel?.textColor = UIColor.whiteColor()
-        //courseNameLabel?.font = ThemeManager.theme().primaryTitleFont()
+        
+        // add gesture recognizer to attendance label (if visible)
+        if ParseDB.isStudent {
+            goToAttendanceLabel.hidden = false
+            let gesture = UITapGestureRecognizer(target: self, action: "didTapGoToAttendance")
+            goToAttendanceLabel.addGestureRecognizer(gesture)
+            goToAttendanceLabel.text = "my attendance"
+        }else{
+            goToAttendanceLabel.hidden = true
+        }
     }
     
-    
+    func didTapGoToAttendance() {
+        if let delegate = goToAttendanceDelegate {
+            delegate.goToAttendanceDetails(displayCourse)
+        }
+    }
     
 }

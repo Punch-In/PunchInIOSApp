@@ -7,11 +7,12 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class DetailAttendanceViewController: UIViewController,UICollectionViewDataSource,UICollectionViewDelegate{
 
-    var course:Course!
-    var student:Student!
+    weak var course:Course!
+    weak var student:Student!
     private var classes:[Class]! {
         didSet {
             attendanceCollectionView.reloadData()
@@ -25,20 +26,13 @@ class DetailAttendanceViewController: UIViewController,UICollectionViewDataSourc
     @IBOutlet weak var studentImage: UIImageView!
     @IBOutlet weak var attendanceCollectionView: UICollectionView!
     
+    // MARK: refresh hacks
+    var refreshControl : UIRefreshControl!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         attendanceCollectionView.delegate = self
         attendanceCollectionView.dataSource = self
-        
-//        course?.attendanceForCourse(student, completion: { (classes, isRegistered) -> Void in
-//            if isRegistered {
-//                self.classAttendance = classes
-//            }else{
-//                print("student \(self.student.studentName) not registered for course \(self.course.courseName)")
-//                self.classAttendance = []
-//            }
-//        })
-        
         studentName.text = student.studentName
         className.text = course.courseName
     
@@ -59,22 +53,41 @@ class DetailAttendanceViewController: UIViewController,UICollectionViewDataSourc
         dailyAttendanceView.backgroundColor = ThemeManager.theme().primaryBlueColor()
     
         studentName.textColor = UIColor.whiteColor()
-        //studentName.font = ThemeManager.theme().primaryTitleFont()
-        
         className.textColor = UIColor.whiteColor()
-        //className.font = ThemeManager.theme().primarySubTitleFont()
-        
         totalAttendance.textColor = UIColor.whiteColor()
-        //totalAttendance.font = ThemeManager.theme().primaryTextFont()
         
         // calculate attendance percentage
         let numClassesAttended = course.classes!.filter({$0.didStudentAttend(self.student)}).count
         let pctAttendance = (Double(numClassesAttended) / Double(course.classes!.count))*100.0
         totalAttendance.text = String(format:"%.2f%% Attendance", pctAttendance)
+        
+        // hack
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: "refreshData", forControlEvents: UIControlEvents.ValueChanged)
+        attendanceCollectionView.alwaysBounceVertical = true
+        attendanceCollectionView.addSubview(refreshControl)
 
         classes = course.classes!
     }
 
+    func refreshData() {
+        let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        hud.labelText = "Updating attendance details..."
+        
+        course.refreshAttendanceForCourse(student) { (classes, error) -> Void in
+            if error ==  nil {
+                dispatch_async(dispatch_get_main_queue()){
+                    self.classes = classes!
+                    self.refreshControl.endRefreshing()
+                    MBProgressHUD.hideHUDForView(self.view, animated: true)
+                }
+            }else{
+                self.refreshControl.endRefreshing()
+                MBProgressHUD.hideHUDForView(self.view, animated: true)
+            }
+        }
+    }
+    
     func setCollectionViewLayout(){
         let flowLayout : UICollectionViewFlowLayout = UICollectionViewFlowLayout.init()
         flowLayout.itemSize = CGSizeMake(self.view.bounds.width, self.view.bounds.height/9)
@@ -93,6 +106,7 @@ class DetailAttendanceViewController: UIViewController,UICollectionViewDataSourc
         cell.layer.borderColor = ThemeManager.theme().primaryBlueColor().CGColor
         cell.backgroundColor = UIColor.whiteColor()
         cell.layer.borderWidth = 0.25
+        cell.setupUI()
         cell.student = student
         cell.displayClass = theClass
         return cell

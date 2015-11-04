@@ -88,7 +88,10 @@ class QuestionsListViewController: UIViewController, UITableViewDelegate, UITabl
         if theClass.isFinished || !theClass.isStarted {
             newQuestionView.hidden = true
         }
+        
         newQuestionTextView.backgroundColor = UIColor.whiteColor()
+        newQuestionTextView.layer.cornerRadius = 10
+        newQuestionTextView.clipsToBounds = true
     }
     
     func initializeNewQuestionText() {
@@ -132,9 +135,23 @@ class QuestionsListViewController: UIViewController, UITableViewDelegate, UITabl
         return cell
     }
     
+    @IBOutlet private weak var newQuestionViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var newQuestionTextViewHeightConstraint: NSLayoutConstraint!
+    private let newQuestionFixedBuffer = 16
+    
     func textViewDidBeginEditing(textView: UITextView) {
         newQuestionTextView.textColor = UIColor.blackColor()
         newQuestionTextView.text = ""
+    }
+    
+    func textViewDidChange(textView: UITextView) {
+        // update the height of the textview based on the text entered
+        var contentSize = self.newQuestionTextView.sizeThatFits(CGSizeMake(newQuestionTextView.frame.width, CGFloat(150)))
+        // maximum height = 150, minimum height = 50
+        contentSize.height = min(contentSize.height, 151)
+        contentSize.height = max(contentSize.height, 49)
+        newQuestionTextViewHeightConstraint.constant = contentSize.height
+        newQuestionViewHeightConstraint.constant = contentSize.height + CGFloat(newQuestionFixedBuffer)
     }
     
     func textViewDidEndEditing(textView: UITextView) {
@@ -171,6 +188,7 @@ class QuestionsListViewController: UIViewController, UITableViewDelegate, UITabl
     
     // MARK: keyboard handling
     @IBOutlet weak var newQuestionViewBottomConstraint: NSLayoutConstraint!
+    
     func keyboardWillShow(notification: NSNotification!) {
         let userInfo: [NSObject : AnyObject] = notification.userInfo!
         let keyboardSize: CGSize = userInfo[UIKeyboardFrameBeginUserInfoKey]!.CGRectValue.size

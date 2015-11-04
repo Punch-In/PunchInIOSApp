@@ -144,6 +144,7 @@ class Course: PFObject, PFSubclassing {
         
     }
     
+    // TODO: support refresh data
     func attendanceForCourse(student: Student, completion: ((classes:[Class]?, isRegistered: Bool)->Void)) {
         // check if student is actually registered
         if let students = self.objectForKey("registeredStudents") as? [Student] {
@@ -159,6 +160,23 @@ class Course: PFObject, PFSubclassing {
             attendedClasses = classes.filter{ $0.didStudentAttend(student) }
         }
         completion(classes: attendedClasses, isRegistered:true)
+    }
+    
+    func refreshAttendanceForCourse(student: Student, completion: ((classes:[Class]?, error: NSError?)->Void)) {
+        if let query = Class.query() {
+            query.includeKey("attendance")
+            query.whereKey("parentCourse", equalTo: self)
+            query.findObjectsInBackgroundWithBlock({ (objs: [PFObject]?, error: NSError?) -> Void in
+                if error == nil {
+                    if let classes = objs as? [Class] {
+                        completion(classes: classes, error:nil)
+                    }
+                }else {
+                    print("error refreshing attendance! \(error)")
+                    completion(classes:nil, error:error)
+                }
+            })
+        }
     }
     
     func getImage(completion: ((image:UIImage?, error:NSError?)-> Void)) {
