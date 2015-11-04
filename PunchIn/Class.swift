@@ -257,8 +257,22 @@ class Class : PFObject, PFSubclassing, LocationProviderGeofenceDelegate {
     // MARK: attendance workflow
     func attendClass(student:Student, completion:((confirmed:Bool)->Void)) {
         // TODO: can we assume this can only be called if the geofence is satisfied?
-        self.addStudentToAttendance(student)
-        completion(confirmed:true)
+        
+        self.refreshDetails { (error) -> Void in
+            if error == nil {
+                if self.isFinished {
+                    // trying to attend class that's already finished
+                    completion(confirmed:false)
+                }else{
+                    self.addStudentToAttendance(student)
+                    completion(confirmed:true)
+                }
+            }else{
+                print("error refreshing class in attendClas() \(error)")
+                completion(confirmed:false)
+            }
+        }
+        
     }
 
     private var classEndTimer: NSTimer?

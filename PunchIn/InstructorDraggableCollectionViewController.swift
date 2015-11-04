@@ -106,24 +106,51 @@ class InstructorDraggableCollectionViewController: UICollectionViewController,UI
 
         switch cellIndex {
         case .CheckInCell:
-            return CGSizeMake(self.view.bounds.size.width,80)
+            if currentClass.isFinished {
+                return CGSizeMake(self.view.bounds.size.width, 60)
+            }else{
+                return CGSizeMake(self.view.bounds.size.width,90)
+            }
         case .ClassInfoCell:
-            if(self.currentClass.classDescription.characters.count < 200){
-                return CGSizeMake(self.view.bounds.size.width,100)
-            }else if(self.currentClass.classDescription.characters.count > 200 && self.currentClass.classDescription.characters.count < 250){
+            let height = getStringHeight(currentClass.classDescription, fontSize: CGFloat(13.0), width: self.view.bounds.size.width) + 50
+            return CGSizeMake(self.view.bounds.size.width, height)
+            
+            /*
+            if(count < 200){
+                return CGSizeMake(self.view.bounds.size.width,90)
+            }else{
+                let height = ((count-200)/50 + 1) * 30 + 90
+                return CGSizeMake(self.view.bounds.size.width, CGFloat(height))
+            }
+            if(self.currentClass.classDescription.characters.count > 200 && self.currentClass.classDescription.characters.count < 250){
                 return CGSizeMake(self.view.bounds.size.width,130)
             }else if(self.currentClass.classDescription.characters.count > 250 && self.currentClass.classDescription.characters.count < 300){
                 return CGSizeMake(self.view.bounds.size.width,160)
             }else if(self.currentClass.classDescription.characters.count > 300 && self.currentClass.classDescription.characters.count < 350){
                 return CGSizeMake(self.view.bounds.size.width,190)
+            }else{
+                return CGSizeMake(self.view.bounds.size.width,220)
             }
-            
-            return defaultSize
+            */
         case .AttendanceCell:
-            return CGSizeMake(self.view.bounds.width, 100)
+            return CGSizeMake(self.view.bounds.width, 75)
         case .QuestionsCell:
-            return CGSizeMake(self.view.bounds.width,100)
+            return CGSizeMake(self.view.bounds.width,75)
         }
+    }
+    
+    private func getStringHeight(mytext: String, fontSize: CGFloat, width: CGFloat)->CGFloat {
+        
+        let font = UIFont.systemFontOfSize(fontSize)
+        let size = CGSizeMake(width,CGFloat.max)
+//        let paragraphStyle = NSMutableParagraphStyle()
+//        paragraphStyle.lineBreakMode = .ByWordWrapping;
+        let attributes = [NSFontAttributeName:font]
+//            NSParagraphStyleAttributeName:paragraphStyle.copy()]
+        
+        let text = mytext as NSString
+        let rect = text.boundingRectWithSize(size, options:.UsesLineFragmentOrigin, attributes: attributes, context:nil)
+        return rect.size.height  
     }
     
     

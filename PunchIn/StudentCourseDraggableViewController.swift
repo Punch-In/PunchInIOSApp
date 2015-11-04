@@ -171,8 +171,16 @@ class StudentCourseDraggableViewController: UICollectionViewController,UICollect
 
         switch cellIndex  {
         case .CheckInCell:
-            return CGSizeMake(self.view.bounds.size.width,60)
+            if currentClass.isFinished || !currentClass.isStarted {
+                return CGSizeMake(self.view.bounds.size.width, 60)
+            }else{
+                return CGSizeMake(self.view.bounds.size.width,90)
+            }
         case .ClassInfoCell:
+            let height = getStringHeight(currentClass.classDescription, fontSize: CGFloat(13.0), width: self.view.bounds.size.width) + 50
+            return CGSizeMake(self.view.bounds.size.width, height)
+
+            /*
             if(self.currentClass.classDescription.characters.count < 200){
                 CGSizeMake(self.view.bounds.size.width,100)
             }else if(self.currentClass.classDescription.characters.count > 200 && self.currentClass.classDescription.characters.count < 250){
@@ -182,10 +190,24 @@ class StudentCourseDraggableViewController: UICollectionViewController,UICollect
             }else if(self.currentClass.classDescription.characters.count > 300 && self.currentClass.classDescription.characters.count < 350){
                 return CGSizeMake(self.view.bounds.size.width,190)
             }
-            return defaultSize
+            */
         case .QuestionsCell:
-            return defaultSize
+            return CGSizeMake(self.view.bounds.width, 75)
         }
+    }
+    
+    private func getStringHeight(mytext: String, fontSize: CGFloat, width: CGFloat)->CGFloat {
+        
+        let font = UIFont.systemFontOfSize(fontSize)
+        let size = CGSizeMake(width,CGFloat.max)
+        //        let paragraphStyle = NSMutableParagraphStyle()
+        //        paragraphStyle.lineBreakMode = .ByWordWrapping;
+        let attributes = [NSFontAttributeName:font]
+        //            NSParagraphStyleAttributeName:paragraphStyle.copy()]
+        
+        let text = mytext as NSString
+        let rect = text.boundingRectWithSize(size, options:.UsesLineFragmentOrigin, attributes: attributes, context:nil)
+        return rect.size.height
     }
     
     // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
@@ -278,36 +300,40 @@ class StudentCourseDraggableViewController: UICollectionViewController,UICollect
         NSNotificationCenter.defaultCenter().removeObserver(self, name: Class.insideClassGeofenceNotification, object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: Class.outsideClassGeofenceNotification, object: nil)
         currentClass.attendClass(self.student) { (confirmed) -> Void in
-            print("woo")
-            if UIApplication.sharedApplication().applicationState != UIApplicationState.Active {
-                // in background... notification
-                print(" \(UIApplication.sharedApplication().applicationState.rawValue) notification!")
-                return
-            }
-            
-            if self.view.window == nil {
-                // view is currently not visible
-                // assume foreground... alert
-                let alertController = UIAlertController(
-                    title: "CheckIn",
-                    message: "\(self.student.studentName), you've checked in for class \(self.currentClass.name)",
-                    preferredStyle: .Alert)
-                
-                let okAction = UIAlertAction(title: "Woo Hoo", style: .Default, handler: nil)
-                alertController.addAction(okAction)
-                
-                if let rootVC = UIApplication.sharedApplication().keyWindow?.rootViewController {
-                    var topVC = rootVC
-                    while (topVC.presentedViewController != nil) {
-                        topVC = topVC.presentedViewController!;
-                    }
-                    topVC.presentViewController(alertController, animated: true, completion: nil)
+            if confirmed {
+                print("woo")
+                if UIApplication.sharedApplication().applicationState != UIApplicationState.Active {
+                    // in background... notification
+                    print(" \(UIApplication.sharedApplication().applicationState.rawValue) notification!")
+                    return
                 }
                 
-                //self.presentViewController(alertController, animated: true, completion: nil)
-//                if let currentVC = UIApplication.sharedApplication().delegate?.window??.rootViewController {
-//                    currentVC.presentViewController(alertController, animated: true, completion: nil)
-//                }
+                if self.view.window == nil {
+                    // view is currently not visible
+                    // assume foreground... alert
+                    let alertController = UIAlertController(
+                        title: "CheckIn",
+                        message: "\(self.student.studentName), you've checked in for class \(self.currentClass.name)",
+                        preferredStyle: .Alert)
+                    
+                    let okAction = UIAlertAction(title: "Woo Hoo", style: .Default, handler: nil)
+                    alertController.addAction(okAction)
+                    
+                    if let rootVC = UIApplication.sharedApplication().keyWindow?.rootViewController {
+                        var topVC = rootVC
+                        while (topVC.presentedViewController != nil) {
+                            topVC = topVC.presentedViewController!;
+                        }
+                        topVC.presentViewController(alertController, animated: true, completion: nil)
+                    }
+                    
+                    //self.presentViewController(alertController, animated: true, completion: nil)
+    //                if let currentVC = UIApplication.sharedApplication().delegate?.window??.rootViewController {
+    //                    currentVC.presentViewController(alertController, animated: true, completion: nil)
+    //                }
+                }
+            }else{
+                print("attendClass not confirmed!")
             }
             
             dispatch_async(dispatch_get_main_queue()){

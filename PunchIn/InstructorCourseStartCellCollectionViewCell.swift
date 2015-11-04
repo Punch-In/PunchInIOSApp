@@ -37,7 +37,7 @@ class InstructorCourseStartCellCollectionViewCell: UICollectionViewCell {
                 useCurrentLocationImageView.image = UIImage(named: "unselected_button_login")
                 UIView.animateWithDuration(0.2, animations: { () -> Void in
                     self.useCurrentLocationLabel.text = self.textForNotUsingCurrentLocation
-                    self.useCurrentLocationImageView.alpha = 0.25
+                    self.useCurrentLocationImageView.alpha = 0.50
                 })
             }
         }
@@ -63,12 +63,7 @@ class InstructorCourseStartCellCollectionViewCell: UICollectionViewCell {
         checkInButton.hidden = true
         checkInButtonWrapperView.hidden = true
         useCurrentLocationImageView.hidden = true
-
-        if displayClass.isUsingCourseLocation {
-            useCurrentLocationLabel.text = "Class used course's registered location"
-        }else{
-            useCurrentLocationLabel.text = "Class used your location, not course location"
-        }
+        useCurrentLocationLabel.hidden = true
     }
     
     private func classIsStarted() {
@@ -112,7 +107,7 @@ class InstructorCourseStartCellCollectionViewCell: UICollectionViewCell {
         
         // button to use current location
         useCurrentLocationImageView.image = UIImage(named: "unselected_button_login")
-        useCurrentLocationImageView.alpha = 0.25
+        useCurrentLocationImageView.alpha = 0.50
         useCurrentLocationImageView.hidden = true
         useCurrentLocationLabel.textColor = UIColor.whiteColor()
         checkInStatus.textColor = UIColor.whiteColor()
