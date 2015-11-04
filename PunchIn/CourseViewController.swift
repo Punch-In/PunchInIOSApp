@@ -12,6 +12,7 @@ import MBProgressHUD
 class CourseViewController: UIViewController,UINavigationBarDelegate,UIPageViewControllerDataSource {
     
     var course:Course!
+    var startIndex: Int?
     var pageController:UIPageViewController!
     
     @IBOutlet weak var courseBaseView:UIView!
@@ -114,11 +115,18 @@ class CourseViewController: UIViewController,UINavigationBarDelegate,UIPageViewC
         
         self.pageController.view.frame = self.courseBaseView.bounds
         
+        
+        // check if should go to specific starting class
+        var index: Int?
+        if startIndex == nil {
         // pick starting class: the first class that has not already finished
-        var index = course.classes?.indexOf{ !$0.isFinished }
-        if index == nil {
-            // all classes finished for the course
-            index = 0
+            index = course.classes?.indexOf{ !$0.isFinished }
+            if index == nil {
+                // all classes finished for the course
+                index = 0
+            }
+        }else{
+            index = startIndex
         }
         
         let viewControllerObject:UIViewController = self.viewControllerAtIndex(withIndex:index!)

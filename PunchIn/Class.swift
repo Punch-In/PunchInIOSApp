@@ -85,9 +85,22 @@ class Class : PFObject, PFSubclassing, LocationProviderGeofenceDelegate {
         return formatter
     }()
     
+    private static let shortTimeFormatter : NSDateFormatter = {
+       var formatter = NSDateFormatter()
+        formatter.dateFormat = "MM/dd/yyyy"
+        formatter.timeZone = NSTimeZone.localTimeZone()
+        return formatter
+    }()
+    
     var dateString: String {
         get {
             return Class.timeFormatter.stringFromDate(self.date)
+        }
+    }
+    
+    var shortDateString: String {
+        get {
+            return Class.shortTimeFormatter.stringFromDate(self.date)
         }
     }
     

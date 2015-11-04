@@ -19,7 +19,7 @@ class DailyAttendanceCollectionViewCell: UICollectionViewCell {
     var displayClass: Class! {
         didSet {
             className.text = displayClass.name
-            classDate.text = displayClass.dateString
+            classDate.text = displayClass.shortDateString
             if displayClass.isFinished {
                 attendanceStatusImageView.hidden = false
                 if displayClass.didStudentAttend(student) {

@@ -91,8 +91,8 @@ class DetailAttendanceViewController: UIViewController,UICollectionViewDataSourc
     
     func setCollectionViewLayout(){
         let flowLayout : UICollectionViewFlowLayout = UICollectionViewFlowLayout.init()
-        flowLayout.itemSize = CGSizeMake(self.view.bounds.width, self.view.bounds.height/9)
-        flowLayout.minimumInteritemSpacing = 10
+        flowLayout.itemSize = CGSizeMake(self.view.bounds.width, self.view.bounds.height/10)
+        flowLayout.minimumInteritemSpacing = 5
         attendanceCollectionView.setCollectionViewLayout(flowLayout, animated: true)
     }
 
@@ -113,13 +113,14 @@ class DetailAttendanceViewController: UIViewController,UICollectionViewDataSourc
         return cell
     }
     
-    private static var classDateFormatter: NSDateFormatter = {
-        let formatter = NSDateFormatter()
-        formatter.timeZone = NSTimeZone.localTimeZone()
-        formatter.dateFormat = "MMM dd y"
-        return formatter
-    }()
-
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let storyBoardName = "Main"
+        let storyBoard = UIStoryboard.init(name: storyBoardName, bundle: nil);
+        let vc = storyBoard.instantiateViewControllerWithIdentifier("CourseViewController") as! CourseViewController
+        vc.startIndex = indexPath.row
+        vc.course = course
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
     
     /*
     // MARK: - Navigation
