@@ -1296,19 +1296,19 @@
                                                 <constraint firstItem="1i3-cV-tl4" firstAttribute="centerX" secondItem="24c-J5-uUn" secondAttribute="centerX" id="wUF-s8-D61"/>
                                             </constraints>
                                         </view>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Use current location to start class?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6TQ-CD-gup">
-                                            <rect key="frame" x="8" y="94" width="198" height="14.5"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                         <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unselected_button_login" translatesAutoresizingMaskIntoConstraints="NO" id="USi-uO-wwY">
-                                            <rect key="frame" x="210" y="93" width="16" height="16"/>
+                                            <rect key="frame" x="8" y="86" width="16" height="16"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="16" id="AvH-o6-6DN"/>
                                                 <constraint firstAttribute="height" constant="16" id="XYH-Do-B9z"/>
                                             </constraints>
                                         </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Use current location to start class?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6TQ-CD-gup">
+                                            <rect key="frame" x="28" y="87" width="198" height="14.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <animations/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1318,10 +1318,11 @@
                                 <constraints>
                                     <constraint firstItem="6TQ-CD-gup" firstAttribute="centerY" secondItem="USi-uO-wwY" secondAttribute="centerY" id="8U4-4M-PHY"/>
                                     <constraint firstItem="PQn-d4-Oko" firstAttribute="leading" secondItem="6TQ-CD-gup" secondAttribute="leading" id="EHx-l3-0Hi"/>
+                                    <constraint firstItem="PQn-d4-Oko" firstAttribute="leading" secondItem="USi-uO-wwY" secondAttribute="leading" id="Gdm-HO-mM8"/>
                                     <constraint firstItem="USi-uO-wwY" firstAttribute="leading" secondItem="6TQ-CD-gup" secondAttribute="trailing" constant="4" id="JDd-4w-53D"/>
                                     <constraint firstAttribute="trailingMargin" secondItem="ENm-Je-knD" secondAttribute="trailing" constant="8" id="KjB-kY-AeN"/>
                                     <constraint firstItem="PQn-d4-Oko" firstAttribute="centerY" secondItem="Ul6-Ts-XhO" secondAttribute="centerY" id="LtF-qg-Ca2"/>
-                                    <constraint firstItem="6TQ-CD-gup" firstAttribute="top" secondItem="PQn-d4-Oko" secondAttribute="bottom" constant="16" id="cyJ-Nv-CUb"/>
+                                    <constraint firstItem="6TQ-CD-gup" firstAttribute="top" secondItem="PQn-d4-Oko" secondAttribute="bottom" constant="8" id="cyJ-Nv-CUb"/>
                                     <constraint firstItem="PQn-d4-Oko" firstAttribute="centerY" secondItem="Ul6-Ts-XhO" secondAttribute="centerY" id="eme-Zf-2il"/>
                                     <constraint firstItem="ENm-Je-knD" firstAttribute="leading" secondItem="24c-J5-uUn" secondAttribute="trailing" constant="6" id="geI-ko-ZCq"/>
                                     <constraint firstItem="PQn-d4-Oko" firstAttribute="centerY" secondItem="24c-J5-uUn" secondAttribute="centerY" id="h1l-9B-p5l"/>
@@ -1330,13 +1331,18 @@
                                     <constraint firstItem="24c-J5-uUn" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="PQn-d4-Oko" secondAttribute="trailing" constant="4" id="qi5-S9-VxJ"/>
                                     <constraint firstItem="PQn-d4-Oko" firstAttribute="leading" secondItem="Ul6-Ts-XhO" secondAttribute="leadingMargin" constant="8" id="qjy-mW-70A"/>
                                     <constraint firstItem="PQn-d4-Oko" firstAttribute="leading" secondItem="Ul6-Ts-XhO" secondAttribute="leadingMargin" constant="17" id="wgY-6y-gko"/>
+                                    <constraint firstItem="USi-uO-wwY" firstAttribute="top" secondItem="PQn-d4-Oko" secondAttribute="bottom" constant="8" id="xfR-og-HSF"/>
+                                    <constraint firstItem="6TQ-CD-gup" firstAttribute="leading" secondItem="USi-uO-wwY" secondAttribute="trailing" constant="4" id="zBO-3r-o3M"/>
                                 </constraints>
                                 <size key="customSize" width="549" height="138"/>
                                 <variation key="default">
                                     <mask key="constraints">
+                                        <exclude reference="EHx-l3-0Hi"/>
                                         <exclude reference="eme-Zf-2il"/>
                                         <exclude reference="qjy-mW-70A"/>
                                         <exclude reference="wgY-6y-gko"/>
+                                        <exclude reference="JDd-4w-53D"/>
+                                        <exclude reference="cyJ-Nv-CUb"/>
                                     </mask>
                                 </variation>
                                 <connections>
@@ -1602,7 +1608,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wjc-xH-XnI">
                                 <rect key="frame" x="30" y="28" width="540" height="160"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="9076EBEF-DA08-46A9-B66B-C34455BCE7CB" highlightedImage="9076EBEF-DA08-46A9-B66B-C34455BCE7CB" translatesAutoresizingMaskIntoConstraints="NO" id="P7e-8M-9OS">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0923516D-4054-4AE6-BD03-6BDE5AC39BC6" highlightedImage="0923516D-4054-4AE6-BD03-6BDE5AC39BC6" translatesAutoresizingMaskIntoConstraints="NO" id="P7e-8M-9OS">
                                         <rect key="frame" x="422" y="42" width="108" height="108"/>
                                         <animations/>
                                         <constraints>
@@ -1958,7 +1964,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="9076EBEF-DA08-46A9-B66B-C34455BCE7CB" width="128" height="128">
+        <image name="0923516D-4054-4AE6-BD03-6BDE5AC39BC6" width="128" height="128">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOzxYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISksLzU4VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA

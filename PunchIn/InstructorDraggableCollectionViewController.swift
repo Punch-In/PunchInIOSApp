@@ -106,7 +106,7 @@ class InstructorDraggableCollectionViewController: UICollectionViewController,UI
 
         switch cellIndex {
         case .CheckInCell:
-            return CGSizeMake(self.view.bounds.size.width,60)
+            return CGSizeMake(self.view.bounds.size.width,80)
         case .ClassInfoCell:
             if(self.currentClass.classDescription.characters.count < 200){
                 return CGSizeMake(self.view.bounds.size.width,100)
