@@ -10,7 +10,7 @@ import UIKit
 import MBProgressHUD
 
 
-class InstructorDraggableCollectionViewController: UICollectionViewController {
+class InstructorDraggableCollectionViewController: UICollectionViewController,UICollectionViewDelegateFlowLayout {
 
     var course:Course!
     var classIndex:Int!
@@ -68,6 +68,30 @@ class InstructorDraggableCollectionViewController: UICollectionViewController {
         instructorDraggableCollectionView.setCollectionViewLayout(flowLayout, animated: true)
     }
     
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize{
+        if(indexPath.row == 0){
+            return CGSizeMake(self.view.bounds.size.width,60)
+        }
+        if(indexPath.row == 1){
+            if(self.currentClass.classDescription.characters.count < 200){
+                CGSizeMake(self.view.bounds.size.width,100)
+            }else if(self.currentClass.classDescription.characters.count > 200 && self.currentClass.classDescription.characters.count < 250){
+                return CGSizeMake(self.view.bounds.size.width,130)
+            }else if(self.currentClass.classDescription.characters.count > 250 && self.currentClass.classDescription.characters.count < 300){
+                return CGSizeMake(self.view.bounds.size.width,160)
+            }else if(self.currentClass.classDescription.characters.count > 300 && self.currentClass.classDescription.characters.count < 350){
+                return CGSizeMake(self.view.bounds.size.width,190)
+            }
+        }
+        if(indexPath.row == 2){
+            return CGSizeMake(self.view.bounds.width, 100)
+
+        }
+        if(indexPath.row == 3){
+            return CGSizeMake(self.view.bounds.width,100)
+        }
+        return CGSizeMake(self.view.bounds.width, self.view.bounds.height/5)
+    }
     
     
     func classStarted(){

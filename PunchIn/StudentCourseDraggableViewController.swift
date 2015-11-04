@@ -9,7 +9,7 @@
 import UIKit
 import MBProgressHUD
 
-class StudentCourseDraggableViewController: UICollectionViewController, QuestionPostedNewProtocol {
+class StudentCourseDraggableViewController: UICollectionViewController, QuestionPostedNewProtocol,UICollectionViewDelegateFlowLayout{
 
     var course:Course!
     var classIndex:Int!
@@ -249,6 +249,7 @@ class StudentCourseDraggableViewController: UICollectionViewController, Question
     
     func setCollectionViewLayout(){
         let flowLayout : UICollectionViewFlowLayout = UICollectionViewFlowLayout.init()
+        
         flowLayout.itemSize = CGSizeMake(self.view.bounds.width, self.view.bounds.height/5)
         flowLayout.minimumInteritemSpacing = 0
         flowLayout.minimumLineSpacing = 0
@@ -275,8 +276,25 @@ class StudentCourseDraggableViewController: UICollectionViewController, Question
         }
         
     }
-    
 
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize{
+      if(indexPath.row == 0){
+        return CGSizeMake(self.view.bounds.size.width,60)
+        }
+        if(indexPath.row == 1){
+            if(self.currentClass.classDescription.characters.count < 200){
+                CGSizeMake(self.view.bounds.size.width,100)
+            }else if(self.currentClass.classDescription.characters.count > 200 && self.currentClass.classDescription.characters.count < 250){
+                return CGSizeMake(self.view.bounds.size.width,130)
+            }else if(self.currentClass.classDescription.characters.count > 250 && self.currentClass.classDescription.characters.count < 300){
+                return CGSizeMake(self.view.bounds.size.width,160)
+            }else if(self.currentClass.classDescription.characters.count > 300 && self.currentClass.classDescription.characters.count < 350){
+                return CGSizeMake(self.view.bounds.size.width,190)
+            }
+        }
+        return CGSizeMake(self.view.bounds.width, self.view.bounds.height/5)
+    }
+    
     // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell{
         if indexPath.row == 0{
@@ -294,6 +312,7 @@ class StudentCourseDraggableViewController: UICollectionViewController, Question
             classNameCell.layer.borderWidth = 0.5
             classNameCell.setUpclassCell()
             classNameCell.displayClass = currentClass
+            self.studentDraggableViewCollectionView.collectionViewLayout.invalidateLayout()
             return classNameCell
         }
         
