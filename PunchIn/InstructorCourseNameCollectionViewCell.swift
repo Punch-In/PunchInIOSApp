@@ -28,11 +28,9 @@ class InstructorCourseNameCollectionViewCell: UICollectionViewCell {
     func setupUI(){
         //Class Names
         className.textColor = ThemeManager.theme().primaryDarkBlueColor()
-//        className.font = ThemeManager.theme().primaryTitleFont()
         //Class Description
         classDescription.textColor = ThemeManager.theme().primaryBlueColor()
-//        classDescription.font = ThemeManager.theme().primarySubTitleFont()
-        
+        // class date
         classDateLabel.textColor = ThemeManager.theme().primaryGreyColor()
     }
     

@@ -14,7 +14,7 @@ class Class : PFObject, PFSubclassing, LocationProviderGeofenceDelegate {
     static let textForInstructorClassStarted = "You've started the class. Tap again to finish"
     static let textForInstructorClassNotStarted = "Start the class"
     static let textForStudentClassNotStarted = "Class hasn't started yet"
-    static let textForStudentClassStarted = "You can try to check in for the class"
+    static let textForStudentClassStarted = "Class has started.\nTap to check in -->"
     static let textForStudentClassCheckedIn = "You've checked in for the class!"
     static let textForStudentOutsideGeofence = "You can't check in because you're not at the class location"
     
@@ -62,6 +62,10 @@ class Class : PFObject, PFSubclassing, LocationProviderGeofenceDelegate {
                 return LocationProvider.createGeofenceRegion(self.parentCourse.courseLocation, id: self.name)
             }
         }
+    }
+    
+    var isUsingCourseLocation: Bool {
+        return location == parentCourse.courseLocation
     }
     
     /// grr... because NSManaged doesn't allow optionals on Ints, use this approach to 
@@ -204,7 +208,7 @@ class Class : PFObject, PFSubclassing, LocationProviderGeofenceDelegate {
             self.startMe(self.parentCourse.courseLocation)
             completion(error:nil)
         }else{
-            // allow option to start class using current location or stored location
+            // start class using current location or stored location
             LocationProvider.location{ (location, error) -> Void in
                 if error == nil {
                     self.startMe(location)

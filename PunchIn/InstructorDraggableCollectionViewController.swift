@@ -199,7 +199,7 @@ class InstructorDraggableCollectionViewController: UICollectionViewController,UI
             attendanceCell.backgroundColor = UIColor.whiteColor()
             attendanceCell.layer.borderColor = ThemeManager.theme().primaryDarkBlueColor().CGColor
             attendanceCell.layer.borderWidth = 0.5
-            attendanceCell.setAttendanceCollectionViewCell()
+            attendanceCell.setupUI()
             attendanceCell.displayClass = currentClass
             return attendanceCell
         case .QuestionsCell:

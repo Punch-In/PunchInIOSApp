@@ -50,4 +50,15 @@ class Location : PFObject, PFSubclassing {
         self.latitude = "\(coordinates.coordinate.latitude)"
         self.longitude = "\(coordinates.coordinate.longitude)"
     }
+    
+}
+
+func ==(left:Location, right:Location) -> Bool {
+    print("calling custom equality for location")
+    return (left.address==right.address) && (left.latitude==right.latitude) && (left.longitude==right.longitude)
+}
+
+func !=(left:Location, right:Location) -> Bool {
+    print("calling custom !equality for location")
+    return !(left==right)
 }

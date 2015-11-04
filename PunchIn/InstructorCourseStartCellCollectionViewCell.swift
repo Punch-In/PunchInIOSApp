@@ -17,11 +17,23 @@ protocol InstructorCourseStartProtocol {
 
 class InstructorCourseStartCellCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet weak var checkInStatus: UILabel!
-    @IBOutlet weak var checkInButon: UIButton!
+    @IBOutlet private weak var checkInStatus: UILabel!
+    @IBOutlet private weak var checkInButton: UIButton!
+    @IBOutlet private weak var checkInButtonWrapperView: UIView!
+    @IBOutlet private weak var useCurrentLocationImageView: UIImageView!
+    @IBOutlet weak var useCurrentLocationLabel: UILabel!
+    
     var newInstructorCourseStartDelegate: InstructorCourseStartProtocol?
     
-    private var useCurrentLocationToStartClass: Bool = false
+    private var useCurrentLocationToStartClass: Bool = false {
+        didSet {
+            if useCurrentLocationToStartClass {
+                useCurrentLocationImageView.image = UIImage(named: "selected_button_login")
+            }else{
+                useCurrentLocationImageView.image = UIImage(named: "unselected_button_login")
+            }
+        }
+    }
     
     private let textForUsingCurrentLocation = "using your current location"
     private let textForNotUsingCurrentLocation = "using the course's registered location"
@@ -40,85 +52,77 @@ class InstructorCourseStartCellCollectionViewCell: UICollectionViewCell {
 
     private func classIsFinished() {
         checkInStatus.text = Class.textForClassFinished
-        checkInButon.hidden = true
-        // TODO: check class location before updating this text since the variable state will be lost
-        // useCurrentLocationLabel.text = "Class was started " + useCurrentLocationToStartClass ? textForUsingCurrentLocation :
-        // textForNotUsingCurrentLocation
-        // useCurrentLocationButton.hidden = true
-        // useCurrentLocationLabel.hidden = true
+        checkInButton.hidden = true
+        checkInButtonWrapperView.hidden = true
+        useCurrentLocationImageView.hidden = true
+
+        useCurrentLocationLabel.text = "Class was started " + (displayClass.isUsingCourseLocation ? textForUsingCurrentLocation : textForNotUsingCurrentLocation)
+
     }
     
     private func classIsStarted() {
         checkInStatus.text = Class.textForInstructorClassStarted
-        checkInButon.hidden = false
-        checkInButon.selected = true
-        // useCurrentLocationLabel.text = "Class was started " + useCurrentLocationToStartClass ? textForUsingCurrentLocation :
-        // textForNotUsingCurrentLocation
-        // useCurrentLocationButton.hidden = true
-        // useCurrentLocationLabel.hidden = false
-
+        checkInButton.hidden = false
+        checkInButton.selected = true
+        checkInButtonWrapperView.hidden = false
+        useCurrentLocationLabel.text = "Class was started " + (useCurrentLocationToStartClass ? textForUsingCurrentLocation : textForNotUsingCurrentLocation)
+        useCurrentLocationImageView.hidden = true
     }
     
     private func classNotStarted() {
         checkInStatus.text = Class.textForInstructorClassNotStarted
-        checkInButon.hidden = false
-        checkInButon.selected = false
-        // useCurrentLocationLabel.text = "Class was started " + useCurrentLocationToStartClass ? textForUsingCurrentLocation :
-        // textForNotUsingCurrentLocation
-        // useCurrentLocationButton.hidden = false
-        // useCurrentLocationLabel.hidden = false
+        checkInButton.hidden = false
+        checkInButton.selected = false
+        checkInButtonWrapperView.hidden = false
+        useCurrentLocationLabel.text = "Class will be started " + (useCurrentLocationToStartClass ? textForUsingCurrentLocation : textForNotUsingCurrentLocation)
+        useCurrentLocationImageView.hidden = false
     }
     
     func setupUI() {
         // button to start the class
-        checkInButon.setBackgroundImage(UIImage.init(named:"selected_checkin"), forState: .Selected)
-        checkInButon.setBackgroundImage(UIImage.init(named:"unselected_checkin"), forState: .Normal)
-        checkInButon.hidden = false
-        //checkInStatus.font = ThemeManager.theme().primarySubTitleFont()
+        checkInButton.setBackgroundImage(UIImage.init(named:"selected_checkin"), forState: .Selected)
+        checkInButton.setBackgroundImage(UIImage.init(named:"unselected_checkin"), forState: .Normal)
+        checkInButton.hidden = true
+        
+        checkInButton.layer.cornerRadius = 6.0
+        checkInButton.clipsToBounds = true
+        checkInButtonWrapperView.hidden = true
+        checkInButtonWrapperView.layer.cornerRadius = 6.0
+        checkInButtonWrapperView.clipsToBounds = true
+
         
         // button to use current location
-        //useCurrentLocationButton.setImage(UIImage.init(named:"selected_button_login"), forState: .Selected)
-        //useCurrentLocationButton.setImage(UIImage.init(named:"unselected_button_login"), forState: .Normal)
-        //useCurrentLocationButton.hidden = false
-
+        useCurrentLocationImageView.image = UIImage(named: "unselected_button_login")
+        useCurrentLocationImageView.hidden = true
+        useCurrentLocationLabel.textColor = UIColor.whiteColor()
         checkInStatus.textColor = UIColor.whiteColor()
     }
     
-    /*
-    func setUpCourseStartCell(aCurrentClass:Class){
-        checkInButon.setImage(UIImage.init(named:"selected_checkin"), forState: .Selected)
-        checkInButon.setImage(UIImage.init(named:"unselected_checkin"), forState: .Normal)
-        currentClass = aCurrentClass
-        checkInStatus.textColor = UIColor.whiteColor()
-        checkInStatus.font = ThemeManager.theme().primarySubTitleFont()
-    }
-    */
     
     @IBAction func checkInButtonAction(sender: AnyObject) {
-        checkInButon.selected = !checkInButon.selected
+        checkInButton.selected = !checkInButton.selected
         startClassTapped()
     }
     
     @IBAction func useCurrentLocationTapped(sender: AnyObject){
         useCurrentLocationToStartClass != useCurrentLocationToStartClass
-        // useCurrentLocationButton.selected = useCurrentLocationToStartClass
     }
     
     func startClassTapped() {
         print("tapped start class!")
         
-        guard !ParseDB.isStudent else {
-            print("students can't start a class")
-            let alertController = UIAlertController(
-                title: "StudentCantStartClass",
-                message: "Students can't start a class",
-                preferredStyle: .Alert)
-            
-            let dismissAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
-            alertController.addAction(dismissAction)
-           // self.presentViewController(alertController, animated: true, completion: nil)
-            return
-        }
+//        guard !ParseDB.isStudent else {
+//            print("students can't start a class")
+//            let alertController = UIAlertController(
+//                title: "StudentCantStartClass",
+//                message: "Students can't start a class",
+//                preferredStyle: .Alert)
+//            
+//            let dismissAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+//            alertController.addAction(dismissAction)
+//           // self.presentViewController(alertController, animated: true, completion: nil)
+//            return
+//        }
         
         guard !displayClass.isFinished else {
             // class already done... do nothing
@@ -143,13 +147,9 @@ class InstructorCourseStartCellCollectionViewCell: UICollectionViewCell {
         displayClass.start(useCourseLocation: !useCurrentLocationToStartClass){ (error) -> Void in
             if error == nil {
                 dispatch_async(dispatch_get_main_queue()) {
+                    print("class \(self.displayClass.name) started!");
                     self.newInstructorCourseStartDelegate?.classStarted()
                     self.classIsStarted()
-                    print("class \(self.displayClass.name) started!");
-                    UIView.animateWithDuration(0.5, animations: { () -> Void in
-                        //           self.startClassView.backgroundColor = UIColor.greenColor()
-                        //         self.startClassLabel.text = Class.classStartedText
-                    })
                     MBProgressHUD.hideHUDForView(self, animated: true)
                 }
             }else{

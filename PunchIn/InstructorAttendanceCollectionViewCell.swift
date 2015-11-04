@@ -13,7 +13,6 @@ class InstructorAttendanceCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var attendanceStudentsCount: UILabel!
     @IBOutlet weak var registeredStudentsCount: UILabel!
     
-    @IBOutlet weak var attendanceTitleLabel: UILabel!
     @IBOutlet weak var attendanceLabel: UILabel!
     @IBOutlet weak var registeredStudentsLabel: UILabel!
     
@@ -24,19 +23,15 @@ class InstructorAttendanceCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func setAttendanceCollectionViewCell(){
-        attendanceStudentsCount.textColor = ThemeManager.theme().primaryBlueColor()
-        registeredStudentsCount.textColor = ThemeManager.theme().primaryBlueColor()
+    func setupUI(){
+        attendanceStudentsCount.textColor = ThemeManager.theme().primaryDarkBlueColor()
+        registeredStudentsCount.textColor = ThemeManager.theme().primaryDarkBlueColor()
     
         /*Other Static Labels*/
         attendanceLabel.textColor  = ThemeManager.theme().primaryBlueColor()
-//        attendanceLabel.font = ThemeManager.theme().primarySubTitleFont()
-        
-        attendanceTitleLabel.textColor = ThemeManager.theme().primaryBlueColor()
-//        attendanceTitleLabel.font = ThemeManager.theme().primaryTitleFont()
+        attendanceLabel.alpha = 0.75
         
         registeredStudentsLabel.textColor = ThemeManager.theme().primaryBlueColor()
-//        registeredStudentsLabel.font = ThemeManager.theme().primarySubTitleFont()
-
+        registeredStudentsLabel.alpha = 0.75
     }
 }

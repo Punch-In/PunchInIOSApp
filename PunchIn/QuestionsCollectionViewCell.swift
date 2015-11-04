@@ -23,11 +23,10 @@ class QuestionsCollectionViewCell: UICollectionViewCell {
     
     func setupUI() {
         questionsCount.hidden = true
-        questionsLabel.textColor = ThemeManager.theme().primaryTextColor()
-//        questionsLabel.font = ThemeManager.theme().primarySubTitleFont()
+        questionsLabel.textColor = ThemeManager.theme().primaryBlueColor()
+        questionsLabel.alpha = 0.75
         
-        questionsCount.textColor = ThemeManager.theme().primaryTextColor()
-//        questionsCount.font = ThemeManager.theme().primaryTextFont()
+        questionsCount.textColor = ThemeManager.theme().primaryDarkBlueColor()
     }
     
 }
