@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "redmark.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "redmark.png",
       "scale" : "2x"
     },
     {

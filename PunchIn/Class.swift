@@ -10,9 +10,13 @@ import Parse
 
 class Class : PFObject, PFSubclassing, LocationProviderGeofenceDelegate {
     
-    static let classFinishedText = "Class has ended!"
-    static let classStartedText = "Class has started"
-    static let classNotStartedText = "Start the class"
+    static let textForClassFinished = "Class has ended!"
+    static let textForInstructorClassStarted = "You've started the class. Tap again to finish"
+    static let textForInstructorClassNotStarted = "Start the class"
+    static let textForStudentClassNotStarted = "Class hasn't started yet"
+    static let textForStudentClassStarted = "You can try to check in for the class"
+    static let textForStudentClassCheckedIn = "You've checked in for the class!"
+    static let textForStudentOutsideGeofence = "You can't check in because you're not at the class location"
     
     static let insideClassGeofenceNotification = "InsideClassGeofenceNotification"
     static let outsideClassGeofenceNotification = "OutsideClassGeofenceNotification"
@@ -193,21 +197,26 @@ class Class : PFObject, PFSubclassing, LocationProviderGeofenceDelegate {
     
     
     // MARK: class workflow
-    func start(completion: ((error:NSError?)->Void)) {
-        self.startMe(self.parentCourse.courseLocation)
-        completion(error:nil)
-        // allow option to start class using current location or stored location
-        /*
-        LocationProvider.location{ (location, error) -> Void in
-            if error == nil {
-                self.startMe(location)
-                completion(error:nil)
-            }else{
-                print("error getting location for starting class \(error)")
-                completion(error:error)
+    func start(useCourseLocation isCourseLocation:Bool, completion: ((error:NSError?)->Void)) {
+        
+        if isCourseLocation {
+            // just use the configured location of the course
+            self.startMe(self.parentCourse.courseLocation)
+            completion(error:nil)
+        }else{
+            // allow option to start class using current location or stored location
+            LocationProvider.location{ (location, error) -> Void in
+                if error == nil {
+                    self.startMe(location)
+                    completion(error:nil)
+                }else{
+                    print("error getting current location for starting class \(error); using course location instead")
+                    self.startMe(self.parentCourse.courseLocation)
+                    completion(error:nil)
+                }
             }
         }
-        */
+        
     }
     
     private func startMe(location: Location?) {
@@ -236,6 +245,21 @@ class Class : PFObject, PFSubclassing, LocationProviderGeofenceDelegate {
     }
 
     private var classEndTimer: NSTimer?
+    private(set) var isWaitingToAttend = false
+    
+    func canCheckIn() -> Bool {
+        if self.isFinished {
+            return false
+        }
+        
+        if !self.isStarted {
+            return false
+        }
+        
+        // class has started, and is not finished
+        return true
+    }
+    
     func notifyWhenStudentCanAttendClass() {
         guard !self.isFinished else {
             return
@@ -246,6 +270,7 @@ class Class : PFObject, PFSubclassing, LocationProviderGeofenceDelegate {
         }
         
         if let region = self.geofenceRegion {
+            isWaitingToAttend = true
             LocationProvider.notifyWhenInsideGeofence(region, delegate: self)
         }
     }
@@ -253,6 +278,7 @@ class Class : PFObject, PFSubclassing, LocationProviderGeofenceDelegate {
     // MARK: LocationProviderGeofenceDelegate
     func isInsideGeofence() {
         print("inside geofence...")
+        isWaitingToAttend = false
         LocationProvider.removeNotifyForRegion(self.geofenceRegion!)
         NSNotificationCenter.defaultCenter().postNotificationName(Class.insideClassGeofenceNotification, object: nil)
     }

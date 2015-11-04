@@ -30,7 +30,7 @@ class CoursesListsCollectionViewCell: UICollectionViewCell {
     
     func setupUI(){
         courseNameLabel?.textColor = UIColor.whiteColor()
-        courseNameLabel?.font = ThemeManager.theme().primaryTitleFont()
+        //courseNameLabel?.font = ThemeManager.theme().primaryTitleFont()
     }
     
     

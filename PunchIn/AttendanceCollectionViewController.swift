@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import AFNetworking
 import MBProgressHUD
 
 class AttendanceCollectionViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource {
