@@ -84,7 +84,7 @@ class AttendanceCollectionViewController: UIViewController,UICollectionViewDeleg
     func setCollectionViewLayout(){
         let flowLayout : UICollectionViewFlowLayout = UICollectionViewFlowLayout.init()
         flowLayout.itemSize = CGSizeMake(self.view.bounds.width/3-16, 100)
-        flowLayout.minimumInteritemSpacing = 10
+        flowLayout.minimumInteritemSpacing = 5
         flowLayout.minimumLineSpacing = 10
         flowLayout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10)
         attendanceCollectionView.setCollectionViewLayout(flowLayout, animated: true)

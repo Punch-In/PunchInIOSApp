@@ -9,7 +9,7 @@
 import UIKit
 import MBProgressHUD
 
-class StudentCourseDraggableViewController: UICollectionViewController, QuestionPostedNewProtocol,UICollectionViewDelegateFlowLayout{
+class StudentCourseDraggableViewController: UICollectionViewController,UICollectionViewDelegateFlowLayout,QuestionPostedNewProtocol, CheckInCollectionViewCellDelegate{
 
     private enum CollectionViewCellIndex : Int {
         case CheckInCell = 0
@@ -149,7 +149,7 @@ class StudentCourseDraggableViewController: UICollectionViewController, Question
 
         switch cellIndex {
         case .CheckInCell:
-            attendClassTapped()
+//            attendClassTapped()
             break
         case .ClassInfoCell:
 //            attendanceViewTapped()
@@ -202,6 +202,7 @@ class StudentCourseDraggableViewController: UICollectionViewController, Question
             checkIncell.backgroundColor = ThemeManager.theme().primaryYellowColor()
             checkIncell.setUpUI()
             checkIncell.student = student
+            checkIncell.tapCheckInDelegate = self
             checkIncell.displayClass = currentClass
             return checkIncell;
         case .ClassInfoCell:
@@ -236,6 +237,13 @@ class StudentCourseDraggableViewController: UICollectionViewController, Question
     }
     
     // MARK: check in functionality
+    func didTapCheckIn(cell: CheckInCollectionViewCell) {
+        if cell.displayClass != currentClass {
+            print("tapped check in for cell that is not the current cell?")
+        }
+        attendClassTapped()
+    }
+    
     private func attendClassTapped() {
         print("tapped attend class \(currentClass.name)")
         

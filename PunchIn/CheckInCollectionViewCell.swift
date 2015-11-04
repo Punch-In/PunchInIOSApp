@@ -10,7 +10,9 @@
 import UIKit
 
 
-
+protocol CheckInCollectionViewCellDelegate : class {
+    func didTapCheckIn(cell: CheckInCollectionViewCell)
+}
 
 class CheckInCollectionViewCell: UICollectionViewCell {
     
@@ -34,6 +36,7 @@ class CheckInCollectionViewCell: UICollectionViewCell {
     }
     
     weak var student:Student!
+    weak var tapCheckInDelegate: CheckInCollectionViewCellDelegate?
     
     func setUpUI(){
         
@@ -126,8 +129,15 @@ class CheckInCollectionViewCell: UICollectionViewCell {
     
     @IBAction func checkInButtonActionClicked(sender: AnyObject) {
         print("Sender State \(checkInButton.state)")
+
+        guard !displayClass.isWaitingToAttend else {
+            print("student already waiting to attend...")
+            return
+        }
         
-        // need to remember whether student has tried to check in for class already
+        if let delegate = tapCheckInDelegate {
+            delegate.didTapCheckIn(self)
+        }
     }
 }
 
