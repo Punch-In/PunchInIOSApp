@@ -182,6 +182,7 @@
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rqW-9m-EUy">
                                                     <rect key="frame" x="190" y="46" width="64" height="64"/>
+                                                    <animations/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="64" id="YLg-ro-qoh"/>
                                                         <constraint firstAttribute="width" constant="64" id="cJM-TS-bG0"/>
@@ -568,6 +569,7 @@
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eK0-mq-LFZ">
                                         <rect key="frame" x="504" y="44" width="64" height="64"/>
+                                        <animations/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="64" id="8Ys-xz-Pfm"/>
                                             <constraint firstAttribute="height" constant="64" id="Wg9-5Z-Loc"/>
@@ -1021,7 +1023,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Questions" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="30l-rw-uPh">
-                                            <rect key="frame" x="32" y="52.5" width="77.5" height="20.5"/>
+                                            <rect key="frame" x="32" y="60.5" width="77.5" height="20.5"/>
                                             <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="209" id="XAh-Re-Tmr"/>
@@ -1041,16 +1043,16 @@
                                                 </mask>
                                             </variation>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JX6-2v-HYt">
-                                            <rect key="frame" x="426" y="32" width="48" height="48"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="right_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="JX6-2v-HYt">
+                                            <rect key="frame" x="442" y="40" width="32" height="32"/>
                                             <animations/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="48" id="XMT-Eq-gfe"/>
-                                                <constraint firstAttribute="width" constant="48" id="rbW-Uc-P8G"/>
+                                                <constraint firstAttribute="height" constant="32" id="XMT-Eq-gfe"/>
+                                                <constraint firstAttribute="width" constant="32" id="rbW-Uc-P8G"/>
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="90" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QZZ-bj-uAC">
-                                            <rect key="frame" x="60" y="32" width="21" height="20.5"/>
+                                            <rect key="frame" x="60" y="40" width="21" height="20.5"/>
                                             <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="69" id="8mR-uf-oYw"/>
@@ -1261,6 +1263,7 @@
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Class Date" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q1e-6u-AUj">
                                             <rect key="frame" x="476.5" y="10" width="56.5" height="13.5"/>
+                                            <animations/>
                                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -1492,7 +1495,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wjc-xH-XnI">
                                 <rect key="frame" x="30" y="28" width="540" height="160"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ABCAF39F-2BC9-447E-B70C-2342F07030CD" highlightedImage="ABCAF39F-2BC9-447E-B70C-2342F07030CD" translatesAutoresizingMaskIntoConstraints="NO" id="P7e-8M-9OS">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="052AA735-215E-4D78-BB7F-3A846A8D21DD" highlightedImage="052AA735-215E-4D78-BB7F-3A846A8D21DD" translatesAutoresizingMaskIntoConstraints="NO" id="P7e-8M-9OS">
                                         <rect key="frame" x="422" y="42" width="108" height="108"/>
                                         <animations/>
                                         <constraints>
@@ -1848,7 +1851,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ABCAF39F-2BC9-447E-B70C-2342F07030CD" width="128" height="128">
+        <image name="052AA735-215E-4D78-BB7F-3A846A8D21DD" width="128" height="128">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOzxYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISksLzU4VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
@@ -3013,6 +3016,7 @@ AAEOnQABDqAAAQ6yAAEOtQABDroAAAAAAAAEAQAAAAAAAAA/AAAAAAAAAAAAAAAAAAEOvA
 </mutableData>
         </image>
         <image name="map" width="25" height="23"/>
+        <image name="right_arrow" width="128" height="128"/>
         <image name="unselected_button_login" width="24" height="24"/>
         <image name="unselected_checkin" width="24" height="24"/>
     </resources>
