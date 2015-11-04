@@ -264,6 +264,8 @@ class StudentCourseDraggableViewController: UICollectionViewController, Question
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         switch indexPath.row {
+        case 0:
+            attendClassTapped()
         case 1:
             attendanceViewTapped()
         case 2:
@@ -277,8 +279,6 @@ class StudentCourseDraggableViewController: UICollectionViewController, Question
 
     // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell{
-        var cell :UICollectionViewCell!
-        
         if indexPath.row == 0{
             let checkIncell:CheckInCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier("CheckInCell", forIndexPath: indexPath) as! CheckInCollectionViewCell
             checkIncell.backgroundColor = ThemeManager.theme().primaryYellowColor()
@@ -307,7 +307,9 @@ class StudentCourseDraggableViewController: UICollectionViewController, Question
             
             return questionCell
         }
-        return cell;
+        
+        // ???
+        return UICollectionViewCell()
     }
     
     // MARK: show map view
