@@ -10,7 +10,7 @@ import UIKit
 import MBProgressHUD
 
 
-class InstructorDraggableCollectionViewController: UICollectionViewController,UICollectionViewDelegateFlowLayout {
+class InstructorDraggableCollectionViewController: UICollectionViewController,UICollectionViewDelegateFlowLayout, QuestionPostedNewProtocol {
 
     private enum CollectionViewCellIndex : Int {
         case CheckInCell = 0
@@ -159,9 +159,18 @@ class InstructorDraggableCollectionViewController: UICollectionViewController,UI
             let storyBoard = UIStoryboard.init(name: storyBoardName, bundle: nil);
             let vc = storyBoard.instantiateViewControllerWithIdentifier("QuestionsListViewController") as! QuestionsListViewController
             vc.theClass = currentClass
+            vc.newQuestionDelegate = self
             self.navigationController?.pushViewController(vc, animated: true)
         default:
             break // do nothing
+        }
+    }
+    
+    func didPostNewQuestion(question: Question?) {
+        let indexPath = NSIndexPath(forRow: CollectionViewCellIndex.QuestionsCell.rawValue, inSection: 0)
+        if let questionCell = instructorDraggableCollectionView.cellForItemAtIndexPath(indexPath) as? InstructorQuestionCollectionViewCell {
+            // new question created... need to make sure to refresh the count
+            questionCell.displayClass = currentClass
         }
     }
 

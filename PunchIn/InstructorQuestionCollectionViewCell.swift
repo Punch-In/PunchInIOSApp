@@ -10,10 +10,10 @@ import UIKit
 
 class InstructorQuestionCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet weak var unansweredCount: UILabel!
-    @IBOutlet weak var questionsCount: UILabel!
-    @IBOutlet weak var unsweredSubtitleLabels: UILabel!
-    @IBOutlet weak var questionsSubTitleLabel: UILabel!
+    @IBOutlet private weak var unansweredCount: UILabel!
+    @IBOutlet private weak var questionsCount: UILabel!
+    @IBOutlet private weak var unsweredSubtitleLabels: UILabel!
+    @IBOutlet private weak var questionsSubTitleLabel: UILabel!
     
     var displayClass: Class! {
         didSet {

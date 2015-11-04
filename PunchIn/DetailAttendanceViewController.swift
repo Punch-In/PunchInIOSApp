@@ -58,8 +58,9 @@ class DetailAttendanceViewController: UIViewController,UICollectionViewDataSourc
         
         // calculate attendance percentage
         let numClassesAttended = course.classes!.filter({$0.didStudentAttend(self.student)}).count
-        let pctAttendance = (Double(numClassesAttended) / Double(course.classes!.count))*100.0
-        totalAttendance.text = String(format:"%.2f%% Attendance", pctAttendance)
+        let numClassesStarted = course.classes!.filter({$0.isStarted}).count
+        let pctAttendance = (Double(numClassesAttended) / Double(numClassesStarted))*100.0
+        totalAttendance.text = String(format:"%.0f%% Attendance", pctAttendance)
         
         // hack
         refreshControl = UIRefreshControl()

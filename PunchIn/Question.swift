@@ -73,15 +73,19 @@ class Question : PFObject, PFSubclassing {
     
     // MARK: utility functions to create data
     
-    class func createQuestion(email:String, text:String, date: NSDate, inClass: Class) -> Question {
+    class func createQuestion(email:String, text:String, date: NSDate, inClass: Class, completion: (question:Question?,error:NSError?)->Void) {
         let question = Question()
         question.askedBy = email
         question.questionText = text
         question.isAnswered = false
         question.date = date
         question.forClass = inClass
-        question.saveEventually()
-        
-        return question
+        question.saveInBackgroundWithBlock { (success, error) -> Void in
+            if success {
+                completion(question: question, error:nil)
+            }else{
+                completion(question: nil, error: error)
+            }
+        }
     }
 }

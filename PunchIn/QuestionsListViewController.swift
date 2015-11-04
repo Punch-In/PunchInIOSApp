@@ -10,7 +10,7 @@ import UIKit
 import Parse
 import MBProgressHUD
 
-protocol QuestionPostedNewProtocol {
+protocol QuestionPostedNewProtocol: class {
     func didPostNewQuestion(question:Question?)
 }
 
@@ -38,7 +38,7 @@ class QuestionsListViewController: UIViewController, UITableViewDelegate, UITabl
         }
     }
     
-    var newQuestionDelegate: QuestionPostedNewProtocol?
+    weak var newQuestionDelegate: QuestionPostedNewProtocol?
     
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self);
@@ -174,16 +174,23 @@ class QuestionsListViewController: UIViewController, UITableViewDelegate, UITabl
         }
         
         // create new question
-        let question = Question.createQuestion(ParseDB.currentPerson!.getName(), text:newQuestionTextView.text!, date:NSDate(), inClass: theClass)
-        theClass.addQuestion(question)
-        questions.append(question)
-        initializeNewQuestionText()
-        newQuestionTextView.resignFirstResponder()
-        
-        if let delegate = self.newQuestionDelegate {
-            delegate.didPostNewQuestion(question)
+        Question.createQuestion(ParseDB.currentPerson!.getName(), text:newQuestionTextView.text!, date:NSDate(), inClass: theClass){
+            (question, error) -> Void in
+            
+            if error == nil,let question=question {
+                self.theClass.addQuestion(question)
+                self.questions.append(question)
+                self.initializeNewQuestionText()
+                self.newQuestionTextView.resignFirstResponder()
+                
+                if let delegate = self.newQuestionDelegate {
+                    delegate.didPostNewQuestion(question)
+                }
+            }else{
+                print("error ading new question: \(error)")
+            }
         }
-        
+            
     }
     
     // MARK: keyboard handling

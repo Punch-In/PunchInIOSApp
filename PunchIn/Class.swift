@@ -318,8 +318,13 @@ class Class : PFObject, PFSubclassing, LocationProviderGeofenceDelegate {
         print("error getting location! \(error)")
     }
     
+    func disableNotifyWhenStudentCanAttendClass() {
+        stopCheckingForGeofence()
+    }
+    
     func stopCheckingForGeofence() {
         // triggered by NSTimer
+        isWaitingToAttend = false
         print("stopping check for geofence")
         LocationProvider.removeNotifyForRegion(self.geofenceRegion!)
     }

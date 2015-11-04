@@ -117,7 +117,7 @@ class StudentCourseDraggableViewController: UICollectionViewController, Question
     }
     
     func didPostNewQuestion(question: Question?) {
-        let indexPath = NSIndexPath(forRow: 2, inSection: 0)
+        let indexPath = NSIndexPath(forRow: CollectionViewCellIndex.QuestionsCell.rawValue, inSection: 0)
         if let questionCell = studentDraggableViewCollectionView.cellForItemAtIndexPath(indexPath) as? QuestionsCollectionViewCell {
             // new question created... need to make sure to refresh the count
             questionCell.numQuestions = currentClass.questions!.count
@@ -287,11 +287,25 @@ class StudentCourseDraggableViewController: UICollectionViewController, Question
                 
                 let okAction = UIAlertAction(title: "Woo Hoo", style: .Default, handler: nil)
                 alertController.addAction(okAction)
-                self.presentViewController(alertController, animated: true, completion: nil)
+                
+                if let rootVC = UIApplication.sharedApplication().keyWindow?.rootViewController {
+                    var topVC = rootVC
+                    while (topVC.presentedViewController != nil) {
+                        topVC = topVC.presentedViewController!;
+                    }
+                    topVC.presentViewController(alertController, animated: true, completion: nil)
+                }
+                
+                //self.presentViewController(alertController, animated: true, completion: nil)
+//                if let currentVC = UIApplication.sharedApplication().delegate?.window??.rootViewController {
+//                    currentVC.presentViewController(alertController, animated: true, completion: nil)
+//                }
             }
             
-            self.studentDraggableViewCollectionView.reloadData()
-            MBProgressHUD.hideHUDForView(self.view, animated: true)
+            dispatch_async(dispatch_get_main_queue()){
+                self.studentDraggableViewCollectionView.reloadData()
+                MBProgressHUD.hideHUDForView(self.view, animated: true)
+            }
         }
     }
     

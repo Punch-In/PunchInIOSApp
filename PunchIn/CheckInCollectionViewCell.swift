@@ -56,7 +56,7 @@ class CheckInCollectionViewCell: UICollectionViewCell {
 
     private func classIsFinished() {
         print("class \(displayClass.name) is finished")
-        checkIntoClassLabel.text = Class.textForClassFinished
+        self.animateCheckInText(Class.textForClassFinished)
         checkinWarningLabel.hidden = true
         checkInButton.hidden = false
         checkInButtonWrapperView.hidden = false
@@ -67,11 +67,16 @@ class CheckInCollectionViewCell: UICollectionViewCell {
         }else{
             checkInButton.setBackgroundImage(UIImage(named: "redmark"), forState: .Selected)
         }
+        
+        // disable notify if class has already finishe
+        if displayClass.isWaitingToAttend {
+            displayClass.disableNotifyWhenStudentCanAttendClass()
+        }
     }
     
     private func classNotStarted() {
         print("class \(displayClass.name) is not started")
-        checkIntoClassLabel.text = Class.textForStudentClassNotStarted
+        self.animateCheckInText(Class.textForStudentClassNotStarted)
         checkInButton.hidden = true
         checkInButton.userInteractionEnabled = false
         checkinWarningLabel.hidden = true
@@ -84,7 +89,7 @@ class CheckInCollectionViewCell: UICollectionViewCell {
         checkinWarningLabel.hidden = true
         if displayClass.didStudentAttend(student) {
             print("class \(displayClass.name) is started and student attended")
-            checkIntoClassLabel.text = Class.textForStudentClassCheckedIn
+            self.animateCheckInText(Class.textForStudentClassCheckedIn)
             checkInButton.selected = true
             checkInButton.userInteractionEnabled = false
 			checkInButton.setBackgroundImage(UIImage(named: "selected_checkin"), forState: .Selected)
@@ -96,16 +101,27 @@ class CheckInCollectionViewCell: UICollectionViewCell {
                 // show question mark as status is unknown
                 checkInButton.setBackgroundImage(UIImage(named: "unsurequestionmark"), forState: .Normal)
 				checkInButton.userInteractionEnabled = false
+            }else{
+                checkInButton.setBackgroundImage(UIImage(named: "unselected_checkin"), forState: .Normal)
+                checkInButton.userInteractionEnabled = true
             }
-            checkIntoClassLabel.text = Class.textForStudentClassStarted
+            self.animateCheckInText(Class.textForStudentClassStarted)
             checkInButton.selected = false
+        }
+    }
+    
+    private func animateCheckInText(text:String) {
+        self.checkIntoClassLabel.alpha = 0
+        self.checkIntoClassLabel.text = text
+        UIView.animateWithDuration(0.2) { () -> Void in
+            self.checkIntoClassLabel.alpha = 1
         }
     }
     
     func showWarning() {
         checkinWarningLabel.hidden = false
         checkinWarningLabel.text = Class.textForStudentOutsideGeofence
-        checkInButton.setImage(UIImage(named: "unsurequestionmark"), forState: .Normal)
+        checkInButton.setBackgroundImage(UIImage(named: "unsurequestionmark"), forState: .Normal)
     }
     
     @IBAction func checkInButtonActionClicked(sender: AnyObject) {
