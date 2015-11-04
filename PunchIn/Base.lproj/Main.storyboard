@@ -1023,7 +1023,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Questions" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="30l-rw-uPh">
-                                            <rect key="frame" x="32" y="60.5" width="77.5" height="20.5"/>
+                                            <rect key="frame" x="32" y="66.5" width="77.5" height="20.5"/>
                                             <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="209" id="XAh-Re-Tmr"/>
@@ -1044,15 +1044,15 @@
                                             </variation>
                                         </label>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="right_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="JX6-2v-HYt">
-                                            <rect key="frame" x="442" y="40" width="32" height="32"/>
+                                            <rect key="frame" x="458" y="48" width="16" height="16"/>
                                             <animations/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="32" id="XMT-Eq-gfe"/>
-                                                <constraint firstAttribute="width" constant="32" id="rbW-Uc-P8G"/>
+                                                <constraint firstAttribute="height" constant="16" id="XMT-Eq-gfe"/>
+                                                <constraint firstAttribute="width" constant="16" id="rbW-Uc-P8G"/>
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="90" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QZZ-bj-uAC">
-                                            <rect key="frame" x="60" y="40" width="21" height="20.5"/>
+                                            <rect key="frame" x="60" y="46" width="21" height="20.5"/>
                                             <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="69" id="8mR-uf-oYw"/>
@@ -1083,9 +1083,11 @@
                                     <constraint firstAttribute="bottomMargin" secondItem="30l-rw-uPh" secondAttribute="bottom" constant="7" id="bpM-XY-TyY"/>
                                     <constraint firstItem="30l-rw-uPh" firstAttribute="centerX" secondItem="QZZ-bj-uAC" secondAttribute="centerX" id="clP-7W-TxU"/>
                                     <constraint firstItem="30l-rw-uPh" firstAttribute="centerY" secondItem="JX6-2v-HYt" secondAttribute="centerY" id="dAj-B2-VAx"/>
+                                    <constraint firstItem="QZZ-bj-uAC" firstAttribute="centerY" secondItem="JX6-2v-HYt" secondAttribute="centerY" id="deF-Rh-nNb"/>
                                     <constraint firstItem="QZZ-bj-uAC" firstAttribute="centerY" secondItem="neO-lz-3da" secondAttribute="centerY" id="jcQ-yh-c46"/>
                                     <constraint firstItem="QZZ-bj-uAC" firstAttribute="height" secondItem="30l-rw-uPh" secondAttribute="height" id="lIU-2O-ZuJ"/>
                                     <constraint firstItem="QZZ-bj-uAC" firstAttribute="top" secondItem="JX6-2v-HYt" secondAttribute="top" id="ttV-lj-1zs"/>
+                                    <constraint firstItem="QZZ-bj-uAC" firstAttribute="centerY" secondItem="neO-lz-3da" secondAttribute="centerY" id="uW9-nj-4xY"/>
                                 </constraints>
                                 <size key="customSize" width="490" height="112"/>
                                 <variation key="default">
@@ -1094,8 +1096,10 @@
                                         <exclude reference="bpM-XY-TyY"/>
                                         <exclude reference="dAj-B2-VAx"/>
                                         <exclude reference="acH-SM-fNx"/>
+                                        <exclude reference="deF-Rh-nNb"/>
                                         <exclude reference="jcQ-yh-c46"/>
                                         <exclude reference="lIU-2O-ZuJ"/>
+                                        <exclude reference="ttV-lj-1zs"/>
                                     </mask>
                                 </variation>
                                 <connections>
@@ -1495,7 +1499,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wjc-xH-XnI">
                                 <rect key="frame" x="30" y="28" width="540" height="160"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="052AA735-215E-4D78-BB7F-3A846A8D21DD" highlightedImage="052AA735-215E-4D78-BB7F-3A846A8D21DD" translatesAutoresizingMaskIntoConstraints="NO" id="P7e-8M-9OS">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="52776589-1DAB-446A-AB83-C68D41746853" highlightedImage="52776589-1DAB-446A-AB83-C68D41746853" translatesAutoresizingMaskIntoConstraints="NO" id="P7e-8M-9OS">
                                         <rect key="frame" x="422" y="42" width="108" height="108"/>
                                         <animations/>
                                         <constraints>
@@ -1851,7 +1855,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="052AA735-215E-4D78-BB7F-3A846A8D21DD" width="128" height="128">
+        <image name="52776589-1DAB-446A-AB83-C68D41746853" width="128" height="128">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOzxYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISksLzU4VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
