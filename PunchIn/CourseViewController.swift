@@ -27,6 +27,7 @@ class CourseViewController: UIViewController,UINavigationBarDelegate,UIPageViewC
     @IBOutlet weak var courseDate: UILabel!
     @IBOutlet weak var courseAddress: UILabel!
     @IBOutlet weak var courseImageView: UIImageView!
+    @IBOutlet weak var instructorNameLabel: UILabel!
     
     /*  Attendance  */
     
@@ -68,11 +69,13 @@ class CourseViewController: UIViewController,UINavigationBarDelegate,UIPageViewC
         
         course.instructors { (instructors, error) -> Void in
             if let instructors = instructors {
-                instructors[0].getImage({ (image, error) -> Void in
+                let instructor = instructors[0]
+                instructor.getImage({ (image, error) -> Void in
                     self.courseImageView.alpha = 0.0
                     self.courseImageView.image = image
                     UIView.animateWithDuration(0.2, animations: { () -> Void in
                         self.courseImageView.alpha = 1.0
+                        self.instructorNameLabel.text = instructor.instructorName
                     })
                 })
             }
@@ -99,6 +102,8 @@ class CourseViewController: UIViewController,UINavigationBarDelegate,UIPageViewC
         courseDate.textColor = UIColor.whiteColor()
         
         courseAddress.textColor = UIColor.whiteColor()
+        
+        self.instructorNameLabel.textColor = UIColor.whiteColor()
     }
     
     override func didReceiveMemoryWarning() {

@@ -668,6 +668,12 @@
                                             <constraint firstAttribute="height" constant="64" id="Wg9-5Z-Loc"/>
                                         </constraints>
                                     </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d9i-Tj-OMU">
+                                        <rect key="frame" x="523" y="116" width="26.5" height="12"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <animations/>
                                 <color key="backgroundColor" red="0.38405275430000002" green="0.47815880570000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -678,6 +684,7 @@
                                     <constraint firstItem="eK0-mq-LFZ" firstAttribute="centerX" secondItem="myn-lc-1Is" secondAttribute="centerX" id="CnY-2Q-FnP"/>
                                     <constraint firstItem="Fb9-CX-gUD" firstAttribute="top" secondItem="IcG-3a-osm" secondAttribute="bottom" constant="8" id="EJw-sS-JwQ"/>
                                     <constraint firstItem="Fb9-CX-gUD" firstAttribute="leading" secondItem="nsb-xZ-Nke" secondAttribute="leading" constant="32" id="FQt-LX-bmc"/>
+                                    <constraint firstItem="d9i-Tj-OMU" firstAttribute="top" secondItem="eK0-mq-LFZ" secondAttribute="bottom" constant="8" id="HtY-QH-Lqp"/>
                                     <constraint firstItem="Fb9-CX-gUD" firstAttribute="top" secondItem="myn-lc-1Is" secondAttribute="bottom" constant="8" id="LXn-uf-vVZ"/>
                                     <constraint firstItem="myn-lc-1Is" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="IcG-3a-osm" secondAttribute="trailing" constant="16" id="Noi-TU-zBC"/>
                                     <constraint firstAttribute="trailing" secondItem="myn-lc-1Is" secondAttribute="trailing" constant="16" id="Pgp-5O-rKt"/>
@@ -689,10 +696,12 @@
                                     <constraint firstAttribute="height" constant="128" id="Yos-Is-fZh"/>
                                     <constraint firstItem="IcG-3a-osm" firstAttribute="top" secondItem="nsb-xZ-Nke" secondAttribute="top" constant="16" id="Z9j-LP-e7m"/>
                                     <constraint firstItem="Fb9-CX-gUD" firstAttribute="width" secondItem="myn-lc-1Is" secondAttribute="width" id="Zvb-QQ-6XP"/>
+                                    <constraint firstItem="d9i-Tj-OMU" firstAttribute="centerX" secondItem="eK0-mq-LFZ" secondAttribute="centerX" id="dEM-wt-0l4"/>
                                     <constraint firstItem="y5k-DY-DzH" firstAttribute="height" secondItem="Fb9-CX-gUD" secondAttribute="height" id="eIJ-36-24Q"/>
                                     <constraint firstItem="myn-lc-1Is" firstAttribute="top" secondItem="nsb-xZ-Nke" secondAttribute="top" constant="8" id="ekh-7E-FGd"/>
                                     <constraint firstItem="IcG-3a-osm" firstAttribute="leading" secondItem="nsb-xZ-Nke" secondAttribute="leading" constant="16" id="fyu-4G-Y3U"/>
                                     <constraint firstItem="eK0-mq-LFZ" firstAttribute="top" secondItem="myn-lc-1Is" secondAttribute="bottom" constant="8" id="gL6-pi-8HP"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="d9i-Tj-OMU" secondAttribute="trailing" constant="8" id="hW5-O8-ZC6"/>
                                     <constraint firstItem="myn-lc-1Is" firstAttribute="height" secondItem="IcG-3a-osm" secondAttribute="height" id="hWu-fJ-cMb"/>
                                     <constraint firstItem="IcG-3a-osm" firstAttribute="width" secondItem="nsb-xZ-Nke" secondAttribute="width" id="koF-k9-ex3"/>
                                     <constraint firstItem="Fb9-CX-gUD" firstAttribute="leading" secondItem="myn-lc-1Is" secondAttribute="leading" id="mhA-xx-sOw"/>
@@ -747,6 +756,7 @@
                         <outlet property="courseName" destination="IcG-3a-osm" id="wMo-b0-waM"/>
                         <outlet property="courseNumber" destination="myn-lc-1Is" id="vax-UA-MpL"/>
                         <outlet property="courseView" destination="nsb-xZ-Nke" id="3Q3-iM-RUA"/>
+                        <outlet property="instructorNameLabel" destination="d9i-Tj-OMU" id="7Bf-76-Osq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NuZ-6W-nsb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1610,7 +1620,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wjc-xH-XnI">
                                 <rect key="frame" x="30" y="28" width="540" height="160"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="78060FBA-884B-452E-84BD-EFEEA1857734" highlightedImage="78060FBA-884B-452E-84BD-EFEEA1857734" translatesAutoresizingMaskIntoConstraints="NO" id="P7e-8M-9OS">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2A10E8B9-BD9C-410D-9D16-D896E97DA98C" highlightedImage="2A10E8B9-BD9C-410D-9D16-D896E97DA98C" translatesAutoresizingMaskIntoConstraints="NO" id="P7e-8M-9OS">
                                         <rect key="frame" x="422" y="42" width="108" height="108"/>
                                         <animations/>
                                         <constraints>
@@ -1966,7 +1976,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="78060FBA-884B-452E-84BD-EFEEA1857734" width="128" height="128">
+        <image name="2A10E8B9-BD9C-410D-9D16-D896E97DA98C" width="128" height="128">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOzxYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISksLzU4VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA

@@ -16,6 +16,9 @@ class AttendanceCollectionViewController: UIViewController,UICollectionViewDeleg
         case Absent = 1
     }
     
+    private let presentTitle = "Present"
+    private let absentTitle = "Absent"
+    
     private static let AttendanceCollectionViewCellName = "AttendanceCollectionViewCell"
     
     @IBOutlet weak var presentOrAbsentSwitcher: UISegmentedControl!
@@ -24,6 +27,7 @@ class AttendanceCollectionViewController: UIViewController,UICollectionViewDeleg
     var theClass: Class!
     private var studentArray: [Student]! {
         didSet {
+            self.setSegmentedTitleText()
             attendanceCollectionView.reloadData()
         }
     }
@@ -58,6 +62,15 @@ class AttendanceCollectionViewController: UIViewController,UICollectionViewDeleg
         
         // set initial segmented index
         presentOrAbsentSwitcher.selectedSegmentIndex = SwitcherSegmentIndex.Present.rawValue
+    }
+    
+    private func setSegmentedTitleText() {
+        let presentCount = self.theClass.attendance.count
+        let absentCount = self.theClass.parentCourse.registeredStudents!.count - presentCount
+        let absentText = "(\(absentCount)) " + self.absentTitle
+        let presentText = "(\(presentCount)) " + self.presentTitle
+        self.presentOrAbsentSwitcher.setTitle(absentText, forSegmentAtIndex: SwitcherSegmentIndex.Absent.rawValue)
+        self.presentOrAbsentSwitcher.setTitle(presentText, forSegmentAtIndex: SwitcherSegmentIndex.Present.rawValue)
     }
     
     // MARK: data fetch
