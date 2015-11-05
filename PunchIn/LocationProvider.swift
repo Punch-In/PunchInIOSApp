@@ -32,7 +32,7 @@ class LocationProvider : NSObject, CLLocationManagerDelegate {
     static let didEnterGeofenceNotificationName = "DidEnterGeofence"
     static let didExitGeofenceNotificationName = "DidExitGeofence"
     
-    static let defaultGeofenceDistance = 10.0 // 10 meters
+    static let defaultGeofenceDistance = 15.0 // 15 meters
     
     // MARK: CLLocation Manager instance
     private let manager: CLLocationManager = {
